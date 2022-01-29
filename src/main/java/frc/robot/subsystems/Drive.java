@@ -39,19 +39,13 @@ public class Drive extends SubsystemBase {
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
     // Left motors
     l1 = new WPI_TalonFX(Constants.L1_ID); 
-    setTalonLimits(l1);
     l2 = new WPI_TalonFX(Constants.L2_ID);
-    setTalonLimits(l2);
     l3 = new WPI_TalonFX(Constants.L3_ID);
-    setTalonLimits(l3);
     driveL = new MotorControllerGroup(l1, l2, l3);
     // Right motors
     r1 = new WPI_TalonFX(Constants.R1_ID);
-    setTalonLimits(r1);
     r2 = new WPI_TalonFX(Constants.R2_ID);
-    setTalonLimits(r2);
     r3 = new WPI_TalonFX(Constants.R3_ID);
-    setTalonLimits(r3);
     driveR = new MotorControllerGroup(r1, r2, r3);
     driveR.setInverted(true);
     // Drivetrain
@@ -116,10 +110,6 @@ public class Drive extends SubsystemBase {
     r3.setSelectedSensorPosition(0);
   }
   
-  private void setTalonLimits(WPI_TalonFX motor) {
-    
- 
-  }
 
 
  
