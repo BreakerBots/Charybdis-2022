@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveWithJoystick;
+import frc.robot.commands.IntakeToggle;
 import frc.robot.commands.MoveStraight;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -22,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drive driveTrain = new Drive();
+  private final Intake IntakeSys = new Intake();
   public static XboxController xbox = new XboxController(0);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
 
@@ -43,7 +46,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(xbox, 1).whenPressed(new MoveStraight(driveTrain, 40), false);
+    new JoystickButton(xbox, 2).whenPressed(new MoveStraight(driveTrain, 40), true);
+    new JoystickButton(xbox, 1).whenPressed(new IntakeToggle(IntakeSys));
   }
 
   /**
