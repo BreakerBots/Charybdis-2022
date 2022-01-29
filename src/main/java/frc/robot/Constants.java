@@ -18,8 +18,8 @@ public final class Constants {
     public static final double MS_PER_CYCLE = 20;
     public static final double CYCLES_PER_SECOND = 200;
     // Drivetrain constants
-    public static final double GEAR_RATIO = 11.97; // Assume (value) to 1. Alpha = 16.24
-    public static final double WHEEL_DIAMETER = 6; // Inches. Alpha = 4
+    public static final double GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 16.24
+    public static final double WHEEL_DIAMETER = 4; // Inches. Alpha = 4
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI; // Inches
     public static final double TALON_FX_TICKS = 2048.0; // Ticks per rotation
     public static final double TICKS_PER_INCH = (TALON_FX_TICKS * GEAR_RATIO) / (WHEEL_CIRCUMFERENCE);
