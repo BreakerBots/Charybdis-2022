@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.IMU;
 
-public class Piviot extends CommandBase {
+public class Pivot extends CommandBase {
   Drive drive;
   IMU imu;
   double target;
 
-  public Piviot(Drive driveArg, IMU imuArg, double targetDegrees) {
+  public Pivot(Drive driveArg, IMU imuArg, double targetDegrees) {
     drive = driveArg;
     imu = imuArg;
     target = targetDegrees;
