@@ -4,16 +4,20 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.IMU;
 
 public class Piviot extends CommandBase {
   Drive drive;
-  double degrees;
+  IMU imu;
+  double target;
 
-  public Piviot(Drive driveArg, double TargetDegrees) {
-    // Use addRequirements() here to declare subsystem dependencies.
-
+  public Piviot(Drive driveArg, IMU imuArg, double targetDegrees) {
+    drive = driveArg;
+    imu = imuArg;
+    target = targetDegrees;
   }
 
   // Called when the command is initially scheduled.
@@ -22,7 +26,14 @@ public class Piviot extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+      double maxTurn = 0.4;
+      double curAngle = imu.getYaw();
+      double turnPercent = drive.anglePID.calculate(curAngle, target);
+      turnPercent = MathUtil.clamp(turnPercent, -maxTurn, maxTurn); // Restricts motor speed
+
+      drive.move(0, turnPercent); // Turns in place
+  }
 
   // Called once the command ends or is interrupted.
   @Override
