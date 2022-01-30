@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -32,11 +33,13 @@ public class Drive extends SubsystemBase {
   /** Creates a new Drive. */
   public PIDController anglePID;
   public PIDController distPID;
+  public SimpleMotorFeedforward driveFF;
   public double prevNet;
   public PowerDistribution pdp = new PowerDistribution();
   public Drive() {
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
+    driveFF = new SimpleMotorFeedforward(Constants.KS_DRIVE, Constants.KV_DRIVE, Constants.KA_DRIVE);
     // Left motors
     l1 = new WPI_TalonFX(Constants.L1_ID); 
     l2 = new WPI_TalonFX(Constants.L2_ID);

@@ -64,5 +64,9 @@ public final class Constants {
     // shooter solonoid IDs
     public static final int SHOOTERSOL_FWD = FILLER;
     public static final int SHOOTERSOL_REV = FILLER;
+    // Drive feedForward values
+    public static final double KS_DRIVE = 4.0089;
+    public static final double KV_DRIVE = 0.029497;
+    public static final double KA_DRIVE = -0.71256;
 
 }

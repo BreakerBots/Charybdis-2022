@@ -31,7 +31,9 @@ public class MoveStraight extends CommandBase {
   @Override
   public void execute() {
     double curDist = Convert.TICK_TO_IN(drive.getLeftTicks());
-    double motorspeed = drive.distPID.calculate(curDist, distance);
+    double feedForwardVal = drive.driveFF.calculate(4, 2); // Constants for desired vel, desired acc
+    double feedBackVal = drive.distPID.calculate(curDist, distance);
+    double motorspeed = feedBackVal + feedForwardVal;
     
     drive.move(motorspeed, 0);
     // 1D movement back and forth
