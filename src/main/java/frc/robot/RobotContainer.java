@@ -5,11 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.commands.IntakeToggle;
-import frc.robot.commands.MoveStraight;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  public static PowerDistribution pdp = new PowerDistribution();
   private final Drive driveTrain = new Drive();
   private final Intake IntakeSys = new Intake();
   public static XboxController xbox = new XboxController(0);

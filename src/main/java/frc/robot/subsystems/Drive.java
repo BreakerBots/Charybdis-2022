@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Drive extends SubsystemBase {
   private WPI_TalonFX l1;
@@ -25,13 +26,13 @@ public class Drive extends SubsystemBase {
   private WPI_TalonFX r3;
   private MotorControllerGroup driveR;
   // Drivetrian
-  public DifferentialDrive driveTrainDiff;
+  private DifferentialDrive driveTrainDiff;
   /** Creates a new Drive. */
   public PIDController anglePID;
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
   public double prevNet;
-  public PowerDistribution pdp = new PowerDistribution();
+
   public Drive() {
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
@@ -49,6 +50,29 @@ public class Drive extends SubsystemBase {
     driveR.setInverted(true);
     // Drivetrain
     driveTrainDiff = new DifferentialDrive(driveL, driveR);
+  }
+
+  public void driveWithJoystick(XboxController xbox){
+
+    double back = xbox.getLeftTriggerAxis();
+    double forward = xbox.getRightTriggerAxis();
+    double turn = xbox.getLeftX();
+    double net = forward - back;
+    if (net != 0) {
+      if (net > prevNet + 0.35) {
+        net = prevNet + 0.35;
+      } else if (net < prevNet - 0.35) {
+        net = prevNet - 0.35;
+      }
+    }
+    if (RobotContainer.pdp.getVoltage() < 8.5) {
+      net *= 0.85;
+    }
+    
+    move(net, turn);
+    prevNet = net;
+    
+    driveTrainDiff.arcadeDrive(net, turn); // Calculates speed and turn outputs
   }
 
    // Wraps around arcadeDrive to allow for movement
