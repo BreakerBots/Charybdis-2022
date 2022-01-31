@@ -41,12 +41,12 @@ public class DriveWithJoystick extends CommandBase {
         net = prevNet - 0.35;
       }
     }
-    if (drive.pdp.getVoltage() < 8.5) {
+    if (RobotContainer.pdp.getVoltage() < 8.5) {
       net *= 0.85;
     }
     prevNet = net;
     
-    drive.driveTrainDiff.arcadeDrive(net, turn); // Calculates speed and turn outputs
+    drive.move(net, turn); // Calculates speed and turn outputs
   }
 
   // Called once the command ends or is interrupted.
