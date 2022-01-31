@@ -25,7 +25,7 @@ public class RobotContainer {
   public static PowerDistribution pdp = new PowerDistribution();
   private final Drive driveTrain = new Drive();
   private final Intake IntakeSys = new Intake();
-  public static XboxController xbox = new XboxController(0);
+  private final XboxController xbox = new XboxController(0);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
 
   private final DriveWithJoystick driveWithJoystick;
