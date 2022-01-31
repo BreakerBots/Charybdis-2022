@@ -25,7 +25,7 @@ public class Drive extends SubsystemBase {
   private WPI_TalonFX r3;
   private MotorControllerGroup driveR;
   // Drivetrian
-  private DifferentialDrive driveTrainDiff;
+  public DifferentialDrive driveTrainDiff;
   /** Creates a new Drive. */
   public PIDController anglePID;
   public PIDController distPID;
@@ -49,29 +49,6 @@ public class Drive extends SubsystemBase {
     driveR.setInverted(true);
     // Drivetrain
     driveTrainDiff = new DifferentialDrive(driveL, driveR);
-  }
-
-  public void driveWithJoystick(XboxController xbox){
-
-    double back = xbox.getLeftTriggerAxis();
-    double forward = xbox.getRightTriggerAxis();
-    double turn = xbox.getLeftX();
-    double net = forward - back;
-    if (net != 0) {
-      if (net > prevNet + 0.35) {
-        net = prevNet + 0.35;
-      } else if (net < prevNet - 0.35) {
-        net = prevNet - 0.35;
-      }
-    }
-    if (pdp.getVoltage() < 8.5) {
-      net *= 0.85;
-    }
-    
-    move(net, turn);
-    prevNet = net;
-    
-    driveTrainDiff.arcadeDrive(net, turn); // Calculates speed and turn outputs
   }
 
    // Wraps around arcadeDrive to allow for movement

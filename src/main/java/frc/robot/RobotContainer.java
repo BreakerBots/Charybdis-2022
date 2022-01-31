@@ -32,7 +32,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    driveWithJoystick = new DriveWithJoystick(driveTrain);
+    driveWithJoystick = new DriveWithJoystick(driveTrain, xbox);
     driveWithJoystick.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(driveWithJoystick);
     // Configure the button bindings
