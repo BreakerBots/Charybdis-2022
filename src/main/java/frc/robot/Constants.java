@@ -57,11 +57,13 @@ public final class Constants {
     public static final int INTAKE_R_ID = FILLER;
     public static final int PWR_DISTR = FILLER;
     // shooter motor IDs
-    public static final int SHOOTER_1_ID = FILLER;
-    public static final int SHOOTER_2_ID = FILLER;
+    public static final int SHOOTER_L_ID = FILLER;
+    public static final int SHOOTER_R_ID = FILLER;
     // shooter solonoid IDs
     public static final int SHOOTERSOL_FWD = FILLER;
     public static final int SHOOTERSOL_REV = FILLER;
+    // shooter motor speeds
+    public static final int SHOOTERSPEED = 1;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
