@@ -7,9 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class ShooterPosToggle extends CommandBase {
+public class ShooterPosDown extends CommandBase {
   Shooter shooter;
-  public ShooterPosToggle(Shooter shooterArg) {
+  public ShooterPosDown(Shooter shooterArg) {
     shooter = shooterArg;
     addRequirements(shooter);
   }
@@ -20,10 +20,8 @@ public class ShooterPosToggle extends CommandBase {
     if(shooter.shooterPos) {
       shooter.shooterDown();
     }
-    else if (shooter.shooterPos == false) {
-      shooter.shooterUp();
-    }
   }
+
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

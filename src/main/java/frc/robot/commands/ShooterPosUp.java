@@ -4,38 +4,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
-public class ShootAll extends CommandBase {
+public class ShooterPosUp extends CommandBase {
   Shooter shooter;
-  XboxController xbox;
-  Hopper hopper;
-  public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg) {
+  public ShooterPosUp(Shooter shooterArg) {
     shooter = shooterArg;
-    xbox = controllerArg;
-    hopper = hopperArg;
     addRequirements(shooter);
-    addRequirements(hopper);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    if (shooter.shooterPos == false) {
+      shooter.shooterUp();
+    }
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    if (xbox.getBButtonPressed() && shooter.flyweelState) {
-      hopper.hopperOn();
-    }
-    if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
-      hopper.hopperOff();
-      shooter.flyweelOff();
-    }
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -44,11 +33,6 @@ public class ShootAll extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (shooter.flyweelState == false) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    return true;
   }
 }

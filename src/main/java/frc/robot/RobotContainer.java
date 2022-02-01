@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.commands.IntakeHopper;
 import frc.robot.commands.IntakeToggle;
-import frc.robot.commands.ShooterPosToggle;
+import frc.robot.commands.ShootCoreCommands;
+import frc.robot.commands.ShooterPosDown;
+import frc.robot.commands.ShooterPosUp;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
@@ -64,7 +66,10 @@ public class RobotContainer {
     // new JoystickButton(xbox, 2).whenPressed(new MoveStraight(driveTrain, 40), true);
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
-    new JoystickButton(xbox, Constants.B).whenPressed(new ShooterPosToggle(shooterSys));
+    new JoystickButton(xbox, Constants.UP).whenPressed(new ShooterPosUp(shooterSys));
+    new JoystickButton(xbox, Constants.DOWN).whenPressed(new ShooterPosDown(shooterSys));
+    //Y button charges flywheel, B button shoots
+    new JoystickButton(xbox, Constants.Y).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
   }
 
   /**
