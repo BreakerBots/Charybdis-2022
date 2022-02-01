@@ -4,14 +4,18 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 
 public class ChargeFlywheel extends CommandBase {
   Shooter shooter;
-  public ChargeFlywheel(Shooter shooterArg) {
+  XboxController xbox;
+  public ChargeFlywheel(Shooter shooterArg, XboxController controllerArg) {
     shooter = shooterArg;
+    xbox = controllerArg;
     addRequirements(shooter);
   }
 
@@ -33,7 +37,10 @@ public class ChargeFlywheel extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    xbox.setRumble(RumbleType.kLeftRumble, 1);
+    xbox.setRumble(RumbleType.kRightRumble, 1);
+  }
 
   // Returns true when the command should end.
   @Override

@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
@@ -23,7 +24,10 @@ public class ShootAll extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    xbox.setRumble(RumbleType.kLeftRumble, 0);
+    xbox.setRumble(RumbleType.kRightRumble, 0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

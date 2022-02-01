@@ -26,6 +26,6 @@ public class ShootCoreCommands extends SequentialCommandGroup {
     intake = intakeArg;
     hopper = hopperArg;
     xbox = controllerArg;
-    addCommands(new ChargeFlywheel(shooter), new ShootAll(shooter, hopper, xbox));
+    addCommands(new ChargeFlywheel(shooter, xbox), new ShootAll(shooter, hopper, xbox));
   }
 }
