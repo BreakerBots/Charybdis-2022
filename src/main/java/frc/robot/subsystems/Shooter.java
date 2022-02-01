@@ -8,7 +8,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -17,10 +20,12 @@ public class Shooter extends SubsystemBase {
   public boolean shooterPos;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
+  private MotorControllerGroup flywheel;
   DoubleSolenoid shooterSol;
   public Shooter() {
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
+    flywheel = new MotorControllerGroup(shooterL, shooterR);
     shooterSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 
                 Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
   }
@@ -31,15 +36,27 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean flyweelOn() {
-    shooterL.set(Constants.SHOOTERSPEED);
-    shooterR.set(Constants.SHOOTERSPEED);
+    flywheel.set(Constants.SHOOTERSPEED);
     return flyweelState = true;
   }
 
   public boolean flyweelOff() {
-    shooterL.set(0);
-    shooterR.set(0);
+    flywheel.set(0);
     return flyweelState = false;
+  }
+
+  public double getFlywheelRPM() {
+    double curTicks;
+    double prevTicks; 
+    double tickDiff;
+    double propOfRotation;
+    double rpm;
+    curTicks = shooterL.getSelectedSensorPosition();
+    tickDiff = curTicks - prevTicks;
+    propOfRotation = tickDiff / 2048;
+    rpm = (propOfRotation * 50) * 60;
+    prevTicks = shooterL.getSelectedSensorPosition();
+    return rpm;
   }
 
   public boolean shooterUp() {
