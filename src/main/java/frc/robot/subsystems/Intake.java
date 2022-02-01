@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.fasterxml.jackson.databind.ser.impl.IndexedStringListSerializer;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -29,6 +28,7 @@ public class Intake extends SubsystemBase {
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
     }
 
+    /** Extends intake arm and spins the intake and indexer */
     public boolean intakeOnMethod() {
         intakeSol.set(Value.kForward);
         intakeMain.set(Constants.INTAKESPEED);
@@ -37,6 +37,7 @@ public class Intake extends SubsystemBase {
         return intakeState = true;
     }
 
+    /** Retracts intake arm and turns off the intake and indexer */
     public boolean intakeOffMethod() {
         intakeSol.set(Value.kReverse);
         intakeMain.set(0);

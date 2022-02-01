@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Convert;
 import frc.robot.subsystems.Drive;
 
+/** Robot moves forward/back to target distance */
 public class MoveStraight extends CommandBase {
   private Drive drive;
   private double targetDistance;

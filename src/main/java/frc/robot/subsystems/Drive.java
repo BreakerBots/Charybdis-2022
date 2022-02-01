@@ -30,7 +30,7 @@ public class Drive extends SubsystemBase {
   public SimpleMotorFeedforward driveFF;
   public double prevNet;
 
-  /** Constructor for drivetrain subsystem */
+  /** Creates a new Drive. */
   public Drive() {
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
