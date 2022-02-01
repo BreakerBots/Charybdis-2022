@@ -30,6 +30,7 @@ public class Drive extends SubsystemBase {
   public SimpleMotorFeedforward driveFF;
   public double prevNet;
 
+  /** Constructor for drivetrain subsystem */
   public Drive() {
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
@@ -49,17 +50,17 @@ public class Drive extends SubsystemBase {
     driveTrainDiff = new DifferentialDrive(driveL, driveR);
   }
 
-  // Wraps around arcadeDrive to allow for movement
+  /** Wraps around arcadeDrive to allow for movement */
   public void move(double netSpd, double turnAmt) {
     driveTrainDiff.arcadeDrive(netSpd, turnAmt); // Calculates speed and turn outputs
   }
 
-  // 1-param call for move method
+  /** 1-param call for move method */
   public void move(double netSpd) {
     move(netSpd, 0);
   }
 
-  // Wraps around tankDrive to allow for tank-like movement
+  /** Wraps around tankDrive to allow for tank-like movement */
   public void tankMove(double spdL, double spdR) {
     driveTrainDiff.tankDrive(spdL, spdR);
   }
@@ -68,14 +69,17 @@ public class Drive extends SubsystemBase {
   public void periodic() {
   }
 
+  /** Returns number of ticks on left motors */
   public double getLeftTicks() {
     return l1.getSelectedSensorPosition();
   }
 
+  /** Returns number of ticks on right motors */
   public double getRightTicks() {
     return r1.getSelectedSensorPosition();
   }
 
+  /*** Sets encoders of all drive motors to 0 */
   public void resetEncoders() {
     l1.setSelectedSensorPosition(0);
     l2.setSelectedSensorPosition(0);
@@ -83,6 +87,21 @@ public class Drive extends SubsystemBase {
     r1.setSelectedSensorPosition(0);
     r2.setSelectedSensorPosition(0);
     r3.setSelectedSensorPosition(0);
+  }
+
+  /** Access feedForward .calculate() method */
+  public double feedForwardCalc(double vel, double accel) {
+    return driveFF.calculate(vel, accel);
+  }
+
+  /** Access distance PID .calculate() method */
+  public double distPIDCalc(double distance, double target) {
+    return distPID.calculate(distance, target);
+  }
+
+  /** Access distance PID .atSetpoint() method */
+  public boolean atSetpointDist() {
+    return distPID.atSetpoint();
   }
 
 }

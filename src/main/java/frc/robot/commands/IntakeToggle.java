@@ -7,8 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
+/** Turns the robot's intake on/off */
 public class IntakeToggle extends CommandBase {
   Intake intake;
+
   public IntakeToggle(Intake intakeArg) {
     intake = intakeArg;
     addRequirements(intake);
@@ -20,7 +22,7 @@ public class IntakeToggle extends CommandBase {
     if(intake.intakeState){
       intake.intakeOffMethod();
     }
-    else if (intake.intakeState == false) {
+    else {
       intake.intakeOnMethod();
     }
   }

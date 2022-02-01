@@ -4,19 +4,18 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Convert;
 import frc.robot.subsystems.Drive;
 
 public class MoveStraight extends CommandBase {
-  Drive drive;
-  double distance;
+  private Drive drive;
+  private double targetDistance;
   /** Creates a new MoveStraight. */
   public MoveStraight(Drive driveArg, double distanceInches) {
     drive = driveArg;
     addRequirements(drive);
-    distance = distanceInches;
+    targetDistance = distanceInches;
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -31,8 +30,8 @@ public class MoveStraight extends CommandBase {
   @Override
   public void execute() {
     double curDist = Convert.TICK_TO_IN(drive.getLeftTicks());
-    double feedForwardVal = drive.driveFF.calculate(4, 2); // Constants for desired vel, desired acc
-    double feedBackVal = drive.distPID.calculate(curDist, distance);
+    double feedForwardVal = drive.feedForwardCalc(4, 2); // Constants for desired vel, desired acc
+    double feedBackVal = drive.distPIDCalc(curDist, targetDistance);
     double motorspeed = feedBackVal + feedForwardVal;
     
     drive.move(motorspeed, 0);
@@ -46,6 +45,6 @@ public class MoveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return drive.distPID.atSetpoint();
+    return drive.atSetpointDist();
   }
 }
