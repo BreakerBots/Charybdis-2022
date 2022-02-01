@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
         intakeMain = new WPI_TalonSRX(Constants.INTAKEMAIN_ID);
         indexerL = new WPI_TalonSRX(Constants.INTAKE_L_ID);
         indexerR = new WPI_TalonSRX(Constants.INTAKE_R_ID);
-        intakeSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 
+        intakeSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
     }
 
@@ -44,7 +44,6 @@ public class Intake extends SubsystemBase {
         indexerR.set(0);
         return intakeState = false;
     }
-
 
     @Override
     public void periodic() {
