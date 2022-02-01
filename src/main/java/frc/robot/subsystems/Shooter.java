@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
+  private static double prevTicks = 0;
   public boolean flyweelState;
   public boolean shooterPos;
   private WPI_TalonFX shooterL;
@@ -47,7 +48,6 @@ public class Shooter extends SubsystemBase {
 
   public double getFlywheelRPM() {
     double curTicks;
-    double prevTicks; 
     double tickDiff;
     double propOfRotation;
     double rpm;
@@ -55,7 +55,7 @@ public class Shooter extends SubsystemBase {
     tickDiff = curTicks - prevTicks;
     propOfRotation = tickDiff / 2048;
     rpm = (propOfRotation * 50) * 60;
-    prevTicks = shooterL.getSelectedSensorPosition();
+    prevTicks = curTicks;
     return rpm;
   }
 
