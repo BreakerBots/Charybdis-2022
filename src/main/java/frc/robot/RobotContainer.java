@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveWithJoystick;
+import frc.robot.commands.IntakeHopper;
 import frc.robot.commands.IntakeToggle;
 import frc.robot.commands.ShooterPosToggle;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,6 +34,7 @@ public class RobotContainer {
   public static PowerDistribution pdp = new PowerDistribution();
   private final Drive driveTrain = new Drive();
   private final Intake intakeSys = new Intake();
+  private final Hopper hopperSys = new Hopper();
   private final Shooter shooterSys = new Shooter();
   private final XboxController xbox = new XboxController(0);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
@@ -59,7 +62,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // new JoystickButton(xbox, 2).whenPressed(new MoveStraight(driveTrain, 40), true);
-    new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys));
+    new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
+    new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
     new JoystickButton(xbox, Constants.B).whenPressed(new ShooterPosToggle(shooterSys));
   }
 

@@ -17,12 +17,8 @@ public class Hopper extends SubsystemBase {
   /** Creates a new Hopper. */
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
-  private DigitalInput hopperPos1;
-  private DigitalInput hopperPos2;
   public Hopper() {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
-    hopperPos1 = new DigitalInput(Constants.HOPPER_P1_ID);
-    hopperPos2 = new DigitalInput(Constants.HOPPER_P2_ID);
   }
 
   @Override
@@ -44,5 +40,7 @@ public class Hopper extends SubsystemBase {
     return  DIOJNI.getDIO(Constants.HOPPER_P1_ID);
   }
 
-
+  public boolean getHopperPos2() {
+    return  DIOJNI.getDIO(Constants.HOPPER_P2_ID);
+  }
 }

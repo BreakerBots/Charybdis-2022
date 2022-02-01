@@ -94,9 +94,16 @@ public final class Constants {
     public static final int RIGHT = 90;
     public static final int DOWN = 180;
     public static final int LEFT = 270;
+    // hopper IDs
     public static final int HOPPER_ID = FILLER;
     public static final int HOPPER_P1_ID = 0;
     public static final int HOPPER_P2_ID = 0;
     public static final double HOPPERSPEED = 0;
+    public static final double HOPPER_WHEEL_DIAMETER = 1;
+    public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
+    public static final double HOPPER_GEAR_RATIO = FILLER;
+    public static final double HOPPER_TICKS_PER_INCH = (TALON_FX_TICKS * HOPPER_GEAR_RATIO) / (HOPPER_WHEEL_CIRCUMFERENCE);
+
+
 
 }

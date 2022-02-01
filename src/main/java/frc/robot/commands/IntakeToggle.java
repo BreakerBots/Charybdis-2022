@@ -5,15 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 
 /** Turns the robot's intake on/off */
 public class IntakeToggle extends CommandBase {
   Intake intake;
+  Hopper hopper;
 
-  public IntakeToggle(Intake intakeArg) {
+  public IntakeToggle(Intake intakeArg, Hopper hopperArg) {
     intake = intakeArg;
+    hopper = hopperArg;
     addRequirements(intake);
+    addRequirements(hopper);
   }
 
   // Called when the command is initially scheduled.
@@ -21,9 +25,11 @@ public class IntakeToggle extends CommandBase {
   public void initialize() {
     if(intake.intakeState){
       intake.intakeOffMethod();
+      hopper.hopperOff();
     }
     else {
       intake.intakeOnMethod();
+      hopper.hopperOn();
     }
   }
 
