@@ -7,13 +7,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class Drive extends SubsystemBase {
   private WPI_TalonFX l1;
@@ -38,7 +35,7 @@ public class Drive extends SubsystemBase {
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
     driveFF = new SimpleMotorFeedforward(Constants.KS_DRIVE, Constants.KV_DRIVE, Constants.KA_DRIVE);
     // Left motors
-    l1 = new WPI_TalonFX(Constants.L1_ID); 
+    l1 = new WPI_TalonFX(Constants.L1_ID);
     l2 = new WPI_TalonFX(Constants.L2_ID);
     l3 = new WPI_TalonFX(Constants.L3_ID);
     driveL = new MotorControllerGroup(l1, l2, l3);
@@ -52,31 +49,8 @@ public class Drive extends SubsystemBase {
     driveTrainDiff = new DifferentialDrive(driveL, driveR);
   }
 
-  public void driveWithJoystick(XboxController xbox){
-
-    double back = xbox.getLeftTriggerAxis();
-    double forward = xbox.getRightTriggerAxis();
-    double turn = xbox.getLeftX();
-    double net = forward - back;
-    if (net != 0) {
-      if (net > prevNet + 0.35) {
-        net = prevNet + 0.35;
-      } else if (net < prevNet - 0.35) {
-        net = prevNet - 0.35;
-      }
-    }
-    if (RobotContainer.pdp.getVoltage() < 8.5) {
-      net *= 0.85;
-    }
-    
-    move(net, turn);
-    prevNet = net;
-    
-    driveTrainDiff.arcadeDrive(net, turn); // Calculates speed and turn outputs
-  }
-
-   // Wraps around arcadeDrive to allow for movement
-   public void move(double netSpd, double turnAmt) {
+  // Wraps around arcadeDrive to allow for movement
+  public void move(double netSpd, double turnAmt) {
     driveTrainDiff.arcadeDrive(netSpd, turnAmt); // Calculates speed and turn outputs
   }
 
@@ -93,10 +67,11 @@ public class Drive extends SubsystemBase {
   @Override
   public void periodic() {
   }
-  
+
   public double getLeftTicks() {
     return l1.getSelectedSensorPosition();
   }
+
   public double getRightTicks() {
     return r1.getSelectedSensorPosition();
   }
@@ -109,10 +84,5 @@ public class Drive extends SubsystemBase {
     r2.setSelectedSensorPosition(0);
     r3.setSelectedSensorPosition(0);
   }
-  
-
-
- 
-
 
 }

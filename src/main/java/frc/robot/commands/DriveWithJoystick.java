@@ -4,10 +4,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drive;
 
 
@@ -15,12 +14,14 @@ public class DriveWithJoystick extends CommandBase {
 
   private final Drive drive;
   private final XboxController xbox; 
+  private final PowerDistribution pdp;
   private double prevNet;
   /** Creates a new DriveWithJoystick. */
-  public DriveWithJoystick(Drive driveTrainArg, XboxController controlerArg) {
+  public DriveWithJoystick(Drive driveTrainArg, XboxController controllerArg, PowerDistribution pdpArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     drive = driveTrainArg;
-    xbox = controlerArg;
+    xbox = controllerArg;
+    pdp = pdpArg;
   }
 
   // Called when the command is initially scheduled.
@@ -30,10 +31,9 @@ public class DriveWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double back = xbox.getLeftTriggerAxis();
-    double forward = xbox.getRightTriggerAxis();
     double turn = xbox.getLeftX();
-    double net = forward - back;
+    double net = xbox.getRightTriggerAxis() - xbox.getLeftTriggerAxis();
+
     if (net != 0) {
       if (net > prevNet + 0.35) {
         net = prevNet + 0.35;
@@ -41,7 +41,7 @@ public class DriveWithJoystick extends CommandBase {
         net = prevNet - 0.35;
       }
     }
-    if (RobotContainer.pdp.getVoltage() < 8.5) {
+    if (pdp.getVoltage() < 8.5) {
       net *= 0.85;
     }
     prevNet = net;
