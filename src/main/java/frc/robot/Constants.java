@@ -12,6 +12,7 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+
 public final class Constants {
     public static final int FILLER = 99; // filler id for unused can devices
     // Time constants
@@ -66,5 +67,23 @@ public final class Constants {
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
     public static final double KA_DRIVE = -0.71256;
+    // Xbox button constants
+    public static final int A = 1;
+    public static final int B = 2;
+    public static final int X = 3;
+    public static final int Y = 4;
+    public static final int L_BUMP = 5;
+    public static final int R_BUMP = 6;
+    public static final int BACK = 7;
+    public static final int START = 8;
+    public static final int L_STICK = 9;
+    public static final int R_STICK = 10;
+    // Xbox axis constants
+    public static final int LEFT_X = 0;
+    public static final int LEFT_Y = 1;
+    public static final int L_TRIGGER = 2;
+    public static final int R_TRIGGER = 3;
+    public static final int RIGHT_X = 4;
+    public static final int RIGHT_Y = 5;
 
 }
