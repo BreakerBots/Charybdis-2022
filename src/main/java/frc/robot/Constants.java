@@ -65,6 +65,8 @@ public final class Constants {
     public static final int SHOOTERSOL_REV = FILLER;
     // shooter motor speeds
     public static final int SHOOTERSPEED = 1;
+    // Speed in RPM
+    public static final int FLYWHEEL_TAR_SPEED = FILLER;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
@@ -92,5 +94,9 @@ public final class Constants {
     public static final int RIGHT = 90;
     public static final int DOWN = 180;
     public static final int LEFT = 270;
+    public static final int HOPPER_ID = FILLER;
+    public static final int HOPPER_P1_ID = 0;
+    public static final int HOPPER_P2_ID = 0;
+    public static final double HOPPERSPEED = 0;
 
 }
