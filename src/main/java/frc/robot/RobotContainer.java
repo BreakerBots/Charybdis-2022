@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveWithJoystick;
@@ -15,11 +16,15 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -33,9 +38,11 @@ public class RobotContainer {
 
   private final DriveWithJoystick driveWithJoystick;
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
-    driveWithJoystick = new DriveWithJoystick(driveTrain, xbox);
+    driveWithJoystick = new DriveWithJoystick(driveTrain, xbox, pdp);
     driveWithJoystick.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(driveWithJoystick);
     // Configure the button bindings
@@ -43,15 +50,17 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
     // new JoystickButton(xbox, 2).whenPressed(new MoveStraight(driveTrain, 40), true);
-    new JoystickButton(xbox, 1).whenPressed(new IntakeToggle(intakeSys));
-    new JoystickButton(xbox, 2).whenPressed(new ShooterPosToggle(shooterSys));
+    new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys));
+    new JoystickButton(xbox, Constants.B).whenPressed(new ShooterPosToggle(shooterSys));
   }
 
   /**
