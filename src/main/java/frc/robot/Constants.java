@@ -87,5 +87,10 @@ public final class Constants {
     public static final int R_TRIGGER = 3;
     public static final int RIGHT_X = 4;
     public static final int RIGHT_Y = 5;
+    // Xbox D-Pad angle constants
+    public static final int UP = 0;
+    public static final int RIGHT = 90;
+    public static final int DOWN = 180;
+    public static final int LEFT = 270;
 
 }
