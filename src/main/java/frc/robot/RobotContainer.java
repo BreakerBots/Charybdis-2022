@@ -14,8 +14,10 @@ import frc.robot.commands.IntakeToggle;
 import frc.robot.commands.ShootCoreCommands;
 import frc.robot.commands.ShooterPosDown;
 import frc.robot.commands.ShooterPosUp;
+import frc.robot.commands.AutoPaths.OffTarmack_H1;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.IMU;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -37,7 +39,8 @@ public class RobotContainer {
   private final Drive driveTrain = new Drive();
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper();
-  private final Shooter shooterSys = new Shooter();
+  private final IMU imuSys = new IMU();
+  // private final Shooter shooterSys = new Shooter();
   private final XboxController xbox = new XboxController(0);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
 
@@ -66,10 +69,10 @@ public class RobotContainer {
     // new JoystickButton(xbox, 2).whenPressed(new MoveStraight(driveTrain, 40), true);
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
-    new JoystickButton(xbox, Constants.UP).whenPressed(new ShooterPosUp(shooterSys));
-    new JoystickButton(xbox, Constants.DOWN).whenPressed(new ShooterPosDown(shooterSys));
-    //Y button charges flywheel, B button shoots
-    new JoystickButton(xbox, Constants.Y).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
+    // new JoystickButton(xbox, Constants.UP).whenPressed(new ShooterPosUp(shooterSys));
+    // new JoystickButton(xbox, Constants.DOWN).whenPressed(new ShooterPosDown(shooterSys));
+    // //Y button charges flywheel, B button shoots
+    // new JoystickButton(xbox, Constants.Y).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
   }
 
   /**
@@ -78,7 +81,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return null;
+    return new OffTarmack_H1(driveTrain, imuSys);
   }
 }
