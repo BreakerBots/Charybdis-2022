@@ -5,10 +5,10 @@
 package frc.robot.commands.AutoPaths;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.MoveStraight;
-import frc.robot.commands.Pivot;
+import frc.robot.commands.AutoActionCommands.MoveStraight;
+import frc.robot.commands.AutoActionCommands.Pivot;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.IMU;
+import frc.robot.subsystems.Devices.IMU;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

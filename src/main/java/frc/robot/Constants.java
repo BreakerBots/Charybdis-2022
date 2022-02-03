@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import javax.swing.Box.Filler;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -94,15 +96,32 @@ public final class Constants {
     public static final int RIGHT = 90;
     public static final int DOWN = 180;
     public static final int LEFT = 270;
-    // hopper IDs
+    // hopper motor ID
     public static final int HOPPER_ID = FILLER;
-    public static final int HOPPER_P1_ID = 0;
-    public static final int HOPPER_P2_ID = 0;
-    public static final double HOPPERSPEED = 0;
+    // hopper ball position sensor IDs
+    public static final int HOPPER_P1_ID = FILLER;
+    public static final int HOPPER_P2_ID = FILLER;
+    // hopper info
+    public static final double HOPPERSPEED = FILLER;
     public static final double HOPPER_WHEEL_DIAMETER = 1;
     public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
     public static final double HOPPER_GEAR_RATIO = FILLER;
     public static final double HOPPER_TICKS_PER_INCH = (TALON_FX_TICKS * HOPPER_GEAR_RATIO) / (HOPPER_WHEEL_CIRCUMFERENCE);
+    // climber motor IDs
+    public static final int CLIMBER_L_ID = FILLER;
+    public static final int CLIMBER_R_ID = FILLER;
+    // climber solonoid IDs
+    public static final int CLIMBSOL_L_FWD = FILLER;
+    public static final int CLIMBSOL_L_REV = FILLER;
+    public static final int CLIMBSOL_R_FWD = FILLER;
+    public static final int CLIMBSOL_R_REV = FILLER;
+    // trigger thresholds for climber states (in ticks)
+    public static final double CLIMB_RET_THRESH = 0;
+    public static final double CLIMB_EXT_THRESH = 0;
+    // PID vals for climber
+    public static final double KP_CLIMB = 0;
+    public static final double KI_CLIMB = 0;
+    public static final double KD_CLIMB = 0;
 
 
 
