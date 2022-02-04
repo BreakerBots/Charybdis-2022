@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Convert;
 import frc.robot.subsystems.Drive;
 
+// Maybe move the IMU into this class?
 public class Odometry extends SubsystemBase {
 
   private Drive driveArg;
@@ -49,6 +50,7 @@ public class Odometry extends SubsystemBase {
 
   public void resetOdometer() {
     driveArg.resetEncoders();
+    imuArg.reset();
     odometer.resetPosition(new Pose2d(0, 0, new Rotation2d(0)), getRot2D());
     // Must be called if we ever reset the gyro
   }
