@@ -65,7 +65,8 @@ public class RobotContainer {
    * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
+  
+   private void configureButtonBindings() {
     // new JoystickButton(xbox, 2).whenPressed(new MoveStraight(driveTrain, 40), true);
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
