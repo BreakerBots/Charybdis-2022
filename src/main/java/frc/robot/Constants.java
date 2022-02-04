@@ -32,7 +32,7 @@ public final class Constants {
     // Drive motor IDs
     public static final int L1_ID = 11; // Alpha = 11
     public static final int L2_ID = 12; // Alpha = 12
-    public static final int L3_ID = 19; // Alpha = 13
+    public static final int L3_ID = 13; // Alpha = 13
     public static final int R1_ID = 14; // Alpha = 14
     public static final int R2_ID = 15; // Alpha = 15
     public static final int R3_ID = 16; // Alpha = 16
@@ -55,7 +55,7 @@ public final class Constants {
     public static final int INTAKESOL_FWD = 0;
     public static final int INTAKESOL_REV = 1;
     // intake motor IDs
-    public static final int INTAKEMAIN_ID = 13;
+    public static final int INTAKEMAIN_ID = 19;
     public static final int INTAKE_L_ID = FILLER;
     public static final int INTAKE_R_ID = FILLER;
     public static final int PWR_DISTR = FILLER;
