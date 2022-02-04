@@ -16,6 +16,14 @@ public class Convert {
         return ticks / (Constants.TICKS_PER_INCH);
     }
 
+    public static final double IN_TO_M(double in) {
+        return in / Constants.IN_PER_M;
+    }
+
+    public static final double M_TO_IN(double m) {
+        return m * Constants.IN_PER_M;
+    }
+
     public static final double IN_TO_TICK(double in) {
         return in * (Constants.TICKS_PER_INCH);
     }

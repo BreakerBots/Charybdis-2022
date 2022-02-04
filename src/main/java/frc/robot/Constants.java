@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import javax.swing.Box.Filler;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -20,6 +18,8 @@ public final class Constants {
     // Time constants
     public static final double MS_PER_CYCLE = 20;
     public static final double CYCLES_PER_SECOND = 200;
+    // Distance constants
+    public static final double IN_PER_M = 39.3700787;
     // Drivetrain constants
     public static final double GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 16.24
     public static final double WHEEL_DIAMETER = 4; // Inches. Alpha = 4
