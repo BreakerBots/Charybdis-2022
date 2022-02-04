@@ -25,6 +25,7 @@ public class Climber extends SubsystemBase {
   public PIDController climbPID;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
   public int climbState;
+  public boolean climbSolState;
   public Climber() {
     climbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
@@ -58,4 +59,6 @@ public class Climber extends SubsystemBase {
   public double getClimbTicks() {
     return climberL.getSelectedSensorPosition();
   }
+  
+  public
 }
