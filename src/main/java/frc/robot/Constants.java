@@ -29,7 +29,6 @@ public final class Constants {
     public static final double TICKS_PER_ROTATION = (TALON_FX_TICKS * GEAR_RATIO);
     // IMU constants
     public static final int IMU_ID = 10; // Alpha = 10
-    public static final double RADIANS_PER_DEGREE = Math.PI/180;
     public static boolean IMU_INVERTED = true;
     // Drive motor IDs
     public static final int L1_ID = 11; // Alpha = 11
