@@ -27,6 +27,7 @@ public class MotorTest extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("MOTOR TESTING BEGIN!");
+    drive.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -52,6 +53,6 @@ public class MotorTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return drive.getLeftTicks() >= (rotate * Constants.TALON_FX_TICKS);
+    return drive.getLeftTicks() >= (rotate * Constants.TICKS_PER_ROTATION);
   }
 }

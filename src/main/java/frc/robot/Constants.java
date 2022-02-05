@@ -26,6 +26,7 @@ public final class Constants {
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI; // Inches
     public static final double TALON_FX_TICKS = 2048.0; // Ticks per rotation
     public static final double TICKS_PER_INCH = (TALON_FX_TICKS * GEAR_RATIO) / (WHEEL_CIRCUMFERENCE);
+    public static final double TICKS_PER_ROTATION = (TALON_FX_TICKS * GEAR_RATIO);
     // IMU constants
     public static final int IMU_ID = 10; // Alpha = 10
     public static final double RADIANS_PER_DEGREE = Math.PI/180;
