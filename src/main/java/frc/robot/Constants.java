@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.lang.module.FindException;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -125,6 +127,10 @@ public final class Constants {
     public static final double KP_CLIMB = 0;
     public static final double KI_CLIMB = 0;
     public static final double KD_CLIMB = 0;
+    // Climber stablity tollerences
+    public static final double CLIMB_PITCH_TOLR = 5;
+    public static final double CLIMB_YAW_TOLR = 5;
+    public static final double CLIMB_ROLL_TOLR = 5;
 
 
 

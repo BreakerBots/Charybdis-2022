@@ -57,4 +57,19 @@ public class IMU extends SubsystemBase {
   public void reset() {
     pigeon.setYaw(0);
   }
+
+  public double getPitchRate() {
+    pigeon.getPitch();
+    return pigeon.getRate();
+  }
+
+  public double getYawRate() {
+    pigeon.getYaw();
+    return pigeon.getRate();
+  }
+
+  public double getRollRate() {
+    pigeon.getRoll();
+    return pigeon.getRate();
+  }
 }
