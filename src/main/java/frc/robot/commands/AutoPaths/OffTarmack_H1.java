@@ -7,6 +7,7 @@ package frc.robot.commands.autoPaths;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.autoActionCommands.MoveStraight;
 import frc.robot.commands.autoActionCommands.Pivot;
+import frc.robot.commands.autoActionCommands.Turn;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Devices.IMU;
 
@@ -18,6 +19,14 @@ public class OffTarmack_H1 extends SequentialCommandGroup {
   public OffTarmack_H1(Drive driveArg, IMU imuArg) {
         // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new Pivot(driveArg, imuArg, -90, 0.5), new Pivot(driveArg, imuArg, -90, 0.5));
+    //addCommands( new Pivot(driveArg, imuArg, 180, 0.5));
+    addCommands(new Turn(driveArg, imuArg, 90, 72, 0.65),
+                new MoveStraight(driveArg, -72, 0.3),
+                new Turn(driveArg, imuArg, 90, 72, 0.65),
+                new Pivot(driveArg, imuArg, 90, 0.5), 
+                new MoveStraight(driveArg, 60, 0.3),
+                new Pivot(driveArg, imuArg, 90, 0.5)
+                // new MoveStraight(driveArg, 60, 0.3)
+                );
   }
 }

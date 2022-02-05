@@ -25,7 +25,7 @@ public class IMU extends SubsystemBase {
 
   /** Returns yaw angle within +- 180 degrees */
   public double getYaw() {
-    return -1 * Convert.ANGLE_CONVERT(pigeon.getYaw());
+    return -1 * (pigeon.getYaw() % 360); // Convert.ANGLE_CONVERT(pigeon.getYaw());
   }
 
   /** Returns roll angle within +- 180 degrees */
@@ -47,7 +47,7 @@ public class IMU extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println("IMU yaw: " + getYaw());
+    //System.out.println("IMU yaw: " + getYaw());
     // This method will be called once per scheduler run
   }
 }

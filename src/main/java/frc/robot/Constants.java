@@ -43,8 +43,9 @@ public final class Constants {
     public static final double KP_DIST = 0.05;
     public static final double KI_DIST = 0;
     public static final double KD_DIST = 0;
-    public static final double ANG_POS_TOLERANCE = 10;
-    public static final double ANG_VEL_TOLERANCE = 0.5;
+    public static final double ANG_POS_TOLERANCE = 1.5;
+    public static final double ANG_VEL_TOLERANCE = 1;
+    public static final double ANG_FEEDFWD = 0.1;
     public static final double DIST_POS_TOLERANCE = 1;
     public static final double DIST_VEL_TOLERANCE = 0.5;
     // intake motor speeds

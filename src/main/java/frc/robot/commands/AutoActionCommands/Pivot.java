@@ -6,6 +6,7 @@ package frc.robot.commands.autoActionCommands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Devices.IMU;
 
@@ -14,6 +15,7 @@ public class Pivot extends CommandBase {
   IMU imu;
   double target;
   double speedClamp;
+  double lastAngle;
 
   public Pivot(Drive driveArg, IMU imuArg, double targetDegrees, double speedLimit) {
     drive = driveArg;
@@ -33,13 +35,17 @@ public class Pivot extends CommandBase {
   @Override
   public void execute() {
       double curAngle = imu.getYaw();
+      if (Math.abs(curAngle - lastAngle)>90)
+        curAngle *= -1;
+      lastAngle = curAngle;
       double turnPercent = drive.anglePID.calculate(curAngle, target);
+      turnPercent += (turnPercent>=0 ? Constants.ANG_FEEDFWD : -Constants.ANG_FEEDFWD);
       turnPercent = MathUtil.clamp(turnPercent, -speedClamp, speedClamp); // Restricts motor speed
 
+      System.out.println("CurrAng: " + curAngle + " TgtAng: " + target + " AngErr: " + drive.anglePID.getPositionError() + " Turn %: " + turnPercent);
       // drive.move(0, turnPercent); // Turns in place
       drive.autoMove(0, turnPercent); // Turns in place
-      System.out.println("Angle error: " + drive.anglePID.getPositionError());
-      System.out.println("Turn percent:" + turnPercent);
+      
   }
 
   // Called once the command ends or is interrupted.
