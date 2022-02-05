@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.util.EnumResolver;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -61,7 +62,16 @@ public class Climber extends SubsystemBase {
   }
 
   public void toggleClimbSol() {
-    
+    if (climbSolState == true) {
+      climbSolL.set(Value.kReverse);
+      climbSolR.set(Value.kReverse);
+      climbSolState = false;
+    }
+    else {
+      climbSolL.set(Value.kForward);
+      climbSolR.set(Value.kForward);
+      climbSolState = true;
+    }
   }
 
 
