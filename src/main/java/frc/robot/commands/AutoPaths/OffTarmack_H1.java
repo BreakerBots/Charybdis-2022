@@ -17,6 +17,6 @@ public class OffTarmack_H1 extends SequentialCommandGroup {
   public OffTarmack_H1(Drive driveArg, IMU imuArg) {
         // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new MoveStraight(driveArg, 16, 0.1));
+    addCommands(new MoveStraight(driveArg, 16, 0.4));
   }
 }

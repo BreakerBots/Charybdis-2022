@@ -34,13 +34,15 @@ public class MoveStraight extends CommandBase {
   @Override
   public void execute() {
     double curDist = Convert.TICK_TO_IN(drive.getLeftTicks());
-    double feedForwardVal = drive.feedForwardCalc(4, 2); // Constants for desired vel, desired acc
-    double feedBackVal = drive.distPIDCalc(curDist, targetDistance);
-    double motorspeed = feedBackVal + feedForwardVal;
+    // double feedForwardVal = drive.feedForwardCalc(4, 2); // Constants for desired vel, desired acc
+    double motorspeed = drive.distPIDCalc(curDist, targetDistance);
+    // double motorspeed = feedBackVal + feedForwardVal;
     motorspeed = MathUtil.clamp(motorspeed, -speedClamp, speedClamp);
     
     drive.move(motorspeed, 0);
     // 1D movement back and forth
+
+    System.out.println(drive.distPID.getPositionError());
   }
 
   // Called once the command ends or is interrupted.
