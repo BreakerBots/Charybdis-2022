@@ -14,14 +14,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drive extends SubsystemBase {
-  private WPI_TalonFX l1;
-  private WPI_TalonFX l2;
-  private WPI_TalonFX l3;
+  public WPI_TalonFX l1;
+  public WPI_TalonFX l2;
+  public WPI_TalonFX l3;
   private MotorControllerGroup driveL;
   // Right motors (falcons)
-  private WPI_TalonFX r1;
-  private WPI_TalonFX r2;
-  private WPI_TalonFX r3;
+  public WPI_TalonFX r1;
+  public WPI_TalonFX r2;
+  public WPI_TalonFX r3;
   private MotorControllerGroup driveR;
   // Drivetrian
   private DifferentialDrive driveTrainDiff;
@@ -94,12 +94,6 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println("supply current L1: " + l1.getSupplyCurrent() + "stator current L1: " + l1.getStatorCurrent());
-    System.out.println("supply current L2: " + l2.getSupplyCurrent() + "stator current L2: " + l2.getStatorCurrent());
-    System.out.println("supply current L3: " + l3.getSupplyCurrent() + "stator current L3: " + l3.getStatorCurrent());
-    System.out.println("supply current R1: " + r1.getSupplyCurrent() + "stator current R1: " + r1.getStatorCurrent());
-    System.out.println("supply current R2: " + r2.getSupplyCurrent() + "stator current R2: " + r2.getStatorCurrent());
-    System.out.println("supply current R3: " + r3.getSupplyCurrent() + "stator current R3: " + r3.getStatorCurrent());
   }
 
   /** Returns number of ticks on left motors */

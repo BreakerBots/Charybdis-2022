@@ -25,17 +25,27 @@ public class MotorTest extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("MOTOR TESTING BEGIN!");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     drive.move(speed, 0);
+    System.out.println("supply current L1: " + drive.l1.getSupplyCurrent() + "stator current L1: " + drive.l1.getStatorCurrent());
+    System.out.println("supply current L2: " + drive.l2.getSupplyCurrent() + "stator current L2: " + drive.l2.getStatorCurrent());
+    System.out.println("supply current L3: " + drive.l3.getSupplyCurrent() + "stator current L3: " + drive.l3.getStatorCurrent());
+    System.out.println("supply current R1: " + drive.r1.getSupplyCurrent() + "stator current R1: " + drive.r1.getStatorCurrent());
+    System.out.println("supply current R2: " + drive.r2.getSupplyCurrent() + "stator current R2: " + drive.r2.getStatorCurrent());
+    System.out.println("supply current R3: " + drive.r3.getSupplyCurrent() + "stator current R3: " + drive.r3.getStatorCurrent());
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    System.out.println("MOTOR TESTING END!");
+  }
 
   // Returns true when the command should end.
   @Override
