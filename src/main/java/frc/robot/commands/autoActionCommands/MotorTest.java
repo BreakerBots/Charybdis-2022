@@ -33,12 +33,14 @@ public class MotorTest extends CommandBase {
   @Override
   public void execute() {
     drive.move(speed, 0);
-    System.out.println("supply current L1: " + drive.l1.getSupplyCurrent() + "stator current L1: " + drive.l1.getStatorCurrent());
-    System.out.println("supply current L2: " + drive.l2.getSupplyCurrent() + "stator current L2: " + drive.l2.getStatorCurrent());
-    System.out.println("supply current L3: " + drive.l3.getSupplyCurrent() + "stator current L3: " + drive.l3.getStatorCurrent());
-    System.out.println("supply current R1: " + drive.r1.getSupplyCurrent() + "stator current R1: " + drive.r1.getStatorCurrent());
-    System.out.println("supply current R2: " + drive.r2.getSupplyCurrent() + "stator current R2: " + drive.r2.getStatorCurrent());
-    System.out.println("supply current R3: " + drive.r3.getSupplyCurrent() + "stator current R3: " + drive.r3.getStatorCurrent());
+    System.out.println(
+    "sta L1: " + drive.l1.getStatorCurrent() + "sta R1: " + drive.r1.getStatorCurrent() + "\n" +
+    "sup L1: " + drive.l1.getSupplyCurrent() + "sup R1: " +drive.r1.getSupplyCurrent() + "\n" + 
+    "sta L2: " + drive.l2.getStatorCurrent() + "sta R2: " + drive.r2.getStatorCurrent() + "\n" +
+    "sup L2: " + drive.l2.getSupplyCurrent() + "sup R2: " +drive.r2.getSupplyCurrent() + "\n" +
+    "sta L3: " + drive.l3.getStatorCurrent() + "sta R3: " + drive.r3.getStatorCurrent() + "\n" +
+    "sup L3: " + drive.l3.getSupplyCurrent() + "sup R3: " +drive.r3.getSupplyCurrent() + "\n\n"
+    );
   }
 
   // Called once the command ends or is interrupted.
