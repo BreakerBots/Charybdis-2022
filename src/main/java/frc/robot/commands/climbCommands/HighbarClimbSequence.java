@@ -23,18 +23,18 @@ public class HighbarClimbSequence extends SequentialCommandGroup {
     addCommands(
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_RET_DIST),
-      new MoveClimb(climbArg, Constants.CLIMB_MERICAL_GRAB_EXT_DIST),
-      new PiviotClimb(climbArg),
+      new MoveClimb(climbArg, Constants.CLIMB_MIRACLE_GRAB_EXT_DIST),
+      new PivotClimb(climbArg),
       new ClimbStablityCheck(imuArg),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST),
       new ClimbStablityCheck(imuArg),
-      new PiviotClimb(climbArg),
+      new PivotClimb(climbArg),
       new MoveClimb(climbArg, Constants.CLIMB_LIFT_OF_MID_DIST),
       new ClimbStablityCheck(imuArg),
-      new PiviotClimb(climbArg),
+      new PivotClimb(climbArg),
       new ClimbStablityCheck(imuArg),
       new MoveClimb(climbArg, Constants.LIFT_ONTO_HIGH_DIST),
-      new MoveClimb(climbArg, Constants.SECOND_MERICAL_GRAB_EXT_DIST)
+      new MoveClimb(climbArg, Constants.SECOND_MIRACLE_GRAB_EXT_DIST)
     );
   }
 }

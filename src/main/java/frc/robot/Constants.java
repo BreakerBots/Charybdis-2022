@@ -131,10 +131,10 @@ public final class Constants {
     // Climber Extension vlaues (ticks)
     public static final double CLIMB_FULL_EXT_DIST = FILLER;
     public static final double CLIMB_FULL_RET_DIST = FILLER;
-    public static final double CLIMB_MERICAL_GRAB_EXT_DIST = FILLER;
+    public static final double CLIMB_MIRACLE_GRAB_EXT_DIST = FILLER;
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
-    public static final double SECOND_MERICAL_GRAB_EXT_DIST = FILLER;
+    public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
 
 
 
