@@ -94,6 +94,12 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
+    System.out.println("supply current L1: " + l1.getSupplyCurrent() + "stator current L1: " + l1.getStatorCurrent());
+    System.out.println("supply current L2: " + l2.getSupplyCurrent() + "stator current L2: " + l2.getStatorCurrent());
+    System.out.println("supply current L3: " + l3.getSupplyCurrent() + "stator current L3: " + l3.getStatorCurrent());
+    System.out.println("supply current R1: " + r1.getSupplyCurrent() + "stator current R1: " + r1.getStatorCurrent());
+    System.out.println("supply current R2: " + r2.getSupplyCurrent() + "stator current R2: " + r2.getStatorCurrent());
+    System.out.println("supply current R3: " + r3.getSupplyCurrent() + "stator current R3: " + r3.getStatorCurrent());
   }
 
   /** Returns number of ticks on left motors */
