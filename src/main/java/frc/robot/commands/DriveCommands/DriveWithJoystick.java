@@ -34,19 +34,22 @@ public class DriveWithJoystick extends CommandBase {
     double turn = xbox.getLeftX();
     double net = xbox.getRightTriggerAxis() - xbox.getLeftTriggerAxis();
 
-    if (net != 0) {
-      if (net > prevNet + 0.35) {
-        net = prevNet + 0.35;
-      } else if (net < prevNet - 0.35) {
-        net = prevNet - 0.35;
-      }
-    }
-    if (pdp.getVoltage() < 8.5) {
-      net *= 0.85;
-    }
+    // if (net != 0) {
+    //   if (net > prevNet + 0.35) {
+    //     net = prevNet + 0.35;
+    //   } else if (net < prevNet - 0.35) {
+    //     net = prevNet - 0.35;
+    //   }
+    // }
+    // if (pdp.getVoltage() < 8.5) {
+    //   net *= 0.85;
+    // }
     prevNet = net;
     
     drive.move(net, turn); // Calculates speed and turn outputs
+
+    System.out.println("left joy" + turn);
+    System.out.println("left trig" + xbox.getLeftTriggerAxis());
   }
 
   // Called once the command ends or is interrupted.

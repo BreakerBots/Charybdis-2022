@@ -60,5 +60,4 @@ public class Climber extends SubsystemBase {
     return climberL.getSelectedSensorPosition();
   }
   
-  public
 }
