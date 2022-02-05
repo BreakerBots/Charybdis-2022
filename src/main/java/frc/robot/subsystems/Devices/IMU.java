@@ -12,10 +12,23 @@ import frc.robot.Convert;
 
 public class IMU extends SubsystemBase {
   private WPI_PigeonIMU pigeon;
+  private double imuInvert;
 
   /** Creates a new PigeonIMU. */
   public IMU() {
     pigeon = new WPI_PigeonIMU(Constants.IMU_ID);
+  }
+
+  @Override
+  public void periodic() {
+    //System.out.println("IMU yaw: " + getYaw());
+    // This method will be called once per scheduler run
+    if (Constants.IMU_INVERTED == true) {
+      imuInvert = -1;
+    }
+    else {
+      imuInvert = 1;
+    }
   }
 
   /** Returns pitch angle within +- 180 degrees */
@@ -25,7 +38,7 @@ public class IMU extends SubsystemBase {
 
   /** Returns yaw angle within +- 180 degrees */
   public double getYaw() {
-    return -1 * (pigeon.getYaw() % 360); // Convert.ANGLE_CONVERT(pigeon.getYaw());
+    return imuInvert * (Convert.ANGLE_CONVERT(pigeon.getYaw())); // Convert.ANGLE_CONVERT(pigeon.getYaw());
   }
 
   /** Returns roll angle within +- 180 degrees */
@@ -43,11 +56,5 @@ public class IMU extends SubsystemBase {
   /** Resets yaw to 0 degrees */
   public void reset() {
     pigeon.setYaw(0);
-  }
-
-  @Override
-  public void periodic() {
-    //System.out.println("IMU yaw: " + getYaw());
-    // This method will be called once per scheduler run
   }
 }

@@ -49,7 +49,7 @@ public class Convert {
     }
 
     public static final double ANGLE_CONVERT(double deg) { // Sets angle within -180 to +180 degrees
-        deg = MathUtil.inputModulus(deg, -180, 180);
+        deg = deg % 360;
         return deg;
     }
 

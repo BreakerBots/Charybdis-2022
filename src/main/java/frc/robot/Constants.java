@@ -29,6 +29,7 @@ public final class Constants {
     // IMU constants
     public static final int IMU_ID = 10; // Alpha = 10
     public static final double RADIANS_PER_DEGREE = Math.PI/180;
+    public static boolean IMU_INVERTED = true;
     // Drive motor IDs
     public static final int L1_ID = 11; // Alpha = 11
     public static final int L2_ID = 12; // Alpha = 12
