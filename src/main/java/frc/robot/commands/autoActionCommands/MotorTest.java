@@ -35,7 +35,7 @@ public class MotorTest extends CommandBase {
   public void execute() {
     drive.move(speed, 0);
     System.out.println(
-    "sta L1: " + drive.l1.getStatorCurrent() +   "sta R1: " + drive.r1.getStatorCurrent() + "\n" +
+    "sta L1: " + drive.l1.getStatorCurrent() + "  sta R1: " + drive.r1.getStatorCurrent() + "\n" +
     "sta L2: " + drive.l2.getStatorCurrent() + "  sta R2: " + drive.r2.getStatorCurrent() + "\n" +
     "sta L3: " + drive.l3.getStatorCurrent() + "  sta R3: " + drive.r3.getStatorCurrent() + "\n\n" +
 

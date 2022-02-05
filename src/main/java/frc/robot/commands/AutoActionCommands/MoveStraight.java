@@ -33,7 +33,7 @@ public class MoveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double curDist = Convert.TICK_TO_IN(drive.getLeftTicks());
+    double curDist = Convert.ticksToInches(drive.getLeftTicks());
     System.out.println("Ticks: " + drive.getLeftTicks());
     // System.out.println(drive.feedForwardCalc(4, 2)); // Constants for desired vel, desired acc
     double motorspeed = drive.distPIDCalc(curDist, targetDistance);

@@ -20,8 +20,6 @@ public final class Constants {
     // Time constants
     public static final double MS_PER_CYCLE = 20;
     public static final double CYCLES_PER_SECOND = 200;
-    // Distance constants
-    public static final double IN_PER_M = 39.3700787;
     // Drivetrain constants
     public static final double GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49
     public static final double WHEEL_DIAMETER = 4; // Inches. Alpha = 4
@@ -31,7 +29,6 @@ public final class Constants {
     public static final double TICKS_PER_ROTATION = (TALON_FX_TICKS * GEAR_RATIO);
     // IMU constants
     public static final int IMU_ID = 10; // Alpha = 10
-    public static final double RADIANS_PER_DEGREE = Math.PI/180;
     public static boolean IMU_INVERTED = true;
     // Drive motor IDs
     public static final int L1_ID = 11; // Alpha = 11

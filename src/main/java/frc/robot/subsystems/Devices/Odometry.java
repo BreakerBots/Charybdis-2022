@@ -7,6 +7,7 @@ package frc.robot.subsystems.Devices;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Convert;
 import frc.robot.subsystems.Drive;
@@ -30,8 +31,8 @@ public class Odometry extends SubsystemBase {
   @Override
   public void periodic() {
     odometer.update(getRot2D(), getMetersL(), getMetersR());
-    xPos = Convert.M_TO_IN(odometer.getPoseMeters().getX());
-    yPos = Convert.M_TO_IN(odometer.getPoseMeters().getY());
+    xPos = Units.metersToInches(odometer.getPoseMeters().getX());
+    yPos = Units.metersToInches(odometer.getPoseMeters().getY());
     anglePos = odometer.getPoseMeters().getRotation().getDegrees();
     // This method will be called once per scheduler run
   }
@@ -60,11 +61,11 @@ public class Odometry extends SubsystemBase {
   }
 
   public double getMetersL() {
-    return Convert.IN_TO_M(Convert.TICK_TO_IN(driveArg.getLeftTicks()));
+    return Units.inchesToMeters(Convert.ticksToInches(driveArg.getLeftTicks()));
   }
 
   public double getMetersR() {
-    return Convert.IN_TO_M(Convert.TICK_TO_IN(driveArg.getLeftTicks()));
+    return Units.inchesToMeters(Convert.ticksToInches(driveArg.getLeftTicks()));
   }
 
 }
