@@ -59,5 +59,11 @@ public class Climber extends SubsystemBase {
   public double getClimbTicks() {
     return climberL.getSelectedSensorPosition();
   }
+
+  public void toggleClimbSol() {
+    
+  }
+
+
   
 }
