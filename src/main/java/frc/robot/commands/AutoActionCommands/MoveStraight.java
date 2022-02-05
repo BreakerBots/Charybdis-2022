@@ -4,6 +4,7 @@
 
 package frc.robot.commands.autoActionCommands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Convert;
 import frc.robot.subsystems.Drive;
@@ -12,11 +13,13 @@ import frc.robot.subsystems.Drive;
 public class MoveStraight extends CommandBase {
   private Drive drive;
   private double targetDistance;
+  private double speedClamp;
   /** Creates a new MoveStraight. */
-  public MoveStraight(Drive driveArg, double distanceInches) {
+  public MoveStraight(Drive driveArg, double distanceInches, double speedLimit) {
     drive = driveArg;
     addRequirements(drive);
     targetDistance = distanceInches;
+    speedClamp = speedLimit;
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -34,6 +37,7 @@ public class MoveStraight extends CommandBase {
     double feedForwardVal = drive.feedForwardCalc(4, 2); // Constants for desired vel, desired acc
     double feedBackVal = drive.distPIDCalc(curDist, targetDistance);
     double motorspeed = feedBackVal + feedForwardVal;
+    motorspeed = MathUtil.clamp(motorspeed, -speedClamp, speedClamp);
     
     drive.move(motorspeed, 0);
     // 1D movement back and forth
