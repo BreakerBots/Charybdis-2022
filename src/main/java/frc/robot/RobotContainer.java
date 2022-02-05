@@ -12,12 +12,14 @@ import frc.robot.commands.autoActionCommands.MotorTest;
 import frc.robot.commands.autoActionCommands.Pivot;
 import frc.robot.commands.autoActionCommands.Turn;
 import frc.robot.commands.autoPaths.OffTarmack_H1;
+import frc.robot.commands.climbCommands.HighbarClimbSequence;
 import frc.robot.commands.driveCommands.DriveWithJoystick;
 import frc.robot.commands.intakeCommands.IntakeHopper;
 import frc.robot.commands.intakeCommands.IntakeToggle;
 import frc.robot.commands.shooterCommands.ShootCoreCommands;
 import frc.robot.commands.shooterCommands.ShooterPosDown;
 import frc.robot.commands.shooterCommands.ShooterPosUp;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
@@ -43,6 +45,7 @@ public class RobotContainer {
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper();
   private final IMU imuSys = new IMU();
+  private final Climber climbSys = new Climber();
   // private final Shooter shooterSys = new Shooter();
   private final XboxController xbox = new XboxController(0);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
@@ -70,15 +73,13 @@ public class RobotContainer {
    */
   
    private void configureButtonBindings() {
-    // new JoystickButton(xbox, 2).whenPressed(new MoveStraight(driveTrain, 40), true);
-    new JoystickButton(xbox, Constants.A).whenPressed(new MotorTest(driveTrain, 20, 0.75));
-    //new JoystickButton(xbox, Constants.A).whenPressed(new Turn(driveTrain, imuSys, -180, 48, 0.65), true);
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new ShooterPosUp(shooterSys));
     // new JoystickButton(xbox, Constants.DOWN).whenPressed(new ShooterPosDown(shooterSys));
     // /Y button charges flywheel, B button shoots
     // new JoystickButton(xbox, Constants.Y).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
+    // new JoystickButton(xbox, Constants.X).whenPressed(new HighbarClimbSequence(climbSys, imuSys));
   }
 
   /**
