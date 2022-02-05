@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import java.lang.module.FindException;
+
+import javax.swing.Box.Filler;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -18,6 +22,8 @@ public final class Constants {
     // Time constants
     public static final double MS_PER_CYCLE = 20;
     public static final double CYCLES_PER_SECOND = 200;
+    // Distance constants
+    public static final double IN_PER_M = 39.3700787;
     // Drivetrain constants
     public static final double GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49
     public static final double WHEEL_DIAMETER = 4; // Inches. Alpha = 4
@@ -27,6 +33,7 @@ public final class Constants {
     public static final double TICKS_PER_ROTATION = (TALON_FX_TICKS * GEAR_RATIO);
     // IMU constants
     public static final int IMU_ID = 10; // Alpha = 10
+    public static final double RADIANS_PER_DEGREE = Math.PI/180;
     public static boolean IMU_INVERTED = true;
     // Drive motor IDs
     public static final int L1_ID = 11; // Alpha = 11
@@ -126,6 +133,13 @@ public final class Constants {
     public static final double CLIMB_PITCH_TOLR = 5;
     public static final double CLIMB_YAW_TOLR = 5;
     public static final double CLIMB_ROLL_TOLR = 5;
+    // Climber Extension vlaues (ticks)
+    public static final double CLIMB_FULL_EXT_DIST = FILLER;
+    public static final double CLIMB_FULL_RET_DIST = FILLER;
+    public static final double CLIMB_MERICAL_GRAB_EXT_DIST = FILLER;
+    public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
+    public static final double LIFT_ONTO_HIGH_DIST = FILLER;
+    public static final double SECOND_MERICAL_GRAB_EXT_DIST = FILLER;
 
 
 
