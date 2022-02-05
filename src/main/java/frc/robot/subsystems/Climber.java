@@ -27,7 +27,7 @@ public class Climber extends SubsystemBase {
   private final double artClimbFeedForward = 0.3;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
   public int climbState;
-  public boolean climbSolState;
+  public boolean climbSolState; //true is extended
   public Climber() {
     climbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
@@ -64,13 +64,13 @@ public class Climber extends SubsystemBase {
 
   public void toggleClimbSol() {
     if (climbSolState == true) {
-      climbSolL.set(Value.kReverse);
-      climbSolR.set(Value.kReverse);
+      climbSolL.set(Value.kForward);
+      climbSolR.set(Value.kForward);
       climbSolState = false;
     }
     else {
-      climbSolL.set(Value.kForward);
-      climbSolR.set(Value.kForward);
+      climbSolL.set(Value.kReverse);
+      climbSolR.set(Value.kReverse);
       climbSolState = true;
     }
   }
