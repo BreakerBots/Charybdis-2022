@@ -21,7 +21,7 @@ public final class Constants {
     // Distance constants
     public static final double IN_PER_M = 39.3700787;
     // Drivetrain constants
-    public static final double GEAR_RATIO = 16.24; // Assume (value) to 1. Alpha = 16.24 scyllia = 8.49
+    public static final double GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49
     public static final double WHEEL_DIAMETER = 4; // Inches. Alpha = 4
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI; // Inches
     public static final double TALON_FX_TICKS = 2048.0; // Ticks per rotation
