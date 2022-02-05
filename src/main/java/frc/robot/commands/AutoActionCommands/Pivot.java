@@ -4,8 +4,6 @@
 
 package frc.robot.commands.autoActionCommands;
 
-import java.util.function.DoubleToLongFunction;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
@@ -17,8 +15,9 @@ public class Pivot extends CommandBase {
   double target;
   double speedClamp;
 
-  public Pivot(Drive driveArg, IMU imuArg, double targetDegrees, Double speedLimit) {
+  public Pivot(Drive driveArg, IMU imuArg, double targetDegrees, double speedLimit) {
     drive = driveArg;
+    addRequirements(drive);
     imu = imuArg;
     target = targetDegrees;
     speedClamp = speedLimit;
@@ -37,7 +36,10 @@ public class Pivot extends CommandBase {
       double turnPercent = drive.anglePID.calculate(curAngle, target);
       turnPercent = MathUtil.clamp(turnPercent, -speedClamp, speedClamp); // Restricts motor speed
 
-      drive.move(0, turnPercent); // Turns in place
+      // drive.move(0, turnPercent); // Turns in place
+      drive.autoMove(0, turnPercent); // Turns in place
+      System.out.println("Angle error: " + drive.anglePID.getPositionError());
+      System.out.println("Turn percent:" + turnPercent);
   }
 
   // Called once the command ends or is interrupted.

@@ -27,7 +27,7 @@ public final class Constants {
     public static final double TALON_FX_TICKS = 2048.0; // Ticks per rotation
     public static final double TICKS_PER_INCH = (TALON_FX_TICKS * GEAR_RATIO) / (WHEEL_CIRCUMFERENCE);
     // IMU constants
-    public static final int IMU_ID = FILLER; // Alpha = 10
+    public static final int IMU_ID = 10; // Alpha = 10
     public static final double RADIANS_PER_DEGREE = Math.PI/180;
     // Drive motor IDs
     public static final int L1_ID = 11; // Alpha = 11
@@ -38,12 +38,12 @@ public final class Constants {
     public static final int R3_ID = 16; // Alpha = 16
     // AngleController PID
     public static final double KP_ANG = 0.02;
-    public static final double KI_ANG = 0.1;
-    public static final double KD_ANG = 0.1;
+    public static final double KI_ANG = 0.0;
+    public static final double KD_ANG = 0.0;
     public static final double KP_DIST = 0.05;
     public static final double KI_DIST = 0;
     public static final double KD_DIST = 0;
-    public static final double ANG_POS_TOLERANCE = 1;
+    public static final double ANG_POS_TOLERANCE = 10;
     public static final double ANG_VEL_TOLERANCE = 0.5;
     public static final double DIST_POS_TOLERANCE = 1;
     public static final double DIST_VEL_TOLERANCE = 0.5;

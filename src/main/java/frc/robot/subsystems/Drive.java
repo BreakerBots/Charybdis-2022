@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -29,11 +30,18 @@ public class Drive extends SubsystemBase {
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
   public double prevNet;
+  private PowerDistribution pdp;
+
+  private final double artLinearFeedForward = 0.3;
+  private final double artAngleFeedForward = 0.2;
 
   /** Creates a new Drive. */
-  public Drive() {
+  public Drive(PowerDistribution pdpArg) {
+    pdp = pdpArg;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
+    anglePID.setTolerance(Constants.ANG_POS_TOLERANCE, Constants.ANG_VEL_TOLERANCE);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
+    distPID.setTolerance(Constants.DIST_POS_TOLERANCE, Constants.DIST_VEL_TOLERANCE);
     driveFF = new SimpleMotorFeedforward(Constants.KS_DRIVE, Constants.KV_DRIVE, Constants.KA_DRIVE);
     // Left motors
     l1 = new WPI_TalonFX(Constants.L1_ID);
@@ -51,13 +59,32 @@ public class Drive extends SubsystemBase {
   }
 
   /** Wraps around arcadeDrive to allow for movement */
-  public void move(double netSpd, double turnAmt) {
-    driveTrainDiff.arcadeDrive(netSpd, turnAmt); // Calculates speed and turn outputs
+  public void move(double netSpd, double turnSpd) {
+    if (pdp.getVoltage() < 8.5) {
+      netSpd *= 0.85;
+      turnSpd *= 0.85;
+    }
+    driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
   }
 
-  /** 1-param call for move method */
-  public void move(double netSpd) {
-    move(netSpd, 0);
+  public void autoMove(double netSpd, double turnSpd) {
+    if (pdp.getVoltage() < 8.5) {
+      netSpd *= 0.85;
+      turnSpd *= 0.85;
+    }
+    if (netSpd > 0) {
+      netSpd += artLinearFeedForward;
+    }
+    else {
+      netSpd -= artLinearFeedForward;
+    }
+    if (turnSpd > 0) {
+      turnSpd += artAngleFeedForward;
+    }
+    else {
+      turnSpd -= artAngleFeedForward;
+    }
+    driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
   }
 
   /** Wraps around tankDrive to allow for tank-like movement */

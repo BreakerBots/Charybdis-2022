@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static PowerDistribution pdp = new PowerDistribution();
-  private final Drive driveTrain = new Drive();
+  private final Drive driveTrain = new Drive(pdp);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper();
   private final IMU imuSys = new IMU();
