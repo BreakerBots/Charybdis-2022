@@ -24,6 +24,7 @@ public class Climber extends SubsystemBase {
   private DoubleSolenoid climbSolL;
   private DoubleSolenoid climbSolR;
   public PIDController climbPID;
+  private final double artClimbFeedForward = 0.3;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
   public int climbState;
   public boolean climbSolState;
@@ -54,7 +55,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void extendClimb(double climbSpeedArg) {
-    climbMotors.set(climbSpeedArg);
+    climbMotors.set(climbSpeedArg + artClimbFeedForward);
   }
 
   public double getClimbTicks() {
