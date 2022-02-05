@@ -40,11 +40,6 @@ public class MotorTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (drive.getLeftTicks() == (rotate * Constants.TALON_FX_TICKS)) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    return drive.getLeftTicks() >= (rotate * Constants.TALON_FX_TICKS);
   }
 }
