@@ -21,10 +21,11 @@ public class Pickup1_Shoot2_H1 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new MoveStraight(driveArg, 60, 0.7),
-      new Pivot(driveArg, imuArg, 5, 0.2),
-      new MoveStraight(driveArg, -96, 0.5),
-      new Pivot(driveArg, imuArg, -40, 0.5)
+      new MoveStraight(driveArg, 60, 0.2),
+      new Pivot(driveArg, imuArg, 25, 0.2),
+      new MoveStraight(driveArg, -85, 0.2),
+      new Pivot(driveArg, imuArg, -45, 0.3),
+      new MoveStraight(driveArg, -15, 0.2)
     );
   }
 }
