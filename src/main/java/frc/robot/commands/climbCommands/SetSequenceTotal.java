@@ -10,19 +10,19 @@ import frc.robot.subsystems.Climber;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PivotClimb extends InstantCommand {
+public class SetSequenceTotal extends InstantCommand {
   Climber climber;
-  public PivotClimb(Climber climbArg) {
+  int actionNum;
+  public SetSequenceTotal(Climber climberArg, int actionNumArg) {
     // Use addRequirements() here to declare subsystem dependencies.
-    climber = climbArg;
+    climber = climberArg;
+    actionNum = actionNumArg;
     addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.toggleClimbSol();
-    climber.climbSequenceProgress ++;
-    System.out.println("CIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
+    climber.climbSequenceTotal = actionNum;
   }
 }

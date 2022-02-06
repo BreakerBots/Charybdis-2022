@@ -21,18 +21,20 @@ public class HighbarClimbSequence extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new ResetSequenceNums(climbArg),
+      new SetSequenceTotal(climbArg, 14),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_RET_DIST),
       new MoveClimb(climbArg, Constants.CLIMB_MIRACLE_GRAB_EXT_DIST),
       new PivotClimb(climbArg),
-      new ClimbStablityCheck(imuArg),
+      new ClimbStablityCheck(climbArg, imuArg),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST),
-      new ClimbStablityCheck(imuArg),
+      new ClimbStablityCheck(climbArg, imuArg),
       new PivotClimb(climbArg),
       new MoveClimb(climbArg, Constants.CLIMB_LIFT_OF_MID_DIST),
-      new ClimbStablityCheck(imuArg),
+      new ClimbStablityCheck(climbArg, imuArg),
       new PivotClimb(climbArg),
-      new ClimbStablityCheck(imuArg),
+      new ClimbStablityCheck(climbArg, imuArg),
       new MoveClimb(climbArg, Constants.LIFT_ONTO_HIGH_DIST),
       new MoveClimb(climbArg, Constants.SECOND_MIRACLE_GRAB_EXT_DIST)
     );

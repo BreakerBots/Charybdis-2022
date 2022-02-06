@@ -5,13 +5,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.fasterxml.jackson.databind.util.EnumResolver;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -28,6 +26,8 @@ public class Climber extends SubsystemBase {
   // 0 = retracted, 1 = extending/retracting, 2 = extended
   public int climbState;
   public boolean climbSolState; //true is extended
+  public int climbSequenceTotal;
+  public int climbSequenceProgress;
   public Climber() {
     climbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
@@ -51,6 +51,12 @@ public class Climber extends SubsystemBase {
       }
       else {
         climbState = 1;
+      }
+
+      if (climbSequenceProgress == climbSequenceTotal) {
+        System.out.println("CLIMB SEQUENCE COMPLETE!");
+        climbSequenceTotal = 0;
+        climbSequenceProgress = 0;
       }
   }
 

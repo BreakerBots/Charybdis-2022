@@ -135,6 +135,9 @@ public final class Constants {
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
+    // Compressor closed-loop-controle pressure values
+    public static final double MIN_PSI = FILLER;
+    public static final double MAX_PSI = 120;
 
 
 

@@ -6,15 +6,19 @@ package frc.robot.commands.climbCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Devices.IMU;
 
 public class ClimbStablityCheck extends CommandBase {
   /** Creates a new ClimbStablityCheck. */
   IMU imu;
-  public ClimbStablityCheck(IMU imuArg) {
+  Climber climber;
+  public ClimbStablityCheck(Climber climberArg, IMU imuArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     imu = imuArg;
+    climber = climberArg;
     addRequirements(imu);
+    addRequirements(climberArg);
   }
 
   // Called when the command is initially scheduled.
@@ -30,6 +34,8 @@ public class ClimbStablityCheck extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     System.out.println("CLIMB STABLITY CHECK PASSED!");
+    climber.climbSequenceProgress ++;
+    System.out.println("CIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 
   // Returns true when the command should end.
