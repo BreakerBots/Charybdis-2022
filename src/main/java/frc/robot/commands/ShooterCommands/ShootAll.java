@@ -7,6 +7,8 @@ package frc.robot.commands.shooterCommands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
+import frc.robot.commands.autoActionCommands.AutoToggleShoot;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
@@ -33,6 +35,9 @@ public class ShootAll extends CommandBase {
   @Override
   public void execute() {
     if (xbox.getBButtonPressed() && shooter.flyweelState) {
+      hopper.hopperOn();
+    }
+    if (shooter.autoShoot == true) {
       hopper.hopperOn();
     }
     if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
