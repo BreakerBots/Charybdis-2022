@@ -90,6 +90,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new Pickup1_Shoot2_ARC_H3(driveTrain, imuSys);
+    return new Pickup1_Shoot2_H3(driveTrain, imuSys);
   }
 }

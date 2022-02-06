@@ -44,8 +44,15 @@ public class Turn extends CommandBase {
   public void execute() {
     double innerMotorSpeed = tgtSpeed * driveRatio;
     double currAngle = imu.getYaw();
+    double currAngleNew;
 
-    angleError = tgtAngle - currAngle;
+    if (tgtSpeed < 0) {
+      currAngleNew = currAngle * -1;
+    }
+    else {
+      currAngleNew = currAngle;
+    }
+    angleError = tgtAngle - currAngleNew;
     double leftMotor = (angleError>0 ? tgtSpeed : innerMotorSpeed);
     double rightMotor = (angleError>0 ? innerMotorSpeed: tgtSpeed);
 

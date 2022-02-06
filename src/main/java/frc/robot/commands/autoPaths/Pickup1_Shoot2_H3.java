@@ -17,7 +17,7 @@ import frc.robot.subsystems.Devices.IMU;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Pickup1_Shoot2_H3 extends SequentialCommandGroup {
   /** Creates a new Pickup1_Shoot2_H1. */
-  public Pickup1_Shoot2_H3(Drive driveArg, IMU imuArg, Intake intakeArg, Hopper hopperArg) {
+  public Pickup1_Shoot2_H3(Drive driveArg, IMU imuArg) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
