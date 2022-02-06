@@ -39,7 +39,7 @@ public class WaitForXButtonPress extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     climber.climbSequenceProgress ++;
-    System.out.println("CIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
+    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 
   // Returns true when the command should end.

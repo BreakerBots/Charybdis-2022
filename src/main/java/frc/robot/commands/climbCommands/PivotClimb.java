@@ -23,6 +23,6 @@ public class PivotClimb extends InstantCommand {
   public void initialize() {
     climber.toggleClimbSol();
     climber.climbSequenceProgress ++;
-    System.out.println("CIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
+    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 }
