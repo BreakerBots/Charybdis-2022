@@ -12,7 +12,8 @@ import frc.robot.commands.autoActionCommands.MotorTest;
 import frc.robot.commands.autoActionCommands.Pivot;
 import frc.robot.commands.autoActionCommands.Turn;
 import frc.robot.commands.autoPaths.OffTarmack_H1;
-import frc.robot.commands.autoPaths.Pickup1_Shoot2_H1;
+import frc.robot.commands.autoPaths.Pickup1_Shoot2_ARC_H3;
+import frc.robot.commands.autoPaths.Pickup1_Shoot2_H3;
 import frc.robot.commands.climbCommands.HighbarClimbSequence;
 import frc.robot.commands.driveCommands.DriveWithJoystick;
 import frc.robot.commands.intakeCommands.IntakeHopper;
@@ -76,7 +77,6 @@ public class RobotContainer {
    private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
-    new JoystickButton(xbox, Constants.A).whenPressed(new MotorTest(driveTrain, 20, 0.8));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new ShooterPosUp(shooterSys));
     // new JoystickButton(xbox, Constants.DOWN).whenPressed(new ShooterPosDown(shooterSys));
     // /Y button charges flywheel, B button shoots
@@ -90,6 +90,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new Pickup1_Shoot2_H1(driveTrain, imuSys, intakeSys, hopperSys);
+    return new Pickup1_Shoot2_ARC_H3(driveTrain, imuSys);
   }
 }
