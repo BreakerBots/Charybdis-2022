@@ -20,6 +20,7 @@ public class Shooter extends SubsystemBase {
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
   private MotorControllerGroup flywheel;
+  public boolean autoShoot;
   DoubleSolenoid shooterSol;
   public Shooter() {
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
