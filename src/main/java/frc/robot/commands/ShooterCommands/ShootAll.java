@@ -14,6 +14,7 @@ public class ShootAll extends CommandBase {
   Shooter shooter;
   XboxController xbox;
   Hopper hopper;
+  private long cycleCount;
   public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg) {
     shooter = shooterArg;
     xbox = controllerArg;
@@ -25,18 +26,27 @@ public class ShootAll extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    xbox.setRumble(RumbleType.kLeftRumble, 0);
-    xbox.setRumble(RumbleType.kRightRumble, 0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    cycleCount ++;
+    if (cycleCount > 450) {
+      xbox.setRumble(RumbleType.kLeftRumble, 0);
+      xbox.setRumble(RumbleType.kRightRumble, 0);
+    }
+    if (cycleCount % 400 == 0) {
+      System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
+    }
     if (xbox.getBButtonPressed() && shooter.flyweelState) {
       hopper.hopperOn();
+      System.out.println("SHOOTER STARTED!");
     }
     else if (shooter.autoShoot == true && shooter.flyweelState) {
       hopper.hopperOn();
+      shooter.autoShoot = false;
+      System.out.println("SHOOTER STARTED IN AUTO!");
     }
     if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
       hopper.hopperOff();
@@ -46,7 +56,9 @@ public class ShootAll extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
+  }
 
   // Returns true when the command should end.
   @Override

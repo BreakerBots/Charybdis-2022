@@ -46,6 +46,7 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public boolean isFinished() {
     if(shooter.getFlywheelRPM() == Constants.FLYWHEEL_TAR_SPEED) {
+      System.out.println("FLYWHEEL CHARGED!");
       return true;
     } else {
       return false;

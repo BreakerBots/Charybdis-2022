@@ -34,17 +34,17 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     
   }
-
+  /** Turns Flywheel On */
   public boolean flyweelOn() {
     flywheel.set(Constants.SHOOTERSPEED);
     return flyweelState = true;
   }
-
+   /** Turns Flywheel Off */
   public boolean flyweelOff() {
     flywheel.set(0);
     return flyweelState = false;
   }
-
+  /** Returns the RPM of the flywheel's Motors */
   public double getFlywheelRPM() {
     double curTicks;
     double tickDiff;
@@ -57,12 +57,12 @@ public class Shooter extends SubsystemBase {
     prevTicks = curTicks;
     return rpm;
   }
-
+  /** Brings shooter to higher fireing angle */
   public boolean shooterUp() {
     shooterSol.set(Value.kForward);
     return shooterPos = true;
   }
-
+  /** Brings shooter to lower fireing angle */
   public boolean shooterDown() {
     shooterSol.set(Value.kReverse);
     return shooterPos = false;

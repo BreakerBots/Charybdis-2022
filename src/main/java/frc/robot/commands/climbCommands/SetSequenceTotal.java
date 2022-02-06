@@ -24,5 +24,6 @@ public class SetSequenceTotal extends InstantCommand {
   @Override
   public void initialize() {
     climber.climbSequenceTotal = actionNum;
+    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 }
