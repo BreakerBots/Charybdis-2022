@@ -4,6 +4,7 @@
 
 package frc.robot.commands.climbCommands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
@@ -14,7 +15,7 @@ import frc.robot.subsystems.Devices.IMU;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class HighbarClimbSequence extends SequentialCommandGroup {
   /** Creates a new MidbarClimbSequence. */
-  public HighbarClimbSequence(Climber climbArg, IMU imuArg) {
+  public HighbarClimbSequence(Climber climbArg, IMU imuArg, XboxController controllerArg) {
     addRequirements(climbArg);
     addRequirements(imuArg);
     
@@ -22,8 +23,9 @@ public class HighbarClimbSequence extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetSequenceNums(climbArg),
-      new SetSequenceTotal(climbArg, 14),
+      new SetSequenceTotal(climbArg, 15),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST),
+      new WaitForXButtonPress(controllerArg, climbArg),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_RET_DIST),
       new MoveClimb(climbArg, Constants.CLIMB_MIRACLE_GRAB_EXT_DIST),
       new PivotClimb(climbArg),

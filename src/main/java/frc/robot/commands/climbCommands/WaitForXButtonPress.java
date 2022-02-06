@@ -4,44 +4,48 @@
 
 package frc.robot.commands.climbCommands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Devices.IMU;
 
-public class ClimbStablityCheck extends CommandBase {
-  /** Creates a new ClimbStablityCheck. */
-  IMU imu;
+public class WaitForXButtonPress extends CommandBase {
+  /** Creates a new WaitForButtonPress. */
+  XboxController xbox;
   Climber climber;
-  public ClimbStablityCheck(Climber climberArg, IMU imuArg) {
+  private long cycleCount;
+  public WaitForXButtonPress(XboxController controllerArg, Climber climberArg) {
     // Use addRequirements() here to declare subsystem dependencies.
-    imu = imuArg;
     climber = climberArg;
-    addRequirements(imu);
-    addRequirements(climberArg);
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("PLEASE PRESS X BUTTON AGAIN TO COMPLETE CLIMB");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    cycleCount++;
+    if ((cycleCount % 400) == 0) {
+      System.out.println("PLEASE PRESS X BUTTON AGAIN TO COMPLETE CLIMB");
+    }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("CLIMB STABLITY CHECK PASSED!");
     climber.climbSequenceProgress ++;
-    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
+    System.out.println("CIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (imu.getPitchRate() < Constants.CLIMB_PITCH_TOLR && imu.getYawRate() < Constants.CLIMB_YAW_TOLR && imu.getRollRate() < Constants.CLIMB_ROLL_TOLR) {
+    if (xbox.getXButtonPressed()) {
       return true;
     }
     else {
