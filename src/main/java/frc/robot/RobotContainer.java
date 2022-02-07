@@ -19,8 +19,7 @@ import frc.robot.commands.driveCommands.DriveWithJoystick;
 import frc.robot.commands.intakeCommands.IntakeHopper;
 import frc.robot.commands.intakeCommands.IntakeToggle;
 import frc.robot.commands.shooterCommands.ShootCoreCommands;
-import frc.robot.commands.shooterCommands.ShooterPosDown;
-import frc.robot.commands.shooterCommands.ShooterPosUp;
+import frc.robot.commands.shooterCommands.ToggleShooterPos;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
@@ -77,11 +76,10 @@ public class RobotContainer {
    private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
-    // new JoystickButton(xbox, Constants.UP).whenPressed(new ShooterPosUp(shooterSys));
-    // new JoystickButton(xbox, Constants.DOWN).whenPressed(new ShooterPosDown(shooterSys));
-    // /Y button charges flywheel, B button shoots
-    // new JoystickButton(xbox, Constants.Y).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
-    // new JoystickButton(xbox, Constants.X).whenPressed(new HighbarClimbSequence(climbSys, imuSys));
+    // new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
+    // //Y button charges flywheel, B button shoots
+    // new JoystickButton(xbox, Constants.R_BUMP).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
+    // new JoystickButton(xbox, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys));
   }
 
   /**

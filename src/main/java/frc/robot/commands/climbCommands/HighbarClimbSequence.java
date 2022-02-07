@@ -25,7 +25,7 @@ public class HighbarClimbSequence extends SequentialCommandGroup {
       new ResetSequenceNums(climbArg),
       new SetSequenceTotal(climbArg, 15),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST),
-      new WaitForXButtonPress(controllerArg, climbArg),
+      new WaitForDownButton(controllerArg, climbArg),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_RET_DIST),
       new MoveClimb(climbArg, Constants.CLIMB_MIRACLE_GRAB_EXT_DIST),
       new PivotClimb(climbArg),
