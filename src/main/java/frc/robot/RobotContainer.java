@@ -75,7 +75,6 @@ public class RobotContainer {
   
    private void configureButtonBindings() {
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
-    // new JoystickButton(xbox, Constants.B).whenPressed(new MotorTest(driveTrain, 1, 20));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
     // new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // //Y button charges flywheel, B button shoots

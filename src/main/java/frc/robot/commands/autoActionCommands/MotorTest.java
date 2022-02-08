@@ -4,6 +4,8 @@
 
 package frc.robot.commands.autoActionCommands;
 
+import java.time.Month;
+
 import javax.lang.model.util.ElementScanner6;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -28,7 +30,7 @@ public class MotorTest extends CommandBase {
 // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("MOTOR TESTING BEGIN!");
+    System.out.println("MOTOR TESTING START!");
     drive.resetEncoders();
   }
 
@@ -56,6 +58,6 @@ public class MotorTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return drive.getLeftTicks() >= (rotate * Constants.TICKS_PER_ROTATION);
+    return Math.abs(drive.getLeftTicks()) >= (rotate * Constants.TICKS_PER_ROTATION);
   }
 }
