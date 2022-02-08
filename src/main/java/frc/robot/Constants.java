@@ -33,11 +33,11 @@ public final class Constants {
     public static final int IMU_ID = 10; // Alpha = 10
     public static boolean IMU_INVERTED = true;
     // Drive motor IDs
-    public static final int L1_ID = 11; // Alpha = 11
-    public static final int L2_ID = 12; // Alpha = 12
+    public static final int L1_ID = 12; // Alpha = 11
+    public static final int L2_ID = 11; // Alpha = 12
     public static final int L3_ID = 13; // Alpha = 13
-    public static final int R1_ID = 14; // Alpha = 14
-    public static final int R2_ID = 15; // Alpha = 15
+    public static final int R1_ID = 15; // Alpha = 14
+    public static final int R2_ID = 14; // Alpha = 15
     public static final int R3_ID = 16; // Alpha = 16
     // AngleController PID
     public static final double KP_ANG = 0.02;
@@ -52,17 +52,17 @@ public final class Constants {
     public static final double DIST_POS_TOLERANCE = 1;
     public static final double DIST_VEL_TOLERANCE = 0.1;
     // intake motor speeds
-    public static final double INTAKESPEED = 1;
+    public static final double INTAKESPEED = -1;
     public static final double R_SORTESPEED = 1;
     public static final double L_SORTESPEED = 0.8;
     // intake solonoid IDs
-    public static final int INTAKESOL_FWD = 0;
-    public static final int INTAKESOL_REV = 1;
+    public static final int INTAKESOL_FWD = 1;
+    public static final int INTAKESOL_REV = 0;
     // intake motor IDs
-    public static final int INTAKEMAIN_ID = 19;
-    public static final int INTAKE_L_ID = FILLER;
-    public static final int INTAKE_R_ID = FILLER;
-    public static final int PWR_DISTR = FILLER;
+    public static final int INTAKEMAIN_ID = 10;
+    public static final int INTAKE_L_ID = 30;
+    public static final int INTAKE_R_ID = 26;
+    public static final int PWR_DISTR = 1;
     // shooter motor IDs
     public static final int SHOOTER_L_ID = FILLER;
     public static final int SHOOTER_R_ID = FILLER;
@@ -101,7 +101,7 @@ public final class Constants {
     public static final int DOWN = 180;
     public static final int LEFT = 270;
     // hopper motor ID
-    public static final int HOPPER_ID = FILLER;
+    public static final int HOPPER_ID = 19;
     // hopper ball position sensor IDs
     public static final int HOPPER_P1_ID = FILLER;
     public static final int HOPPER_P2_ID = FILLER;

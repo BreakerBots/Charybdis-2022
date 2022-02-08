@@ -9,13 +9,15 @@ import javax.lang.model.util.ElementScanner6;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Intake;
 
 public class MotorTest extends CommandBase {
   /** Creates a new MotorRotationTest. */
   Drive drive;
   double speed;
   double rotate;
-  public MotorTest(Drive driveArg, double rotationsArg, double speedArg) {
+  public MotorTest(Drive driveArg, double speedArg, int rotationsArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     drive = driveArg;
     speed = speedArg;
@@ -23,7 +25,7 @@ public class MotorTest extends CommandBase {
     addRequirements(drive);
   }
 
-  // Called when the command is initially scheduled.
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
     System.out.println("MOTOR TESTING BEGIN!");
