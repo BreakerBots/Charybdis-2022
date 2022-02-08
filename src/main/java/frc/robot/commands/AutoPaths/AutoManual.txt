@@ -1,7 +1,7 @@
 Starting positions: 
 H1 - closest position to the hanger on the hanger's side of the field.
 H2 - furthest position to the hanger on the hanger's side of the field.
-H3 - allighned with edg of furthest end of tarmac from hanger on hangers side of the field. Also allighhned with outward edge tarmac.
+H3 - alligned with edge of furthest end of the tarmac from hanger on hangers side of the field. Also alligned with outward edge of tarmac.
 P4 - closest position to the human player on the human player's side of the field.
 P5 - furthest position to the human player on the human player's side of the field.
 
