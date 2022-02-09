@@ -74,7 +74,7 @@ public class RobotContainer {
    */
   
    private void configureButtonBindings() {
-    new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
+    // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
     // new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // //Right bumper charges flywheel, B button shoots
@@ -88,6 +88,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new Pickup1_Shoot2_H3(driveTrain, imuSys);
+    return new MotorTest(driveTrain, 0.25, 30);
   }
 }

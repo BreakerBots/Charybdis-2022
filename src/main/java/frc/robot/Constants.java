@@ -33,12 +33,12 @@ public final class Constants {
     public static final int IMU_ID = 10; // Alpha = 10
     public static boolean IMU_INVERTED = true;
     // Drive motor IDs
-    public static final int L1_ID = 12; // Alpha = 11
-    public static final int L2_ID = 11; // Alpha = 12
-    public static final int L3_ID = 13; // Alpha = 13
-    public static final int R1_ID = 15; // Alpha = 14
-    public static final int R2_ID = 14; // Alpha = 15
-    public static final int R3_ID = 16; // Alpha = 16
+    public static final int L1_ID = 12; // Alpha = 11 // scylla = 12
+    public static final int L2_ID = 11; // Alpha = 12 // scylla = 11
+    public static final int L3_ID = 13; // Alpha = 13 // scylla = 13
+    public static final int R1_ID = 15; // Alpha = 14 // scylla = 15
+    public static final int R2_ID = 14; // Alpha = 15 // scylla = 14
+    public static final int R3_ID = 16; // Alpha = 16 // scylla = 16
     // AngleController PID
     public static final double KP_ANG = 0.02;
     public static final double KI_ANG = 0.0;
@@ -62,7 +62,7 @@ public final class Constants {
     public static final int INTAKEMAIN_ID = 10;
     public static final int INTAKE_L_ID = 30;
     public static final int INTAKE_R_ID = 26;
-    public static final int PWR_DISTR = 1;
+    public static final int PWR_DISTR = 0;
     // shooter motor IDs
     public static final int SHOOTER_L_ID = FILLER;
     public static final int SHOOTER_R_ID = FILLER;
