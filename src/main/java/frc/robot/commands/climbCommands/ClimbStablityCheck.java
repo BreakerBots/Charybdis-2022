@@ -41,7 +41,7 @@ public class ClimbStablityCheck extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (imu.getPitchRate() < Constants.CLIMB_PITCH_TOLR && imu.getYawRate() < Constants.CLIMB_YAW_TOLR && imu.getRollRate() < Constants.CLIMB_ROLL_TOLR) {
+    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOLR && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOLR && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOLR) {
       return true;
     }
     else {

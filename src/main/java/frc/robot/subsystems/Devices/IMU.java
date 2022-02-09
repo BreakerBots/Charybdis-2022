@@ -60,16 +60,16 @@ public class IMU extends SubsystemBase {
 
   public double getPitchRate() {
     pigeon.getPitch();
-    return Math.abs(pigeon.getRate());
+    return pigeon.getRate();
   }
 
   public double getYawRate() {
     pigeon.getYaw();
-    return Math.abs(pigeon.getRate());
+    return pigeon.getRate();
   }
 
   public double getRollRate() {
     pigeon.getRoll();
-    return Math.abs(pigeon.getRate());
+    return pigeon.getRate();
   }
 }
