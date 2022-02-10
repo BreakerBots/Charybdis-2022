@@ -54,8 +54,8 @@ public class ShootAll extends CommandBase {
     }
     if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false && timedStopCount == 250) {
       hopper.hopperOff();
-      shooter.flyweelOff();
       timedStopCount = 0;
+      shooter.flyweelOff();
     }
   }
 
@@ -73,6 +73,8 @@ public class ShootAll extends CommandBase {
       return true;
     } else if (xbox.getRightBumperPressed()) {
       System.out.println("SHOOTER MANUALY STOPED!");
+      hopper.hopperOff();
+      shooter.flyweelOff();
       return true;
     }
     else {
