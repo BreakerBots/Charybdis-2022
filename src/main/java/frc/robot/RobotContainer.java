@@ -43,8 +43,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static PowerDistribution pdp = new PowerDistribution();
   private final Drive driveTrain = new Drive(pdp);
-  private final Intake intakeSys = new Intake();
-  private final Hopper hopperSys = new Hopper();
+  // private final Intake intakeSys = new Intake();
+  // private final Hopper hopperSys = new Hopper();
   private final IMU imuSys = new IMU();
   // private final Climber climbSys = new Climber();
   // private final Shooter shooterSys = new Shooter();
