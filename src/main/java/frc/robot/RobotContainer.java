@@ -77,7 +77,7 @@ public class RobotContainer {
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
     // new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
-    // //Right bumper charges flywheel, B button shoots
+    // //Right bumper charges flywheel, B button shoots, Right bumper again cancles
     // new JoystickButton(xbox, Constants.R_BUMP).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys));
   }

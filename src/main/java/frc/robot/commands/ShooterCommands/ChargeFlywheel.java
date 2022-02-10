@@ -48,7 +48,13 @@ public class ChargeFlywheel extends CommandBase {
     if(shooter.getFlywheelRPM() == Constants.FLYWHEEL_TAR_SPEED) {
       System.out.println("FLYWHEEL CHARGED!");
       return true;
-    } else {
+    } else if (xbox.getLeftBumperPressed()) {
+      shooter.flyweelOff();
+      System.out.println("FLYWHEEL MANUALY STOPED!");
+      return true;
+    }
+    
+    else {
       return false;
     }
 }}

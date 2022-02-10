@@ -15,6 +15,7 @@ public class ShootAll extends CommandBase {
   XboxController xbox;
   Hopper hopper;
   private long cycleCount;
+  private long timedStopCount;
   public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg) {
     shooter = shooterArg;
     xbox = controllerArg;
@@ -49,21 +50,29 @@ public class ShootAll extends CommandBase {
       System.out.println("SHOOTER STARTED IN AUTO!");
     }
     if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
+       timedStopCount ++;
+    }
+    if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false && timedStopCount == 250) {
       hopper.hopperOff();
       shooter.flyweelOff();
+      timedStopCount = 0;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
+    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     if (shooter.flyweelState == false) {
+      System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
+      return true;
+    } else if (xbox.getRightBumperPressed()) {
+      System.out.println("SHOOTER MANUALY STOPED!");
       return true;
     }
     else {
