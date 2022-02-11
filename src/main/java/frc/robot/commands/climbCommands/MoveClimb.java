@@ -10,6 +10,9 @@ import frc.robot.subsystems.Climber;
 public class MoveClimb extends CommandBase {
   Climber climber;
   double target;
+  /** Uses PID to move climber and robot to set distance 
+   * (NOTE: distance base on motor ticks and winch extension, 
+   * does not use actual climber extension distance) */
   public MoveClimb( Climber climbArg, double targetExtension) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = climbArg;

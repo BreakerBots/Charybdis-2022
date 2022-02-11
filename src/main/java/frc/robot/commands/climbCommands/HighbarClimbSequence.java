@@ -14,7 +14,8 @@ import frc.robot.subsystems.Devices.IMU;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class HighbarClimbSequence extends SequentialCommandGroup {
-  /** Creates a new MidbarClimbSequence. */
+  /** Command group that runs sequence of actions nessary to automaticly climb to high bar, 
+   * for actuon to continue after first extension user mus press D-PAD down button*/
   public HighbarClimbSequence(Climber climbArg, IMU imuArg, XboxController controllerArg) {
     addRequirements(climbArg);
     addRequirements(imuArg);

@@ -13,6 +13,9 @@ import frc.robot.subsystems.Climber;
 public class SetSequenceTotal extends InstantCommand {
   Climber climber;
   int actionNum;
+  /** Sets the # of actions in a climbe sequence for progress counter.
+   * Recomeded that only non-instant commands be considerd.
+   */
   public SetSequenceTotal(Climber climberArg, int actionNumArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = climberArg;

@@ -14,6 +14,7 @@ public class WaitForDownButton extends CommandBase {
   XboxController xbox;
   Climber climber;
   private long cycleCount;
+  /** Pauses climb sequence to wait for user imput to continue (D_PAD Down Button) */
   public WaitForDownButton(XboxController controllerArg, Climber climberArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = climberArg;

@@ -14,7 +14,9 @@ public class ClimbStablityCheck extends CommandBase {
   IMU imu;
   Climber climber;
   private long stableTimeCount;
-  
+  /** Checks if robot is stable enough to continue climbing. 
+   * Uses rate of gyro change. Rate of change must return as 
+   * below passing threshhold for a cirtan amount of time before it can continue.*/
   public ClimbStablityCheck(Climber climberArg, IMU imuArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     imu = imuArg;
@@ -47,7 +49,6 @@ public class ClimbStablityCheck extends CommandBase {
   @Override
   public boolean isFinished() {
     if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOLR && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOLR && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOLR && stableTimeCount >= Constants.CLIMB_MIN_STABLE_TIME) {
-      
       return true;
     }
     else {
