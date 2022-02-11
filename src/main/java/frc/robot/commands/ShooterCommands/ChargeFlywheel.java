@@ -10,9 +10,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 
+/** Spins the shooter's flywheel */
 public class ChargeFlywheel extends CommandBase {
   Shooter shooter;
   XboxController xbox;
+  /**
+   * Creates a new ChargeFlywheel.
+   * @param shooterArg Shooter subsystem from RobotContainer.
+   * @param controllerArg Xbox controller from RobotContainer.
+   */
   public ChargeFlywheel(Shooter shooterArg, XboxController controllerArg) {
     shooter = shooterArg;
     xbox = controllerArg;
