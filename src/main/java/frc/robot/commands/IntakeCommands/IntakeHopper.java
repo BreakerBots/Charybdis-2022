@@ -5,6 +5,7 @@
 package frc.robot.commands.intakeCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 
@@ -12,6 +13,7 @@ public class IntakeHopper extends CommandBase {
   /** Creates a new IntakeHopper. */
   Hopper hopper;
   Intake intake;
+  private long pauseCountA;
   public IntakeHopper(Hopper hopperArg, Intake intakeArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     hopper = hopperArg;
@@ -29,12 +31,13 @@ public class IntakeHopper extends CommandBase {
       hopper.hopperOn();
     } 
     else if (hopper.getHopperPos1() == false && hopper.getHopperPos2()){
+      pauseCountA ++;
+      if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
       hopper.hopperOff();
+      pauseCountA = 0;
+      }
     }
     else if ((hopper.getHopperPos1() == false && hopper.getHopperPos2() == false)) {
-      hopper.hopperOn();
-    }
-    else if (hopper.getHopperPos1() && hopper.getHopperPos2()) {
       hopper.hopperOn();
     }
   }

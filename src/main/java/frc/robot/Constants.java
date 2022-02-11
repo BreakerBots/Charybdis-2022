@@ -140,6 +140,7 @@ public final class Constants {
     // Compressor closed-loop-controle pressure values
     public static final double MIN_PSI = FILLER;
     public static final double MAX_PSI = 120;
+    public static final long HOPPER_DELAY_CYCLES = 0;
 
 
 
