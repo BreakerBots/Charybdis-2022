@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-/** Drivetrain subsystem */
+/** Drivetrain subsystem. */
 public class Drive extends SubsystemBase {
   public WPI_TalonFX l1;
   public WPI_TalonFX l2;

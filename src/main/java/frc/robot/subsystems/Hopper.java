@@ -9,10 +9,11 @@ import edu.wpi.first.hal.DIOJNI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+/** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
-  /** Creates a new Hopper. */
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
+  /** Creates a new Hopper. */
   public Hopper() {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
   }
