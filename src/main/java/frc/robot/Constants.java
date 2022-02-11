@@ -147,6 +147,8 @@ public final class Constants {
     public static final double MIN_PSI = FILLER;
     public static final double MAX_PSI = 120;
     public static final long HOPPER_DELAY_CYCLES = 0;
+    public static final double FLYWHEEL_CANCEL_RPM = 0;
+    public static final long CLIMB_MIN_STABLE_TIME = 0;
 
 
 
