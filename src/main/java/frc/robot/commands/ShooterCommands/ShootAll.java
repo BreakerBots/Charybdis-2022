@@ -17,6 +17,13 @@ public class ShootAll extends CommandBase {
   Hopper hopper;
   private long cycleCount;
   private long timedStopCount;
+  /**
+   * Creates a new ShootAll.
+   * 
+   * @param shooterArg Shooter subsystem from RobotContainer
+   * @param hopperArg hopper subsystem from RobotContainer
+   * @param controllerArg Xbox controller from RobotContainer
+   */
   public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg) {
     shooter = shooterArg;
     xbox = controllerArg;
@@ -72,7 +79,7 @@ public class ShootAll extends CommandBase {
     if (shooter.flyweelState == false) {
       System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
       return true;
-    } else if (xbox.getLeftBumperPressed() || shooter.getFlywheelRPM() < Constants.FLYWHEEL_CANCLE_RPM) {
+    } else if (xbox.getLeftBumperPressed() || shooter.getFlywheelRPM() < Constants.FLYWHEEL_CANCEL_RPM) {
       System.out.println("SHOOTER MANUALY STOPED!");
       hopper.hopperOff();
       shooter.flyweelOff();

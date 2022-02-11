@@ -9,15 +9,15 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 
-/**
- * Runs the hopper subsystem while the intake is active.
- */
+/** Runs the hopper subsystem while the intake is active. */
 public class IntakeHopper extends CommandBase {
   Hopper hopper;
   Intake intake;
   private long pauseCountA;
+
   /**
    * Creates a new IntakeHopper.
+   * 
    * @param hopperArg Hopper subsystem from RobotContainer.
    * @param intakeArg Intake subsystem from RobotContainer.
    */
@@ -29,37 +29,36 @@ public class IntakeHopper extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (hopper.getHopperPos1() && hopper.getHopperPos2() == false) {
       hopper.hopperOn();
-    } 
-    else if (hopper.getHopperPos1() == false && hopper.getHopperPos2()){
-      pauseCountA ++;
+    } else if (hopper.getHopperPos1() == false && hopper.getHopperPos2()) {
+      pauseCountA++;
       if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
-      hopper.hopperOff();
-      pauseCountA = 0;
+        hopper.hopperOff();
+        pauseCountA = 0;
       }
-    }
-    else if ((hopper.getHopperPos1() == false && hopper.getHopperPos2() == false)) {
+    } else if ((hopper.getHopperPos1() == false && hopper.getHopperPos2() == false)) {
       hopper.hopperOn();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     if (intake.intakeState == false) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
