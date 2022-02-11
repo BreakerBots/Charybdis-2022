@@ -11,18 +11,22 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
+/**
+ * Shoots all the balls in the hopper
+ */
 public class ShootAll extends CommandBase {
   Shooter shooter;
   XboxController xbox;
   Hopper hopper;
   private long cycleCount;
   private long timedStopCount;
+
   /**
    * Creates a new ShootAll.
    * 
-   * @param shooterArg Shooter subsystem from RobotContainer
-   * @param hopperArg hopper subsystem from RobotContainer
-   * @param controllerArg Xbox controller from RobotContainer
+   * @param shooterArg    Shooter subsystem from RobotContainer.
+   * @param hopperArg     Hopper subsystem from RobotContainer.
+   * @param controllerArg Xbox controller from RobotContainer.
    */
   public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg) {
     shooter = shooterArg;
@@ -40,7 +44,7 @@ public class ShootAll extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    cycleCount ++;
+    cycleCount++;
     if (cycleCount > 450) {
       xbox.setRumble(RumbleType.kLeftRumble, 0);
       xbox.setRumble(RumbleType.kRightRumble, 0);
@@ -51,14 +55,13 @@ public class ShootAll extends CommandBase {
     if (xbox.getBButtonPressed() && shooter.flyweelState) {
       hopper.hopperOn();
       System.out.println("SHOOTER STARTED!");
-    }
-    else if (shooter.autoShoot == true && shooter.flyweelState) {
+    } else if (shooter.autoShoot == true && shooter.flyweelState) {
       hopper.hopperOn();
       shooter.autoShoot = false;
       System.out.println("SHOOTER STARTED IN AUTO!");
     }
     if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
-       timedStopCount ++;
+      timedStopCount++;
     }
     if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false && timedStopCount == 250) {
       hopper.hopperOff();
@@ -70,7 +73,7 @@ public class ShootAll extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+
   }
 
   // Returns true when the command should end.
@@ -84,8 +87,7 @@ public class ShootAll extends CommandBase {
       hopper.hopperOff();
       shooter.flyweelOff();
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

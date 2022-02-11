@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+/** Drivetrain subsystem */
 public class Drive extends SubsystemBase {
   public WPI_TalonFX l1;
   public WPI_TalonFX l2;
@@ -25,7 +26,6 @@ public class Drive extends SubsystemBase {
   private MotorControllerGroup driveR;
   // Drivetrian
   private DifferentialDrive driveTrainDiff;
-  /** Creates a new Drive. */
   public PIDController anglePID;
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
@@ -35,7 +35,11 @@ public class Drive extends SubsystemBase {
   private final double artLinearFeedForward = 0.3;
   private final double artAngleFeedForward = 0.2;
 
-  /** Creates a new Drive. */
+  /**
+   * Creates a new Drive.
+   * 
+   * @param pdpArg PDP from RobotContainer.
+   */
   public Drive(PowerDistribution pdpArg) {
     pdp = pdpArg;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
@@ -58,7 +62,12 @@ public class Drive extends SubsystemBase {
     driveTrainDiff = new DifferentialDrive(driveL, driveR);
   }
 
-  /** Wraps around arcadeDrive to allow for movement */
+  /**
+   * Wraps around arcadeDrive to allow for movement.
+   * 
+   * @param netSpd  Percent driving speed. Should be between -1.0 and 1.0.
+   * @param turnSpd Percent turn speed. Should be between -1.0 and 1.0.
+   */
   public void move(double netSpd, double turnSpd) {
     if (pdp.getVoltage() < 8.5) {
       netSpd *= 0.85;
@@ -67,6 +76,12 @@ public class Drive extends SubsystemBase {
     driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
   }
 
+  /**
+   * Version of move command used for autonomous.
+   * 
+   * @param netSpd  Percent driving speed. Should be between -1.0 and 1.0.
+   * @param turnSpd Percent turn speed. Should be between -1.0 and 1.0.
+   */
   public void autoMove(double netSpd, double turnSpd) {
     if (pdp.getVoltage() < 8.5) {
       netSpd *= 0.85;
@@ -74,20 +89,23 @@ public class Drive extends SubsystemBase {
     }
     if (netSpd > 0) {
       netSpd += artLinearFeedForward;
-    }
-    else {
+    } else {
       netSpd -= artLinearFeedForward;
     }
     if (turnSpd > 0) {
       turnSpd += artAngleFeedForward;
-    }
-    else {
+    } else {
       turnSpd -= artAngleFeedForward;
     }
-    driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
+    move(netSpd, turnSpd);
   }
 
-  /** Wraps around tankDrive to allow for tank-like movement */
+  /**
+   * Wraps around tankDrive to allow for tank-like movement.
+   * 
+   * @param spdL Percent speed of left motors. Should be between -1.0 and 1.0.
+   * @param spdR Percent speed of right motors. Should be between -1.0 and 1.0.
+   */
   public void tankMove(double spdL, double spdR) {
     driveTrainDiff.tankDrive(spdL, spdR);
   }
@@ -116,12 +134,22 @@ public class Drive extends SubsystemBase {
     r3.setSelectedSensorPosition(0);
   }
 
-  /** Access feedForward .calculate() method */
+  /**
+   * Access feedForward .calculate() method
+   * 
+   * @param vel   Desired velocity, in inches per second.
+   * @param accel Desired acceleration, in inches per second per second.
+   */
   public double feedForwardCalc(double vel, double accel) {
     return driveFF.calculate(vel, accel);
   }
 
-  /** Access distance PID .calculate() method */
+  /**
+   * Access distance PID .calculate() method
+   * 
+   * @param distance Current distance traveled.
+   * @param target   Target distance traveled.
+   */
   public double distPIDCalc(double distance, double target) {
     return distPID.calculate(distance, target);
   }
