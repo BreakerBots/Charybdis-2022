@@ -9,11 +9,18 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 
+/**
+ * Runs the hopper subsystem while the intake is active.
+ */
 public class IntakeHopper extends CommandBase {
-  /** Creates a new IntakeHopper. */
   Hopper hopper;
   Intake intake;
   private long pauseCountA;
+  /**
+   * Creates a new IntakeHopper.
+   * @param hopperArg Hopper subsystem from RobotContainer.
+   * @param intakeArg Intake subsystem from RobotContainer.
+   */
   public IntakeHopper(Hopper hopperArg, Intake intakeArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     hopper = hopperArg;

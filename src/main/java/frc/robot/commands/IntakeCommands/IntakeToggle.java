@@ -13,6 +13,11 @@ public class IntakeToggle extends CommandBase {
   Intake intake;
   Hopper hopper;
 
+  /**
+   * Creates a new IntakeToggle.
+   * @param intakeArg Intake subsystem from RobotContainer.
+   * @param hopperArg Hopper subsystem from RobotContainer.
+   */
   public IntakeToggle(Intake intakeArg, Hopper hopperArg) {
     intake = intakeArg;
     hopper = hopperArg;
