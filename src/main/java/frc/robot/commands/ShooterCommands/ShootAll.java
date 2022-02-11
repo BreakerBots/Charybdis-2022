@@ -7,6 +7,7 @@ package frc.robot.commands.shooterCommands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
@@ -71,7 +72,7 @@ public class ShootAll extends CommandBase {
     if (shooter.flyweelState == false) {
       System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
       return true;
-    } else if (xbox.getRightBumperPressed()) {
+    } else if (xbox.getLeftBumperPressed() || shooter.getFlywheelRPM() < Constants.FLYWHEEL_CANCLE_RPM) {
       System.out.println("SHOOTER MANUALY STOPED!");
       hopper.hopperOff();
       shooter.flyweelOff();
