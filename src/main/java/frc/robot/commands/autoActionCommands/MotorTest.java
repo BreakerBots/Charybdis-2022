@@ -69,13 +69,13 @@ public class MotorTest extends CommandBase {
     cycleCount ++;
     drive.move(speed, 0);
     // System.out.println(
-    // "sta L1: " + drive.l1.getStatorCurrent() + "  sta R1: " + drive.r1.getStatorCurrent() + "\n" +
-    // "sta L2: " + drive.l2.getStatorCurrent() + "  sta R2: " + drive.r2.getStatorCurrent() + "\n" +
-    // "sta L3: " + drive.l3.getStatorCurrent() + "  sta R3: " + drive.r3.getStatorCurrent() + "\n\n" +
+    // "sta L1: " + drive.getStatorCurrent(Constants.L1_ID) + "  sta R1: " + drive.getStatorCurrent(Constants.R1_ID) + "\n" +
+    // "sta L2: " + drive.getStatorCurrent(Constants.L2_ID) + "  sta R2: " + drive.getStatorCurrent(Constants.R2_ID) + "\n" +
+    // "sta L3: " + drive.getStatorCurrent(Constants.L3_ID) + "  sta R3: " + drive.getStatorCurrent(Constants.R3_ID) + "\n\n" +
 
-    // "sup L1: " + drive.l1.getSupplyCurrent() + "  sup R1: " +drive.r1.getSupplyCurrent() + "\n" +   
-    // "sup L2: " + drive.l2.getSupplyCurrent() + "  sup R2: " +drive.r2.getSupplyCurrent() + "\n" +
-    // "sup L3: " + drive.l3.getSupplyCurrent() + "  sup R3: " +drive.r3.getSupplyCurrent() + "\n\n\n"
+    // "sup L1: " + drive.getSupplyCurrent(Constants.L1_ID) + "  sup R1: " +drive.getSupplyCurrent(Constants.R1_ID) + "\n" +   
+    // "sup L2: " + drive.getSupplyCurrent(Constants.L2_ID) + "  sup R2: " +drive.getSupplyCurrent(Constants.R2_ID) + "\n" +
+    // "sup L3: " + drive.getSupplyCurrent(Constants.L3_ID) + "  sup R3: " +drive.getSupplyCurrent(Constants.R3_ID) + "\n\n\n"
     // );
 
     l1StaTotal = l1StaTotal + drive.getStatorCurrent(Constants.L1_ID);
