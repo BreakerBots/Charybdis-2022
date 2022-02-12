@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Convert;
 
 /** Drivetrain subsystem. */
 public class Drive extends SubsystemBase {
@@ -69,6 +70,7 @@ public class Drive extends SubsystemBase {
    * @param turnSpd Percent turn speed. Should be between -1.0 and 1.0.
    */
   public void move(double netSpd, double turnSpd) {
+    netSpd = Convert.logisticCurve(netSpd);
     if (pdp.getVoltage() < 8.5) {
       netSpd *= 0.85;
       turnSpd *= 0.85;
