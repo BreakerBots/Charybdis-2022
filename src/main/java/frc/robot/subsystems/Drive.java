@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Convert;
 
 public class Drive extends SubsystemBase {
   private WPI_TalonFX l1;
@@ -60,6 +61,7 @@ public class Drive extends SubsystemBase {
 
   /** Wraps around arcadeDrive to allow for movement */
   public void move(double netSpd, double turnSpd) {
+    netSpd = Convert.logisticCurve(netSpd);
     if (pdp.getVoltage() < 8.5) {
       netSpd *= 0.85;
       turnSpd *= 0.85;
