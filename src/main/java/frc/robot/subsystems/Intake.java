@@ -14,6 +14,7 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     public boolean intakeState;
+    public boolean indexerHopperState;
     private WPI_TalonSRX indexerL;
     private WPI_TalonSRX indexerR;
     private DoubleSolenoid intakeSol;
@@ -43,7 +44,19 @@ public class Intake extends SubsystemBase {
         intakeMain.set(0);
         indexerL.set(0);
         indexerR.set(0);
+        indexerHopperState = false;
         return intakeState = false;
+    }
+
+    public void lIndexerHopper() {
+        if (intakeState == false && indexerHopperState == false) {
+            indexerL.set(Constants.L_SORTESPEED);
+            indexerHopperState = true;
+        }
+        else if (intakeState == false && indexerHopperState) {
+            indexerL.set(0);
+            indexerHopperState = false;
+        }
     }
 
     @Override

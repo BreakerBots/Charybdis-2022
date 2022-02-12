@@ -25,6 +25,8 @@ public class IntakeHopper extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     hopper = hopperArg;
     intake = intakeArg;
+    addRequirements(hopper);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -45,6 +47,9 @@ public class IntakeHopper extends CommandBase {
       }
     } else if ((hopper.getHopperPos1() == false && hopper.getHopperPos2() == false)) {
       hopper.hopperOn();
+    } else if (hopper.getHopperPos1() && hopper.getHopperPos2()) {
+      intake.intakeOffMethod();
+      hopper.hopperOff();
     }
   }
 
