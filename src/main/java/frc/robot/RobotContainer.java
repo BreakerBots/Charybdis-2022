@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.autoActionCommands.MotorTest;
+import frc.robot.commands.autoActionCommands.MoveStraight;
 import frc.robot.commands.autoActionCommands.Pivot;
 import frc.robot.commands.autoActionCommands.Turn;
 import frc.robot.commands.autoPaths.OffTarmack_H1;
@@ -74,6 +75,7 @@ public class RobotContainer {
    */
   
    private void configureButtonBindings() {
+     new JoystickButton(xbox, Constants.A).whenPressed(new MoveStraight(driveTrain, imuSys, 80, 0.5));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
     // new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));

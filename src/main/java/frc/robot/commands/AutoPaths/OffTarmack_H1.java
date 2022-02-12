@@ -21,10 +21,10 @@ public class OffTarmack_H1 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     //addCommands( new Pivot(driveArg, imuArg, 180, 0.5));
     addCommands(new Turn(driveArg, imuArg, 90, 72, 0.65),
-                new MoveStraight(driveArg, -72, 0.3),
+                new MoveStraight(driveArg, imuArg, -72, 0.3),
                 new Turn(driveArg, imuArg, 90, 72, 0.65),
                 new Pivot(driveArg, imuArg, 90, 0.5), 
-                new MoveStraight(driveArg, 60, 0.3),
+                new MoveStraight(driveArg, imuArg, 60, 0.3),
                 new Pivot(driveArg, imuArg, 90, 0.5)
                 // new MoveStraight(driveArg, 60, 0.3)
                 );

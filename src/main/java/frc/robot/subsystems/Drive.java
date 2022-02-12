@@ -48,7 +48,7 @@ public class Drive extends SubsystemBase {
     l1 = new WPI_TalonFX(Constants.L1_ID);
     l2 = new WPI_TalonFX(Constants.L2_ID);
     l3 = new WPI_TalonFX(Constants.L3_ID);
-    driveL = new MotorControllerGroup(l1, l2, l3);
+    driveL = new MotorControllerGroup(l1, l2);
     // Right motors
     r1 = new WPI_TalonFX(Constants.R1_ID);
     r2 = new WPI_TalonFX(Constants.R2_ID);
