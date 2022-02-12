@@ -48,7 +48,7 @@ public class Drive extends SubsystemBase {
     l1 = new WPI_TalonFX(Constants.L1_ID);
     l2 = new WPI_TalonFX(Constants.L2_ID);
     l3 = new WPI_TalonFX(Constants.L3_ID);
-    driveL = new MotorControllerGroup(l1, l2);
+    driveL = new MotorControllerGroup(l1, l2, l3);
     // Right motors
     r1 = new WPI_TalonFX(Constants.R1_ID);
     r2 = new WPI_TalonFX(Constants.R2_ID);
@@ -61,12 +61,12 @@ public class Drive extends SubsystemBase {
 
   /** Wraps around arcadeDrive to allow for movement */
   public void move(double netSpd, double turnSpd) {
-    double logSpd = Convert.logisticCurve(netSpd);
+    double logSpd = netSpd; // Convert.logisticCurve(netSpd);
     if (pdp.getVoltage() < 8.5) {
       logSpd *= 0.85;
       turnSpd *= 0.85;
     }
-    System.out.println("netSpd: " + netSpd + "  logSpd: " + logSpd + " turnSpd: " + turnSpd + "  logTurn: ");
+    // System.out.println("netSpd: " + netSpd + "  logSpd: " + logSpd + " turnSpd: " + turnSpd + "  logTurn: ");
     driveTrainDiff.arcadeDrive(logSpd, turnSpd); // Calculates speed and turn outputs
     // System.out.println("L1: " + l1.getSupplyCurrent() + " L2: " + l2.getSupplyCurrent() + " L3: " + l3.getSupplyCurrent());
     // System.out.println("R1: " + r1.getSupplyCurrent() + " R2: " + r2.getSupplyCurrent() + " R3: " + r3.getSupplyCurrent());

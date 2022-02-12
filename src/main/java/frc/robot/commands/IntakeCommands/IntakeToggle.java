@@ -22,8 +22,8 @@ public class IntakeToggle extends CommandBase {
   public IntakeToggle(Intake intakeArg, Hopper hopperArg) {
     intake = intakeArg;
     hopper = hopperArg;
-    addRequirements(intake);
-    addRequirements(hopper);
+    // addRequirements(intake);
+    // addRequirements(hopper);
   }
 
   // Called when the command is initially scheduled.

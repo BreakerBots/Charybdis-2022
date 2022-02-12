@@ -17,8 +17,10 @@ import frc.robot.commands.autoPaths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.autoPaths.Pickup1_Shoot2_H3;
 import frc.robot.commands.climbCommands.HighbarClimbSequence;
 import frc.robot.commands.driveCommands.DriveWithJoystick;
+import frc.robot.commands.intakeCommands.IntakeCoreCommands;
 import frc.robot.commands.intakeCommands.IntakeHopper;
 import frc.robot.commands.intakeCommands.IntakeToggle;
+import frc.robot.commands.intakeCommands.ToggleIntakeNestGroup;
 import frc.robot.commands.shooterCommands.ShootCoreCommands;
 import frc.robot.commands.shooterCommands.ToggleShooterPos;
 import frc.robot.subsystems.Climber;
@@ -75,9 +77,8 @@ public class RobotContainer {
    */
   
    private void configureButtonBindings() {
-     new JoystickButton(xbox, Constants.A).whenPressed(new MoveStraight(driveTrain, imuSys, 80, 0.5));
-    // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
-    // new JoystickButton(xbox, Constants.A).whenPressed(new IntakeHopper(hopperSys, intakeSys));
+    // new JoystickButton(xbox, Constants.A).whenPressed(new MoveStraight(driveTrain, imuSys, 80, 0.5));
+    new JoystickButton(xbox, Constants.A).whenPressed(new ToggleIntakeNestGroup(xbox, intakeSys, hopperSys));
     // new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // //Right bumper charges flywheel, B button shoots, Left bumper again cancles
     // new JoystickButton(xbox, Constants.R_BUMP).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
@@ -90,6 +91,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new MotorTest(driveTrain, 0.25, 30);
+    return new MotorTest(driveTrain, 1, 30);
   }
 }

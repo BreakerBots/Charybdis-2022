@@ -14,6 +14,7 @@ public class IntakeHopper extends CommandBase {
   Hopper hopper;
   Intake intake;
   private long pauseCountA;
+  private boolean end;
 
   /**
    * Creates a new IntakeHopper.
@@ -25,8 +26,8 @@ public class IntakeHopper extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     hopper = hopperArg;
     intake = intakeArg;
-    addRequirements(hopper);
-    addRequirements(intake);
+    // addRequirements(hopper);
+    // addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -37,15 +38,20 @@ public class IntakeHopper extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (hopper.getHopperPos1() && hopper.getHopperPos2() == false) {
+    if (!intake.intakeState) {
+      end = true;
+    } else if (intake.intakeState) {
+      end = false;
+    }
+    if (hopper.getHopperPos1() && !hopper.getHopperPos2()) {
       hopper.hopperOn();
-    } else if (hopper.getHopperPos1() == false && hopper.getHopperPos2()) {
+    } else if (!hopper.getHopperPos1() && hopper.getHopperPos2()) {
       pauseCountA++;
       if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
         hopper.hopperOff();
         pauseCountA = 0;
       }
-    } else if ((hopper.getHopperPos1() == false && hopper.getHopperPos2() == false)) {
+    } else if (!hopper.getHopperPos1() && !hopper.getHopperPos2()) {
       hopper.hopperOn();
     } else if (hopper.getHopperPos1() && hopper.getHopperPos2()) {
       intake.intakeOffMethod();
@@ -56,15 +62,12 @@ public class IntakeHopper extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    hopper.hopperOff();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (intake.intakeState == false) {
-      return true;
-    } else {
-      return false;
-    }
+    return end;
   }
 }

@@ -34,10 +34,10 @@ public class Hopper extends SubsystemBase {
   }
 
   public boolean getHopperPos1() {
-    return  DIOJNI.getDIO(Constants.HOPPER_P1_ID);
+    return false; //DIOJNI.getDIO(Constants.HOPPER_P1_ID);
   }
 
   public boolean getHopperPos2() {
-    return  DIOJNI.getDIO(Constants.HOPPER_P2_ID);
+    return false; //DIOJNI.getDIO(Constants.HOPPER_P2_ID);
   }
 }

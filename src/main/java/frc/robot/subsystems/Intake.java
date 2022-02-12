@@ -27,25 +27,28 @@ public class Intake extends SubsystemBase {
         indexerR = new WPI_TalonSRX(Constants.INTAKE_R_ID);
         intakeSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
+        intakeState = false;
+        indexerHopperState = false;
     }
 
     /** Extends intake arm and spins the intake and indexer */
-    public boolean intakeOnMethod() {
+    public void intakeOnMethod() {
         intakeSol.set(Value.kForward);
         intakeMain.set(Constants.INTAKESPEED);
         indexerL.set(Constants.L_SORTESPEED);
         indexerR.set(Constants.R_SORTESPEED);
-        return intakeState = true;
+        intakeState = true;
     }
 
     /** Retracts intake arm and turns off the intake and indexer */
-    public boolean intakeOffMethod() {
+    public void intakeOffMethod() {
         intakeSol.set(Value.kReverse);
         intakeMain.set(0);
         indexerL.set(0);
         indexerR.set(0);
         indexerHopperState = false;
-        return intakeState = false;
+        intakeState = false;
+        System.out.println("INTAKE OFF CALLED!!!!");
     }
 
     public void lIndexerHopper() {
