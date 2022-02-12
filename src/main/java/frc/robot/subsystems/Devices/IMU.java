@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems.Devices;
 
+import java.lang.reflect.Array;
+
+import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,12 +14,12 @@ import frc.robot.Constants;
 import frc.robot.Convert;
 
 public class IMU extends SubsystemBase {
-  private WPI_PigeonIMU pigeon;
+  private Pigeon2 pigeon;
   private double imuInvert;
 
   /** Creates a new PigeonIMU. */
   public IMU() {
-    pigeon = new WPI_PigeonIMU(Constants.IMU_ID);
+    pigeon = new Pigeon2(Constants.IMU_ID);
   }
 
   @Override
@@ -58,18 +61,21 @@ public class IMU extends SubsystemBase {
     pigeon.setYaw(0);
   }
 
+  public double getGyroRates(int arrayElement) {
+    double[] rawRates = new double[2];
+    pigeon.getRawGyro(rawRates);
+    return rawRates[arrayElement];
+  }
+
   public double getPitchRate() {
-    pigeon.getPitch();
-    return pigeon.getRate();
+    return getGyroRates(0);
   }
 
   public double getYawRate() {
-    pigeon.getYaw();
-    return pigeon.getRate();
+    return getGyroRates(1);
   }
 
   public double getRollRate() {
-    pigeon.getRoll();
-    return pigeon.getRate();
+    return getGyroRates(2);
   }
 }
