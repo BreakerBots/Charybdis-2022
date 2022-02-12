@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.FlywheelState;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -43,6 +44,7 @@ public class ShootAll extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("STARTED SHOOTING");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -56,16 +58,11 @@ public class ShootAll extends CommandBase {
     if (cycleCount % 400 == 0) {
       System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
     }
-    if (xbox.getBButtonPressed() && shooter.flyweelState) {
+    if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED) {
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");
 
-    } else if (shooter.autoShoot == true && shooter.flyweelState) {
-      hopper.hopperOn();
-      intake.lIndexerHopper();
-      shooter.autoShoot = false;
-      System.out.println("SHOOTER STARTED IN AUTO!");
     }
     if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
       timedStopCount++;
@@ -87,10 +84,10 @@ public class ShootAll extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (shooter.flyweelState == false) {
+    if (shooter.flywheelState == FlywheelState.OFF) {
       System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
       return true;
-    } else if (xbox.getLeftBumperPressed() || shooter.getFlywheelRPM() < Constants.FLYWHEEL_CANCEL_RPM) {
+    } else if (xbox.getLeftBumperPressed()) {
       System.out.println("SHOOTER MANUALY STOPED!");
       hopper.hopperOff();
       shooter.flyweelOff();

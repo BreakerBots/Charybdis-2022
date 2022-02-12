@@ -70,15 +70,15 @@ public final class Constants {
     public static final int INTAKE_R_ID = 26;
     public static final int PWR_DISTR = 0;
     // shooter motor IDs
-    public static final int SHOOTER_L_ID = FILLER;
-    public static final int SHOOTER_R_ID = FILLER;
+    public static final int SHOOTER_L_ID = 20;
+    public static final int SHOOTER_R_ID = 21;
     // shooter solonoid IDs
-    public static final int SHOOTERSOL_FWD = FILLER;
-    public static final int SHOOTERSOL_REV = FILLER;
+    public static final int SHOOTERSOL_FWD = 2;
+    public static final int SHOOTERSOL_REV = 3;
     // shooter motor speeds
-    public static final int SHOOTERSPEED = 1;
+    public static final double SHOOTERSPEED = 0.5;
     // Speed in RPM
-    public static final int FLYWHEEL_TAR_SPEED = FILLER;
+    public static final int FLYWHEEL_TAR_SPEED = 200;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
@@ -149,6 +149,7 @@ public final class Constants {
     public static final long HOPPER_DELAY_CYCLES = 0;
     public static final double FLYWHEEL_CANCEL_RPM = 0;
     public static final long CLIMB_MIN_STABLE_TIME = 0;
+    public static final double FLYWHEEL_IDLE_SPEED = 0.5;
 
 
 

@@ -12,19 +12,24 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.FlywheelState;
 
 public class Shooter extends SubsystemBase {
+  public FlywheelState flywheelState;
   private static double prevTicks = 0;
-  public boolean flyweelState;
+  // public boolean flyweelState;
   public boolean shooterPos;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
   private MotorControllerGroup flywheel;
   public boolean autoShoot;
   DoubleSolenoid shooterSol;
-  public Shooter() {
+  Hopper hopper;
+  public Shooter(Hopper hopperArg) {
+    hopper = hopperArg;
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
+    shooterL.setInverted(true);
     flywheel = new MotorControllerGroup(shooterL, shooterR);
     shooterSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 
                 Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
@@ -32,17 +37,20 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
+    if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
+      flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
+    }
   }
   /** Turns Flywheel On */
-  public boolean flyweelOn() {
+  public void flyweelFullOn() {
     flywheel.set(Constants.SHOOTERSPEED);
-    return flyweelState = true;
+    flywheelState = FlywheelState.CHARGING;
   }
+
    /** Turns Flywheel Off */
-  public boolean flyweelOff() {
+  public void flyweelOff() {
     flywheel.set(0);
-    return flyweelState = false;
+    flywheelState = FlywheelState.OFF;
   }
   /** Returns the RPM of the flywheel's Motors */
   public double getFlywheelRPM() {
@@ -67,5 +75,4 @@ public class Shooter extends SubsystemBase {
     shooterSol.set(Value.kReverse);
     return shooterPos = false;
   }
-
 }

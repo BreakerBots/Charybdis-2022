@@ -6,11 +6,14 @@ package frc.robot.commands.intakeCommands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Intake;
 
-public class WaitForAButton extends CommandBase {
+public class StopIntakeManual extends CommandBase {
   /** Creates a new WaitForAButton. */
   XboxController xbox;
-  public WaitForAButton(XboxController controllerArg) {
+  Intake intake;
+  boolean end;
+  public StopIntakeManual(XboxController controllerArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     xbox = controllerArg;
   }
@@ -21,8 +24,7 @@ public class WaitForAButton extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -31,6 +33,6 @@ public class WaitForAButton extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return xbox.getAButtonPressed();
+    return xbox.getXButtonPressed();
   }
 }

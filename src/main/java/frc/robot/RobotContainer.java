@@ -50,7 +50,7 @@ public class RobotContainer {
   private final Hopper hopperSys = new Hopper();
   private final IMU imuSys = new IMU();
   // private final Climber climbSys = new Climber();
-  // private final Shooter shooterSys = new Shooter();
+  private final Shooter shooterSys = new Shooter(hopperSys);
   private final XboxController xbox = new XboxController(0);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
 
@@ -79,9 +79,9 @@ public class RobotContainer {
    private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xbox, Constants.A).whenPressed(new ToggleIntakeNestGroup(xbox, intakeSys, hopperSys));
-    // new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
-    // //Right bumper charges flywheel, B button shoots, Left bumper again cancles
-    // new JoystickButton(xbox, Constants.R_BUMP).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
+    new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
+    // // B button shoots, Left bumper cancles
+    new JoystickButton(xbox, Constants.B).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys));
   }
 
@@ -91,6 +91,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new MotorTest(driveTrain, 1, 30);
+    return new Pickup1_Shoot2_ARC_H3(driveTrain, imuSys);
+
   }
 }

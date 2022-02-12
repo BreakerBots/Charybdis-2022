@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
+    public boolean StopIntakeAuto = false;
     public boolean intakeState;
     public boolean indexerHopperState;
     private WPI_TalonSRX indexerL;

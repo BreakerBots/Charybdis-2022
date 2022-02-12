@@ -5,6 +5,7 @@
 package frc.robot.commands.intakeCommands;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import frc.robot.subsystems.Hopper;
@@ -18,8 +19,16 @@ public class ToggleIntakeNestGroup extends ParallelDeadlineGroup {
   public ToggleIntakeNestGroup(XboxController controllerArg, Intake intakeArg, Hopper hopperArg) {
     // Add the deadline command in the super() call. Add other commands using
     // addCommands().
-    super(new WaitForAButton(controllerArg));
+    super(new StopIntakeManual(controllerArg));
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new IntakeCoreCommands(intakeArg, hopperArg));
   }
+
+  // public ToggleIntakeNestGroup(Intake intakeArg, Hopper hopperArg, double seconds) {
+  //   // Add the deadline command in the super() call. Add other commands using
+  //   // addCommands().
+  //   super(new StopIntakeAuto(seconds));
+  //   // addCommands(new FooCommand(), new BarCommand());
+  //   addCommands(new IntakeCoreCommands(intakeArg, hopperArg));
+  // }
 }
