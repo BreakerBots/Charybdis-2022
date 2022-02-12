@@ -41,6 +41,7 @@ public class IntakeHopper extends CommandBase {
       pauseCountA++;
       if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
         hopper.hopperOff();
+        intake.intakeOffMethod();
         pauseCountA = 0;
       }
     } else if ((hopper.getHopperPos1() == false && hopper.getHopperPos2() == false)) {

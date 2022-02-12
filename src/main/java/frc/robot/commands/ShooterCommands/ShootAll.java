@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
 /**
@@ -18,6 +19,7 @@ public class ShootAll extends CommandBase {
   Shooter shooter;
   XboxController xbox;
   Hopper hopper;
+  Intake intake;
   private long cycleCount;
   private long timedStopCount;
 
@@ -28,10 +30,11 @@ public class ShootAll extends CommandBase {
    * @param hopperArg     Hopper subsystem from RobotContainer.
    * @param controllerArg Xbox controller from RobotContainer.
    */
-  public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg) {
+  public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg, Intake intakeArg) {
     shooter = shooterArg;
     xbox = controllerArg;
     hopper = hopperArg;
+    intake = intakeArg;
     addRequirements(shooter);
     addRequirements(hopper);
   }
@@ -54,6 +57,7 @@ public class ShootAll extends CommandBase {
     }
     if (xbox.getBButtonPressed() && shooter.flyweelState) {
       hopper.hopperOn();
+
       System.out.println("SHOOTER STARTED!");
     } else if (shooter.autoShoot == true && shooter.flyweelState) {
       hopper.hopperOn();

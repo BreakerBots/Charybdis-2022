@@ -46,6 +46,12 @@ public class Intake extends SubsystemBase {
         return intakeState = false;
     }
 
+    public void lIndexerHopper() {
+        if (intakeState == false) {
+            indexerL.set(Constants.L_SORTESPEED);
+        }
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
