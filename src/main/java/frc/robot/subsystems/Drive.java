@@ -13,19 +13,19 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-/** Drivetrain subsystem. */
 public class Drive extends SubsystemBase {
-  public WPI_TalonFX l1;
-  public WPI_TalonFX l2;
-  public WPI_TalonFX l3;
+  private WPI_TalonFX l1;
+  private WPI_TalonFX l2;
+  private WPI_TalonFX l3;
   private MotorControllerGroup driveL;
   // Right motors (falcons)
-  public WPI_TalonFX r1;
-  public WPI_TalonFX r2;
-  public WPI_TalonFX r3;
+  private WPI_TalonFX r1;
+  private WPI_TalonFX r2;
+  private WPI_TalonFX r3;
   private MotorControllerGroup driveR;
   // Drivetrian
   private DifferentialDrive driveTrainDiff;
+  /** Creates a new Drive. */
   public PIDController anglePID;
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
@@ -35,11 +35,7 @@ public class Drive extends SubsystemBase {
   private final double artLinearFeedForward = 0.3;
   private final double artAngleFeedForward = 0.2;
 
-  /**
-   * Creates a new Drive.
-   * 
-   * @param pdpArg PDP from RobotContainer.
-   */
+  /** Creates a new Drive. */
   public Drive(PowerDistribution pdpArg) {
     pdp = pdpArg;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
@@ -62,26 +58,19 @@ public class Drive extends SubsystemBase {
     driveTrainDiff = new DifferentialDrive(driveL, driveR);
   }
 
-  /**
-   * Wraps around arcadeDrive to allow for movement.
-   * 
-   * @param netSpd  Percent driving speed. Should be between -1.0 and 1.0.
-   * @param turnSpd Percent turn speed. Should be between -1.0 and 1.0.
-   */
+  /** Wraps around arcadeDrive to allow for movement */
   public void move(double netSpd, double turnSpd) {
     if (pdp.getVoltage() < 8.5) {
       netSpd *= 0.85;
       turnSpd *= 0.85;
     }
     driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
+    System.out.println("L1: " + l1.getSupplyCurrent() + " L2: " + l2.getSupplyCurrent() + " L3: " + l3.getSupplyCurrent());
+    System.out.println("R1: " + r1.getSupplyCurrent() + " R2: " + r2.getSupplyCurrent() + " R3: " + r3.getSupplyCurrent());
+    System.out.println("L1Stat: " + l1.getStatorCurrent() + " L2Stat: " + l2.getStatorCurrent() + " L3Stat: " + l3.getStatorCurrent());
+    System.out.println("R1Stat: " + r1.getStatorCurrent() + " R2Stat: " + r2.getStatorCurrent() + " R3Stat: " + r3.getStatorCurrent());
   }
 
-  /**
-   * Version of move command used for autonomous.
-   * 
-   * @param netSpd  Percent driving speed. Should be between -1.0 and 1.0.
-   * @param turnSpd Percent turn speed. Should be between -1.0 and 1.0.
-   */
   public void autoMove(double netSpd, double turnSpd) {
     if (pdp.getVoltage() < 8.5) {
       netSpd *= 0.85;
@@ -89,23 +78,20 @@ public class Drive extends SubsystemBase {
     }
     if (netSpd > 0) {
       netSpd += artLinearFeedForward;
-    } else {
+    }
+    else {
       netSpd -= artLinearFeedForward;
     }
     if (turnSpd > 0) {
       turnSpd += artAngleFeedForward;
-    } else {
+    }
+    else {
       turnSpd -= artAngleFeedForward;
     }
-    move(netSpd, turnSpd);
+    driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
   }
 
-  /**
-   * Wraps around tankDrive to allow for tank-like movement.
-   * 
-   * @param spdL Percent speed of left motors. Should be between -1.0 and 1.0.
-   * @param spdR Percent speed of right motors. Should be between -1.0 and 1.0.
-   */
+  /** Wraps around tankDrive to allow for tank-like movement */
   public void tankMove(double spdL, double spdR) {
     driveTrainDiff.tankDrive(spdL, spdR);
   }
@@ -134,22 +120,12 @@ public class Drive extends SubsystemBase {
     r3.setSelectedSensorPosition(0);
   }
 
-  /**
-   * Access feedForward .calculate() method
-   * 
-   * @param vel   Desired velocity, in inches per second.
-   * @param accel Desired acceleration, in inches per second per second.
-   */
+  /** Access feedForward .calculate() method */
   public double feedForwardCalc(double vel, double accel) {
     return driveFF.calculate(vel, accel);
   }
 
-  /**
-   * Access distance PID .calculate() method
-   * 
-   * @param distance Current distance traveled.
-   * @param target   Target distance traveled.
-   */
+  /** Access distance PID .calculate() method */
   public double distPIDCalc(double distance, double target) {
     return distPID.calculate(distance, target);
   }
@@ -157,6 +133,32 @@ public class Drive extends SubsystemBase {
   /** Access distance PID .atSetpoint() method */
   public boolean atSetpointDist() {
     return distPID.atSetpoint();
+  }
+
+  public double getStatorCurrent(int motorID) {
+    switch (motorID) {
+      case Constants.L1_ID:  return l1.getStatorCurrent();
+      case Constants.L2_ID:  return l2.getStatorCurrent();
+      case Constants.L3_ID:  return l3.getStatorCurrent();
+      case Constants.R1_ID:  return r1.getStatorCurrent();
+      case Constants.R2_ID:  return r2.getStatorCurrent();
+      case Constants.R3_ID:  return r3.getStatorCurrent();
+      default: break;
+    }
+    return 0;
+  }
+
+  public double getSupplyCurrent(int motorID) {
+    switch (motorID) {
+      case Constants.L1_ID:  return l1.getSupplyCurrent();
+      case Constants.L2_ID:  return l2.getSupplyCurrent();
+      case Constants.L3_ID:  return l3.getSupplyCurrent();
+      case Constants.R1_ID:  return r1.getSupplyCurrent();
+      case Constants.R2_ID:  return r2.getSupplyCurrent();
+      case Constants.R3_ID:  return r3.getSupplyCurrent();
+      default: break;
+    }
+    return 0;
   }
 
 }

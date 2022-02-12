@@ -19,19 +19,19 @@ public class MotorTest extends CommandBase {
   Drive drive;
   double speed;
   double rotate;
-  double l1StaTotle;
-  double l2StaTotle;
-  double l3StaTotle;
-  double r1StaTotle;
-  double r2StaTotle;
-  double r3StaTotle;
+  double l1StaTotal;
+  double l2StaTotal;
+  double l3StaTotal;
+  double r1StaTotal;
+  double r2StaTotal;
+  double r3StaTotal;
   
-  double l1SupTotle;
-  double l2SupTotle;
-  double l3SupTotle;
-  double r1SupTotle;
-  double r2SupTotle;
-  double r3SupTotle;
+  double l1SupTotal;
+  double l2SupTotal;
+  double l3SupTotal;
+  double r1SupTotal;
+  double r2SupTotal;
+  double r3SupTotal;
 
   double l1StaAvg;
   double l2StaAvg;
@@ -78,38 +78,38 @@ public class MotorTest extends CommandBase {
     // "sup L3: " + drive.l3.getSupplyCurrent() + "  sup R3: " +drive.r3.getSupplyCurrent() + "\n\n\n"
     // );
 
-    l1StaTotle = l1StaTotle + drive.l1.getStatorCurrent();
-    l2StaTotle = l2StaTotle + drive.l1.getStatorCurrent();
-    l3StaTotle = l3StaTotle + drive.l1.getStatorCurrent();
-    r1StaTotle = r1StaTotle + drive.l1.getStatorCurrent();
-    r2StaTotle = r2StaTotle + drive.l1.getStatorCurrent();
-    r3StaTotle = r3StaTotle + drive.l1.getStatorCurrent();
+    l1StaTotal = l1StaTotal + drive.getStatorCurrent(Constants.L1_ID);
+    l2StaTotal = l2StaTotal + drive.getStatorCurrent(Constants.L2_ID);
+    l3StaTotal = l3StaTotal + drive.getStatorCurrent(Constants.L3_ID);
+    r1StaTotal = r1StaTotal + drive.getStatorCurrent(Constants.R1_ID);
+    r2StaTotal = r2StaTotal + drive.getStatorCurrent(Constants.R2_ID);
+    r3StaTotal = r3StaTotal + drive.getStatorCurrent(Constants.R3_ID);
 
-    l1SupTotle = l1SupTotle + drive.l1.getSupplyCurrent();
-    l2SupTotle = l2SupTotle + drive.l1.getSupplyCurrent();
-    l3SupTotle = l3SupTotle + drive.l1.getSupplyCurrent();
-    r1SupTotle = r1SupTotle + drive.l1.getSupplyCurrent();
-    r2SupTotle = r2SupTotle + drive.l1.getSupplyCurrent();
-    r3SupTotle = r3SupTotle + drive.l1.getSupplyCurrent();
+    l1SupTotal = l1SupTotal + drive.getSupplyCurrent(Constants.L1_ID);
+    l2SupTotal = l2SupTotal + drive.getSupplyCurrent(Constants.L2_ID);
+    l3SupTotal = l3SupTotal + drive.getSupplyCurrent(Constants.L3_ID);
+    r1SupTotal = r1SupTotal + drive.getSupplyCurrent(Constants.R1_ID);
+    r2SupTotal = r2SupTotal + drive.getSupplyCurrent(Constants.R2_ID);
+    r3SupTotal = r3SupTotal + drive.getSupplyCurrent(Constants.R3_ID);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     System.out.println("MOTOR TESTING END!");
-    l1StaAvg = l1StaTotle / cycleCount;
-    l2StaAvg = l2StaTotle / cycleCount;
-    l3StaAvg = l3StaTotle / cycleCount;
-    r1StaAvg = r1StaTotle / cycleCount;
-    r2StaAvg = r2StaTotle / cycleCount;
-    r3StaAvg = r3StaTotle / cycleCount;
+    l1StaAvg = l1StaTotal / cycleCount;
+    l2StaAvg = l2StaTotal / cycleCount;
+    l3StaAvg = l3StaTotal / cycleCount;
+    r1StaAvg = r1StaTotal / cycleCount;
+    r2StaAvg = r2StaTotal / cycleCount;
+    r3StaAvg = r3StaTotal / cycleCount;
 
-    l1SupAvg = l1SupTotle / cycleCount;
-    l2SupAvg = l2SupTotle / cycleCount;
-    l3SupAvg = l3SupTotle / cycleCount;
-    r1SupAvg = r1SupTotle / cycleCount;
-    r2SupAvg = r2SupTotle / cycleCount;
-    r3SupAvg = r3SupTotle / cycleCount;
+    l1SupAvg = l1SupTotal / cycleCount;
+    l2SupAvg = l2SupTotal / cycleCount;
+    l3SupAvg = l3SupTotal / cycleCount;
+    r1SupAvg = r1SupTotal / cycleCount;
+    r2SupAvg = r2SupTotal / cycleCount;
+    r3SupAvg = r3SupTotal / cycleCount;
     System.out.println(
       "\n" + "AVG RESULTS: " + "\n" +
     "sta avg L1: " + l1StaAvg + "  sta avg R1: " + r1StaAvg + "\n" +
