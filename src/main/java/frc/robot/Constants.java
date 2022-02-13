@@ -109,7 +109,7 @@ public final class Constants {
     // hopper motor ID
     public static final int HOPPER_ID = 19;
     // hopper ball position sensor IDs
-    public static final int HOPPER_P1_ID = FILLER;
+    public static final int HOPPER_P1_ID = 9;
     public static final int HOPPER_P2_ID = FILLER;
     // hopper info
     public static final double HOPPERSPEED = 0.8; //0.8

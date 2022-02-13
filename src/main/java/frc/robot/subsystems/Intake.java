@@ -19,7 +19,7 @@ public class Intake extends SubsystemBase {
     private WPI_TalonSRX indexerL;
     private WPI_TalonSRX indexerR;
     private DoubleSolenoid intakeSol;
-    private static WPI_TalonSRX intakeMain;
+    private WPI_TalonSRX intakeMain;
 
     /** Creates a new Intake. */
     public Intake() {

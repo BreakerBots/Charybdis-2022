@@ -28,7 +28,7 @@ public class AirCompressor extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
+    // System.out.println(compressor.());
     // This method will be called once per scheduler run
   }
 }
