@@ -4,11 +4,13 @@
 
 package frc.robot;
 
+import com.fasterxml.jackson.databind.deser.std.ContainerDeserializerBase;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.compress;
+import frc.robot.commands.ToggleCompressor;
 import frc.robot.commands.autoActionCommands.MotorTest;
 import frc.robot.commands.autoActionCommands.MoveStraight;
 import frc.robot.commands.autoActionCommands.Pivot;
@@ -48,7 +50,7 @@ public class RobotContainer {
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
   private final IMU imuSys = new IMU();
-  private final AirCompressor compressor = new AirCompressor();
+  private final AirCompressor compressorSys = new AirCompressor();
   // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final XboxController xbox = new XboxController(0);
@@ -79,10 +81,10 @@ public class RobotContainer {
    private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
-    new JoystickButton(xbox, Constants.Y).whenPressed(new compress(compressor));
     new POVButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // // B button shoots, Left bumper cancles
     new JoystickButton(xbox, Constants.B).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
+    new JoystickButton(xbox, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys));
   }
 
