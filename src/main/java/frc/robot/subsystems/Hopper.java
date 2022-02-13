@@ -11,16 +11,35 @@ import frc.robot.Constants;
 
 /** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
+  private long pauseCountA;
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
   /** Creates a new Hopper. */
-  public Hopper() {
+  Intake intake;
+  public Hopper(Intake intakeArg) {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
+    intake = intakeArg;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if (intake.intakeState) {
+      if (getHopperPos1() && !getHopperPos2()) {
+        hopperOn();
+      } else if (!getHopperPos1() && getHopperPos2()) {
+        pauseCountA++;
+        if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
+          hopperOff();
+          pauseCountA = 0;
+        }
+      } else if (!getHopperPos1() && !getHopperPos2()) {
+        hopperOn();
+      } else if (getHopperPos1() && getHopperPos2()) {
+        intake.intakeOffMethod();
+        hopperOff();
+      }
+    }
   }
 
   public boolean hopperOn() {

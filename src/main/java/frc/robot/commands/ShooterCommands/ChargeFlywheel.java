@@ -43,8 +43,6 @@ public class ChargeFlywheel extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    xbox.setRumble(RumbleType.kLeftRumble, 1);
-    xbox.setRumble(RumbleType.kRightRumble, 1);
   }
 
   // Returns true when the command should end.

@@ -58,15 +58,15 @@ public final class Constants {
     public static final double DIST_POS_TOLERANCE = 1;
     public static final double DIST_VEL_TOLERANCE = 0.1;
     // intake motor speeds
-    public static final double INTAKESPEED = -1;
+    public static final double INTAKESPEED = -1; //-1
     public static final double R_SORTESPEED = 1;
-    public static final double L_SORTESPEED = 0.8;
+    public static final double L_SORTESPEED = 0.8; //0.8
     // intake solonoid IDs
     public static final int INTAKESOL_FWD = 1;
     public static final int INTAKESOL_REV = 0;
     // intake motor IDs
-    public static final int INTAKEMAIN_ID = 10;
-    public static final int INTAKE_L_ID = 30;
+    public static final int INTAKEMAIN_ID = 30;
+    public static final int INTAKE_L_ID = 27;
     public static final int INTAKE_R_ID = 26;
     public static final int PWR_DISTR = 0;
     // shooter motor IDs
@@ -78,7 +78,7 @@ public final class Constants {
     // shooter motor speeds
     public static final double SHOOTERSPEED = 0.5;
     // Speed in RPM
-    public static final int FLYWHEEL_TAR_SPEED = 200;
+    public static final int FLYWHEEL_TAR_SPEED = 0;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
@@ -112,7 +112,7 @@ public final class Constants {
     public static final int HOPPER_P1_ID = FILLER;
     public static final int HOPPER_P2_ID = FILLER;
     // hopper info
-    public static final double HOPPERSPEED = 0.8;
+    public static final double HOPPERSPEED = 0.8; //0.8
     public static final double HOPPER_WHEEL_DIAMETER = 1;
     public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
     public static final double HOPPER_GEAR_RATIO = FILLER;

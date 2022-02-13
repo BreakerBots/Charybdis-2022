@@ -51,10 +51,7 @@ public class ShootAll extends CommandBase {
   @Override
   public void execute() {
     cycleCount++;
-    if (cycleCount > 450) {
-      xbox.setRumble(RumbleType.kLeftRumble, 0);
-      xbox.setRumble(RumbleType.kRightRumble, 0);
-    }
+  
     if (cycleCount % 400 == 0) {
       System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
     }
@@ -64,15 +61,15 @@ public class ShootAll extends CommandBase {
       System.out.println("SHOOTER STARTED!");
 
     }
-    if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
-      timedStopCount++;
-    }
-    if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false && timedStopCount == 250) {
-      hopper.hopperOff();
-      intake.lIndexerHopper();
-      timedStopCount = 0;
-      shooter.flyweelOff();
-    }
+    // if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
+    //   timedStopCount++;
+    // }
+    // if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false && timedStopCount == 250) {
+    //   hopper.hopperOff();
+    //   intake.lIndexerHopper();
+    //   timedStopCount = 0;
+    //   shooter.flyweelOff();
+    // }
   }
 
   // Called once the command ends or is interrupted.

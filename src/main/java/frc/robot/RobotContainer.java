@@ -17,10 +17,7 @@ import frc.robot.commands.autoPaths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.autoPaths.Pickup1_Shoot2_H3;
 import frc.robot.commands.climbCommands.HighbarClimbSequence;
 import frc.robot.commands.driveCommands.DriveWithJoystick;
-import frc.robot.commands.intakeCommands.IntakeCoreCommands;
-import frc.robot.commands.intakeCommands.IntakeHopper;
 import frc.robot.commands.intakeCommands.IntakeToggle;
-import frc.robot.commands.intakeCommands.ToggleIntakeNestGroup;
 import frc.robot.commands.shooterCommands.ShootCoreCommands;
 import frc.robot.commands.shooterCommands.ToggleShooterPos;
 import frc.robot.subsystems.Climber;
@@ -47,7 +44,7 @@ public class RobotContainer {
   public static PowerDistribution pdp = new PowerDistribution();
   private final Drive driveTrain = new Drive(pdp);
   private final Intake intakeSys = new Intake();
-  private final Hopper hopperSys = new Hopper();
+  private final Hopper hopperSys = new Hopper(intakeSys);
   private final IMU imuSys = new IMU();
   // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
@@ -78,8 +75,8 @@ public class RobotContainer {
   
    private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new MoveStraight(driveTrain, imuSys, 80, 0.5));
-    new JoystickButton(xbox, Constants.A).whenPressed(new ToggleIntakeNestGroup(xbox, intakeSys, hopperSys));
-    new JoystickButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
+    new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
+    new POVButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // // B button shoots, Left bumper cancles
     new JoystickButton(xbox, Constants.B).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys));

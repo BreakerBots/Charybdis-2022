@@ -31,7 +31,7 @@ public class IntakeToggle extends CommandBase {
   public void initialize() {
     if (intake.intakeState) {
       intake.intakeOffMethod();
-      // hopper.hopperOff();
+      hopper.hopperOff();
     } else {
       intake.intakeOnMethod();
       // hopper.hopperOn();
