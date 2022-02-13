@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.compress;
 import frc.robot.commands.autoActionCommands.MotorTest;
 import frc.robot.commands.autoActionCommands.MoveStraight;
 import frc.robot.commands.autoActionCommands.Pivot;
@@ -25,6 +26,7 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Devices.AirCompressor;
 import frc.robot.subsystems.Devices.IMU;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -46,6 +48,7 @@ public class RobotContainer {
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
   private final IMU imuSys = new IMU();
+  private final AirCompressor compressor = new AirCompressor();
   // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final XboxController xbox = new XboxController(0);
@@ -76,6 +79,7 @@ public class RobotContainer {
    private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
+    new JoystickButton(xbox, Constants.Y).whenPressed(new compress(compressor));
     new POVButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // // B button shoots, Left bumper cancles
     new JoystickButton(xbox, Constants.B).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));

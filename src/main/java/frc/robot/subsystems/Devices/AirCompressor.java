@@ -7,14 +7,14 @@ package frc.robot.subsystems.Devices;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 public class AirCompressor extends SubsystemBase {
   private Compressor compressor;
 
   /** Creates a new AirCompressor. */
-  public AirCompressor() {
+  public  AirCompressor() {
     compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+    
   }
 
   /** Returns air pressure in psi */
@@ -22,9 +22,13 @@ public class AirCompressor extends SubsystemBase {
     return compressor.getPressure();
   }
 
+  public void startCompressor() {
+    compressor.enableDigital();
+  }
+
   @Override
   public void periodic() {
+    
     // This method will be called once per scheduler run
-    compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
   }
 }

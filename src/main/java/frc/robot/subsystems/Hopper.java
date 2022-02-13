@@ -24,22 +24,22 @@ public class Hopper extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if (intake.intakeState) {
-      if (getHopperPos1() && !getHopperPos2()) {
-        hopperOn();
-      } else if (!getHopperPos1() && getHopperPos2()) {
-        pauseCountA++;
-        if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
-          hopperOff();
-          pauseCountA = 0;
-        }
-      } else if (!getHopperPos1() && !getHopperPos2()) {
-        hopperOn();
-      } else if (getHopperPos1() && getHopperPos2()) {
-        intake.intakeOffMethod();
-        hopperOff();
-      }
-    }
+    // if (intake.intakeState) {
+    //   if (getHopperPos1() && !getHopperPos2()) {
+    //     hopperOn();
+    //   } else if (!getHopperPos1() && getHopperPos2()) {
+    //     pauseCountA++;
+    //     if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
+    //       hopperOff();
+    //       pauseCountA = 0;
+    //     }
+    //   } else if (!getHopperPos1() && !getHopperPos2()) {
+    //     hopperOn();
+    //   } else if (getHopperPos1() && getHopperPos2()) {
+    //     intake.intakeOffMethod();
+    //     hopperOff();
+    //   }
+    // }
   }
 
   public boolean hopperOn() {

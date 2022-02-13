@@ -61,6 +61,7 @@ public class ShootAll extends CommandBase {
       System.out.println("SHOOTER STARTED!");
 
     }
+    System.out.println(shooter.getFlywheelRPM());
     // if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
     //   timedStopCount++;
     // }
@@ -88,6 +89,7 @@ public class ShootAll extends CommandBase {
       System.out.println("SHOOTER MANUALY STOPED!");
       hopper.hopperOff();
       shooter.flyweelOff();
+      intake.intakeOffMethod();
       return true;
     } else {
       return false;

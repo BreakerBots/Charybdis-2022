@@ -76,7 +76,7 @@ public final class Constants {
     public static final int SHOOTERSOL_FWD = 2;
     public static final int SHOOTERSOL_REV = 3;
     // shooter motor speeds
-    public static final double SHOOTERSPEED = 0.5;
+    public static final double SHOOTERSPEED = 0.7;
     // Speed in RPM
     public static final int FLYWHEEL_TAR_SPEED = 0;
     // Drive feedForward values
