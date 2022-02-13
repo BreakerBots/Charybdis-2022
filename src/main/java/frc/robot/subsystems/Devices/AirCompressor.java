@@ -14,11 +14,11 @@ public class AirCompressor extends SubsystemBase {
   /** Creates a new AirCompressor. */
   public  AirCompressor() {
     compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+    compressor.enableAnalog(70, 120);
   }
 
   public void startCompressor() {
     System.out.print("Compressor enabled!\n");
-    compressor.enableAnalog(70, 120);
     compressor.enableDigital();
   }
 

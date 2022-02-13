@@ -21,5 +21,7 @@ public class ToggleCompressor extends InstantCommand {
   @Override
   public void initialize() {
       compressor.startCompressor();
+      boolean thingy = compressor.getCompressorState();
+      System.out.print(thingy + "\n");
   }
 }

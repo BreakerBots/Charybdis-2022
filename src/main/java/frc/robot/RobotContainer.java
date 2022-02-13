@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.deser.std.ContainerDeserializerBase;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ToggleCompressor;
@@ -46,6 +47,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static PowerDistribution pdp = new PowerDistribution();
+  public static PneumaticsControlModule pcm = new PneumaticsControlModule(5);
   private final Drive driveTrain = new Drive(pdp);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
