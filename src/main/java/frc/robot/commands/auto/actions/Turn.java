@@ -2,11 +2,11 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.autoActionCommands;
+package frc.robot.commands.auto.actions;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Devices.IMU;
+import frc.robot.subsystems.devices.IMU;
 
 public class Turn extends CommandBase {
   /** Creates a new Turn. */
