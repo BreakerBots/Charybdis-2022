@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.FlywheelState;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Shooter.FlywheelState;
 
 /**
  * Shoots all the balls in the hopper
@@ -55,7 +55,7 @@ public class ShootAll extends CommandBase {
     // if (cycleCount % 400 == 0) {
     //   System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
     // }
-    if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED) {
+    if (shooter.flywheelState == FlywheelState.CHARGED) {
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");

@@ -47,21 +47,23 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public PowerDistribution pdp = new PowerDistribution();
-  public PneumaticsControlModule pcm = new PneumaticsControlModule(Constants.PCM_ID);
 
-  public RobotMode robotMode = Robot.mode;
-  private final Drive driveTrain = new Drive(pdp);
-  private final Intake intakeSys = new Intake();
-  private final Hopper hopperSys = new Hopper(intakeSys);
-  private final IMU imuSys = new IMU();
-  private final AirCompressor compressorSys = new AirCompressor();
-  // private final Climber climbSys = new Climber();
-  private final Shooter shooterSys = new Shooter(hopperSys);
-  private final XboxController xbox = new XboxController(0);
-  // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
+  // Subsystems
+  public final Drive driveTrain = new Drive();
+  public final Intake intakeSys = new Intake();
+  public final Hopper hopperSys = new Hopper(intakeSys);
+  public final IMU imuSys = new IMU();
+  public final AirCompressor compressorSys = new AirCompressor();
+  // public final Climber climbSys = new Climber();
+  public final Shooter shooterSys = new Shooter(hopperSys);
 
-  private final DriveWithJoystick driveWithJoystick;
+  // Miscellaneous objects
+  public final PowerDistribution pdp = new PowerDistribution();
+  public final PneumaticsControlModule pcm = new PneumaticsControlModule(Constants.PCM_ID);
+  public final XboxController xbox = new XboxController(0);
+  public final RobotMode robotMode = Robot.mode;
+
+  public final DriveWithJoystick driveWithJoystick;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -82,7 +84,6 @@ public class RobotContainer {
    * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-
   private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new
     // MoveStraight(driveTrain, imuSys, 80, 0.5));

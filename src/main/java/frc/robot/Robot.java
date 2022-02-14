@@ -3,15 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.devices.AirCompressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -35,7 +29,7 @@ public class Robot extends TimedRobot {
   }
   public static RobotMode mode;
   private Command m_autonomousCommand;
-  private RobotContainer m_robotContainer;
+  public static RobotContainer m_robotContainer; // Note: Might not work!
   
 
   /**

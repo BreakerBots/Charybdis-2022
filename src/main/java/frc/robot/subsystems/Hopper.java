@@ -15,14 +15,14 @@ public class Hopper extends SubsystemBase {
   private long pauseCountA;
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
-  private DigitalInput hopPos1;
-  private DigitalInput hopPos2;
+  private DigitalInput slot1;
+  private DigitalInput slot2;
   Intake intake;
   public Hopper(Intake intakeArg) {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
-    hopPos1 = new DigitalInput(9);
-    hopPos2 = new DigitalInput(8);
+    slot1 = new DigitalInput(9);
+    slot2 = new DigitalInput(8);
   }
 
   public void hopperOn() {
@@ -37,11 +37,11 @@ public class Hopper extends SubsystemBase {
   }
 
   public boolean getHopperPos1() {
-    return hopPos1.get();
+    return slot1.get();
   }
 
   public boolean getHopperPos2() {
-    return hopPos2.get();
+    return slot2.get();
   }
 
 
