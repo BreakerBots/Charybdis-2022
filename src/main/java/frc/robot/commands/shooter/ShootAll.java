@@ -54,7 +54,7 @@ public class ShootAll extends CommandBase {
     // if (cycleCount % 400 == 0) {
     //   System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
     // }
-    if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED) {
+    if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED && shooter.flywheelPID.atSetpoint()) {
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");
@@ -76,7 +76,7 @@ public class ShootAll extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    shooter.flywheelPID.reset();
   }
 
   // Returns true when the command should end.

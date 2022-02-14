@@ -14,6 +14,7 @@ import frc.robot.subsystems.Shooter;
 public class ChargeFlywheel extends CommandBase {
   Shooter shooter;
   XboxController xbox;
+  private long atRPM;
   /**
    * Creates a new ChargeFlywheel.
    * @param shooterArg Shooter subsystem from RobotContainer.
@@ -28,6 +29,7 @@ public class ChargeFlywheel extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooter.flywheelPID.reset();
     System.out.println("ChargeFlywheel initaited");
     //if (shooter.flywheelState == FlywheelState.IDLE || shooter.flywheelState == FlywheelState.OFF) {
       shooter.flyweelFullOn();
@@ -37,7 +39,6 @@ public class ChargeFlywheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("RPM: " + shooter.getFlywheelRPM());
   }
 
   // Called once the command ends or is interrupted.
@@ -54,6 +55,7 @@ public class ChargeFlywheel extends CommandBase {
       return true;
     } else if (xbox.getLeftBumperPressed()) {
       shooter.flyweelOff();
+      shooter.flywheelPID.reset();
       System.out.println("FLYWHEEL MANUALY STOPED!");
       return true;
     }

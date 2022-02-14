@@ -34,7 +34,7 @@ public class Shooter extends SubsystemBase {
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS, Constants.FLYWHEEL_KV);
     flywheelPID = new PIDController(Constants.FLYWHEEL_KP, Constants.FLYWHEEL_KI, Constants.FLYWHEEL_KD);
     hopper = hopperArg;
-    flywheelPID.setTolerance(100);
+    flywheelPID.setTolerance(20);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
@@ -56,16 +56,16 @@ public class Shooter extends SubsystemBase {
   }
   /** Returns the RPM of the flywheel's Motors */
   public double getFlywheelRPM() {
-    double curTicks;
-    double tickDiff;
-    double propOfRotation;
-    double rpm;
-    curTicks = shooterL.getSelectedSensorPosition();
-    tickDiff = curTicks - prevTicks;
-    propOfRotation = tickDiff / 2048;
-    rpm = (propOfRotation * 50) * 60;
-    prevTicks = curTicks;
-    return rpm;
+    // double curTicks;
+    // double tickDiff;
+    // double propOfRotation;
+    // double rpm;
+    // curTicks = shooterL.getSelectedSensorPosition();
+    // tickDiff = curTicks - prevTicks;
+    // propOfRotation = tickDiff / 2048;
+    // rpm = (propOfRotation * 50) * 60;
+    // prevTicks = curTicks;
+    return Math.abs((shooterL.getSelectedSensorVelocity()/10));
   }
   /** Brings shooter to higher fireing angle */
   public boolean shooterUp() {
@@ -83,15 +83,16 @@ public class Shooter extends SubsystemBase {
   }
 
   public void periodic() {
-    // flywheel.set(1);
-    // System.out.println("RPM: " + getFlywheelRPM());
-    if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
-      flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
-    }
-    else if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
+    //flywheel.set(1);
+    System.out.println("RPM: " + getFlywheelRPM());
+    System.out.println("AT SETPOINT: " + flywheelPID.atSetpoint());
+    // if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
+    //   flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
+    // }
+    if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
      double flySpd;
       flySpd = (flywheelPID.calculate(getFlywheelRPM(), getFlywheelTargetSpeed()));
-      flySpd = MathUtil.clamp(flySpd, 0, 1);
+      //flySpd = MathUtil.clamp(flySpd, 0, 1);
       flywheel.set(flySpd);
     }
   }

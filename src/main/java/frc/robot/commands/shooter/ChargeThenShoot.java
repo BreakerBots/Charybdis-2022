@@ -26,6 +26,6 @@ public class ChargeThenShoot extends SequentialCommandGroup {
     intake = intakeArg;
     hopper = hopperArg;
     xbox = controllerArg;
-    addCommands(new ChargeFlywheel(shooter, xbox), new ShootAll(shooter, hopper, xbox, intake));
+    addCommands(new ResetFlywheelPID(shooterArg), new ChargeFlywheel(shooter, xbox), new ShootAll(shooter, hopper, xbox, intake));
   }
 }
