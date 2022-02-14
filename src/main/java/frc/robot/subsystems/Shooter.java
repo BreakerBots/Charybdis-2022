@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -17,6 +19,7 @@ import frc.robot.FlywheelState;
 
 public class Shooter extends SubsystemBase {
   public SimpleMotorFeedforward flywheelFF;
+  public PIDController flywheelPID;
   public FlywheelState flywheelState;
   private static double prevTicks = 0;
   // public boolean flyweelState;
@@ -28,7 +31,8 @@ public class Shooter extends SubsystemBase {
   DoubleSolenoid shooterSol;
   Hopper hopper;
   public Shooter(Hopper hopperArg) {
-    flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS, Constants.FLYWHEEL_KV)
+    flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS, Constants.FLYWHEEL_KV);
+    flywheelPID = new PIDController(Constants.FLYWHEEL_KP, Constants.FLYWHEEL_KI, Constants.FLYWHEEL_KD);
     hopper = hopperArg;
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
@@ -82,8 +86,11 @@ public class Shooter extends SubsystemBase {
       flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
     }
     else if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
+     double flyFF;
      double flyV;
-      flyV = flywheelFF.calculate(getFlywheelTargetSpeed());
+      flyFF = flywheelFF.calculate(getFlywheelTargetSpeed());
+      flyV = (flywheelPID.calculate(getFlywheelRPM(), getFlywheelTargetSpeed()) + flyFF);
+      flyV = MathUtil.clamp(flyV, 0, 14);
       flywheel.setVoltage(flyV);
     }
   }

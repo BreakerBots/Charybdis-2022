@@ -48,7 +48,7 @@ public class ChargeFlywheel extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shooter.getFlywheelRPM() > Constants.FLYWHEEL_TAR_SPEED) {
+    if(shooter.flywheelPID.atSetpoint()) {
       System.out.println("FLYWHEEL CHARGED!");
       shooter.flywheelState = FlywheelState.CHARGED;
       return true;
@@ -57,7 +57,6 @@ public class ChargeFlywheel extends CommandBase {
       System.out.println("FLYWHEEL MANUALY STOPED!");
       return true;
     }
-    
     else {
       return false;
     }
