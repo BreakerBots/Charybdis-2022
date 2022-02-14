@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -15,6 +16,7 @@ import frc.robot.Constants;
 import frc.robot.FlywheelState;
 
 public class Shooter extends SubsystemBase {
+  public SimpleMotorFeedforward flywheelFF;
   public FlywheelState flywheelState;
   private static double prevTicks = 0;
   // public boolean flyweelState;
@@ -26,6 +28,7 @@ public class Shooter extends SubsystemBase {
   DoubleSolenoid shooterSol;
   Hopper hopper;
   public Shooter(Hopper hopperArg) {
+    flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS, Constants.FLYWHEEL_KV)
     hopper = hopperArg;
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
@@ -35,15 +38,9 @@ public class Shooter extends SubsystemBase {
                 Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
   }
 
-  @Override
-  public void periodic() {
-    // if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
-    //   flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
-    // }
-  }
+  
   /** Turns Flywheel On */
   public void flyweelFullOn() {
-    flywheel.set(Constants.SHOOTERSPEED);
     flywheelState = FlywheelState.CHARGING;
   }
 
@@ -74,5 +71,20 @@ public class Shooter extends SubsystemBase {
   public boolean shooterDown() {
     shooterSol.set(Value.kReverse);
     return shooterPos = false;
+  }
+
+  public double getFlywheelTargetSpeed() {
+    return Constants.FLYWHEEL_MAX_SPEED * Constants.FLYWHEEL_TAR_SPEED_PREC;
+  }
+
+  public void periodic() {
+    if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
+      flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
+    }
+    else if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
+     double flyV;
+      flyV = flywheelFF.calculate(getFlywheelTargetSpeed());
+      flywheel.setVoltage(flyV);
+    }
   }
 }

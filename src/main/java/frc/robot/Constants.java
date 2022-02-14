@@ -77,7 +77,8 @@ public final class Constants {
     // shooter motor speeds
     public static final double SHOOTERSPEED = 0.48;
     // Speed in RPM
-    public static final int FLYWHEEL_TAR_SPEED = 2000;
+    public static final int FLYWHEEL_MAX_SPEED = 2000;
+    public static final double FLYWHEEL_TAR_SPEED_PREC = 0;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
