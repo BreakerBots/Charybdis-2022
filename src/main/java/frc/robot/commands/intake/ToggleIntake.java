@@ -9,7 +9,7 @@ import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 
 /** Turns the robot's intake on/off */
-public class IntakeToggle extends CommandBase {
+public class ToggleIntake extends CommandBase {
   Intake intake;
   Hopper hopper;
 
@@ -19,7 +19,7 @@ public class IntakeToggle extends CommandBase {
    * @param intakeArg Intake subsystem from RobotContainer.
    * @param hopperArg Hopper subsystem from RobotContainer.
    */
-  public IntakeToggle(Intake intakeArg, Hopper hopperArg) {
+  public ToggleIntake(Intake intakeArg, Hopper hopperArg) {
     intake = intakeArg;
     hopper = hopperArg;
     // addRequirements(intake);

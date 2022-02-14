@@ -46,7 +46,7 @@ public class DriveWithJoystick extends CommandBase {
     }
     prevNet = net;
     
-    drive.move(net, turn); // Calculates speed and turn outputs
+    drive.teleopMove(net, turn); // Calculates speed and turn outputs
   }
 
   // Called once the command ends or is interrupted.

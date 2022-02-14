@@ -60,7 +60,7 @@ public class Drive extends SubsystemBase {
   }
 
   /** Wraps around arcadeDrive to allow for movement */
-  public void move(double netSpd, double turnSpd) {
+  public void teleopMove(double netSpd, double turnSpd) {
     double logSpd = netSpd; // Convert.logisticCurve(netSpd);
     if (pdp.getVoltage() < 8.5) {
       logSpd *= 0.85;
