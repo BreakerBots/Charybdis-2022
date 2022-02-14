@@ -17,7 +17,7 @@ public class DriveWithJoystick extends CommandBase {
   private final PowerDistribution pdp;
   private double prevNet;
   /** Creates a new DriveWithJoystick. */
-  public DriveWithJoystick(Drive driveTrainArg, XboxController controllerArg, PowerDistribution pdpArg) {
+  public DriveWithJoystick(XboxController controllerArg, PowerDistribution pdpArg, Drive driveTrainArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     drive = driveTrainArg;
     xbox = controllerArg;

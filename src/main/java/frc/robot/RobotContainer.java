@@ -16,7 +16,7 @@ import frc.robot.commands.ToggleCompressor;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
-import frc.robot.commands.shooter.ShootCoreCommands;
+import frc.robot.commands.shooter.ChargeThenShoot;
 import frc.robot.commands.shooter.ToggleShooterPos;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
@@ -57,7 +57,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    driveWithJoystick = new DriveWithJoystick(driveSys, xboxSys, pdpSys);
+    driveWithJoystick = new DriveWithJoystick(xboxSys, pdpSys, driveSys);
     driveWithJoystick.addRequirements(driveSys);
     driveSys.setDefaultCommand(driveWithJoystick);
     // Configure the button bindings
@@ -79,7 +79,7 @@ public class RobotContainer {
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // // B button shoots, Left bumper cancles
-    new JoystickButton(xboxSys, Constants.B).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xboxSys));
+    new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new
     // HighbarClimbSequence(climbSys, imuSys));
