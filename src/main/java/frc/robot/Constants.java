@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import javax.swing.Box.Filler;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -144,7 +142,9 @@ public final class Constants {
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
     // Compressor closed-loop-controle pressure values
-    public static final double MIN_PSI = FILLER;
+    /** CAN ID for robot's Pneumatics Control Module (PCM) */
+    public static final int PCM_ID = 5;
+    public static final double MIN_PSI = 70;
     public static final double MAX_PSI = 120;
     public static final long HOPPER_DELAY_CYCLES = 0;
     public static final double FLYWHEEL_CANCEL_RPM = 0;

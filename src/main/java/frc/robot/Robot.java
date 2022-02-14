@@ -19,9 +19,24 @@ import frc.robot.subsystems.Devices.AirCompressor;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
+
+
 public class Robot extends TimedRobot {
+  /** Operating state of the robot, based on FRC Drive Station.*/
+  public enum RobotMode {
+    /** Robot is disabled in any mode. */
+    DISABLED,
+    /** Robot is enabled in teleop mode. */
+    TELEOP,
+    /** Robot is enabled in autonomous mode. */
+    AUTO,
+    /** Robot is enabled in test mode. */
+    TEST
+  }
+  public static RobotMode mode;
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -52,7 +67,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    mode = RobotMode.DISABLED;
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -60,6 +77,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    mode = RobotMode.AUTO;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
