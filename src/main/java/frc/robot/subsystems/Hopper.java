@@ -9,20 +9,22 @@ import edu.wpi.first.hal.DIOJNI;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.subsystems.Intake.IntakeState;
 
 /** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
   private long pauseCountA;
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
-  private DigitalInput hopPos1;
-  private DigitalInput hopPos2;
-  Intake intake;
-  public Hopper(Intake intakeArg) {
+  private DigitalInput slot1;
+  private DigitalInput slot2;
+  private Intake intake;
+  public Hopper() {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
-    intake = intakeArg;
-    hopPos1 = new DigitalInput(9);
-    hopPos2 = new DigitalInput(8);
+    intake = Robot.m_robotContainer.intakeSys;
+    slot1 = new DigitalInput(9);
+    slot2 = new DigitalInput(8);
   }
 
   public void hopperOn() {
@@ -37,11 +39,11 @@ public class Hopper extends SubsystemBase {
   }
 
   public boolean getHopperPos1() {
-    return hopPos1.get();
+    return slot1.get();
   }
 
   public boolean getHopperPos2() {
-    return hopPos2.get();
+    return slot2.get();
   }
 
 
@@ -50,7 +52,7 @@ public class Hopper extends SubsystemBase {
   public void periodic() {
     // System.out.println("hop 1: " + getHopperPos1());
     // System.out.println("hop 2: " + getHopperPos2());
-    if (intake.intakeState) {
+    if (intake.intakeStatus == IntakeState.ON) {
       // if (getHopperPos1() && !getHopperPos2()) { 
       //   hopperOn();
       // }

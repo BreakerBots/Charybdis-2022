@@ -12,33 +12,35 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Convert;
+import frc.robot.Robot;
 
 public class Drive extends SubsystemBase {
+  /** PDP alias for RobotContainer instance. */
+  private PowerDistribution pdp;
+  // Left motors (falcons).
   private WPI_TalonFX l1;
   private WPI_TalonFX l2;
   private WPI_TalonFX l3;
   private MotorControllerGroup driveL;
-  // Right motors (falcons)
+  // Right motors (falcons).
   private WPI_TalonFX r1;
   private WPI_TalonFX r2;
   private WPI_TalonFX r3;
   private MotorControllerGroup driveR;
-  // Drivetrian
+  // Drivetrain.
   private DifferentialDrive driveTrainDiff;
-  /** Creates a new Drive. */
+  // Feedback/feedforward.
   public PIDController anglePID;
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
-  public double prevNet;
-  private PowerDistribution pdp;
 
+  public double prevNet;
   private final double artLinearFeedForward = 0.3;
   private final double artAngleFeedForward = 0.2;
 
   /** Creates a new Drive. */
-  public Drive(PowerDistribution pdpArg) {
-    pdp = pdpArg;
+  public Drive() {
+    pdp = Robot.m_robotContainer.pdp;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     anglePID.setTolerance(Constants.ANG_POS_TOLERANCE, Constants.ANG_VEL_TOLERANCE);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);

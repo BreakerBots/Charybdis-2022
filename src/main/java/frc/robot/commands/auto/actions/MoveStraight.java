@@ -6,7 +6,8 @@ package frc.robot.commands.auto.actions;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Convert;
+import frc.robot.BreakerMath;
+import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.devices.IMU;
 
@@ -17,9 +18,9 @@ public class MoveStraight extends CommandBase {
   private double targetDistance;
   private double speedClamp;
   /** Creates a new MoveStraight. */
-  public MoveStraight(Drive driveArg, IMU imuArg, double distanceInches, double speedLimit) {
-    drive = driveArg;
-    imu = imuArg;
+  public MoveStraight(double distanceInches, double speedLimit) {
+    drive = Robot.m_robotContainer.driveTrain;
+    imu = Robot.m_robotContainer.imuSys;
     addRequirements(drive);
     targetDistance = distanceInches;
     speedClamp = speedLimit;
@@ -37,7 +38,7 @@ public class MoveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double curDist = Convert.ticksToInches(drive.getLeftTicks());
+    double curDist = BreakerMath.ticksToInches(drive.getLeftTicks());
     System.out.println("Ticks: " + drive.getLeftTicks());
     // System.out.println(drive.feedForwardCalc(4, 2)); // Constants for desired vel, desired acc
     double motorSpeed = drive.distPIDCalc(curDist, targetDistance);

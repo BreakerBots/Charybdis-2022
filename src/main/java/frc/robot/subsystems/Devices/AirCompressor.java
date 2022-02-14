@@ -7,6 +7,7 @@ package frc.robot.subsystems.devices;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class AirCompressor extends SubsystemBase {
   private Compressor compressor;
@@ -14,12 +15,11 @@ public class AirCompressor extends SubsystemBase {
   /** Creates a new AirCompressor. */
   public  AirCompressor() {
     compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    compressor.enableAnalog(70, 120);
   }
 
   public void startCompressor() {
     System.out.print("Compressor enabled!\n");
-    compressor.enableDigital();
+    compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
   }
 
   public void stopCompressor() {
@@ -27,7 +27,7 @@ public class AirCompressor extends SubsystemBase {
     compressor.disable();
   }
 
-  public boolean getCompressorState() {
+  public boolean isEnabled() {
     return compressor.enabled();
   }
 

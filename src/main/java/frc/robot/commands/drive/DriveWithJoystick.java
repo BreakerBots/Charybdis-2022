@@ -7,6 +7,7 @@ package frc.robot.commands.drive;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
 
 
@@ -19,9 +20,9 @@ public class DriveWithJoystick extends CommandBase {
   /** Creates a new DriveWithJoystick. */
   public DriveWithJoystick(Drive driveTrainArg, XboxController controllerArg, PowerDistribution pdpArg) {
     // Use addRequirements() here to declare subsystem dependencies.
-    drive = driveTrainArg;
-    xbox = controllerArg;
-    pdp = pdpArg;
+    drive = Robot.m_robotContainer.driveTrain;
+    xbox = Robot.m_robotContainer.xbox;
+    pdp = Robot.m_robotContainer.pdp;
   }
 
   // Called when the command is initially scheduled.

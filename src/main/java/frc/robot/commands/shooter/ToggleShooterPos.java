@@ -5,12 +5,14 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
 public class ToggleShooterPos extends CommandBase {
+  /** Shooter alias for RobotContainer instance. */
   Shooter shooter;
-  public ToggleShooterPos(Shooter shooterArg) {
-    shooter = shooterArg;
+  public ToggleShooterPos() {
+    shooter = Robot.m_robotContainer.shooterSys;
     addRequirements(shooter);
   }
 

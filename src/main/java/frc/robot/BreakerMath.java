@@ -1,7 +1,7 @@
 package frc.robot;
 
 //easily accessible conversion equations
-public class Convert {
+public class BreakerMath {
 
     // Drive logistic curve constants
 
