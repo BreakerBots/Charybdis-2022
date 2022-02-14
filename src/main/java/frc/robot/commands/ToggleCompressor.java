@@ -20,8 +20,10 @@ public class ToggleCompressor extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    if (compressor.getCompressorState()) {
+      compressor.stopCompressor();
+    } else {
       compressor.startCompressor();
-      boolean thingy = compressor.getCompressorState();
-      System.out.print(thingy + "\n");
+    }
   }
 }
