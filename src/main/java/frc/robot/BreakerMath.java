@@ -1,7 +1,7 @@
 package frc.robot;
 
 //easily accessible conversion equations
-public class Convert {
+public class BreakerMath {
 
     // Drive logistic curve constants
 
@@ -18,7 +18,7 @@ public class Convert {
      * @param deg Angle value, in degrees
      * @return angle value within -360 to +360 degrees.
      */
-    public static final double ANGLE_CONVERT(double deg) {
+    public static final double constrainAngle(double deg) {
         deg = deg % 360;
         return deg;
     }

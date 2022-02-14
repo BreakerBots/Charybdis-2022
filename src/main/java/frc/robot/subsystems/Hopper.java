@@ -5,14 +5,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.hal.DIOJNI;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
-  private long pauseCountA;
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
   private DigitalInput hopPos1;
