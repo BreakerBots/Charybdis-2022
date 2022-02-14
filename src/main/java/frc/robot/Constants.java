@@ -74,9 +74,10 @@ public final class Constants {
     public static final int SHOOTERSOL_FWD = 2;
     public static final int SHOOTERSOL_REV = 3;
     // shooter motor speeds
-    public static final double SHOOTERSPEED = 0.48;
+    public static final double UP_SHOOTERSPEED = 0.48; // Upper is 0.48
+    public static final double LOW_SHOOTERSPEED = 0.3;
     // Speed in RPM
-    public static final int FLYWHEEL_TAR_SPEED = 2000;
+    public static final int FLYWHEEL_TAR_SPEED = 2200;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;

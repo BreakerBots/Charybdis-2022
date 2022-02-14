@@ -18,7 +18,7 @@ public class Shooter extends SubsystemBase {
   public FlywheelState flywheelState;
   private static double prevTicks = 0;
   // public boolean flyweelState;
-  public boolean shooterPos;
+  public boolean shooterPos; // MAKE THIS AN ENUM
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
   private MotorControllerGroup flywheel;
@@ -43,7 +43,7 @@ public class Shooter extends SubsystemBase {
   }
   /** Turns Flywheel On */
   public void flyweelFullOn() {
-    flywheel.set(Constants.SHOOTERSPEED);
+    flywheel.set(Constants.UP_SHOOTERSPEED);
     flywheelState = FlywheelState.CHARGING;
   }
 
