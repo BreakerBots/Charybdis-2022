@@ -13,3 +13,5 @@
     c. Hopper
     d. Shooter
     e. Climber
+
+Also, all subsystem instances in RobotContainer should have "Sys" at the end of the name.
