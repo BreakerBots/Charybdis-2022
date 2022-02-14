@@ -50,7 +50,7 @@ public class RobotContainer {
   public static PowerDistribution pdp = new PowerDistribution();
   public static PneumaticsControlModule pcm = new PneumaticsControlModule(Constants.PCM_ID);
 
-  public static RobotMode robotMode = Robot.mode;
+  public RobotMode robotMode = Robot.mode;
   private final Drive driveTrain = new Drive(pdp);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
