@@ -4,26 +4,37 @@
 
 package frc.robot;
 
+import com.fasterxml.jackson.databind.deser.std.ContainerDeserializerBase;
+
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot.RobotMode;
 import frc.robot.commands.ToggleCompressor;
+import frc.robot.commands.auto.actions.MotorTest;
+import frc.robot.commands.auto.actions.MoveStraight;
+import frc.robot.commands.auto.actions.Pivot;
+import frc.robot.commands.auto.actions.Turn;
+import frc.robot.commands.auto.paths.OffTarmack_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
+import frc.robot.commands.auto.paths.Pickup1_Shoot2_H3;
+import frc.robot.commands.climb.HighbarClimbSequence;
 import frc.robot.commands.drive.DriveWithJoystick;
-import frc.robot.commands.intake.ToggleIntake;
+import frc.robot.commands.intake.IntakeToggle;
 import frc.robot.commands.shooter.ShootCoreCommands;
 import frc.robot.commands.shooter.ToggleShooterPos;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.IMU;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -36,23 +47,21 @@ import frc.robot.subsystems.devices.IMU;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  public PowerDistribution pdp = new PowerDistribution();
+  public PneumaticsControlModule pcm = new PneumaticsControlModule(Constants.PCM_ID);
 
-  // Subsystems
-  public final Drive driveTrain = new Drive();
-  public final Intake intakeSys = new Intake();
-  public final Hopper hopperSys = new Hopper();
-  public final IMU imuSys = new IMU();
-  public final AirCompressor compressorSys = new AirCompressor();
-  // public final Climber climbSys = new Climber();
-  public final Shooter shooterSys = new Shooter(hopperSys);
+  public RobotMode robotMode = Robot.mode;
+  private final Drive driveTrain = new Drive(pdp);
+  private final Intake intakeSys = new Intake();
+  private final Hopper hopperSys = new Hopper(intakeSys);
+  private final IMU imuSys = new IMU();
+  private final AirCompressor compressorSys = new AirCompressor();
+  // private final Climber climbSys = new Climber();
+  private final Shooter shooterSys = new Shooter(hopperSys);
+  private final XboxController xbox = new XboxController(0);
+  // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
 
-  // Miscellaneous objects
-  public final PowerDistribution pdp = new PowerDistribution();
-  public final PneumaticsControlModule pcm = new PneumaticsControlModule(Constants.PCM_ID);
-  public final XboxController xbox = new XboxController(0);
-  public final RobotMode robotMode = Robot.mode;
-
-  public final DriveWithJoystick driveWithJoystick;
+  private final DriveWithJoystick driveWithJoystick;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -73,14 +82,15 @@ public class RobotContainer {
    * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
+
   private void configureButtonBindings() {
     // new JoystickButton(xbox, Constants.A).whenPressed(new
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
-    new JoystickButton(xbox, Constants.A).whenPressed(new ToggleIntake());
-    new POVButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos());
+    new JoystickButton(xbox, Constants.A).whenPressed(new IntakeToggle(intakeSys, hopperSys));
+    new POVButton(xbox, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
     // // B button shoots, Left bumper cancles
-    new JoystickButton(xbox, Constants.B).whenPressed(new ShootCoreCommands());
-    new JoystickButton(xbox, Constants.BACK).whenPressed(new ToggleCompressor());
+    new JoystickButton(xbox, Constants.B).whenPressed(new ShootCoreCommands(shooterSys, intakeSys, hopperSys, xbox));
+    new JoystickButton(xbox, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new
     // HighbarClimbSequence(climbSys, imuSys));
   }
@@ -91,7 +101,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new Pickup1_Shoot2_ARC_H3();
+    return new Pickup1_Shoot2_ARC_H3(driveTrain, imuSys);
 
   }
 }

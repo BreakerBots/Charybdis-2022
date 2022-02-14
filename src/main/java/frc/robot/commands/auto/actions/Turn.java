@@ -5,7 +5,6 @@
 package frc.robot.commands.auto.actions;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.devices.IMU;
 
@@ -20,11 +19,11 @@ public class Turn extends CommandBase {
 
   private double tgtSpeed;
 
-  public Turn(double angleArg, double radiusArg, double speedArg) {
+  public Turn(Drive driveTrainArg, IMU imuArg, double angleArg, double radiusArg, double speedArg) {
     // Use addRequirements() here to declare subsystem dependencies.
-    driveTrain = Robot.m_robotContainer.driveTrain;
+    driveTrain = driveTrainArg;
     addRequirements(driveTrain);
-    imu = Robot.m_robotContainer.imuSys;
+    imu = imuArg;
     tgtAngle = angleArg;
     tgtSpeed = speedArg;
     radiusOfCurvature = radiusArg;

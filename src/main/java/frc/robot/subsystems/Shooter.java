@@ -12,14 +12,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.FlywheelState;
 
 public class Shooter extends SubsystemBase {
-  public enum FlywheelState {
-    CHARGED,
-    CHARGING,
-    IDLE,
-    OFF
-  }
   public FlywheelState flywheelState;
   private static double prevTicks = 0;
   // public boolean flyweelState;
@@ -30,37 +25,33 @@ public class Shooter extends SubsystemBase {
   public boolean autoShoot;
   DoubleSolenoid shooterSol;
   Hopper hopper;
-
   public Shooter(Hopper hopperArg) {
     hopper = hopperArg;
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
     flywheel = new MotorControllerGroup(shooterL, shooterR);
-    shooterSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
-        Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
+    shooterSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 
+                Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
   }
 
   @Override
   public void periodic() {
-    // if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState ==
-    // FlywheelState.OFF) {
-    // flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
+    // if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
+    //   flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
     // }
   }
-
   /** Turns Flywheel On */
   public void flyweelFullOn() {
     flywheel.set(Constants.SHOOTERSPEED);
     flywheelState = FlywheelState.CHARGING;
   }
 
-  /** Turns Flywheel Off */
+   /** Turns Flywheel Off */
   public void flyweelOff() {
     flywheel.set(0);
     flywheelState = FlywheelState.OFF;
   }
-
   /** Returns the RPM of the flywheel's Motors */
   public double getFlywheelRPM() {
     double curTicks;
@@ -74,13 +65,11 @@ public class Shooter extends SubsystemBase {
     prevTicks = curTicks;
     return rpm;
   }
-
   /** Brings shooter to higher fireing angle */
   public boolean shooterUp() {
     shooterSol.set(Value.kForward);
     return shooterPos = true;
   }
-
   /** Brings shooter to lower fireing angle */
   public boolean shooterDown() {
     shooterSol.set(Value.kReverse);

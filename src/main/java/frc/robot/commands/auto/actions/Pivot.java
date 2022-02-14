@@ -7,7 +7,6 @@ package frc.robot.commands.auto.actions;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.devices.IMU;
 
@@ -18,10 +17,10 @@ public class Pivot extends CommandBase {
   double speedClamp;
   double lastAngle;
 
-  public Pivot(double targetDegrees, double speedLimit) {
-    drive = Robot.m_robotContainer.driveTrain;
+  public Pivot(Drive driveArg, IMU imuArg, double targetDegrees, double speedLimit) {
+    drive = driveArg;
     addRequirements(drive);
-    imu = Robot.m_robotContainer.imuSys;
+    imu = imuArg;
     target = targetDegrees;
     speedClamp = speedLimit;
   }

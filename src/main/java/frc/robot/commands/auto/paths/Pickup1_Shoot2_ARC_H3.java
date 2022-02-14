@@ -16,15 +16,15 @@ import frc.robot.subsystems.devices.IMU;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Pickup1_Shoot2_ARC_H3 extends SequentialCommandGroup {
   /** Creates a new Pickup1_Shoot2_H3. */
-  public Pickup1_Shoot2_ARC_H3() {
+  public Pickup1_Shoot2_ARC_H3(Drive driveArg, IMU imuArg) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new MoveStraight(60, 0.3),
-    new Pivot(40, 0.3),
-    new MoveStraight(-44, 0.3),
-    new Turn(65, 48, -0.7),
-    new MoveStraight(-20, 0.3)
+    new MoveStraight(driveArg, imuArg, 60, 0.3),
+    new Pivot(driveArg, imuArg, 40, 0.3),
+    new MoveStraight(driveArg, imuArg, -44, 0.3),
+    new Turn(driveArg, imuArg, 65, 48, -0.7),
+    new MoveStraight(driveArg, imuArg, -20, 0.3)
     );
   }
 }

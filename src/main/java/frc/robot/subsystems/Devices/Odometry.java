@@ -9,7 +9,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.BreakerMath;
+import frc.robot.Convert;
 import frc.robot.subsystems.Drive;
 
 // Maybe move the IMU into this class?
@@ -61,11 +61,11 @@ public class Odometry extends SubsystemBase {
   }
 
   public double getMetersL() {
-    return Units.inchesToMeters(BreakerMath.ticksToInches(driveArg.getLeftTicks()));
+    return Units.inchesToMeters(Convert.ticksToInches(driveArg.getLeftTicks()));
   }
 
   public double getMetersR() {
-    return Units.inchesToMeters(BreakerMath.ticksToInches(driveArg.getLeftTicks()));
+    return Units.inchesToMeters(Convert.ticksToInches(driveArg.getLeftTicks()));
   }
 
 }

@@ -5,22 +5,24 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
+import frc.robot.FlywheelState;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Shooter.FlywheelState;
 
 /** Spins the shooter's flywheel */
 public class ChargeFlywheel extends CommandBase {
-  /** Shooter alias for RobotContainer instance. */
-  private Shooter shooter;
-  /** Xbox controller alias for RobotContainer instance. */
-  private XboxController xbox;
-  /** Creates a new ChargeFlywheel. */
-  public ChargeFlywheel() {
-    shooter = Robot.m_robotContainer.shooterSys;
-    xbox = Robot.m_robotContainer.xbox;
+  Shooter shooter;
+  XboxController xbox;
+  /**
+   * Creates a new ChargeFlywheel.
+   * @param shooterArg Shooter subsystem from RobotContainer.
+   * @param controllerArg Xbox controller from RobotContainer.
+   */
+  public ChargeFlywheel(Shooter shooterArg, XboxController controllerArg) {
+    shooter = shooterArg;
+    xbox = controllerArg;
     addRequirements(shooter);
   }
 

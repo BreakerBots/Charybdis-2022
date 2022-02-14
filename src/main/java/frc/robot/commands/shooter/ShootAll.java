@@ -5,34 +5,37 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.Constants;
+import frc.robot.FlywheelState;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Shooter.FlywheelState;
 
 /**
  * Shoots all the balls in the hopper
  */
 public class ShootAll extends CommandBase {
-  /** Shooter alias for RobotContainer instance. */
   Shooter shooter;
-  /** Xbox controller alias for RobotContainer instance. */
   XboxController xbox;
-  /** Hopper alias for RobotContainer instance. */
   Hopper hopper;
-  /** Intake alias for RobotContainer instance. */
   Intake intake;
   private long cycleCount;
   private long timedStopCount;
 
-  /** Creates a new ShootAll. */
-  public ShootAll() {
-    shooter = Robot.m_robotContainer.shooterSys;
-    xbox = Robot.m_robotContainer.xbox;
-    hopper = Robot.m_robotContainer.hopperSys;
-    intake = Robot.m_robotContainer.intakeSys;
+  /**
+   * Creates a new ShootAll.
+   * 
+   * @param shooterArg    Shooter subsystem from RobotContainer.
+   * @param hopperArg     Hopper subsystem from RobotContainer.
+   * @param controllerArg Xbox controller from RobotContainer.
+   */
+  public ShootAll(Shooter shooterArg, Hopper hopperArg, XboxController controllerArg, Intake intakeArg) {
+    shooter = shooterArg;
+    xbox = controllerArg;
+    hopper = hopperArg;
+    intake = intakeArg;
     addRequirements(shooter);
     addRequirements(hopper);
     addRequirements(intake);
@@ -52,9 +55,9 @@ public class ShootAll extends CommandBase {
     // if (cycleCount % 400 == 0) {
     //   System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
     // }
-    if (shooter.flywheelState == FlywheelState.CHARGED) {
+    if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED) {
       hopper.hopperOn();
-      intake.indexerHopperL();
+      intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");
 
     }

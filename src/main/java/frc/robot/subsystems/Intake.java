@@ -14,19 +14,8 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     public boolean StopIntakeAuto = false;
-
-    public enum IntakeState {
-        OFF,
-        ON
-    }
-
-    public enum IndexerHopperState {
-        OFF,
-        ON
-    }
-
-    public IntakeState intakeStatus;
-    public IndexerHopperState indexerHopperStatus;
+    public boolean intakeState;
+    public boolean indexerHopperState;
     private WPI_TalonSRX indexerL;
     private WPI_TalonSRX indexerR;
     private DoubleSolenoid intakeSol;
@@ -39,8 +28,8 @@ public class Intake extends SubsystemBase {
         indexerR = new WPI_TalonSRX(Constants.INTAKE_R_ID);
         intakeSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
-        intakeStatus = IntakeState.OFF;
-        indexerHopperStatus = IndexerHopperState.OFF;
+        intakeState = false;
+        indexerHopperState = false;
     }
 
     /** Extends intake arm and spins the intake and indexer */
@@ -49,7 +38,7 @@ public class Intake extends SubsystemBase {
         intakeMain.set(Constants.INTAKESPEED);
         indexerL.set(Constants.L_SORTESPEED);
         indexerR.set(Constants.R_SORTESPEED);
-        intakeStatus = IntakeState.ON;
+        intakeState = true;
     }
 
     /** Retracts intake arm and turns off the intake and indexer */
@@ -58,23 +47,19 @@ public class Intake extends SubsystemBase {
         intakeMain.set(0);
         indexerL.set(0);
         indexerR.set(0);
-        indexerHopperStatus = IndexerHopperState.OFF;
-        intakeStatus = IntakeState.OFF;
+        indexerHopperState = false;
+        intakeState = false;
         System.out.println("INTAKE OFF CALLED!!!!");
     }
 
-    public void indexerHopperL() {
-        if (intakeStatus == IntakeState.OFF) {
-            switch(indexerHopperStatus){
-            case ON:
-                indexerL.set(0);
-                indexerHopperStatus = IndexerHopperState.OFF;
-                break;
-            case OFF:
-                indexerL.set(Constants.L_SORTESPEED);
-                indexerHopperStatus = IndexerHopperState.ON;
-                break;
-            }
+    public void lIndexerHopper() {
+        if (intakeState == false && indexerHopperState == false) {
+            indexerL.set(Constants.L_SORTESPEED);
+            indexerHopperState = true;
+        }
+        else if (intakeState == false && indexerHopperState) {
+            indexerL.set(0);
+            indexerHopperState = false;
         }
     }
 
