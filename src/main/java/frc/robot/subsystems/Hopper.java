@@ -16,21 +16,24 @@ public class Hopper extends SubsystemBase {
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
   private DigitalInput hopPos1;
+  private DigitalInput hopPos2;
   Intake intake;
   public Hopper(Intake intakeArg) {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
     hopPos1 = new DigitalInput(9);
+    hopPos2 = new DigitalInput(8);
   }
 
-  public boolean hopperOn() {
+  public void hopperOn() {
     hopperMotor.set(Constants.HOPPERSPEED);
-    return hopperState = true;
+    hopperState = true;
+    //return hopperState = true;
   }
 
-  public boolean hopperOff() {
+  public void hopperOff() {
     hopperMotor.set(0);
-    return hopperState = false;
+    hopperState = false;
   }
 
   public boolean getHopperPos1() {
@@ -38,17 +41,19 @@ public class Hopper extends SubsystemBase {
   }
 
   public boolean getHopperPos2() {
-    return false; //DIOJNI.getDIO(Constants.HOPPER_P2_ID);
+    return hopPos2.get();
   }
 
 
 
   @Override
   public void periodic() {
+    // System.out.println("hop 1: " + getHopperPos1());
+    // System.out.println("hop 2: " + getHopperPos2());
     if (intake.intakeState) {
-      if (getHopperPos1() ) { //&& !getHopperPos2()
-        hopperOn();
-      }
+      // if (getHopperPos1() && !getHopperPos2()) { 
+      //   hopperOn();
+      // }
       // } else if (!getHopperPos1() && getHopperPos2()) {
       //   pauseCountA++;
       //   if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
@@ -60,14 +65,15 @@ public class Hopper extends SubsystemBase {
       // } else if (getHopperPos1() && getHopperPos2()) {
       //   intake.intakeOffMethod();
       //   hopperOff();
-      // }
+      if (!getHopperPos1()) {
+        hopperOn();
+      }
       else {
         hopperOff();
-        intake.intakeOffMethod();
-
       }
+    
+    }
     }
   }
-}
 
  

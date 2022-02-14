@@ -38,6 +38,7 @@ public class ChargeFlywheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println("RPM: " + shooter.getFlywheelRPM());
   }
 
   // Called once the command ends or is interrupted.
@@ -48,7 +49,7 @@ public class ChargeFlywheel extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shooter.getFlywheelRPM() == Constants.FLYWHEEL_TAR_SPEED) {
+    if(shooter.getFlywheelRPM() > Constants.FLYWHEEL_TAR_SPEED) {
       System.out.println("FLYWHEEL CHARGED!");
       shooter.flywheelState = FlywheelState.CHARGED;
       return true;

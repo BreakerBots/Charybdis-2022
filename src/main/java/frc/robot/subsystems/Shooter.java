@@ -37,9 +37,9 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
-      flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
-    }
+    // if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
+    //   flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
+    // }
   }
   /** Turns Flywheel On */
   public void flyweelFullOn() {

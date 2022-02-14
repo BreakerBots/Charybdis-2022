@@ -52,9 +52,9 @@ public class ShootAll extends CommandBase {
   public void execute() {
     cycleCount++;
   
-    if (cycleCount % 400 == 0) {
-      System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
-    }
+    // if (cycleCount % 400 == 0) {
+    //   System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
+    // }
     if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED) {
       hopper.hopperOn();
       intake.lIndexerHopper();
@@ -62,15 +62,16 @@ public class ShootAll extends CommandBase {
 
     }
     System.out.println(shooter.getFlywheelRPM());
-    // if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false) {
-    //   timedStopCount++;
-    // }
-    // if (hopper.getHopperPos1() == false && hopper.getHopperPos2() == false && timedStopCount == 250) {
-    //   hopper.hopperOff();
-    //   intake.lIndexerHopper();
-    //   timedStopCount = 0;
-    //   shooter.flyweelOff();
-    // }
+    if (hopper.getHopperPos2()) { //&& hopper.getHopperPos1() == false
+      timedStopCount++;
+    }
+    if (hopper.getHopperPos2() && timedStopCount > 100) { // && hopper.getHopperPos1() == false 
+      hopper.hopperOff();
+      intake.intakeOffMethod();
+      timedStopCount = 0;
+      shooter.flyweelOff();
+      shooter.flywheelState = FlywheelState.OFF;
+    }
   }
 
   // Called once the command ends or is interrupted.
