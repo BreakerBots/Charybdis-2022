@@ -28,7 +28,7 @@ public class BreakerMath {
      * @return distance, in inches.
      */
     public static double ticksToInches(double ticks) {
-        return ticks / (Constants.TICKS_PER_INCH);
+        return ticks / (Constants.DRIVE_TICKS_PER_INCH);
     }
 
     /**
@@ -37,12 +37,9 @@ public class BreakerMath {
      * @param x Value between -1 and 1.
      * @return Value between -1 and 1.
      */
-    public static double logisticCurve(double x) {
+    public static double driveCurve(double x) {
         double absX = Math.abs(x);
-        double y = L / (1 + Math.pow(Math.E, -k * (absX - x0))) + b;
-        if (x < 0) {
-            y *= -1;
-        }
+        double y = (Math.signum(x) * L) / (1 + Math.pow(Math.E, -k * (absX - x0))) + b;
         return y;
     }
 }

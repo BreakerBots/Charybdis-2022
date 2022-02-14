@@ -122,6 +122,6 @@ public class MotorTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(drive.getLeftTicks()) >= (rotate * Constants.TICKS_PER_ROTATION);
+    return Math.abs(drive.getLeftTicks()) >= (rotate * Constants.DRIVE_TICKS_PER_ROTATION);
   }
 }
