@@ -14,7 +14,7 @@ public class AirCompressor extends SubsystemBase {
   /** Creates a new AirCompressor. */
   public  AirCompressor() {
     compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    compressor.enableAnalog(70, 120);
+    compressor.disable();
   }
 
   public void startCompressor() {
