@@ -75,12 +75,12 @@ public final class Constants {
     public static final int SHOOTERSOL_FWD = 2;
     public static final int SHOOTERSOL_REV = 3;
     // shooter motor speeds
-    public static final double UP_SHOOTERSPEED = 0.48; // Upper is 0.48
-    public static final double LOW_SHOOTERSPEED = 0.3;
-    public static final double LAUNCH_SHOOTERSPEED = 1;
+    public static final double UP_SHOOTERSPEED = 0.44; // Upper is 0.48
+    public static final double LOW_SHOOTERSPEED = 0.2; // Hood must be up
+    public static final double LAUNCH_SHOOTERSPEED = 0.55;
     // Speed in RPM
     public static final int FLYWHEEL_MAX_SPEED = 1780;
-    public static final double FLYWHEEL_TAR_SPEED_PREC = 0.40;
+    public static final double FLYWHEEL_TAR_SPEED_PREC = 0.55;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
@@ -114,7 +114,7 @@ public final class Constants {
     public static final int HOPPER_P1_ID = 9;
     public static final int HOPPER_P2_ID = FILLER;
     // hopper info
-    public static final double HOPPERSPEED = 1; //0.8
+    public static final double HOPPERSPEED = 0.8; //0.8
     public static final double HOPPER_WHEEL_DIAMETER = 1;
     public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
     public static final double HOPPER_GEAR_RATIO = FILLER;

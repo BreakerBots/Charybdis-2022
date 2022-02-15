@@ -64,7 +64,7 @@ public class ShootAll extends CommandBase {
     if (hopper.getHopperPos2()) { //&& hopper.getHopperPos1() == false
       timedStopCount++;
     }
-    if (hopper.getHopperPos2() && timedStopCount > 100) { // && hopper.getHopperPos1() == false 
+    if (hopper.getHopperPos2() && timedStopCount > 150) { // && hopper.getHopperPos1() == false 
       hopper.hopperOff();
       intake.intakeOffMethod();
       timedStopCount = 0;
