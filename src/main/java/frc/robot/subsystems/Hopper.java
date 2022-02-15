@@ -20,6 +20,7 @@ public class Hopper extends SubsystemBase {
   Intake intake;
   private long pauseCountA;
   private long pauseCountB;
+
   public Hopper(Intake intakeArg) {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
@@ -30,7 +31,7 @@ public class Hopper extends SubsystemBase {
   public void hopperOn() {
     hopperMotor.set(Constants.HOPPERSPEED);
     hopperState = true;
-    //return hopperState = true;
+    // return hopperState = true;
   }
 
   public void hopperOff() {
@@ -40,21 +41,37 @@ public class Hopper extends SubsystemBase {
 
   public boolean slot1IsFull() {
     return !(slot1.get());
-    
+
   }
 
   public boolean slot2IsFull() {
     return !(slot2.get());
   }
 
+  /**
+   * Returns hopper motor supply/input current.
+   * 
+   * @return Supply/input current in amps
+   */
+  public double getHopperSup() {
+    return hopperMotor.getSupplyCurrent();
+  }
 
+  /**
+   * Returns hopper motor stator/output current.
+   * 
+   * @return Stator/output current in amps
+   */
+  public double getHopperSta() {
+    return hopperMotor.getStatorCurrent();
+  }
 
   @Override
   public void periodic() {
-    System.out.println("hop 1: " + slot1IsFull());
-    System.out.println("hop 2: " + slot2IsFull());
+    // System.out.println("hop 1: " + slot1IsFull());
+    // System.out.println("hop 2: " + slot2IsFull());
     if (intake.intakeState) {
-      if (!slot1IsFull() && !slot2IsFull()) { 
+      if (!slot1IsFull() && !slot2IsFull()) {
         hopperOn();
       } else if (!slot1IsFull() && slot2IsFull()) {
         pauseCountA++;
@@ -65,14 +82,13 @@ public class Hopper extends SubsystemBase {
       } else if (!slot1IsFull() && !slot2IsFull()) {
         hopperOn();
       } else if (slot1IsFull() && slot2IsFull()) {
-        pauseCountB ++;
+        pauseCountB++;
         if (pauseCountB > 25) {
-        intake.deactivateIntake();
-        hopperOff();
-        pauseCountB = 0;
+          intake.deactivateIntake();
+          hopperOff();
+          pauseCountB = 0;
         }
+      }
     }
   }
-  }
 }
- 

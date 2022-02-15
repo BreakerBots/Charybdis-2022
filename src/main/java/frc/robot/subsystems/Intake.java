@@ -72,6 +72,60 @@ public class Intake extends SubsystemBase {
         indexerHopperState = false;
     }
 
+    /**
+     * Returns intake arm motor supply/input current.
+     * 
+     * @return Supply/input current in amps
+     */
+    public double getIntakeSup() {
+        return intakeMain.getSupplyCurrent();
+    }
+
+    /**
+     * Returns intake arm motor stator/output current.
+     * 
+     * @return Stator/output current in amps
+     */
+    public double getIntakeSta() {
+        return intakeMain.getStatorCurrent();
+    }
+
+    /**
+     * Returns right indexer motor supply/input current.
+     * 
+     * @return Supply/input current in amps
+     */
+    public double getIndexerRSup() {
+        return indexerR.getSupplyCurrent();
+    }
+
+    /**
+     * Returns left indexer motor supply/input current.
+     * 
+     * @return Supply/input current in amps
+     */
+    public double getIndexerLSup() {
+        return indexerL.getSupplyCurrent();
+    }
+
+    /**
+     * Returns right indexer motor stator/output current.
+     * 
+     * @return Stator/output current in amps
+     */
+    public double getIndexerRSta() {
+        return indexerR.getStatorCurrent();
+    }
+
+    /**
+     * Returns left indexer motor stator/output current.
+     * 
+     * @return Stator/output current in amps
+     */
+    public double getIndexerLSta() {
+        return indexerL.getStatorCurrent();
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run

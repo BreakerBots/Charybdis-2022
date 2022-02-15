@@ -42,4 +42,8 @@ public class BreakerMath {
         double y = (Math.signum(x) * L) / (1 + Math.pow(Math.E, -k * (absX - x0))) + b;
         return y;
     }
+
+    public static double rollingAvg(double avg, double newVal) {
+        return (avg + newVal) / 2.0;
+    }
 }
