@@ -1,0 +1,40 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class SmartDashboardControle extends SubsystemBase {
+  /** Creates a new SmartDashbord. */
+  Shooter shooter;
+  Intake intake;
+  Climber climber;
+  private double[] climbProg = new double[1];
+  public SmartDashboardControle(Shooter shooterArg, Intake intakeArg, Climber climbArg) {
+    intake = intakeArg;
+    shooter = shooterArg;
+    climber = climbArg;
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    switch (shooter.shooterMode) {
+      case UP: SmartDashboard.putString("SHOOTER MODE: ", "HIGH");
+      break;
+      case LOW: SmartDashboard.putString("SHOOTER MODE: ", "LOW");
+      break;
+      case LAUNCH: SmartDashboard.putString("SHOOTER MODE: ", "LAUNCH");
+      break;
+      default: SmartDashboard.putString("SHOOTER MODE: ", "ERROR!");
+    }
+    climbProg[0] = climber.climbSequenceTotal;
+    climbProg[1] = climber.climbSequenceProgress;
+    SmartDashboard.putBoolean("INTAKEING: ", intake.intakeState);
+    SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
+    
+  }
+}

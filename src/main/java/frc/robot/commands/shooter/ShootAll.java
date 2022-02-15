@@ -56,7 +56,7 @@ public class ShootAll extends CommandBase {
       System.out.println("SHOOTER STARTED!");
 
     }
-    System.out.println(shooter.getFlywheelRPM());
+    System.out.println(shooter.getFlywheelTPS());
     if (hopper.getHopperPos2()) { //&& hopper.getHopperPos1() == false
       timedStopCount++;
     }

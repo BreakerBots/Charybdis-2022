@@ -16,13 +16,13 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.FlywheelState;
+import frc.robot.ShooterMode;
 
 public class Shooter extends SubsystemBase {
-  public int shooterMode;
   public SimpleMotorFeedforward flywheelFF;
   public PIDController flywheelPID;
   public FlywheelState flywheelState;
-  private static double prevTicks = 0;
+  public ShooterMode shooterMode = ShooterMode.UP;
   // public boolean flyweelState;
   public boolean shooterPos;
   private WPI_TalonFX shooterL;
@@ -57,7 +57,7 @@ public class Shooter extends SubsystemBase {
     flywheelState = FlywheelState.OFF;
   }
   /** Returns the RPM of the flywheel's Motors */
-  public double getFlywheelRPM() {
+  public double getFlywheelTPS() {
     return Math.abs((shooterL.getSelectedSensorVelocity()/10));
   }
   /** Brings shooter to higher fireing angle */
@@ -76,17 +76,16 @@ public class Shooter extends SubsystemBase {
   }
 
   public void periodic() {
-    shooterMode = shooterMode % 3;
     switch (shooterMode) {
-      case 0: if (shooterPos) {shooterDown();}
+      case UP: if (shooterPos) {shooterDown();}
               flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;   
       break;
-      case 1: if (!shooterPos) {shooterUp();}
+      case LOW: if (!shooterPos) {shooterUp();}
               flyTgtSpdPrec = Constants.LOW_SHOOTERSPEED;
       break;
-      case 2: flyTgtSpdPrec = Constants.LAUNCH_SHOOTERSPEED;
+      case LAUNCH: flyTgtSpdPrec = Constants.LAUNCH_SHOOTERSPEED;
       break;
-      default: shooterDown();
+      default: shooterDown(); flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
     }
     // System.out.println("RPM: " + getFlywheelRPM());
     // System.out.println("AT SETPOINT: " + flywheelPID.atSetpoint());
@@ -96,7 +95,7 @@ public class Shooter extends SubsystemBase {
     // }
     if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
      double flySpd;
-      flySpd = (flywheelPID.calculate(getFlywheelRPM(), getFlywheelTargetSpeed()));
+      flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
       flywheel.set(flySpd);
     }
   }
