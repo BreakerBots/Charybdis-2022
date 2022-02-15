@@ -85,7 +85,7 @@ public class ShootAll extends CommandBase {
     if (shooter.flywheelState == FlywheelState.OFF) {
       System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
       return true;
-    } else if (xbox.getLeftBumperPressed()) {
+    } else if (xbox.getStartButtonPressed()) {
       System.out.println("SHOOTER MANUALY STOPED!");
       hopper.hopperOff();
       shooter.flyweelOff();

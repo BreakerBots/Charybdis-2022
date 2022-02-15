@@ -17,12 +17,7 @@ public class ToggleShooterPos extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(shooter.shooterPos) {
-      shooter.shooterDown();
-    }
-    else {
-      shooter.shooterUp();
-    }
+    shooter.shooterMode ++;
   }
 
 
