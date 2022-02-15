@@ -40,6 +40,7 @@ public class AirCompressor extends SubsystemBase {
         if (cycleCount > 6000) {
           stopCompressor();
           cycleCount = 0;
+          System.out.println("COMPRESSOR TIMED OUT!");
         }
     } else {
       cycleCount = 0;
