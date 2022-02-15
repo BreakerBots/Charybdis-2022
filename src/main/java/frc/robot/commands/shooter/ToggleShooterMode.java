@@ -5,11 +5,12 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.ShooterMode;
 import frc.robot.subsystems.Shooter;
 
-public class ToggleShooterPos extends CommandBase {
+public class ToggleShooterMode extends CommandBase {
   Shooter shooter;
-  public ToggleShooterPos(Shooter shooterArg) {
+  public ToggleShooterMode(Shooter shooterArg) {
     shooter = shooterArg;
     addRequirements(shooter);
   }
@@ -17,11 +18,14 @@ public class ToggleShooterPos extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(shooter.shooterPos) {
-      shooter.shooterDown();
-    }
-    else {
-      shooter.shooterUp();
+    if (shooter.shooterMode == ShooterMode.UP) {
+      shooter.shooterMode = ShooterMode.LOW;
+    } else if (shooter.shooterMode == ShooterMode.LOW) {
+      shooter.shooterMode = ShooterMode.LAUNCH;
+    } else if (shooter.shooterMode == ShooterMode.LAUNCH) {
+      shooter.shooterMode = ShooterMode.UP;
+    } else {
+      shooter.shooterMode = ShooterMode.UP;
     }
   }
 

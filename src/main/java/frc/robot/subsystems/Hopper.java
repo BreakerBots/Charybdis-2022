@@ -5,24 +5,23 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.hal.DIOJNI;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
-  private long pauseCountA;
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
-  private DigitalInput slot1;
-  private DigitalInput slot2;
+  private DigitalInput hopPos1;
+  private DigitalInput hopPos2;
   Intake intake;
   public Hopper(Intake intakeArg) {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
-    slot1 = new DigitalInput(9);
-    slot2 = new DigitalInput(8);
+    hopPos1 = new DigitalInput(9);
+    hopPos2 = new DigitalInput(8);
   }
 
   public void hopperOn() {
@@ -37,11 +36,12 @@ public class Hopper extends SubsystemBase {
   }
 
   public boolean getHopperPos1() {
-    return slot1.get();
+    return false;
+    //hopPos1.get();
   }
 
   public boolean getHopperPos2() {
-    return slot2.get();
+    return hopPos2.get();
   }
 
 
@@ -65,7 +65,7 @@ public class Hopper extends SubsystemBase {
       // } else if (getHopperPos1() && getHopperPos2()) {
       //   intake.intakeOffMethod();
       //   hopperOff();
-      if (!getHopperPos1()) {
+      if (!getHopperPos2()) {
         hopperOn();
       }
       else {

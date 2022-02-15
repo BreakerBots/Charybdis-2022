@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.climb;
+package frc.robot.commands.climb.actions;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -34,6 +34,8 @@ public class ClimbStablityCheck extends CommandBase {
   public void execute() {
     if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOLR && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOLR && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOLR) {
       stableTimeCount ++;
+    } else {
+      stableTimeCount = 0;
     }
   }
 
@@ -48,7 +50,7 @@ public class ClimbStablityCheck extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOLR && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOLR && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOLR && stableTimeCount >= Constants.CLIMB_MIN_STABLE_TIME) {
+    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOLR && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOLR && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOLR && stableTimeCount > Constants.CLIMB_MIN_STABLE_TIME) {
       return true;
     }
     else {

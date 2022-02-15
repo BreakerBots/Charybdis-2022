@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -12,35 +13,32 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 public class Drive extends SubsystemBase {
-  /** PDP alias for RobotContainer instance. */
-  private PowerDistribution pdp;
-  // Left motors (falcons).
   private WPI_TalonFX l1;
   private WPI_TalonFX l2;
   private WPI_TalonFX l3;
   private MotorControllerGroup driveL;
-  // Right motors (falcons).
+  // Right motors (falcons)
   private WPI_TalonFX r1;
   private WPI_TalonFX r2;
   private WPI_TalonFX r3;
   private MotorControllerGroup driveR;
-  // Drivetrain.
+  // Drivetrian
   private DifferentialDrive driveTrainDiff;
-  // Feedback/feedforward.
+  /** Creates a new Drive. */
   public PIDController anglePID;
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
-
   public double prevNet;
+  private PowerDistribution pdp;
+
   private final double artLinearFeedForward = 0.3;
   private final double artAngleFeedForward = 0.2;
 
   /** Creates a new Drive. */
-  public Drive() {
-    pdp = Robot.m_robotContainer.pdp;
+  public Drive(PowerDistribution pdpArg) {
+    pdp = pdpArg;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     anglePID.setTolerance(Constants.ANG_POS_TOLERANCE, Constants.ANG_VEL_TOLERANCE);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
@@ -62,7 +60,7 @@ public class Drive extends SubsystemBase {
   }
 
   /** Wraps around arcadeDrive to allow for movement */
-  public void move(double netSpd, double turnSpd) {
+  public void teleopMove(double netSpd, double turnSpd) {
     double logSpd = netSpd; // Convert.logisticCurve(netSpd);
     if (pdp.getVoltage() < 8.5) {
       logSpd *= 0.85;

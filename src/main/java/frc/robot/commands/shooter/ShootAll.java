@@ -4,14 +4,13 @@
 
 package frc.robot.commands.shooter;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.FlywheelState;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Shooter.FlywheelState;
 
 /**
  * Shoots all the balls in the hopper
@@ -51,21 +50,17 @@ public class ShootAll extends CommandBase {
   @Override
   public void execute() {
     cycleCount++;
-  
-    // if (cycleCount % 400 == 0) {
-    //   System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
-    // }
-    if (shooter.flywheelState == FlywheelState.CHARGED) {
+    if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED && shooter.flywheelPID.atSetpoint()) {
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");
 
     }
-    System.out.println(shooter.getFlywheelRPM());
+    System.out.println(shooter.getFlywheelTPS());
     if (hopper.getHopperPos2()) { //&& hopper.getHopperPos1() == false
       timedStopCount++;
     }
-    if (hopper.getHopperPos2() && timedStopCount > 100) { // && hopper.getHopperPos1() == false 
+    if (hopper.getHopperPos2() && timedStopCount > 150) { // && hopper.getHopperPos1() == false 
       hopper.hopperOff();
       intake.intakeOffMethod();
       timedStopCount = 0;
@@ -77,7 +72,8 @@ public class ShootAll extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    shooter.flywheelPID.reset();
+    cycleCount = 0;
   }
 
   // Returns true when the command should end.
@@ -86,8 +82,14 @@ public class ShootAll extends CommandBase {
     if (shooter.flywheelState == FlywheelState.OFF) {
       System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
       return true;
-    } else if (xbox.getLeftBumperPressed()) {
+    } else if (xbox.getStartButtonPressed()) {
       System.out.println("SHOOTER MANUALY STOPED!");
+      hopper.hopperOff();
+      shooter.flyweelOff();
+      intake.intakeOffMethod();
+      return true;
+    } else if (cycleCount > 400) {
+      System.out.println("SHOOTER TIMED OUT!");
       hopper.hopperOff();
       shooter.flyweelOff();
       intake.intakeOffMethod();

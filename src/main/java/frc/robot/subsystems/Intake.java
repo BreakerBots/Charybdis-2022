@@ -49,7 +49,7 @@ public class Intake extends SubsystemBase {
         indexerR.set(0);
         indexerHopperState = false;
         intakeState = false;
-        System.out.println("INTAKE OFF CALLED!!!!");
+        System.out.println("INTAKE OFF CALLED!");
     }
 
     public void lIndexerHopper() {

@@ -5,9 +5,10 @@
 package frc.robot.subsystems.devices;
 
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.BreakerMath;
+import frc.robot.Constants;
 
 public class IMU extends SubsystemBase {
   private WPI_Pigeon2 pigeon;
@@ -20,29 +21,28 @@ public class IMU extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //System.out.println("IMU yaw: " + getYaw());
+    // System.out.println("IMU yaw: " + getYaw());
     // This method will be called once per scheduler run
     if (Constants.IMU_INVERTED == true) {
       imuInvert = -1;
-    }
-    else {
+    } else {
       imuInvert = 1;
     }
   }
 
   /** Returns pitch angle within +- 180 degrees */
   public double getPitch() {
-    return BreakerMath.ANGLE_CONVERT(pigeon.getPitch());
+    return BreakerMath.constrainAngle(pigeon.getPitch());
   }
 
   /** Returns yaw angle within +- 180 degrees */
   public double getYaw() {
-    return imuInvert * (BreakerMath.ANGLE_CONVERT(pigeon.getYaw())); // Convert.ANGLE_CONVERT(pigeon.getYaw());
+    return imuInvert * (BreakerMath.constrainAngle(pigeon.getYaw())); // Convert.ANGLE_CONVERT(pigeon.getYaw());
   }
 
   /** Returns roll angle within +- 180 degrees */
   public double getRoll() {
-    return BreakerMath.ANGLE_CONVERT(pigeon.getRoll());
+    return BreakerMath.constrainAngle(pigeon.getRoll());
   }
 
   /** Returns raw yaw, pitch, and roll angles in an array */

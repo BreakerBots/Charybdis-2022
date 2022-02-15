@@ -4,15 +4,9 @@
 
 package frc.robot.commands.auto.actions;
 
-import java.time.Month;
-
-import javax.lang.model.util.ElementScanner6;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Hopper;
-import frc.robot.subsystems.Intake;
 
 public class MotorTest extends CommandBase {
   /** Creates a new MotorRotationTest. */
@@ -67,7 +61,7 @@ public class MotorTest extends CommandBase {
   @Override
   public void execute() {
     cycleCount ++;
-    drive.move(speed, 0);
+    drive.teleopMove(speed, 0);
     // System.out.println(
     // "sta L1: " + drive.getStatorCurrent(Constants.L1_ID) + "  sta R1: " + drive.getStatorCurrent(Constants.R1_ID) + "\n" +
     // "sta L2: " + drive.getStatorCurrent(Constants.L2_ID) + "  sta R2: " + drive.getStatorCurrent(Constants.R2_ID) + "\n" +
@@ -128,6 +122,6 @@ public class MotorTest extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(drive.getLeftTicks()) >= (rotate * Constants.TICKS_PER_ROTATION);
+    return Math.abs(drive.getLeftTicks()) >= (rotate * Constants.DRIVE_TICKS_PER_ROTATION);
   }
 }

@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.auto.actions.MoveStraight;
 import frc.robot.commands.auto.actions.Pivot;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Hopper;
-import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.devices.IMU;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

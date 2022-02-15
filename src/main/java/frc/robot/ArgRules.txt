@@ -1,0 +1,17 @@
+1. Numbers (doubles/ints) go first
+2. Enums/booleans relating to status go second
+3. Lightweight devices go in the following order (later items are more directly relevant to subsystems):
+    a. Xbox controller
+    b. PDP
+    c. PCM
+    d. Compressor
+    e. IMU
+    f. Odometer
+4. Subsystems go in the following order (later items are used later in an average match/less overall):
+    a. Drive
+    b. Intake
+    c. Hopper
+    d. Shooter
+    e. Climber
+
+Also, all subsystem instances in RobotContainer should have "Sys" at the end of the name.

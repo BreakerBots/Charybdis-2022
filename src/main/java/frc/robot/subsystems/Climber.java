@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
-  /** Creates a new Climber. */
   private WPI_TalonFX climberL;
   private WPI_TalonFX climberR;
   private MotorControllerGroup climbMotors;
@@ -23,8 +22,13 @@ public class Climber extends SubsystemBase {
   private DoubleSolenoid climbSolR;
   public PIDController climbPID;
   private final double artClimbFeedForward = 0.3;
+  enum ClimberState {
+    RETRACTED,
+    MOVING,
+    EXTENDED
+  }
   // 0 = retracted, 1 = extending/retracting, 2 = extended
-  public int climbState;
+  public ClimberState climbState;
   public boolean climbSolState; //true is extended
   public int climbSequenceTotal;
   public int climbSequenceProgress;
@@ -44,13 +48,13 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
       if (getClimbTicks() < Constants.CLIMB_RET_THRESH) {
-        climbState = 0;
+        climbState = ClimberState.RETRACTED;
       }
       else if (getClimbTicks() > Constants.CLIMB_EXT_THRESH) {
-        climbState = 2;
+        climbState = ClimberState.EXTENDED;
       }
       else {
-        climbState = 1;
+        climbState = ClimberState.MOVING;
       }
 
       if (climbSequenceProgress == climbSequenceTotal) {

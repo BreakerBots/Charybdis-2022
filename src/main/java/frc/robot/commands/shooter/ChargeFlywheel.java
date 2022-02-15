@@ -5,16 +5,17 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.FlywheelState;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Shooter.FlywheelState;
 
 /** Spins the shooter's flywheel */
 public class ChargeFlywheel extends CommandBase {
   Shooter shooter;
   XboxController xbox;
+  private long atRPM;
+  private long cycleCount;
   /**
    * Creates a new ChargeFlywheel.
    * @param shooterArg Shooter subsystem from RobotContainer.
@@ -29,6 +30,7 @@ public class ChargeFlywheel extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooter.flywheelPID.reset();
     System.out.println("ChargeFlywheel initaited");
     //if (shooter.flywheelState == FlywheelState.IDLE || shooter.flywheelState == FlywheelState.OFF) {
       shooter.flyweelFullOn();
@@ -38,28 +40,33 @@ public class ChargeFlywheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("RPM: " + shooter.getFlywheelRPM());
+    cycleCount ++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    cycleCount = 0;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shooter.getFlywheelRPM() > Constants.FLYWHEEL_TAR_SPEED) {
+    if(shooter.flywheelPID.atSetpoint()) {
       System.out.println("FLYWHEEL CHARGED!");
       shooter.flywheelState = FlywheelState.CHARGED;
       return true;
-    } else if (xbox.getLeftBumperPressed()) {
+    } else if (xbox.getStartButtonPressed()) {
       shooter.flyweelOff();
+      shooter.flywheelPID.reset();
       System.out.println("FLYWHEEL MANUALY STOPED!");
       return true;
-    }
-    
-    else {
+    } else if (cycleCount > 500) {
+      shooter.flyweelOff();
+      shooter.flywheelPID.reset();
+      System.out.println("FLYWHEEL CHARGEING TIMED OUT!");
+      return true;
+    } else {
       return false;
     }
 }}

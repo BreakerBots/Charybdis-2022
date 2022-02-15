@@ -3,9 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -29,7 +31,7 @@ public class Robot extends TimedRobot {
   }
   public static RobotMode mode;
   private Command m_autonomousCommand;
-  public static RobotContainer m_robotContainer; // Note: Might not work!
+  private RobotContainer m_robotContainer;
   
 
   /**
