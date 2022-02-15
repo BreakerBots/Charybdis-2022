@@ -5,4 +5,8 @@
 package frc.robot;
 
 /** Add your docs here. */
-public class ShooterMode {}
+public enum ShooterMode {
+    UP,
+    LOW,
+    LAUNCH
+}
