@@ -7,9 +7,9 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class ToggleShooterPos extends CommandBase {
+public class ToggleShooterMode extends CommandBase {
   Shooter shooter;
-  public ToggleShooterPos(Shooter shooterArg) {
+  public ToggleShooterMode(Shooter shooterArg) {
     shooter = shooterArg;
     addRequirements(shooter);
   }

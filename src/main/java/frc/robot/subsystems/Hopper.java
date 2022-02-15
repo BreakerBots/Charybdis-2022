@@ -65,7 +65,7 @@ public class Hopper extends SubsystemBase {
       // } else if (getHopperPos1() && getHopperPos2()) {
       //   intake.intakeOffMethod();
       //   hopperOff();
-      if (getHopperPos2()) {
+      if (!getHopperPos2()) {
         hopperOn();
       }
       else {

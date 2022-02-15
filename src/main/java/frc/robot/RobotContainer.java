@@ -17,7 +17,7 @@ import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
 import frc.robot.commands.shooter.ChargeThenShoot;
-import frc.robot.commands.shooter.ToggleShooterPos;
+import frc.robot.commands.shooter.ToggleShooterMode;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
@@ -77,7 +77,7 @@ public class RobotContainer {
     // new JoystickButton(xbox, Constants.A).whenPressed(new
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
-    new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterPos(shooterSys));
+    new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
     // // B button shoots, Left bumper cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));

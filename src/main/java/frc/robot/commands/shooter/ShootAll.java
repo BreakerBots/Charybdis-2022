@@ -50,10 +50,6 @@ public class ShootAll extends CommandBase {
   @Override
   public void execute() {
     cycleCount++;
-  
-    // if (cycleCount % 400 == 0) {
-    //   System.out.println("PLEASE PRESS B BUTTON TO SHOOT (IF IN TELEOP)");
-    // }
     if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED && shooter.flywheelPID.atSetpoint()) {
       hopper.hopperOn();
       intake.lIndexerHopper();
@@ -77,6 +73,7 @@ public class ShootAll extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooter.flywheelPID.reset();
+    cycleCount = 0;
   }
 
   // Returns true when the command should end.
@@ -87,6 +84,12 @@ public class ShootAll extends CommandBase {
       return true;
     } else if (xbox.getStartButtonPressed()) {
       System.out.println("SHOOTER MANUALY STOPED!");
+      hopper.hopperOff();
+      shooter.flyweelOff();
+      intake.intakeOffMethod();
+      return true;
+    } else if (cycleCount > 400) {
+      System.out.println("SHOOTER TIMED OUT!");
       hopper.hopperOff();
       shooter.flyweelOff();
       intake.intakeOffMethod();

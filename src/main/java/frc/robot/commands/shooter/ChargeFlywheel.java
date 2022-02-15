@@ -15,6 +15,7 @@ public class ChargeFlywheel extends CommandBase {
   Shooter shooter;
   XboxController xbox;
   private long atRPM;
+  private long cycleCount;
   /**
    * Creates a new ChargeFlywheel.
    * @param shooterArg Shooter subsystem from RobotContainer.
@@ -39,11 +40,13 @@ public class ChargeFlywheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    cycleCount ++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    cycleCount = 0;
   }
 
   // Returns true when the command should end.
@@ -58,8 +61,12 @@ public class ChargeFlywheel extends CommandBase {
       shooter.flywheelPID.reset();
       System.out.println("FLYWHEEL MANUALY STOPED!");
       return true;
-    }
-    else {
+    } else if (cycleCount > 500) {
+      shooter.flyweelOff();
+      shooter.flywheelPID.reset();
+      System.out.println("FLYWHEEL CHARGEING TIMED OUT!");
+      return true;
+    } else {
       return false;
     }
 }}
