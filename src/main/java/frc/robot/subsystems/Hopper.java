@@ -36,7 +36,8 @@ public class Hopper extends SubsystemBase {
   }
 
   public boolean getHopperPos1() {
-    return hopPos1.get();
+    return false;
+    //hopPos1.get();
   }
 
   public boolean getHopperPos2() {
@@ -64,7 +65,7 @@ public class Hopper extends SubsystemBase {
       // } else if (getHopperPos1() && getHopperPos2()) {
       //   intake.intakeOffMethod();
       //   hopperOff();
-      if (!getHopperPos1()) {
+      if (!getHopperPos2()) {
         hopperOn();
       }
       else {

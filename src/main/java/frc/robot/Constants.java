@@ -80,7 +80,7 @@ public final class Constants {
     public static final double LAUNCH_SHOOTERSPEED = 0.55;
     // Speed in RPM
     public static final int FLYWHEEL_MAX_SPEED = 1780;
-    public static final double FLYWHEEL_TAR_SPEED_PREC = 0.55;
+    public static final double FLYWHEEL_TAR_SPEED_PREC = 0.15;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;

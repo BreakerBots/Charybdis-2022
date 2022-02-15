@@ -84,8 +84,8 @@ public class Shooter extends SubsystemBase {
 
   public void periodic() {
     //flywheel.set(1);
-    System.out.println("RPM: " + getFlywheelRPM());
-    System.out.println("AT SETPOINT: " + flywheelPID.atSetpoint());
+    // System.out.println("RPM: " + getFlywheelRPM());
+    // System.out.println("AT SETPOINT: " + flywheelPID.atSetpoint());
     // if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && flywheelState == FlywheelState.OFF) {
     //   flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
     // }
