@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AirCompressor extends SubsystemBase {
   private Compressor compressor;
-
+  private long cycleCount;
   /** Creates a new AirCompressor. */
   public AirCompressor() {
     compressor = new Compressor(Constants.PCM_ID, PneumaticsModuleType.CTREPCM);
@@ -35,7 +35,14 @@ public class AirCompressor extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // System.out.println(compressor.());
-    // This method will be called once per scheduler run
+    if (getCompressorState()) {
+      cycleCount ++;
+        if (cycleCount > 6000) {
+          stopCompressor();
+          cycleCount = 0;
+        }
+    } else {
+      cycleCount = 0;
+    }
   }
 }
