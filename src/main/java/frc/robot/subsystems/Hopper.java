@@ -9,19 +9,22 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.FlywheelState;
 
 /** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
   public boolean hopperState;
   private WPI_TalonSRX hopperMotor;
-  private DigitalInput hopPos1;
-  private DigitalInput hopPos2;
+  private DigitalInput slot1;
+  private DigitalInput slot2;
   Intake intake;
+  private long pauseCountA;
+  private long pauseCountB;
   public Hopper(Intake intakeArg) {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
-    hopPos1 = new DigitalInput(9);
-    hopPos2 = new DigitalInput(8);
+    slot1 = new DigitalInput(9);
+    slot2 = new DigitalInput(8);
   }
 
   public void hopperOn() {
@@ -35,45 +38,41 @@ public class Hopper extends SubsystemBase {
     hopperState = false;
   }
 
-  public boolean getHopperPos1() {
-    return false;
-    //hopPos1.get();
+  public boolean slot1IsFull() {
+    return !(slot1.get());
+    
   }
 
-  public boolean getHopperPos2() {
-    return hopPos2.get();
+  public boolean slot2IsFull() {
+    return !(slot2.get());
   }
 
 
 
   @Override
   public void periodic() {
-    // System.out.println("hop 1: " + getHopperPos1());
-    // System.out.println("hop 2: " + getHopperPos2());
+    System.out.println("hop 1: " + slot1IsFull());
+    System.out.println("hop 2: " + slot2IsFull());
     if (intake.intakeState) {
-      // if (getHopperPos1() && !getHopperPos2()) { 
-      //   hopperOn();
-      // }
-      // } else if (!getHopperPos1() && getHopperPos2()) {
-      //   pauseCountA++;
-      //   if (pauseCountA >= Constants.HOPPER_DELAY_CYCLES) {
-      //     hopperOff();
-      //     pauseCountA = 0;
-      //   }
-      // } else if (!getHopperPos1() && !getHopperPos2()) {
-      //   hopperOn();
-      // } else if (getHopperPos1() && getHopperPos2()) {
-      //   intake.intakeOffMethod();
-      //   hopperOff();
-      if (!getHopperPos2()) {
+      if (!slot1IsFull() && !slot2IsFull()) { 
         hopperOn();
-      }
-      else {
+      } else if (!slot1IsFull() && slot2IsFull()) {
+        pauseCountA++;
+        if (pauseCountA > Constants.HOPPER_DELAY_CYCLES) {
+          hopperOff();
+          pauseCountA = 0;
+        }
+      } else if (!slot1IsFull() && !slot2IsFull()) {
+        hopperOn();
+      } else if (slot1IsFull() && slot2IsFull()) {
+        pauseCountB ++;
+        if (pauseCountB > 25) {
+        intake.deactivateIntake();
         hopperOff();
-      }
-    
-    }
+        pauseCountB = 0;
+        }
     }
   }
-
+  }
+}
  

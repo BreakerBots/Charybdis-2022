@@ -14,7 +14,7 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     public boolean StopIntakeAuto = false;
-    public boolean intakeState;
+    public boolean intakeState = false;
     public boolean indexerHopperState;
     private WPI_TalonSRX indexerL;
     private WPI_TalonSRX indexerR;
@@ -33,7 +33,7 @@ public class Intake extends SubsystemBase {
     }
 
     /** Extends intake arm and spins the intake and indexer */
-    public void intakeOnMethod() {
+    public void activateIntake() {
         intakeSol.set(Value.kForward);
         intakeMain.set(Constants.INTAKESPEED);
         indexerL.set(Constants.L_SORTESPEED);
@@ -42,7 +42,7 @@ public class Intake extends SubsystemBase {
     }
 
     /** Retracts intake arm and turns off the intake and indexer */
-    public void intakeOffMethod() {
+    public void deactivateIntake() {
         intakeSol.set(Value.kReverse);
         intakeMain.set(0);
         indexerL.set(0);
@@ -56,11 +56,20 @@ public class Intake extends SubsystemBase {
         if (intakeState == false && indexerHopperState == false) {
             indexerL.set(Constants.L_SORTESPEED);
             indexerHopperState = true;
-        }
-        else if (intakeState == false && indexerHopperState) {
+        } else if (intakeState == false && indexerHopperState) {
             indexerL.set(0);
             indexerHopperState = false;
         }
+    }
+
+    public void runHopperFeed() {
+        indexerL.set(Constants.L_SORTESPEED);
+        indexerHopperState = true;
+    }
+
+    public void stopHopperFeed() {
+        indexerL.set(0);
+        indexerHopperState = false;
     }
 
     @Override

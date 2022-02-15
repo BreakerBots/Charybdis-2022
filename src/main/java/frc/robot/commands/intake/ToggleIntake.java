@@ -30,10 +30,10 @@ public class ToggleIntake extends CommandBase {
   @Override
   public void initialize() {
     if (intake.intakeState) {
-      intake.intakeOffMethod();
+      intake.deactivateIntake();
       hopper.hopperOff();
     } else {
-      intake.intakeOnMethod();
+      intake.activateIntake();
       // hopper.hopperOn();
     }
   }

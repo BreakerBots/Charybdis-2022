@@ -54,15 +54,14 @@ public class ShootAll extends CommandBase {
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");
-
     }
     System.out.println(shooter.getFlywheelTPS());
-    if (hopper.getHopperPos2()) { //&& hopper.getHopperPos1() == false
+    if (!hopper.slot2IsFull() && !hopper.slot1IsFull()) { //&& hopper.slot1IsFull() == false
       timedStopCount++;
     }
-    if (hopper.getHopperPos2() && timedStopCount > 150) { // && hopper.getHopperPos1() == false 
+    if (!hopper.slot2IsFull() && !hopper.slot1IsFull() && timedStopCount > 150) { // && hopper.slot1IsFull() == false 
       hopper.hopperOff();
-      intake.intakeOffMethod();
+      intake.deactivateIntake();
       timedStopCount = 0;
       shooter.flyweelOff();
       shooter.flywheelState = FlywheelState.OFF;
@@ -86,13 +85,13 @@ public class ShootAll extends CommandBase {
       System.out.println("SHOOTER MANUALY STOPED!");
       hopper.hopperOff();
       shooter.flyweelOff();
-      intake.intakeOffMethod();
+      intake.deactivateIntake();
       return true;
     } else if (cycleCount > 400) {
       System.out.println("SHOOTER TIMED OUT!");
       hopper.hopperOff();
       shooter.flyweelOff();
-      intake.intakeOffMethod();
+      intake.deactivateIntake();
       return true;
     } else {
       return false;

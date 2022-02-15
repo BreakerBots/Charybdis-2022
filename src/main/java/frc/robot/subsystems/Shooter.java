@@ -76,7 +76,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getFlywheelIdleSpeed() {
-    return flyTgtSpdPrec * 0.5;
+    return flyTgtSpdPrec * 0.8;
   }
 
   public void periodic() {
@@ -96,9 +96,9 @@ public class Shooter extends SubsystemBase {
       flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
       flywheel.set(flySpd);
     } 
-    // else if (hopper.getHopperPos1(;) && hopper.getHopperPos2() && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
-    //   flywheel.set(getFlywheelIdleSpeed());
-    //   flywheelState = FlywheelState.IDLE
-    // }
+    else if (hopper.slot1IsFull() && hopper.slot2IsFull() && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
+      flywheel.set(getFlywheelIdleSpeed());
+      flywheelState = FlywheelState.IDLE;
+    }
   }
 }
