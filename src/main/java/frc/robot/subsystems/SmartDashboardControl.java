@@ -13,14 +13,14 @@ import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SmartDashboardControle extends SubsystemBase {
+public class SmartDashboardControl extends SubsystemBase {
   /** Creates a new SmartDashbord. */
   Shooter shooter;
   Intake intake;
   Climber climber;
   //private double[] climbProg = new double[1];
   
-  public SmartDashboardControle(Shooter shooterArg, Intake intakeArg) { //Climber climbArg
+  public SmartDashboardControl(Shooter shooterArg, Intake intakeArg) { //Climber climbArg
     intake = intakeArg;
     shooter = shooterArg;
     // climber = climbArg;
