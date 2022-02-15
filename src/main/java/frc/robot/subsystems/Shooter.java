@@ -75,6 +75,10 @@ public class Shooter extends SubsystemBase {
     return Constants.FLYWHEEL_MAX_SPEED * flyTgtSpdPrec;
   }
 
+  public double getFlywheelIdleSpeed() {
+    return flyTgtSpdPrec * 0.5;
+  }
+
   public void periodic() {
     switch (shooterMode) {
       case UP: if (shooterPos) {shooterDown();}
@@ -87,16 +91,14 @@ public class Shooter extends SubsystemBase {
       break;
       default: shooterDown(); flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
     }
-    // System.out.println("RPM: " + getFlywheelRPM());
-    // System.out.println("AT SETPOINT: " + flywheelPID.atSetpoint());
-    // if ((hopper.getHopperPos1() || hopper.getHopperPos2()) && (flywheelState == FlywheelState.OFF || flywheelState == Flywheelstate.IDLE) {
-    //   flywheel.set(Constants.FLYWHEEL_IDLE_SPEED);
-    //    flywheelState = FlywheelState.IDLE
-    // }
     if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
      double flySpd;
       flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
       flywheel.set(flySpd);
-    }
+    } 
+    // else if (hopper.getHopperPos1(;) && hopper.getHopperPos2() && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
+    //   flywheel.set(getFlywheelIdleSpeed());
+    //   flywheelState = FlywheelState.IDLE
+    // }
   }
 }

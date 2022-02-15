@@ -56,7 +56,7 @@ public class ChargeFlywheel extends CommandBase {
       System.out.println("FLYWHEEL CHARGED!");
       shooter.flywheelState = FlywheelState.CHARGED;
       return true;
-    } else if (xbox.getLeftBumperPressed()) {
+    } else if (xbox.getStartButtonPressed()) {
       shooter.flyweelOff();
       shooter.flywheelPID.reset();
       System.out.println("FLYWHEEL MANUALY STOPED!");
