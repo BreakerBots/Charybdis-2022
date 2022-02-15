@@ -2,11 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.climb;
+package frc.robot.commands.climb.sequences;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.climb.actions.ClimbStablityCheck;
+import frc.robot.commands.climb.actions.MoveClimb;
+import frc.robot.commands.climb.actions.PivotClimb;
+import frc.robot.commands.climb.sequenceManagement.ResetSequenceNums;
+import frc.robot.commands.climb.sequenceManagement.SetSequenceTotal;
+import frc.robot.commands.climb.sequenceManagement.WaitForDownButton;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.devices.IMU;
 

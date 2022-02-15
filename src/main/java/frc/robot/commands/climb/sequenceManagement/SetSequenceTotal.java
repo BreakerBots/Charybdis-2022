@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.climb;
+package frc.robot.commands.climb.sequenceManagement;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Climber;
@@ -10,20 +10,23 @@ import frc.robot.subsystems.Climber;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ResetSequenceNums extends InstantCommand {
+public class SetSequenceTotal extends InstantCommand {
   Climber climber;
-  /** resets climb sequence progress counter to "0 of 0" before it is set.
+  int actionNum;
+  /** Sets the # of actions in a climbe sequence for progress counter.
+   * Recomeded that only non-instant commands be considerd.
    */
-  public ResetSequenceNums(Climber climberArg) {
+  public SetSequenceTotal(Climber climberArg, int actionNumArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = climberArg;
+    actionNum = actionNumArg;
     addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.climbSequenceTotal = 0;
-    climber.climbSequenceProgress = 0;
+    climber.climbSequenceTotal = actionNum;
+    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 }

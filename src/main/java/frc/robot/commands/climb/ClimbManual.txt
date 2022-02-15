@@ -1,0 +1,17 @@
+Sequences:
+    automated action sequences in which the robot wil move between bars on its own. (NOTE: Requires user imput to continue after initial extension)
+        HOW TO USE: create sequecen by chaining togetehr desired action in order (with stability checks regurly spaced throughout).Then put this sequence into 
+            the "RunClimbSequence" command group called in robot contaner. In addition to your action sequence, the "RunClimbSequence" group should also
+            call the "SequenceWatchdog" command.
+Actions:
+    commands that are linked together in a series to form a climb sequence:
+        1. MoveClimb: Extends or retracts climber arms to a spesified length in ticks of winch motor.
+        2. PivotClimb: Extends or retracts pistons for climber arms. Used when climber is grabing new bars.
+        3. climbStablityCheck: Waits for IMU's returned rate of YPR change to be below 5 degrees per second for 3 seconds befor allowing sequence to progress.
+SequenceManagement:
+    commands called within a climb sequence that do not directly effect the climber and that insted have support roles.
+        1. ResetSequenceNums: sets the total number of actions in a climb sequence to 0 of 0 for progress counter.
+        2. SetSequenceNums: sets the total number of actions in a climb sequence for progress counter.
+        3. WaitForDownButton: Waits for user imput to continue with sequence after initial climber extension.
+        4. SequenceWatchdog: allows for manual or automatic termination of an active climb sequence by pressing the menu button or by the sequence exceading
+            45 seconds in length. The latter of which will trigure a "Timed Out" cancel statement.

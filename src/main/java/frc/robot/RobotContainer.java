@@ -83,8 +83,7 @@ public class RobotContainer {
     // // B button shoots, Left bumper cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-    // new JoystickButton(xbox, Constants.UP).whenPressed(new
-    // HighbarClimbSequence(climbSys, imuSys));
+    // new JoystickButton(xbox, Constants.UP).whenPressed(new RunClimbSequence(climbSys, imuSys));
   }
 
   /**
