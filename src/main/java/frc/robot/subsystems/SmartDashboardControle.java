@@ -18,12 +18,12 @@ public class SmartDashboardControle extends SubsystemBase {
   Shooter shooter;
   Intake intake;
   Climber climber;
-  private double[] climbProg = new double[1];
+  //private double[] climbProg = new double[1];
   
-  public SmartDashboardControle(Shooter shooterArg, Intake intakeArg, Climber climbArg) {
+  public SmartDashboardControle(Shooter shooterArg, Intake intakeArg) { //Climber climbArg
     intake = intakeArg;
     shooter = shooterArg;
-    climber = climbArg;
+    // climber = climbArg;
   }
 
   @Override
@@ -39,17 +39,17 @@ public class SmartDashboardControle extends SubsystemBase {
       break;
       default: SmartDashboard.putString("SHOOTER MODE: ", "ERROR!");
     }
-    climbProg[0] = climber.climbSequenceTotal;
-    climbProg[1] = climber.climbSequenceProgress;
     SmartDashboard.putBoolean("INTAKEING: ", intake.intakeState);
-    SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
-    UsbCamera usbCamera = new UsbCamera("USB Camera 0", 0);
-        CameraServer.startAutomaticCapture(usbCamera);
+    // climbProg[0] = climber.climbSequenceTotal;
+    // climbProg[1] = climber.climbSequenceProgress;
+    // SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
+    // UsbCamera usbCamera = new UsbCamera("USB Camera 0", 0);
+    //     CameraServer.startAutomaticCapture(usbCamera);
 
-        // Creates the CvSink and connects it to the UsbCamera
-        CvSink cvSink = CameraServer.getVideo();
+    //     // Creates the CvSink and connects it to the UsbCamera
+    //     CvSink cvSink = CameraServer.getVideo();
         
-        // Creates the CvSource and MjpegServer [2] and connects them
-        CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
+    //     // Creates the CvSource and MjpegServer [2] and connects them
+    //     CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
   }
 }
