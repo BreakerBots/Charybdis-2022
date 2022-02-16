@@ -71,7 +71,7 @@ public class Hopper extends SubsystemBase {
     // System.out.println("hop 1: " + slot1IsFull());
     // System.out.println("hop 2: " + slot2IsFull());
     if (intake.intakeState) {
-      if (!slot1IsFull() && !slot2IsFull()) {
+      if (slot1IsFull() && !slot2IsFull()) {
         hopperOn();
       } else if (!slot1IsFull() && slot2IsFull()) {
         pauseCountA++;
@@ -80,7 +80,7 @@ public class Hopper extends SubsystemBase {
           pauseCountA = 0;
         }
       } else if (!slot1IsFull() && !slot2IsFull()) {
-        hopperOn();
+        hopperOff();
       } else if (slot1IsFull() && slot2IsFull()) {
         pauseCountB++;
         if (pauseCountB > 25) {

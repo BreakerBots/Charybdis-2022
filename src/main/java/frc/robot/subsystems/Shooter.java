@@ -60,6 +60,22 @@ public class Shooter extends SubsystemBase {
   public double getFlywheelTPS() {
     return Math.abs((shooterL.getSelectedSensorVelocity()/10));
   }
+
+  public double getLFlywheelSta() {
+    return shooterL.getStatorCurrent();
+  }
+
+  public double getLFlywheelSup() {
+    return shooterL.getSupplyCurrent();
+  }
+
+  public double getRFlywheelSta() {
+    return shooterR.getStatorCurrent();
+  }
+
+  public double getRFlywheelSup() {
+    return shooterR.getSupplyCurrent();
+  }
   /** Brings shooter to higher fireing angle */
   public boolean shooterUp() {
     shooterSol.set(Value.kForward);

@@ -58,7 +58,7 @@ public final class Constants {
     public static final double DIST_VEL_TOLERANCE = 0.1;
     // intake motor speeds
     public static final double INTAKESPEED = -1; //-1
-    public static final double R_SORTESPEED = 1;
+    public static final double R_SORTESPEED = 1; //1
     public static final double L_SORTESPEED = 0.8; //0.8
     // intake solonoid IDs
     public static final int INTAKESOL_FWD = 1;

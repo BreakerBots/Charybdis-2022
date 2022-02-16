@@ -70,12 +70,14 @@ public class IntakeHopperIndexerTest extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     System.out.println(
-      "AVERAGES: \n" 
+      "AVERAGES: \n\n" 
       + " INTAKE STATOR: " + intakeStaAvg + " INTAKE SUPPLY: " + intakeSupAvg + "\n"
       + " LEFT INDEXER STATOR: " + indexLStaAvg + " LEFT INDEXER SUPPLY: " + indexLSupAvg + "\n"
       + " RIGHT INDEXER STATOR: " + indexRStaAvg + " RIGHT INDEXER SUPPLY: " + indexRSupAvg + "\n"
       + " HOPPER STATOR: " + hopperStaAvg + " HOPPER SUPPLY: " + hopperSupAvg + "\n\n"
     );
+    hopper.hopperOff();
+    intake.deactivateIntake();
     cycleCount = 0;
   }
 
