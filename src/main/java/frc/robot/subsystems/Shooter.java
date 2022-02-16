@@ -21,7 +21,7 @@ import frc.robot.ShooterMode;
 public class Shooter extends SubsystemBase {
   public SimpleMotorFeedforward flywheelFF;
   public PIDController flywheelPID;
-  public FlywheelState flywheelState;
+  public FlywheelState flywheelState = FlywheelState.OFF;
   public ShooterMode shooterMode = ShooterMode.UP;
   // public boolean flyweelState;
   public boolean shooterPos;

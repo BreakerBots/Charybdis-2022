@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
@@ -44,6 +46,20 @@ public class SmartDashboardControl extends SubsystemBase {
     }
     SmartDashboard.putBoolean("INTAKE: ", intake.intakeState);
     SmartDashboard.putBoolean("Compressor: ", compressor.getCompressorState());
+    switch (shooter.flywheelState) {
+      case IDLE: SmartDashboard.putString("FLYWHEEL MODE: ", "IDLE");
+      break;
+      case CHARGING: SmartDashboard.putString("FLYWHEEL MODE: ", "CHARGING");
+      break;
+      case CHARGED: SmartDashboard.putString("FLYWHEEL MODE: ", "CHARGED");
+      break;
+      case OFF: SmartDashboard.putString("FLYWHEEL MODE: ", "OFF");
+      break;
+      default: SmartDashboard.putString("FLYWHEEL MODE: ", "ERROR!");
+
+
+
+    }
     // climbProg[0] = climber.climbSequenceTotal;
     // climbProg[1] = climber.climbSequenceProgress;
     // SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
