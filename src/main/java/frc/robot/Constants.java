@@ -61,8 +61,8 @@ public final class Constants {
     public static final double R_SORTESPEED = 1; //1
     public static final double L_SORTESPEED = 0.8; //0.8
     // intake solonoid IDs
-    public static final int INTAKESOL_FWD = 1;
-    public static final int INTAKESOL_REV = 0;
+    public static final int INTAKESOL_FWD = 0;
+    public static final int INTAKESOL_REV = 1;
     // intake motor IDs
     public static final int INTAKEMAIN_ID = 30;
     public static final int INTAKE_L_ID = 27;
