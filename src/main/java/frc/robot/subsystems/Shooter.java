@@ -133,6 +133,10 @@ public class Shooter extends SubsystemBase {
     return flywheelPID.atSetpoint();
   }
 
+  public void setManualFlywheelSpeed(double speed) {
+    flywheel.set(speed);
+  }
+
   public void periodic() {
     switch (shooterMode) {
       case UP:
@@ -167,4 +171,7 @@ public class Shooter extends SubsystemBase {
       flyweelOff();
     }
   }
+
+public void setflywheelManualSpeed(double speed) {
+}
 }

@@ -65,7 +65,7 @@ public class ShootAll extends CommandBase {
       intake.deactivateIntake();
       timedStopCount = 0;
       shooter.flyweelOff();
-      shooter.flywheelState = FlywheelState.OFF;
+      shooter.setFlywheelState(FlywheelState.OFF);
     }
   }
 

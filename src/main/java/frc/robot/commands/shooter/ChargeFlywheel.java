@@ -55,7 +55,7 @@ public class ChargeFlywheel extends CommandBase {
     // Move state setting into shooter periodic?
     if(shooter.flywheelPIDAtSetpoint()) {
       System.out.println("FLYWHEEL CHARGED!");
-      shooter.flywheelState = FlywheelState.CHARGED;
+      shooter.setFlywheelState(FlywheelState.CHARGED);
       return true;
     } else if (xbox.getStartButtonPressed()) {
       shooter.flyweelOff();
