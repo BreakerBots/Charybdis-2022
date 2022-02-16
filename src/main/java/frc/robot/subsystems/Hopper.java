@@ -83,7 +83,7 @@ public class Hopper extends SubsystemBase {
         hopperOff();
       } else if (slot1IsFull() && slot2IsFull()) {
         pauseCountB++;
-        if (pauseCountB > 0) {
+        if (pauseCountB > 25) {
           intake.deactivateIntake();
           hopperOff();
           pauseCountB = 0;

@@ -116,5 +116,8 @@ public class Shooter extends SubsystemBase {
       flywheel.set(getFlywheelIdleSpeed());
       flywheelState = FlywheelState.IDLE;
     }
+    else if ((!hopper.slot1IsFull() || !hopper.slot2IsFull()) && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
+      flyweelOff();
+    }
   }
 }
