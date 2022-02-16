@@ -15,12 +15,24 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.FlywheelState;
-import frc.robot.ShooterMode;
 
 public class Shooter extends SubsystemBase {
   public SimpleMotorFeedforward flywheelFF;
   public PIDController flywheelPID;
+
+  public enum FlywheelState {
+    CHARGED,
+    CHARGING,
+    IDLE,
+    OFF
+  }
+
+  public enum ShooterMode {
+    UP,
+    LOW,
+    LAUNCH
+  }
+
   public FlywheelState flywheelState = FlywheelState.OFF;
   public ShooterMode shooterMode = ShooterMode.UP;
   // public boolean flyweelState;
@@ -32,8 +44,10 @@ public class Shooter extends SubsystemBase {
   public boolean autoShoot;
   DoubleSolenoid shooterSol;
   Hopper hopper;
+
   public Shooter(Hopper hopperArg) {
-    // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS, Constants.FLYWHEEL_KV);
+    // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
+    // Constants.FLYWHEEL_KV);
     flywheelPID = new PIDController(Constants.FLYWHEEL_KP, Constants.FLYWHEEL_KI, Constants.FLYWHEEL_KD);
     hopper = hopperArg;
     flywheelPID.setTolerance(20);
@@ -41,24 +55,24 @@ public class Shooter extends SubsystemBase {
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
     flywheel = new MotorControllerGroup(shooterL, shooterR);
-    shooterSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM, 
-                Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
+    shooterSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
+        Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
   }
 
-  
   /** Turns Flywheel On */
   public void flyweelFullOn() {
     flywheelState = FlywheelState.CHARGING;
   }
 
-   /** Turns Flywheel Off */
+  /** Turns Flywheel Off */
   public void flyweelOff() {
     flywheel.set(0);
     flywheelState = FlywheelState.OFF;
   }
+
   /** Returns the RPM of the flywheel's Motors */
   public double getFlywheelTPS() {
-    return Math.abs((shooterL.getSelectedSensorVelocity()/10));
+    return Math.abs((shooterL.getSelectedSensorVelocity() / 10));
   }
 
   public double getLFlywheelSta() {
@@ -76,11 +90,13 @@ public class Shooter extends SubsystemBase {
   public double getRFlywheelSup() {
     return shooterR.getSupplyCurrent();
   }
+
   /** Brings shooter to higher fireing angle */
   public boolean shooterUp() {
     shooterSol.set(Value.kForward);
     return shooterPos = true;
   }
+
   /** Brings shooter to lower fireing angle */
   public boolean shooterDown() {
     shooterSol.set(Value.kReverse);
@@ -97,26 +113,35 @@ public class Shooter extends SubsystemBase {
 
   public void periodic() {
     switch (shooterMode) {
-      case UP: if (shooterPos) {shooterDown();}
-              flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;   
-      break;
-      case LOW: if (!shooterPos) {shooterUp();}
-              flyTgtSpdPrec = Constants.LOW_SHOOTERSPEED;
-      break;
-      case LAUNCH: flyTgtSpdPrec = Constants.LAUNCH_SHOOTERSPEED;
-      break;
-      default: shooterDown(); flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
+      case UP:
+        if (shooterPos) {
+          shooterDown();
+        }
+        flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
+        break;
+      case LOW:
+        if (!shooterPos) {
+          shooterUp();
+        }
+        flyTgtSpdPrec = Constants.LOW_SHOOTERSPEED;
+        break;
+      case LAUNCH:
+        flyTgtSpdPrec = Constants.LAUNCH_SHOOTERSPEED;
+        break;
+      default:
+        shooterDown();
+        flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
     }
     if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
-     double flySpd;
+      double flySpd;
       flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
       flywheel.set(flySpd);
-    } 
-    else if ((hopper.slot1IsFull() && hopper.slot2IsFull()) && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
+    } else if ((hopper.slot1IsFull() && hopper.slot2IsFull())
+        && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
       flywheel.set(getFlywheelIdleSpeed());
       flywheelState = FlywheelState.IDLE;
-    }
-    else if ((!hopper.slot1IsFull() || !hopper.slot2IsFull()) && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
+    } else if ((!hopper.slot1IsFull() || !hopper.slot2IsFull())
+        && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
       flyweelOff();
     }
   }

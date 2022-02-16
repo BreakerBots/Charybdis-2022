@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.math.util.Units;
+
 //easily accessible conversion equations
 public class BreakerMath {
 
@@ -46,4 +48,9 @@ public class BreakerMath {
     public static double rollingAvg(double avg, double newVal) {
         return (avg + newVal) / 2.0;
     }
+
+    public static double voltsToSpdPer(double volts) {
+        return volts * Constants.MAX_SPD_VOLTS_FX;
+    }
+
 }

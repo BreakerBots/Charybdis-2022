@@ -7,10 +7,10 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.FlywheelState;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Shooter.FlywheelState;
 
 /**
  * Shoots all the balls in the hopper
@@ -50,7 +50,7 @@ public class ShootAll extends CommandBase {
   @Override
   public void execute() {
     cycleCount++;
-    if (shooter.flywheelState == frc.robot.FlywheelState.CHARGED && shooter.flywheelPID.atSetpoint()) {
+    if (shooter.flywheelState == FlywheelState.CHARGED && shooter.flywheelPID.atSetpoint()) {
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");

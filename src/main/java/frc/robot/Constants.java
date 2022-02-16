@@ -5,20 +5,28 @@
 package frc.robot;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants
+ * should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the
  * constants are needed, to reduce verbosity.
  */
 
 public final class Constants {
-    /** Filler ID for unused CAN devices*/
+    /** Filler ID for unused CAN devices */
     public static final int FILLER = 99;
     // Time constants
     public static final double MS_PER_CYCLE = 20;
     public static final double CYCLES_PER_SECOND = 200;
+    // Talon FX constants
+    /** Ticks per rotation for Talon FX motors */
+    public static final double TALON_FX_TICKS = 2048.0;
+    public static final double MAX_SPD_VOLTS_FX = FILLER;
 
     // Drivetrain constants
     /** Gear ratio for drivetrain (rotation of motors to rotation of wheel) */
@@ -27,8 +35,6 @@ public final class Constants {
     public static final double COLSON_DIAMETER = 4;
     /** Circumference of Colson wheel, in inches */
     public static final double COLSON_CIRCUMFERENCE = COLSON_DIAMETER * Math.PI;
-    /** Ticks per rotation for Talon FX motors*/
-    public static final double TALON_FX_TICKS = 2048.0;
     /** Ticks per rotation of Colson wheels on drivetrain */
     public static final double DRIVE_TICKS_PER_ROTATION = (TALON_FX_TICKS * DRIVE_GEAR_RATIO);
     /** Number of Talon FX ticks per inch driven */
@@ -57,9 +63,9 @@ public final class Constants {
     public static final double DIST_POS_TOLERANCE = 1;
     public static final double DIST_VEL_TOLERANCE = 0.1;
     // intake motor speeds
-    public static final double INTAKESPEED = -1; //-1
-    public static final double R_SORTESPEED = 0.8; //1
-    public static final double L_SORTESPEED = 0.7; //0.8
+    public static final double INTAKESPEED = -1; // -1
+    public static final double R_SORTESPEED = 0.8; // 1
+    public static final double L_SORTESPEED = 0.7; // 0.8
     // intake solonoid IDs
     public static final int INTAKESOL_FWD = 0;
     public static final int INTAKESOL_REV = 1;
@@ -114,11 +120,12 @@ public final class Constants {
     public static final int HOPPER_P1_ID = 9;
     public static final int HOPPER_P2_ID = FILLER;
     // hopper info
-    public static final double HOPPERSPEED = 0.4; //0.8
+    public static final double HOPPERSPEED = 0.4; // 0.8
     public static final double HOPPER_WHEEL_DIAMETER = 1;
     public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
     public static final double HOPPER_GEAR_RATIO = FILLER;
-    public static final double HOPPER_TICKS_PER_INCH = (TALON_FX_TICKS * HOPPER_GEAR_RATIO) / (HOPPER_WHEEL_CIRCUMFERENCE);
+    public static final double HOPPER_TICKS_PER_INCH = (TALON_FX_TICKS * HOPPER_GEAR_RATIO)
+            / (HOPPER_WHEEL_CIRCUMFERENCE);
     // climber motor IDs
     public static final int CLIMBER_L_ID = FILLER;
     public static final int CLIMBER_R_ID = FILLER;
@@ -157,7 +164,5 @@ public final class Constants {
     public static final double FLYWHEEL_KP = 0.5;
     public static final double FLYWHEEL_KI = 0;
     public static final double FLYWHEEL_KD = 0.3;
-
-
 
 }
