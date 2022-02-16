@@ -112,7 +112,7 @@ public class Shooter extends SubsystemBase {
       flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
       flywheel.set(flySpd);
     } 
-    else if ((hopper.slot1IsFull() || hopper.slot2IsFull()) && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
+    else if ((hopper.slot1IsFull() && hopper.slot2IsFull()) && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
       flywheel.set(getFlywheelIdleSpeed());
       flywheelState = FlywheelState.IDLE;
     }
