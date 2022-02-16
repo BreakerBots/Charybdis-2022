@@ -10,6 +10,8 @@ import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+
+// REMOVE, JUST USE INLINE CALLS
 public class ResetFlywheelPID extends InstantCommand {
   Shooter shooter;
   public ResetFlywheelPID(Shooter shooterArg) {
@@ -20,6 +22,6 @@ public class ResetFlywheelPID extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.flywheelPID.reset();
+    shooter.resetFlywheelPID();
   }
 }

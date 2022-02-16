@@ -49,8 +49,9 @@ public class ShootAll extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // STOP SETTING FLYWHEEL STATES! REWORK LOGIC!
     cycleCount++;
-    if (shooter.flywheelState == FlywheelState.CHARGED && shooter.flywheelPID.atSetpoint()) {
+    if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");
@@ -71,14 +72,14 @@ public class ShootAll extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.flywheelPID.reset();
+    shooter.resetFlywheelPID();
     cycleCount = 0;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (shooter.flywheelState == FlywheelState.OFF) {
+    if (shooter.getFlywheelState() == FlywheelState.OFF) {
       System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
       return true;
     } else if (xbox.getStartButtonPressed()) {

@@ -5,11 +5,13 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Shooter.ShooterMode;
 
-public class ToggleShooterMode extends CommandBase {
+public class ToggleShooterMode extends InstantCommand {
   Shooter shooter;
+
   public ToggleShooterMode(Shooter shooterArg) {
     shooter = shooterArg;
     addRequirements(shooter);
@@ -18,29 +20,25 @@ public class ToggleShooterMode extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (shooter.shooterMode == ShooterMode.UP) {
-      shooter.shooterMode = ShooterMode.LOW;
-    } else if (shooter.shooterMode == ShooterMode.LOW) {
-      shooter.shooterMode = ShooterMode.LAUNCH;
-    } else if (shooter.shooterMode == ShooterMode.LAUNCH) {
-      shooter.shooterMode = ShooterMode.UP;
-    } else {
-      shooter.shooterMode = ShooterMode.UP;
+    switch (shooter.getShootMode()) {
+      case UP:
+        shooter.setShootMode(ShooterMode.LOW);
+        break;
+      case LOW:
+        shooter.setShootMode(ShooterMode.LAUNCH);
+        break;
+      default:
+        shooter.setShootMode(ShooterMode.UP);
+        break;
     }
-  }
-
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
+    // if (shooter.shooterMode == ShooterMode.UP) {
+    // shooter.shooterMode = ShooterMode.LOW;
+    // } else if (shooter.shooterMode == ShooterMode.LOW) {
+    // shooter.shooterMode = ShooterMode.LAUNCH;
+    // } else if (shooter.shooterMode == ShooterMode.LAUNCH) {
+    // shooter.shooterMode = ShooterMode.UP;
+    // } else {
+    // shooter.shooterMode = ShooterMode.UP;
+    // }
   }
 }

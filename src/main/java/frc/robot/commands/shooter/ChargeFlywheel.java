@@ -30,7 +30,7 @@ public class ChargeFlywheel extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.flywheelPID.reset();
+    shooter.resetFlywheelPID();
     System.out.println("ChargeFlywheel initaited");
     //if (shooter.flywheelState == FlywheelState.IDLE || shooter.flywheelState == FlywheelState.OFF) {
       shooter.flyweelFullOn();
@@ -52,19 +52,20 @@ public class ChargeFlywheel extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shooter.flywheelPID.atSetpoint()) {
+    // Move state setting into shooter periodic?
+    if(shooter.flywheelPIDAtSetpoint()) {
       System.out.println("FLYWHEEL CHARGED!");
       shooter.flywheelState = FlywheelState.CHARGED;
       return true;
     } else if (xbox.getStartButtonPressed()) {
       shooter.flyweelOff();
-      shooter.flywheelPID.reset();
-      System.out.println("FLYWHEEL MANUALY STOPED!");
+      shooter.resetFlywheelPID();
+      System.out.println("FLYWHEEL MANUALLY STOPPED!");
       return true;
     } else if (cycleCount > 500) {
       shooter.flyweelOff();
-      shooter.flywheelPID.reset();
-      System.out.println("FLYWHEEL CHARGEING TIMED OUT!");
+      shooter.resetFlywheelPID();
+      System.out.println("FLYWHEEL CHARGING TIMED OUT!");
       return true;
     } else {
       return false;

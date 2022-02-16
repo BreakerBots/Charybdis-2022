@@ -17,9 +17,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-  public SimpleMotorFeedforward flywheelFF;
-  public PIDController flywheelPID;
-
   public enum FlywheelState {
     CHARGED,
     CHARGING,
@@ -33,17 +30,18 @@ public class Shooter extends SubsystemBase {
     LAUNCH
   }
 
-  public FlywheelState flywheelState = FlywheelState.OFF;
-  public ShooterMode shooterMode = ShooterMode.UP;
-  // public boolean flyweelState;
-  public boolean shooterPos;
+  private SimpleMotorFeedforward flywheelFF;
+  private PIDController flywheelPID;
+  private FlywheelState flywheelState = FlywheelState.OFF;
+  private ShooterMode shooterMode = ShooterMode.UP;
+  private boolean shooterIsUp;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
-  public double flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
-  public MotorControllerGroup flywheel;
-  public boolean autoShoot;
-  DoubleSolenoid shooterSol;
-  Hopper hopper;
+  private double flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
+  private MotorControllerGroup flywheel;
+  // public boolean autoShoot; Remove due to being unused.
+  private DoubleSolenoid shooterSol;
+  private Hopper hopper;
 
   public Shooter(Hopper hopperArg) {
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
@@ -94,13 +92,13 @@ public class Shooter extends SubsystemBase {
   /** Brings shooter to higher fireing angle */
   public boolean shooterUp() {
     shooterSol.set(Value.kForward);
-    return shooterPos = true;
+    return shooterIsUp = true;
   }
 
   /** Brings shooter to lower fireing angle */
   public boolean shooterDown() {
     shooterSol.set(Value.kReverse);
-    return shooterPos = false;
+    return shooterIsUp = false;
   }
 
   public double getFlywheelTargetSpeed() {
@@ -111,16 +109,40 @@ public class Shooter extends SubsystemBase {
     return flyTgtSpdPrec * 0.8;
   }
 
+  public ShooterMode getShootMode() {
+    return shooterMode;
+  }
+
+  public void setShootMode(ShooterMode mode) {
+    shooterMode = mode;
+  }
+
+  public FlywheelState getFlywheelState() {
+    return flywheelState;
+  }
+
+  public void setFlywheelState(FlywheelState state) {
+    flywheelState = state;
+  }
+
+  public void resetFlywheelPID() {
+    flywheelPID.reset();
+  }
+
+  public boolean flywheelPIDAtSetpoint() {
+    return flywheelPID.atSetpoint();
+  }
+
   public void periodic() {
     switch (shooterMode) {
       case UP:
-        if (shooterPos) {
+        if (shooterIsUp) {
           shooterDown();
         }
         flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
         break;
       case LOW:
-        if (!shooterPos) {
+        if (!shooterIsUp) {
           shooterUp();
         }
         flyTgtSpdPrec = Constants.LOW_SHOOTERSPEED;

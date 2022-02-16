@@ -22,9 +22,9 @@ public class SmartDashboardControl extends SubsystemBase {
   private Intake intake;
   private AirCompressor compressor;
   private Climber climber;
-  //private double[] climbProg = new double[1];
-  
-  public SmartDashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg) { //Climber climbArg
+  // private double[] climbProg = new double[1];
+
+  public SmartDashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg) { // Climber climbArg
     intake = intakeArg;
     shooter = shooterArg;
     compressor = compressorArg;
@@ -35,41 +35,48 @@ public class SmartDashboardControl extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.updateValues();
-    switch (shooter.shooterMode) {
-      case UP: SmartDashboard.putString("SHOOTER MODE: ", "HIGH");
-      break;
-      case LOW: SmartDashboard.putString("SHOOTER MODE: ", "LOW");
-      break;
-      case LAUNCH: SmartDashboard.putString("SHOOTER MODE: ", "LAUNCH");
-      break;
-      default: SmartDashboard.putString("SHOOTER MODE: ", "ERROR!");
+    switch (shooter.getShootMode()) {
+      case UP:
+        SmartDashboard.putString("SHOOTER MODE", "HIGH");
+        break;
+      case LOW:
+        SmartDashboard.putString("SHOOTER MODE", "LOW");
+        break;
+      case LAUNCH:
+        SmartDashboard.putString("SHOOTER MODE", "LAUNCH");
+        break;
+      default:
+        SmartDashboard.putString("SHOOTER MODE", "ERROR!");
     }
     SmartDashboard.putBoolean("INTAKE: ", intake.intakeState);
     SmartDashboard.putBoolean("Compressor: ", compressor.getCompressorState());
-    switch (shooter.flywheelState) {
-      case IDLE: SmartDashboard.putString("FLYWHEEL MODE: ", "IDLE");
-      break;
-      case CHARGING: SmartDashboard.putString("FLYWHEEL MODE: ", "CHARGING");
-      break;
-      case CHARGED: SmartDashboard.putString("FLYWHEEL MODE: ", "CHARGED");
-      break;
-      case OFF: SmartDashboard.putString("FLYWHEEL MODE: ", "OFF");
-      break;
-      default: SmartDashboard.putString("FLYWHEEL MODE: ", "ERROR!");
-
-
+    switch (shooter.getFlywheelState()) {
+      case IDLE:
+        SmartDashboard.putString("FLYWHEEL MODE: ", "IDLE");
+        break;
+      case CHARGING:
+        SmartDashboard.putString("FLYWHEEL MODE: ", "CHARGING");
+        break;
+      case CHARGED:
+        SmartDashboard.putString("FLYWHEEL MODE: ", "CHARGED");
+        break;
+      case OFF:
+        SmartDashboard.putString("FLYWHEEL MODE: ", "OFF");
+        break;
+      default:
+        SmartDashboard.putString("FLYWHEEL MODE: ", "ERROR!");
 
     }
     // climbProg[0] = climber.climbSequenceTotal;
     // climbProg[1] = climber.climbSequenceProgress;
     // SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
     // UsbCamera usbCamera = new UsbCamera("USB Camera 0", 0);
-    //     CameraServer.startAutomaticCapture(usbCamera);
+    // CameraServer.startAutomaticCapture(usbCamera);
 
-    //     // Creates the CvSink and connects it to the UsbCamera
-    //     CvSink cvSink = CameraServer.getVideo();
-        
-    //     // Creates the CvSource and MjpegServer [2] and connects them
-    //     CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
+    // // Creates the CvSink and connects it to the UsbCamera
+    // CvSink cvSink = CameraServer.getVideo();
+
+    // // Creates the CvSource and MjpegServer [2] and connects them
+    // CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
   }
 }
