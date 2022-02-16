@@ -26,7 +26,7 @@ public class Intake extends SubsystemBase {
         intakeMain = new WPI_TalonSRX(Constants.INTAKEMAIN_ID);
         indexerL = new WPI_TalonSRX(Constants.INTAKE_L_ID);
         indexerR = new WPI_TalonSRX(Constants.INTAKE_R_ID);
-        intakeSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
+        intakeSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
         intakeState = false;
         indexerHopperState = false;

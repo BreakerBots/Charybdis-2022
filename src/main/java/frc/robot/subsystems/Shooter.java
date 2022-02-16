@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
     flywheel = new MotorControllerGroup(shooterL, shooterR);
-    shooterSol = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 
+    shooterSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM, 
                 Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
   }
 

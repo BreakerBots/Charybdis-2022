@@ -37,9 +37,9 @@ public class Climber extends SubsystemBase {
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
     climbMotors = new MotorControllerGroup(climberL, climberR);
-    climbSolL = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
+    climbSolL = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
     Constants.CLIMBSOL_L_FWD, Constants.CLIMBSOL_L_REV);
-    climbSolR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
+    climbSolR = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
     Constants.CLIMBSOL_R_FWD, Constants.CLIMBSOL_R_REV);
   }
 
