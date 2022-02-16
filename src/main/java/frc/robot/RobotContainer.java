@@ -53,7 +53,7 @@ public class RobotContainer {
   // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final SmartDashboardControl dashbordSys = new SmartDashboardControl(shooterSys, intakeSys);
+  private final SmartDashboardControl dashbordSys = new SmartDashboardControl(compressorSys, shooterSys, intakeSys);
 
   private final DriveWithJoystick driveWithJoystick;
 

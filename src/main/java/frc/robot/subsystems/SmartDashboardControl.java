@@ -12,17 +12,20 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.devices.AirCompressor;
 
 public class SmartDashboardControl extends SubsystemBase {
   /** Creates a new SmartDashbord. */
-  Shooter shooter;
-  Intake intake;
-  Climber climber;
+  private Shooter shooter;
+  private Intake intake;
+  private AirCompressor compressor;
+  private Climber climber;
   //private double[] climbProg = new double[1];
   
-  public SmartDashboardControl(Shooter shooterArg, Intake intakeArg) { //Climber climbArg
+  public SmartDashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg) { //Climber climbArg
     intake = intakeArg;
     shooter = shooterArg;
+    compressor = compressorArg;
     // climber = climbArg;
   }
 
@@ -39,7 +42,8 @@ public class SmartDashboardControl extends SubsystemBase {
       break;
       default: SmartDashboard.putString("SHOOTER MODE: ", "ERROR!");
     }
-    SmartDashboard.putBoolean("INTAKEING: ", intake.intakeState);
+    SmartDashboard.putBoolean("INTAKE: ", intake.intakeState);
+    SmartDashboard.putBoolean("Compressor: ", compressor.getCompressorState());
     // climbProg[0] = climber.climbSequenceTotal;
     // climbProg[1] = climber.climbSequenceProgress;
     // SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
