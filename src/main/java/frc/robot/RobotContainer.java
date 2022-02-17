@@ -105,6 +105,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return 
     //new FLywheelTest(15, 0.55, shooterSys);
-     new ArmMoveTest(0, 0, false, climbSys)
+     new ArmMoveTest(xboxSys.getRightY(), 999, false, climbSys);
   }
 }
