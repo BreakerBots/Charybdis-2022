@@ -11,7 +11,7 @@ import frc.robot.subsystems.Climber;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PivotClimb extends InstantCommand {
-  Climber climber;
+  private Climber climber;
   /** Toggles climber pistons to move arms between extended and retracted positions */
   public PivotClimb(Climber climbArg) {
     // Use addRequirements() here to declare subsystem dependencies.

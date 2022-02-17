@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 public class MoveClimb extends CommandBase {
-  Climber climber;
-  double target;
+  private Climber climber;
+  private double target;
   /** Uses PID to move climber and robot to set distance 
    * (NOTE: distance base on motor ticks and winch extension, 
    * does not use actual climber extension distance) */
