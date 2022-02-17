@@ -22,13 +22,7 @@ public class Climber extends SubsystemBase {
   private DoubleSolenoid climbSolR;
   public PIDController climbPID;
   private final double artClimbFeedForward = 0.3;
-  enum ClimberState {
-    RETRACTED,
-    MOVING,
-    EXTENDED
-  }
   // 0 = retracted, 1 = extending/retracting, 2 = extended
-  public ClimberState climbState;
   public boolean climbSolState; //true is extended
   public int climbSequenceTotal;
   public int climbSequenceProgress;
@@ -47,15 +41,6 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-      if (getClimbTicks() < Constants.CLIMB_RET_THRESH) {
-        climbState = ClimberState.RETRACTED;
-      }
-      else if (getClimbTicks() > Constants.CLIMB_EXT_THRESH) {
-        climbState = ClimberState.EXTENDED;
-      }
-      else {
-        climbState = ClimberState.MOVING;
-      }
 
       if (climbSequenceProgress == climbSequenceTotal) {
         System.out.println("CLIMB SEQUENCE COMPLETE!");
@@ -83,6 +68,10 @@ public class Climber extends SubsystemBase {
       climbSolR.set(Value.kReverse);
       climbSolState = true;
     }
+  }
+/** Returns rounded value for the precent the climber is currently extended or retracted relative to its max value */
+  public double getClimbExtPrct() {
+    return Math.round((getClimbTicks() * 100) / Constants.CLIMB_EXT_THRESH);
   }
 
 

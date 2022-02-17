@@ -52,6 +52,7 @@ public class ShootAll extends CommandBase {
     // STOP SETTING FLYWHEEL STATES! REWORK LOGIC!
     cycleCount++;
     if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
+      shooter.isShooting = true;
       hopper.hopperOn();
       intake.lIndexerHopper();
       System.out.println("SHOOTER STARTED!");
@@ -74,6 +75,7 @@ public class ShootAll extends CommandBase {
   public void end(boolean interrupted) {
     shooter.resetFlywheelPID();
     cycleCount = 0;
+    shooter.isShooting = false;
   }
 
   // Returns true when the command should end.

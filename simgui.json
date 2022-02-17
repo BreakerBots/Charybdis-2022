@@ -4,6 +4,7 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/AirCompressor": "Subsystem",
       "/LiveWindow/Drive": "Subsystem",
+      "/LiveWindow/FMS_Handler": "Subsystem",
       "/LiveWindow/Hopper": "Subsystem",
       "/LiveWindow/IMU": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
@@ -21,6 +22,11 @@
       "/LiveWindow/Ungrouped/Talon SRX [26]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [27]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [30]": "Motor Controller"
+    }
+  },
+  "NetworkTables": {
+    "SmartDashboard": {
+      "open": true
     }
   }
 }

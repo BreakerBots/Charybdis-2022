@@ -42,6 +42,7 @@ public class Shooter extends SubsystemBase {
   // public boolean autoShoot; Remove due to being unused.
   private DoubleSolenoid shooterSol;
   private Hopper hopper;
+  public boolean isShooting = false;
 
   public Shooter(Hopper hopperArg) {
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,

@@ -33,6 +33,16 @@ public class Intake extends SubsystemBase {
         indexerHopperState = false;
     }
 
+    public void extendIntakeArm() {
+        intakeSol.set(Value.kForward);
+        intakeSolState = true;
+    }
+
+    public void retractIntakeArm() {
+        intakeSol.set(Value.kReverse);
+        intakeSolState = false;
+    }
+
     /** Extends intake arm and spins the intake and indexer */
     public void activateIntake() {
         intakeMain.set(Constants.INTAKESPEED);
@@ -40,8 +50,7 @@ public class Intake extends SubsystemBase {
         indexerR.set(Constants.R_SORTESPEED);
         intakeState = true;
         if (!intakeSolState) {
-            intakeSol.set(Value.kForward);
-            intakeSolState = true;
+            extendIntakeArm();
         }
     }
 
@@ -54,16 +63,6 @@ public class Intake extends SubsystemBase {
         indexerHopperState = false;
         intakeState = false;
         System.out.println("INTAKE OFF CALLED!");
-    }
-
-    public void extendIntakeArm() {
-        intakeSol.set(Value.kForward);
-        intakeSolState = true;
-    }
-
-    public void retractIntakeArm() {
-        intakeSol.set(Value.kReverse);
-        intakeSolState = false;
     }
 
     public void lIndexerHopper() {
