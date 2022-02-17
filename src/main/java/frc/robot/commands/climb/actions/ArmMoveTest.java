@@ -6,21 +6,22 @@ package frc.robot.commands.climb.actions;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Climber;
 
 public class ArmMoveTest extends CommandBase {
   /** Creates a new ArmMoveTest. */
-  private double armSpd;
   private Climber climb;
   private double time;
   private long cycleCount;
   private boolean isInGroup;
-  public ArmMoveTest(double speedArg, double secArg, boolean isGroupedArg, Climber climbArg) {
-    armSpd = speedArg;
+  private XboxController xbox;
+  public ArmMoveTest(XboxController xboxArg, double secArg, boolean isGroupedArg, Climber climbArg) {
     isInGroup = isGroupedArg;
     time = secArg * 50;
+    xbox = xboxArg;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -32,7 +33,7 @@ public class ArmMoveTest extends CommandBase {
   @Override
   public void execute() {
     cycleCount ++;
-    climb.setManualArmSpd(armSpd);
+    climb.setManualArmSpd(xbox.getRightY());
   }
 
   @Override

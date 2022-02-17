@@ -89,7 +89,7 @@ public class RobotContainer {
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
-    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ArmMoveTest(xboxSys.getRightY(), 60, false, climbSys));
+    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ArmMoveTest(xboxSys, 60, false, climbSys));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys));
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
