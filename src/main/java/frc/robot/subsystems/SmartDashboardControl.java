@@ -51,8 +51,8 @@ public class SmartDashboardControl extends SubsystemBase {
     SmartDashboard.putString("FLYWHEEL", shooter.getFlywheelState().toString());
     SmartDashboard.putBoolean("SHOOTING", shooter.isShooting);
     //intake widgets
-    SmartDashboard.putBoolean("INTAKEING", intake.intakeState);
-    SmartDashboard.putBoolean("ARM EXTENDED", intake.intakeSolState);
+    SmartDashboard.putBoolean("INTAKING", intake.intakeIsRunning());
+    SmartDashboard.putBoolean("ARM EXTENDED", intake.armIsExtended());
     //compressor widgets
     SmartDashboard.putBoolean("COMPRESSOR", compressor.getCompressorState());
     // eletrical widgets

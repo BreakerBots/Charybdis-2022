@@ -51,7 +51,7 @@ public class IntakeHopperIndexerTest extends CommandBase {
   @Override
   public void execute() {
     cycleCount++;
-    hopper.hopperOn();
+    hopper.activateHopper();
     intake.activateIntake();
     
     hopperStaAvg = BreakerMath.rollingAvg(hopperStaAvg, hopper.getHopperSta());
@@ -76,7 +76,7 @@ public class IntakeHopperIndexerTest extends CommandBase {
       + " RIGHT INDEXER STATOR: " + indexRStaAvg + " RIGHT INDEXER SUPPLY: " + indexRSupAvg + "\n"
       + " HOPPER STATOR: " + hopperStaAvg + " HOPPER SUPPLY: " + hopperSupAvg + "\n\n"
     );
-    hopper.hopperOff();
+    hopper.deactivateHopper();
     intake.deactivateIntake();
     cycleCount = 0;
   }

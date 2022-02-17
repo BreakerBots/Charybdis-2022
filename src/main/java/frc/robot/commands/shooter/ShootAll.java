@@ -53,8 +53,8 @@ public class ShootAll extends CommandBase {
     cycleCount++;
     if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
       shooter.isShooting = true;
-      hopper.hopperOn();
-      intake.lIndexerHopper();
+      hopper.activateHopper();
+      intake.toggleHopperFeed();
       System.out.println("SHOOTER STARTED!");
     }
     System.out.println(shooter.getFlywheelTPS());
@@ -62,7 +62,7 @@ public class ShootAll extends CommandBase {
       timedStopCount++;
     }
     if (!hopper.slot2IsFull() && !hopper.slot1IsFull() && timedStopCount > 150) { // && hopper.slot1IsFull() == false 
-      hopper.hopperOff();
+      hopper.deactivateHopper();
       intake.deactivateIntake();
       timedStopCount = 0;
       shooter.flyweelOff();
@@ -86,13 +86,13 @@ public class ShootAll extends CommandBase {
       return true;
     } else if (xbox.getStartButtonPressed()) {
       System.out.println("SHOOTER MANUALY STOPED!");
-      hopper.hopperOff();
+      hopper.deactivateHopper();
       shooter.flyweelOff();
       intake.deactivateIntake();
       return true;
     } else if (cycleCount > 400) {
       System.out.println("SHOOTER TIMED OUT!");
-      hopper.hopperOff();
+      hopper.deactivateHopper();
       shooter.flyweelOff();
       intake.deactivateIntake();
       return true;

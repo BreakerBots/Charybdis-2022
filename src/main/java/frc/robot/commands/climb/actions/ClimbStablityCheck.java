@@ -32,7 +32,7 @@ public class ClimbStablityCheck extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOLR && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOLR && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOLR) {
+    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOL && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOL && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOL) {
       stableTimeCount ++;
     } else {
       stableTimeCount = 0;
@@ -50,7 +50,7 @@ public class ClimbStablityCheck extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOLR && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOLR && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOLR && stableTimeCount > Constants.CLIMB_MIN_STABLE_TIME) {
+    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOL && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOL && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOL && stableTimeCount > Constants.CLIMB_MIN_STABLE_TIME) {
       return true;
     }
     else {

@@ -18,7 +18,7 @@ package frc.robot;
  */
 
 public final class Constants {
-    /** Filler ID for unused CAN devices */
+    /** General filler constant */
     public static final int FILLER = 99;
     // Time constants
     public static final double MS_PER_CYCLE = 20;
@@ -28,69 +28,6 @@ public final class Constants {
     public static final double TALON_FX_TICKS = 2048.0;
     public static final double MAX_SPD_VOLTS_FX = FILLER;
 
-    // Drivetrain constants
-    /** Gear ratio for drivetrain (rotation of motors to rotation of wheel) */
-    public static final double DRIVE_GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49
-    /** Diameter of Colson wheel, in inches */
-    public static final double COLSON_DIAMETER = 4;
-    /** Circumference of Colson wheel, in inches */
-    public static final double COLSON_CIRCUMFERENCE = COLSON_DIAMETER * Math.PI;
-    /** Ticks per rotation of Colson wheels on drivetrain */
-    public static final double DRIVE_TICKS_PER_ROTATION = (TALON_FX_TICKS * DRIVE_GEAR_RATIO);
-    /** Number of Talon FX ticks per inch driven */
-    public static final double DRIVE_TICKS_PER_INCH = DRIVE_TICKS_PER_ROTATION / (COLSON_CIRCUMFERENCE);
-
-    // IMU constants
-    public static final int IMU_ID = 10; // Alpha = 10
-    public static boolean IMU_INVERTED = true;
-    // Drive motor IDs
-    public static final int L1_ID = 11; // Alpha = 11 // scylla = 12
-    public static final int L2_ID = 12; // Alpha = 12 // scylla = 11
-    public static final int L3_ID = 13; // Alpha = 13 // scylla = 13
-    public static final int R1_ID = 14; // Alpha = 14 // scylla = 15
-    public static final int R2_ID = 15; // Alpha = 15 // scylla = 14
-    public static final int R3_ID = 16; // Alpha = 16 // scylla = 16
-    // AngleController PID
-    public static final double KP_ANG = 0.02;
-    public static final double KI_ANG = 0.0;
-    public static final double KD_ANG = 0.0;
-    public static final double KP_DIST = 0.05;
-    public static final double KI_DIST = 0;
-    public static final double KD_DIST = 0;
-    public static final double ANG_POS_TOLERANCE = 2.5;
-    public static final double ANG_VEL_TOLERANCE = 1;
-    public static final double ANG_FEEDFWD = 0.1;
-    public static final double DIST_POS_TOLERANCE = 1;
-    public static final double DIST_VEL_TOLERANCE = 0.1;
-    // intake motor speeds
-    public static final double INTAKESPEED = -1; // -1
-    public static final double R_SORTESPEED = 0.8; // 1
-    public static final double L_SORTESPEED = 0.8; // 0.8
-    // intake solonoid IDs
-    public static final int INTAKESOL_FWD = 0;
-    public static final int INTAKESOL_REV = 1;
-    // intake motor IDs
-    public static final int INTAKEMAIN_ID = 30;
-    public static final int INTAKE_L_ID = 27;
-    public static final int INTAKE_R_ID = 26;
-    public static final int PWR_DISTR = 0;
-    // shooter motor IDs
-    public static final int SHOOTER_L_ID = 20;
-    public static final int SHOOTER_R_ID = 21;
-    // shooter solonoid IDs
-    public static final int SHOOTERSOL_FWD = 2;
-    public static final int SHOOTERSOL_REV = 3;
-    // shooter motor speeds
-    public static final double UP_SHOOTERSPEED = 0.44; // Upper is 0.48
-    public static final double LOW_SHOOTERSPEED = 0.25; // Hood must be up
-    public static final double LAUNCH_SHOOTERSPEED = 0.55;
-    // Speed in RPM
-    public static final int FLYWHEEL_MAX_SPEED = 1780;
-    public static final double FLYWHEEL_TAR_SPEED_PREC = 0.15;
-    // Drive feedForward values
-    public static final double KS_DRIVE = 4.0089;
-    public static final double KV_DRIVE = 0.029497;
-    public static final double KA_DRIVE = -0.71256;
     // Xbox button constants
     public static final int A = 1;
     public static final int B = 2;
@@ -114,55 +51,130 @@ public final class Constants {
     public static final int RIGHT = 90;
     public static final int DOWN = 180;
     public static final int LEFT = 270;
-    // hopper motor ID
+
+    // Compressor constants
+    /** CAN ID for robot's Pneumatics Control Module (PCM) */
+    public static final int PCM_ID = 5;
+    public static final double MIN_PSI = 70;
+    public static final double MAX_PSI = 120;
+
+    // Drivetrain constants
+    // Angle and distance PID
+    public static final double KP_ANG = 0.02;
+    public static final double KI_ANG = 0.0;
+    public static final double KD_ANG = 0.0;
+    public static final double KP_DIST = 0.05;
+    public static final double KI_DIST = 0;
+    public static final double KD_DIST = 0;
+    public static final double ANG_POS_TOLERANCE = 2.5;
+    public static final double ANG_VEL_TOLERANCE = 1;
+    public static final double DIST_POS_TOLERANCE = 1;
+    public static final double DIST_VEL_TOLERANCE = 0.1;
+    // Drive feedForward values
+    public static final double KS_DRIVE = 4.0089;
+    public static final double KV_DRIVE = 0.029497;
+    public static final double KA_DRIVE = -0.71256;
+    public static final double ANG_FEEDFWD = 0.1;
+    // Drive motor IDs
+    public static final int L1_ID = 11;
+    public static final int L2_ID = 12;
+    public static final int L3_ID = 13;
+    public static final int R1_ID = 14;
+    public static final int R2_ID = 15;
+    public static final int R3_ID = 16;
+    // Drive specs 
+    /** Gear ratio for drivetrain (rotation of motors to rotation of wheel) */
+    public static final double DRIVE_GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49
+    /** Diameter of Colson wheel, in inches */
+    public static final double COLSON_DIAMETER = 4;
+    /** Circumference of Colson wheel, in inches */
+    public static final double COLSON_CIRCUMFERENCE = COLSON_DIAMETER * Math.PI;
+    /** Ticks per rotation of Colson wheels on drivetrain */
+    public static final double DRIVE_TICKS_PER_ROTATION = (TALON_FX_TICKS * DRIVE_GEAR_RATIO);
+    /** Number of Talon FX ticks per inch driven */
+    public static final double DRIVE_TICKS_PER_INCH = DRIVE_TICKS_PER_ROTATION / (COLSON_CIRCUMFERENCE);
+
+    // IMU constants
+    public static final int IMU_ID = 10; // Alpha = 10
+    public static boolean IMU_INVERTED = true;
+
+    // Intake constants
+    // Intake motor speeds
+    public static final double INTAKE_SPD = 1; // 1
+    public static final double R_INDEX_SPD = 0.8; // 1
+    public static final double L_INDEX_SPD = 0.8; // 0.8
+    // Intake motor IDs
+    public static final int INTAKEMAIN_ID = 30;
+    public static final int INTAKE_L_ID = 27;
+    public static final int INTAKE_R_ID = 26;
+    public static final int PWR_DISTR = 0;
+    // Intake Solonoid IDs
+    public static final int INTAKESOL_FWD = 0;
+    public static final int INTAKESOL_REV = 1;
+
+    // Hopper constants
+    // Hopper motor ID
     public static final int HOPPER_ID = 19;
-    // hopper ball position sensor IDs
-    public static final int HOPPER_P1_ID = 9;
-    public static final int HOPPER_P2_ID = FILLER;
-    // hopper info
+    // Hopper ball position sensor channels
+    public static final int SLOT_1_CHANNEL = 9;
+    public static final int SLOT_2_CHANNEL = 8;
+    // Amount of delay on hopper
+    public static final long HOPPER_DELAY_CYCLES = 0;
+    // Hopper specs
     public static final double HOPPERSPEED = 0.6; // 0.8
     public static final double HOPPER_WHEEL_DIAMETER = 1;
     public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
     public static final double HOPPER_GEAR_RATIO = FILLER;
     public static final double HOPPER_TICKS_PER_INCH = (TALON_FX_TICKS * HOPPER_GEAR_RATIO)
             / (HOPPER_WHEEL_CIRCUMFERENCE);
-    // climber motor IDs
+
+    // Shooter constants
+    // Shooter motor speeds
+    public static final double HUB_SHOOT_SPD = 0.44; // Upper is 0.48
+    public static final double LOW_SHOOT_SPD = 0.25; // Hood must be up
+    public static final double LAUNCH_SHOOT_SPD = 0.55; // Hood up
+    public static final double FLYWHEEL_IDLE_SPEED = 0.5; // Idle for all states (FIX!)
+    public static final double FLYWHEEL_CANCEL_RPM = 0;
+    // Flywheel speed in RPM
+    public static final int FLYWHEEL_MAX_SPEED = 1780;
+    public static final double FLYWHEEL_TGT_SPEED_PRCT = 0.15; // Target speed percent, is deprecated?
+    // Shooter motor IDs
+    public static final int SHOOTER_L_ID = 20;
+    public static final int SHOOTER_R_ID = 21;
+    // Shooter Solonoid IDs
+    public static final int SHOOTERSOL_FWD = 2;
+    public static final int SHOOTERSOL_REV = 3;
+    public static final double FLYWHEEL_KP = 0.5;
+    public static final double FLYWHEEL_KI = 0;
+    public static final double FLYWHEEL_KD = 0.3;
+    
+    // Climber constants
+    // Climber motor IDs
     public static final int CLIMBER_L_ID = FILLER;
     public static final int CLIMBER_R_ID = FILLER;
-    // climber solonoid IDs
+    // Climber Solonoid IDs
     public static final int CLIMBSOL_L_FWD = FILLER;
     public static final int CLIMBSOL_L_REV = FILLER;
     public static final int CLIMBSOL_R_FWD = FILLER;
     public static final int CLIMBSOL_R_REV = FILLER;
-    // trigger thresholds for climber states (in ticks)
+    // Trigger thresholds for climber states (in ticks)
     public static final double CLIMB_RET_THRESH = 0;
     public static final double CLIMB_EXT_THRESH = 0;
-    // PID vals for climber
+    // PID values for climber
     public static final double KP_CLIMB = FILLER;
     public static final double KI_CLIMB = FILLER;
     public static final double KD_CLIMB = FILLER;
-    // Climber stablity tollerences
-    public static final double CLIMB_PITCH_TOLR = 5;
-    public static final double CLIMB_YAW_TOLR = 5;
-    public static final double CLIMB_ROLL_TOLR = 5;
-    // Climber Extension vlaues (ticks)
+    // Climber stablity tolerences
+    public static final double CLIMB_PITCH_TOL = 5;
+    public static final double CLIMB_YAW_TOL = 5;
+    public static final double CLIMB_ROLL_TOL = 5;
+    public static final long CLIMB_MIN_STABLE_TIME = 150;
+    // Climber extension values (ticks)
     public static final double CLIMB_FULL_EXT_DIST = FILLER;
     public static final double CLIMB_FULL_RET_DIST = FILLER;
     public static final double CLIMB_MIRACLE_GRAB_EXT_DIST = FILLER;
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
-    // Compressor closed-loop-controle pressure values
-    /** CAN ID for robot's Pneumatics Control Module (PCM) */
-    public static final int PCM_ID = 5;
-    public static final double MIN_PSI = 70;
-    public static final double MAX_PSI = 120;
-    public static final long HOPPER_DELAY_CYCLES = 0;
-    public static final double FLYWHEEL_CANCEL_RPM = 0;
-    public static final long CLIMB_MIN_STABLE_TIME = 150;
-    public static final double FLYWHEEL_IDLE_SPEED = 0.5;
-    public static final double FLYWHEEL_KP = 0.5;
-    public static final double FLYWHEEL_KI = 0;
-    public static final double FLYWHEEL_KD = 0.3;
 
 }

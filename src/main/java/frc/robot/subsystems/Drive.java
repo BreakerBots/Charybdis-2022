@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drive extends SubsystemBase {
+  // Left motors (falcons)
   private WPI_TalonFX l1;
   private WPI_TalonFX l2;
   private WPI_TalonFX l3;
@@ -26,7 +27,7 @@ public class Drive extends SubsystemBase {
   private MotorControllerGroup driveR;
   // Drivetrian
   private DifferentialDrive driveTrainDiff;
-  /** Creates a new Drive. */
+  // PIDs and stuff
   public PIDController anglePID;
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
@@ -66,12 +67,17 @@ public class Drive extends SubsystemBase {
       logSpd *= 0.85;
       turnSpd *= 0.85;
     }
-    // System.out.println("netSpd: " + netSpd + "  logSpd: " + logSpd + " turnSpd: " + turnSpd + "  logTurn: ");
+    // System.out.println("netSpd: " + netSpd + " logSpd: " + logSpd + " turnSpd: "
+    // + turnSpd + " logTurn: ");
     driveTrainDiff.arcadeDrive(logSpd, turnSpd); // Calculates speed and turn outputs
-    // System.out.println("L1: " + l1.getSupplyCurrent() + " L2: " + l2.getSupplyCurrent() + " L3: " + l3.getSupplyCurrent());
-    // System.out.println("R1: " + r1.getSupplyCurrent() + " R2: " + r2.getSupplyCurrent() + " R3: " + r3.getSupplyCurrent());
-    // System.out.println("L1Stat: " + l1.getStatorCurrent() + " L2Stat: " + l2.getStatorCurrent() + " L3Stat: " + l3.getStatorCurrent());
-    // System.out.println("R1Stat: " + r1.getStatorCurrent() + " R2Stat: " + r2.getStatorCurrent() + " R3Stat: " + r3.getStatorCurrent());
+    // System.out.println("L1: " + l1.getSupplyCurrent() + " L2: " +
+    // l2.getSupplyCurrent() + " L3: " + l3.getSupplyCurrent());
+    // System.out.println("R1: " + r1.getSupplyCurrent() + " R2: " +
+    // r2.getSupplyCurrent() + " R3: " + r3.getSupplyCurrent());
+    // System.out.println("L1Stat: " + l1.getStatorCurrent() + " L2Stat: " +
+    // l2.getStatorCurrent() + " L3Stat: " + l3.getStatorCurrent());
+    // System.out.println("R1Stat: " + r1.getStatorCurrent() + " R2Stat: " +
+    // r2.getStatorCurrent() + " R3Stat: " + r3.getStatorCurrent());
   }
 
   public void autoMove(double netSpd, double turnSpd) {
@@ -81,14 +87,12 @@ public class Drive extends SubsystemBase {
     }
     if (netSpd > 0) {
       netSpd += artLinearFeedForward;
-    }
-    else {
+    } else {
       netSpd -= artLinearFeedForward;
     }
     if (turnSpd > 0) {
       turnSpd += artAngleFeedForward;
-    }
-    else {
+    } else {
       turnSpd -= artAngleFeedForward;
     }
     driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
@@ -140,26 +144,40 @@ public class Drive extends SubsystemBase {
 
   public double getStatorCurrent(int motorID) {
     switch (motorID) {
-      case Constants.L1_ID:  return l1.getStatorCurrent();
-      case Constants.L2_ID:  return l2.getStatorCurrent();
-      case Constants.L3_ID:  return l3.getStatorCurrent();
-      case Constants.R1_ID:  return r1.getStatorCurrent();
-      case Constants.R2_ID:  return r2.getStatorCurrent();
-      case Constants.R3_ID:  return r3.getStatorCurrent();
-      default: break;
+      case Constants.L1_ID:
+        return l1.getStatorCurrent();
+      case Constants.L2_ID:
+        return l2.getStatorCurrent();
+      case Constants.L3_ID:
+        return l3.getStatorCurrent();
+      case Constants.R1_ID:
+        return r1.getStatorCurrent();
+      case Constants.R2_ID:
+        return r2.getStatorCurrent();
+      case Constants.R3_ID:
+        return r3.getStatorCurrent();
+      default:
+        break;
     }
     return 0;
   }
 
   public double getSupplyCurrent(int motorID) {
     switch (motorID) {
-      case Constants.L1_ID:  return l1.getSupplyCurrent();
-      case Constants.L2_ID:  return l2.getSupplyCurrent();
-      case Constants.L3_ID:  return l3.getSupplyCurrent();
-      case Constants.R1_ID:  return r1.getSupplyCurrent();
-      case Constants.R2_ID:  return r2.getSupplyCurrent();
-      case Constants.R3_ID:  return r3.getSupplyCurrent();
-      default: break;
+      case Constants.L1_ID:
+        return l1.getSupplyCurrent();
+      case Constants.L2_ID:
+        return l2.getSupplyCurrent();
+      case Constants.L3_ID:
+        return l3.getSupplyCurrent();
+      case Constants.R1_ID:
+        return r1.getSupplyCurrent();
+      case Constants.R2_ID:
+        return r2.getSupplyCurrent();
+      case Constants.R3_ID:
+        return r3.getSupplyCurrent();
+      default:
+        break;
     }
     return 0;
   }

@@ -12,37 +12,52 @@ import frc.robot.Constants;
 
 /** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
-  public boolean hopperState;
+  private boolean hopperIsRunning;
   private WPI_TalonSRX hopperMotor;
   private DigitalInput slot1;
   private DigitalInput slot2;
-  Intake intake;
+  private Intake intake;
   private long pauseCountA;
   private long pauseCountB;
 
   public Hopper(Intake intakeArg) {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
-    slot1 = new DigitalInput(9);
-    slot2 = new DigitalInput(8);
+    slot1 = new DigitalInput(Constants.SLOT_1_CHANNEL);
+    slot2 = new DigitalInput(Constants.SLOT_2_CHANNEL);
   }
 
-  public void hopperOn() {
+  /** Turns on hopper */
+  public void activateHopper() {
     hopperMotor.set(Constants.HOPPERSPEED);
-    hopperState = true;
-    // return hopperState = true;
+    hopperIsRunning = true;
   }
 
-  public void hopperOff() {
+  /** Turns off hopper */
+  public void deactivateHopper() {
     hopperMotor.set(0);
-    hopperState = false;
+    hopperIsRunning = false;
   }
 
+  public boolean hopperIsRunning() {
+    return hopperIsRunning;
+  }
+
+  /**
+   * Top slot of hopper.
+   * 
+   * @return true if full, false if empty.
+   */
   public boolean slot1IsFull() {
     return !(slot1.get());
 
   }
 
+  /**
+   * Bottom slot of hopper.
+   * 
+   * @return true if full, false if empty.
+   */
   public boolean slot2IsFull() {
     return !(slot2.get());
   }
@@ -65,29 +80,31 @@ public class Hopper extends SubsystemBase {
     return hopperMotor.getStatorCurrent();
   }
 
-  @Override
-  public void periodic() {
-    // System.out.println("hop 1: " + slot1IsFull());
-    // System.out.println("hop 2: " + slot2IsFull());
-    if (intake.intakeState) {
-      if (slot1IsFull() && !slot2IsFull()) {
-        hopperOn();
-      } else if (!slot1IsFull() && slot2IsFull()) {
+  public void hopperLogicLoop() {
+    if (intake.intakeIsRunning()) {
+      if (slot1IsFull() && !slot2IsFull()) { // Only bottom is full
+        activateHopper(); // Turns on hopper
+      } else if (!slot1IsFull() && slot2IsFull()) { // Only top is full
         pauseCountA++;
-        if (pauseCountA > Constants.HOPPER_DELAY_CYCLES) {
-          hopperOff();
+        if (pauseCountA > Constants.HOPPER_DELAY_CYCLES) { // Waits to turn off hopper
+          deactivateHopper();
           pauseCountA = 0;
         }
-      } else if (!slot1IsFull() && !slot2IsFull()) {
-        hopperOff();
-      } else if (slot1IsFull() && slot2IsFull()) {
+      } else if (!slot1IsFull() && !slot2IsFull()) { // Both ar empty
+        deactivateHopper();
+      } else if (slot1IsFull() && slot2IsFull()) { // Both are full
         pauseCountB++;
-        if (pauseCountB > 25) {
+        if (pauseCountB > 25) { // Waits to turn off hopper and intake.
           intake.deactivateIntake();
-          hopperOff();
+          deactivateHopper();
           pauseCountB = 0;
         }
       }
     }
+  }
+
+  @Override
+  public void periodic() {
+    hopperLogicLoop();
   }
 }

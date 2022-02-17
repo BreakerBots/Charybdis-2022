@@ -14,12 +14,16 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+/** Climber subsystem for robot. */
 public class Climber extends SubsystemBase {
+  // Extend/retracts climbing arms.
   private WPI_TalonFX climberL;
   private WPI_TalonFX climberR;
   private MotorControllerGroup climbMotors;
+  // Rotates the climb arms.
   private DoubleSolenoid climbSolL;
   private DoubleSolenoid climbSolR;
+  // Makes sure we get to desired position
   public PIDController climbPID;
   private final double artClimbFeedForward = 0.3;
   // 0 = retracted, 1 = extending/retracting, 2 = extended

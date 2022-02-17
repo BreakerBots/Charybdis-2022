@@ -37,7 +37,7 @@ public class Shooter extends SubsystemBase {
   private boolean shooterIsUp;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
-  private double flyTgtSpdPrct = Constants.UP_SHOOTERSPEED;
+  private double flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
   private MotorControllerGroup flywheel;
   // public boolean autoShoot; Remove due to being unused.
   private DoubleSolenoid shooterSol;
@@ -144,20 +144,20 @@ public class Shooter extends SubsystemBase {
         if (shooterIsUp) {
           shooterDown();
         }
-        flyTgtSpdPrct = Constants.UP_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
         break;
       case LOW:
         if (!shooterIsUp) {
           shooterUp();
         }
-        flyTgtSpdPrct = Constants.LOW_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.LOW_SHOOT_SPD;
         break;
       case LAUNCH:
-        flyTgtSpdPrct = Constants.LAUNCH_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.LAUNCH_SHOOT_SPD;
         break;
       default:
         shooterDown();
-        flyTgtSpdPrct = Constants.UP_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
     }
     if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
       double flySpd;

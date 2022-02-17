@@ -13,76 +13,112 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-    public boolean StopIntakeAuto = false;
-    public boolean intakeState = false;
-    public boolean intakeSolState = false;
-    public boolean indexerHopperState;
+    private boolean intakeIsRunning = false;
+    private boolean intakeIsExtended = false;
+    private boolean indexerLIsRunning = false;
+    private boolean indexerRIsRunning = false;
     private WPI_TalonSRX indexerL;
     private WPI_TalonSRX indexerR;
     private DoubleSolenoid intakeSol;
-    private WPI_TalonSRX intakeMain;
+    private WPI_TalonSRX intakeMotor;
 
     /** Creates a new Intake. */
     public Intake() {
-        intakeMain = new WPI_TalonSRX(Constants.INTAKEMAIN_ID);
+        intakeMotor = new WPI_TalonSRX(Constants.INTAKEMAIN_ID);
+        intakeMotor.setInverted(true); // Spins backwards
         indexerL = new WPI_TalonSRX(Constants.INTAKE_L_ID);
         indexerR = new WPI_TalonSRX(Constants.INTAKE_R_ID);
         intakeSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
-        intakeState = false;
-        indexerHopperState = false;
+        // intakeIsRunning = false;
+        // indexerIsRunning = false;
     }
 
     public void extendIntakeArm() {
         intakeSol.set(Value.kForward);
-        intakeSolState = true;
+        intakeIsExtended = true;
     }
 
     public void retractIntakeArm() {
         intakeSol.set(Value.kReverse);
-        intakeSolState = false;
+        intakeIsExtended = false;
+    }
+
+    public boolean armIsExtended() {
+        return intakeIsExtended;
+    }
+
+    public void startIntakeMotor() {
+        intakeMotor.set(Constants.INTAKE_SPD);
+        intakeIsRunning = true;
+    }
+
+    public void stopIntakeMotor() {
+        intakeMotor.set(0);
+        intakeIsRunning = false;
+    }
+
+    public boolean intakeIsRunning() {
+        return intakeIsRunning;
+    }
+
+    public void startLeftIndexer() {
+        indexerL.set(Constants.L_INDEX_SPD);
+        indexerLIsRunning = true;
+    }
+
+    public void stopLeftIndexer() {
+        indexerL.set(0);
+        indexerLIsRunning = false;
+    }
+
+    public boolean leftIndexerIsOn() {
+        return indexerLIsRunning;
+    }
+
+    public void startRightIndexer() {
+        indexerR.set(Constants.R_INDEX_SPD);
+        indexerRIsRunning = true;
+    }
+
+    public void stopRightIndexer() {
+        indexerR.set(0);
+        indexerRIsRunning = false;
+    }
+
+    public boolean rightIndexerIsOn() {
+        return indexerRIsRunning;
     }
 
     /** Extends intake arm and spins the intake and indexer */
     public void activateIntake() {
-        intakeMain.set(Constants.INTAKESPEED);
-        indexerL.set(Constants.L_SORTESPEED);
-        indexerR.set(Constants.R_SORTESPEED);
-        intakeState = true;
-        if (!intakeSolState) {
+        startIntakeMotor();
+        startLeftIndexer();
+        startRightIndexer();
+        if (!intakeIsExtended) {
             extendIntakeArm();
         }
     }
 
-    /** Retracts intake arm and turns off the intake and indexer */
+    /** Turns off the intake and indexer */
     public void deactivateIntake() {
-        //intakeSol.set(Value.kReverse);
-        intakeMain.set(0);
-        indexerL.set(0);
-        indexerR.set(0);
-        indexerHopperState = false;
-        intakeState = false;
-        System.out.println("INTAKE OFF CALLED!");
+        stopIntakeMotor();
+        stopLeftIndexer();
+        stopRightIndexer();
     }
 
-    public void lIndexerHopper() {
-        if (intakeState == false && indexerHopperState == false) {
-            indexerL.set(Constants.L_SORTESPEED);
-            indexerHopperState = true;
-        } else if (intakeState == false && indexerHopperState) {
-            indexerL.set(0);
-            indexerHopperState = false;
+    /**
+     * Toggles left indexer on/off when intake is off to feed in balls to the
+     * hopper.
+     */
+    public void toggleHopperFeed() {
+        if (!intakeIsRunning) {
+            if (indexerLIsRunning) {
+                stopLeftIndexer();
+            } else {
+                startLeftIndexer();
+            }
         }
-    }
-
-    public void runHopperFeed() {
-        indexerL.set(Constants.L_SORTESPEED);
-        indexerHopperState = true;
-    }
-
-    public void stopHopperFeed() {
-        indexerL.set(0);
-        indexerHopperState = false;
     }
 
     /**
@@ -91,7 +127,7 @@ public class Intake extends SubsystemBase {
      * @return Supply/input current in amps
      */
     public double getIntakeSup() {
-        return intakeMain.getSupplyCurrent();
+        return intakeMotor.getSupplyCurrent();
     }
 
     /**
@@ -100,7 +136,7 @@ public class Intake extends SubsystemBase {
      * @return Stator/output current in amps
      */
     public double getIntakeSta() {
-        return intakeMain.getStatorCurrent();
+        return intakeMotor.getStatorCurrent();
     }
 
     /**

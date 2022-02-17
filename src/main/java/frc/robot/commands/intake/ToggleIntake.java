@@ -28,9 +28,9 @@ public class ToggleIntake extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (intake.intakeState) {
+    if (intake.intakeIsRunning()) {
       intake.deactivateIntake();
-      hopper.hopperOff();
+      hopper.deactivateHopper();
     } else {
       intake.activateIntake();
       // hopper.hopperOn();
