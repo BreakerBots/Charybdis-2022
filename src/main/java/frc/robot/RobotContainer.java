@@ -18,6 +18,7 @@ import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
+import frc.robot.commands.intake.ToggleIntakeArm;
 import frc.robot.commands.shooter.ChargeThenShoot;
 import frc.robot.commands.shooter.ToggleShooterMode;
 import frc.robot.subsystems.Drive;
@@ -53,7 +54,7 @@ public class RobotContainer {
   // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final SmartDashboardControl dashbordSys = new SmartDashboardControl(compressorSys, shooterSys, intakeSys);
+  private final SmartDashboardControl dashbordSys = new SmartDashboardControl(compressorSys, shooterSys, intakeSys, pdpSys);
 
   private final DriveWithJoystick driveWithJoystick;
 
@@ -82,6 +83,7 @@ public class RobotContainer {
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
+    new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys));
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));

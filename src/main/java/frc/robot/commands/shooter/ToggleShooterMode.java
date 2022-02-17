@@ -33,14 +33,5 @@ public class ToggleShooterMode extends InstantCommand {
         shooter.setShootMode(ShooterMode.UP);
         break;
     }
-    // if (shooter.shooterMode == ShooterMode.UP) {
-    // shooter.shooterMode = ShooterMode.LOW;
-    // } else if (shooter.shooterMode == ShooterMode.LOW) {
-    // shooter.shooterMode = ShooterMode.LAUNCH;
-    // } else if (shooter.shooterMode == ShooterMode.LAUNCH) {
-    // shooter.shooterMode = ShooterMode.UP;
-    // } else {
-    // shooter.shooterMode = ShooterMode.UP;
-    // }
   }
 }

@@ -15,6 +15,7 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
     public boolean StopIntakeAuto = false;
     public boolean intakeState = false;
+    public boolean intakeSolState = false;
     public boolean indexerHopperState;
     private WPI_TalonSRX indexerL;
     private WPI_TalonSRX indexerR;
@@ -34,22 +35,35 @@ public class Intake extends SubsystemBase {
 
     /** Extends intake arm and spins the intake and indexer */
     public void activateIntake() {
-        intakeSol.set(Value.kForward);
         intakeMain.set(Constants.INTAKESPEED);
         indexerL.set(Constants.L_SORTESPEED);
         indexerR.set(Constants.R_SORTESPEED);
         intakeState = true;
+        if (!intakeSolState) {
+            intakeSol.set(Value.kForward);
+            intakeSolState = true;
+        }
     }
 
     /** Retracts intake arm and turns off the intake and indexer */
     public void deactivateIntake() {
-        intakeSol.set(Value.kReverse);
+        //intakeSol.set(Value.kReverse);
         intakeMain.set(0);
         indexerL.set(0);
         indexerR.set(0);
         indexerHopperState = false;
         intakeState = false;
         System.out.println("INTAKE OFF CALLED!");
+    }
+
+    public void extendIntakeArm() {
+        intakeSol.set(Value.kForward);
+        intakeSolState = true;
+    }
+
+    public void retractIntakeArm() {
+        intakeSol.set(Value.kReverse);
+        intakeSolState = false;
     }
 
     public void lIndexerHopper() {

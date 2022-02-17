@@ -4,15 +4,14 @@
 
 package frc.robot.commands.intake;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 
 /** Turns the robot's intake on/off */
-public class ToggleIntake extends CommandBase {
-  Intake intake;
-  Hopper hopper;
-
+public class ToggleIntake extends InstantCommand {
+  private Intake intake;
+  private Hopper hopper;
   /**
    * Creates a new IntakeToggle.
    * 
@@ -36,21 +35,5 @@ public class ToggleIntake extends CommandBase {
       intake.activateIntake();
       // hopper.hopperOn();
     }
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
   }
 }

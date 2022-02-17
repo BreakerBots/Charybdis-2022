@@ -37,7 +37,7 @@ public class Shooter extends SubsystemBase {
   private boolean shooterIsUp;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
-  private double flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
+  private double flyTgtSpdPrct = Constants.UP_SHOOTERSPEED;
   private MotorControllerGroup flywheel;
   // public boolean autoShoot; Remove due to being unused.
   private DoubleSolenoid shooterSol;
@@ -102,11 +102,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getFlywheelTargetSpeed() {
-    return Constants.FLYWHEEL_MAX_SPEED * flyTgtSpdPrec;
+    return Constants.FLYWHEEL_MAX_SPEED * flyTgtSpdPrct;
   }
 
   public double getFlywheelIdleSpeed() {
-    return flyTgtSpdPrec * 0.8;
+    return flyTgtSpdPrct * 0.8;
   }
 
   public ShooterMode getShootMode() {
@@ -143,20 +143,20 @@ public class Shooter extends SubsystemBase {
         if (shooterIsUp) {
           shooterDown();
         }
-        flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.UP_SHOOTERSPEED;
         break;
       case LOW:
         if (!shooterIsUp) {
           shooterUp();
         }
-        flyTgtSpdPrec = Constants.LOW_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.LOW_SHOOTERSPEED;
         break;
       case LAUNCH:
-        flyTgtSpdPrec = Constants.LAUNCH_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.LAUNCH_SHOOTERSPEED;
         break;
       default:
         shooterDown();
-        flyTgtSpdPrec = Constants.UP_SHOOTERSPEED;
+        flyTgtSpdPrct = Constants.UP_SHOOTERSPEED;
     }
     if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
       double flySpd;
