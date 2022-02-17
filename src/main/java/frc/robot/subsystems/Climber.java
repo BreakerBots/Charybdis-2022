@@ -41,6 +41,10 @@ public class Climber extends SubsystemBase {
     Constants.CLIMBSOL_R_FWD, Constants.CLIMBSOL_R_REV);
   }
 
+  public void setManualArmSpd(double speedArg) {
+    climbMotors.set(speedArg);
+  }
+
 
   @Override
   public void periodic() {

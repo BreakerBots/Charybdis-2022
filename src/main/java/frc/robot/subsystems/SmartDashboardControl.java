@@ -31,7 +31,7 @@ public class SmartDashboardControl extends SubsystemBase {
   private Climber climber;
   private PowerDistribution pdp;
   private FMS_Handler fms;
-  // private double[] climbProg = new double[1];
+  private double[] climbProg = new double[2];
 
   public SmartDashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg, PowerDistribution pdpArg, FMS_Handler fmsArg) { // , Climber climbArg
     intake = intakeArg;
@@ -65,10 +65,10 @@ public class SmartDashboardControl extends SubsystemBase {
     SmartDashboard.putNumber("MATCH #", DriverStation.getMatchNumber());
     SmartDashboard.putBoolean("FMS CONNECTED", DriverStation.isFMSAttached());
     // climber widgets
-    // SmartDashboard.putString("CLIMB EXT", "%" + climber.getClimbExtPrct());
-    // climbProg[0] = climber.climbSequenceTotal;
-    // climbProg[1] = climber.climbSequenceProgress;
-    // SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
+    SmartDashboard.putString("CLIMB EXT", "%" + climber.getClimbExtPrct());
+    climbProg[0] = climber.climbSequenceTotal;
+    climbProg[1] = climber.climbSequenceProgress;
+    SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
     // // cameras
     // UsbCamera frontCam = new UsbCamera("Front Camera", 0);
     // UsbCamera backCam = new UsbCamera("Back Camera", 1);

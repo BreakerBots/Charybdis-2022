@@ -134,9 +134,8 @@ public final class Constants {
     public static final double LOW_SHOOT_SPD = 0.25; // Hood must be up
     public static final double LAUNCH_SHOOT_SPD = 0.55; // Hood up
     public static final double FLYWHEEL_CANCEL_RPM = 0;
-    // Flywheel speed in RPM
-    public static final int FLYWHEEL_MAX_RPM = 1780;
-    public static final double FLYWHEEL_TGT_SPEED_PRCT = 0.15; // Target speed percent, is deprecated?
+    // Flywheel speed in TPS
+    public static final int FLYWHEEL_MAX_TPS = 1780;
     // Shooter motor IDs
     public static final int SHOOTER_L_ID = 20;
     public static final int SHOOTER_R_ID = 21;

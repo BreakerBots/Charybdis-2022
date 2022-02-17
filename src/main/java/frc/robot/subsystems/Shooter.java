@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -25,37 +24,32 @@ public class Shooter extends SubsystemBase {
   }
 
   public enum ShooterMode {
-    UP,
+    HUB,
     LOW,
     LAUNCH
   }
 
-  // States for shooter
-  private FlywheelState flywheelState = FlywheelState.OFF;
-  private ShooterMode shooterMode = ShooterMode.UP;
-  private boolean shooterIsUp = false;
-  public boolean isShooting = false;
-  // Controllers for shooter
-  private SimpleMotorFeedforward flywheelFF; // Currently unused
+  private SimpleMotorFeedforward flywheelFF;
   private PIDController flywheelPID;
-  // Flywheel motors
+  private FlywheelState flywheelState = FlywheelState.OFF;
+  private ShooterMode shooterMode = ShooterMode.HUB;
+  private boolean shooterIsUp;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
+  private double flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
+  private double flyIdleSpd = flyTgtSpdPrct * 0.8;
   private MotorControllerGroup flywheel;
-  // Flywheel target speed
-  private double flyTgtSpd = Constants.HUB_SHOOT_SPD;
-  private double flyIdleSpd = 0.8 * flyTgtSpd;
-  // Hood piston for changing position
+  // public boolean autoShoot; Remove due to being unused.
   private DoubleSolenoid shooterSol;
-  // Subsystem pass-in
   private Hopper hopper;
+  public boolean isShooting = false;
 
   public Shooter(Hopper hopperArg) {
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
     // Constants.FLYWHEEL_KV);
     flywheelPID = new PIDController(Constants.FLYWHEEL_KP, Constants.FLYWHEEL_KI, Constants.FLYWHEEL_KD);
     hopper = hopperArg;
-    flywheelPID.setTolerance(Constants.FLYWHEEL_SPD_TOL);
+    flywheelPID.setTolerance(20);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
@@ -64,55 +58,50 @@ public class Shooter extends SubsystemBase {
         Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
   }
 
-  /** Brings shooter to higher firing angle */
-  public void raiseShooter() {
-    if (!shooterIsUp) {
-      shooterSol.set(Value.kForward);
-      shooterIsUp = true;
-    }
-  }
-
-  /** Brings shooter to lower firing angle */
-  public void lowerShooter() {
-    if (shooterIsUp) {
-      shooterSol.set(Value.kReverse);
-      shooterIsUp = false;
-    }
-  }
-
-  /** Sets target and idle flywheel speed based on shooter position. */
-  public void setFlywheelSpds() {
-    switch (shooterMode) {
-      case UP:
-        flyTgtSpd = Constants.HUB_SHOOT_SPD;
-      case LOW:
-        flyTgtSpd = Constants.LOW_SHOOT_SPD;
-      case LAUNCH:
-        flyTgtSpd = Constants.LAUNCH_SHOOT_SPD;
-    }
-    flyIdleSpd = 0.8 * flyTgtSpd;
-  }
-
-  /** Sets flywheel to charging state. */
-  public void setCharging() {
-    double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetRPM()));
-    flywheel.set(flySpd);
+  /** Flywheel is set to charging state. */
+  public void chargeFlywheel() {
     flywheelState = FlywheelState.CHARGING;
   }
 
-  /** Turns off flywheel. */
+  /** Turns flywheel off */
   public void setOff() {
     flywheel.set(0);
     flywheelState = FlywheelState.OFF;
   }
-
-  /** Sets flywheel to idle spinning. */
+  
+  /** Sets flywheel into idling state. */
   public void setIdle() {
     flywheel.set(flyIdleSpd);
     flywheelState = FlywheelState.IDLE;
   }
 
-  /** Returns the RPM of the flywheel's motors */
+  /** Makes flywheel charge to desired speed. */
+  public void runFlywheel() {
+    double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
+    flywheel.set(flySpd);
+  }
+
+  /** Based on shoot mode, sets idle speed, target speed, and shoot position. */
+  public void setShooter() {
+    switch (shooterMode) {
+      case LOW:
+        raiseShooter();
+        flyTgtSpdPrct = Constants.LOW_SHOOT_SPD;
+        break;
+      case LAUNCH:
+        raiseShooter();
+        flyTgtSpdPrct = Constants.LAUNCH_SHOOT_SPD;
+        break;
+      case HUB:
+      default:
+        lowerShooter();
+        flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
+        break;
+    }
+    flyIdleSpd = flyTgtSpdPrct * 0.8;
+  }
+
+  /** Returns the TPS of the flywheel's Motors */
   public double getFlywheelTPS() {
     return Math.abs((shooterL.getSelectedSensorVelocity() / 10));
   }
@@ -133,12 +122,24 @@ public class Shooter extends SubsystemBase {
     return shooterR.getSupplyCurrent();
   }
 
-  public double getFlywheelTargetRPM() {
-    return Constants.FLYWHEEL_MAX_RPM * flyTgtSpd;
+  /** Brings shooter to higher firing angle */
+  public void raiseShooter() {
+    if (!shooterIsUp) {
+      shooterSol.set(Value.kForward);
+      shooterIsUp = true;
+    }
   }
 
-  public double getFlywheelIdleSpeed() {
-    return flyIdleSpd;
+  /** Brings shooter to lower firing angle */
+  public void lowerShooter() {
+    if (shooterIsUp) {
+      shooterSol.set(Value.kReverse);
+      shooterIsUp = false;
+    }
+  }
+
+  public double getFlywheelTargetSpeed() {
+    return Constants.FLYWHEEL_MAX_TPS * flyTgtSpdPrct;
   }
 
   public ShooterMode getShootMode() {
@@ -169,46 +170,24 @@ public class Shooter extends SubsystemBase {
     flywheel.set(speed);
   }
 
-  public void shooterLogicLoop() {
-    switch (shooterMode) { // Aims shooter according to position
-      case UP:
-        lowerShooter();
-        break;
-      case LOW:
-      case LAUNCH:
-        raiseShooter();
-        break;
-    }
-    setFlywheelSpds();
-    switch (flywheelState) { // Sets flywheel speed according to its state.
-      case CHARGING:
+  public void periodic() {
+    setShooter();
+    switch (flywheelState) {
       case CHARGED:
-        setCharging();
-      case IDLE:
+      case CHARGING:
+        runFlywheel();
+        break;
       case OFF:
-        if (hopper.bothSlotsAreFull()) { // Shooter idles if hopper is full.
+      case IDLE:
+        if (hopper.bothSlotsAreFull()) {
           setIdle();
-        } else { // Shooter shuts off if no balls are present.
+        } else {
           setOff();
         }
-
     }
-    // if (flywheelState == FlywheelState.CHARGING || flywheelState == FlywheelState.CHARGED) {
-    //   double flySpd;
-    //   flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetRPM()));
-    //   flywheel.set(flySpd);
-    // } else if ((hopper.slot1IsFull() && hopper.slot2IsFull())
-    //     && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
-    //   flywheel.set(getFlywheelIdleSpeed());
-    //   flywheelState = FlywheelState.IDLE;
-    // } else if ((!hopper.slot1IsFull() || !hopper.slot2IsFull())
-    //     && (flywheelState == FlywheelState.OFF || flywheelState == FlywheelState.IDLE)) {
-    //   setOff();
-    // }
   }
 
-  public void periodic() {
-    shooterLogicLoop();
+  public void setflywheelManualSpeed(double speed) {
+    flywheel.set(speed);
   }
-
 }

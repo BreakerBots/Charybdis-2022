@@ -6,7 +6,6 @@ package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Shooter.FlywheelState;
 
@@ -16,9 +15,11 @@ public class ChargeFlywheel extends CommandBase {
   private XboxController xbox;
   private long atRPM;
   private long cycleCount;
+
   /**
    * Creates a new ChargeFlywheel.
-   * @param shooterArg Shooter subsystem from RobotContainer.
+   * 
+   * @param shooterArg    Shooter subsystem from RobotContainer.
    * @param controllerArg Xbox controller from RobotContainer.
    */
   public ChargeFlywheel(Shooter shooterArg, XboxController controllerArg) {
@@ -32,15 +33,15 @@ public class ChargeFlywheel extends CommandBase {
   public void initialize() {
     shooter.resetFlywheelPID();
     System.out.println("ChargeFlywheel initaited");
-    //if (shooter.flywheelState == FlywheelState.IDLE || shooter.flywheelState == FlywheelState.OFF) {
-      shooter.setCharging();
-    //}
-  } 
+    if (shooter.getFlywheelState() == FlywheelState.IDLE || shooter.getFlywheelState() == FlywheelState.OFF) {
+      shooter.chargeFlywheel();
+    }
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    cycleCount ++;
+    cycleCount++;
   }
 
   // Called once the command ends or is interrupted.
@@ -53,7 +54,7 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public boolean isFinished() {
     // Move state setting into shooter periodic?
-    if(shooter.flywheelPIDAtSetpoint()) {
+    if (shooter.flywheelPIDAtSetpoint()) {
       System.out.println("FLYWHEEL CHARGED!");
       shooter.setFlywheelState(FlywheelState.CHARGED);
       return true;
@@ -70,4 +71,5 @@ public class ChargeFlywheel extends CommandBase {
     } else {
       return false;
     }
-}}
+  }
+}

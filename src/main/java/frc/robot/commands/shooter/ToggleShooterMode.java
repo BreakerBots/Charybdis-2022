@@ -21,16 +21,16 @@ public class ToggleShooterMode extends InstantCommand {
   @Override
   public void initialize() {
     switch (shooter.getShootMode()) {
-      case UP:
+      case HUB:
         shooter.setShootMode(ShooterMode.LOW);
         break;
       case LOW:
         shooter.setShootMode(ShooterMode.LAUNCH);
         break;
       case LAUNCH:
-        shooter.setShootMode(ShooterMode.UP);
+        shooter.setShootMode(ShooterMode.HUB);
       default:
-        shooter.setShootMode(ShooterMode.UP);
+        shooter.setShootMode(ShooterMode.HUB);
         break;
     }
   }
