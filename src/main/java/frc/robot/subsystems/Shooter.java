@@ -174,5 +174,6 @@ public class Shooter extends SubsystemBase {
   }
 
 public void setflywheelManualSpeed(double speed) {
+  flywheel.set(speed);
 }
 }
