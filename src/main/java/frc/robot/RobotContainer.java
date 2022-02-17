@@ -18,7 +18,6 @@ import frc.robot.commands.auto.actions.FLywheelTest;
 import frc.robot.commands.auto.actions.IntakeHopperIndexerTest;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.climb.actions.ArmMoveTest;
-import frc.robot.commands.climb.run.RunArmTest;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
@@ -90,6 +89,7 @@ public class RobotContainer {
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
+    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ArmMoveTest(xboxSys.getRightY(), 60, false, climbSys));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys));
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
@@ -103,8 +103,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return 
-    //new FLywheelTest(15, 0.55, shooterSys);
-     new ArmMoveTest(xboxSys.getRightY(), 999, false, climbSys);
+    return new FLywheelTest(15, 0.55, shooterSys);
   }
 }
