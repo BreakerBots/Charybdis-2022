@@ -133,10 +133,9 @@ public final class Constants {
     public static final double HUB_SHOOT_SPD = 0.44; // Upper is 0.48
     public static final double LOW_SHOOT_SPD = 0.25; // Hood must be up
     public static final double LAUNCH_SHOOT_SPD = 0.55; // Hood up
-    public static final double FLYWHEEL_IDLE_SPEED = 0.5; // Idle for all states (FIX!)
     public static final double FLYWHEEL_CANCEL_RPM = 0;
     // Flywheel speed in RPM
-    public static final int FLYWHEEL_MAX_SPEED = 1780;
+    public static final int FLYWHEEL_MAX_RPM = 1780;
     public static final double FLYWHEEL_TGT_SPEED_PRCT = 0.15; // Target speed percent, is deprecated?
     // Shooter motor IDs
     public static final int SHOOTER_L_ID = 20;
@@ -144,9 +143,12 @@ public final class Constants {
     // Shooter Solonoid IDs
     public static final int SHOOTERSOL_FWD = 2;
     public static final int SHOOTERSOL_REV = 3;
+    // Flywheel PID
     public static final double FLYWHEEL_KP = 0.5;
     public static final double FLYWHEEL_KI = 0;
     public static final double FLYWHEEL_KD = 0.3;
+    public static final double FLYWHEEL_SPD_TOL = 20; // Used as position tolerance.
+    public static final double FLYWHEEL_ACCEL_TOL = FILLER; // Unused
     
     // Climber constants
     // Climber motor IDs

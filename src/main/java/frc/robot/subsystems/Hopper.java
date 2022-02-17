@@ -13,10 +13,14 @@ import frc.robot.Constants;
 /** Hopper subsystem. */
 public class Hopper extends SubsystemBase {
   private boolean hopperIsRunning;
+  // Hopper motor
   private WPI_TalonSRX hopperMotor;
+  // Sensors for checking hopper inventory
   private DigitalInput slot1;
   private DigitalInput slot2;
+  // Intake pass-in
   private Intake intake;
+  // Pause times for hopper logic
   private long pauseCountA;
   private long pauseCountB;
 
@@ -60,6 +64,10 @@ public class Hopper extends SubsystemBase {
    */
   public boolean slot2IsFull() {
     return !(slot2.get());
+  }
+
+  public boolean bothSlotsAreFull() {
+    return slot1IsFull() && slot2IsFull();
   }
 
   /**

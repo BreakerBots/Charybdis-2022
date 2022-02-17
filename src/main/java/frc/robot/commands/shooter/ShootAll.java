@@ -65,7 +65,7 @@ public class ShootAll extends CommandBase {
       hopper.deactivateHopper();
       intake.deactivateIntake();
       timedStopCount = 0;
-      shooter.flyweelOff();
+      shooter.setOff();
       shooter.setFlywheelState(FlywheelState.OFF);
     }
   }
@@ -87,13 +87,13 @@ public class ShootAll extends CommandBase {
     } else if (xbox.getStartButtonPressed()) {
       System.out.println("SHOOTER MANUALY STOPED!");
       hopper.deactivateHopper();
-      shooter.flyweelOff();
+      shooter.setOff();
       intake.deactivateIntake();
       return true;
     } else if (cycleCount > 400) {
       System.out.println("SHOOTER TIMED OUT!");
       hopper.deactivateHopper();
-      shooter.flyweelOff();
+      shooter.setOff();
       intake.deactivateIntake();
       return true;
     } else {

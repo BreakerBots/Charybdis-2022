@@ -33,7 +33,7 @@ public class ChargeFlywheel extends CommandBase {
     shooter.resetFlywheelPID();
     System.out.println("ChargeFlywheel initaited");
     //if (shooter.flywheelState == FlywheelState.IDLE || shooter.flywheelState == FlywheelState.OFF) {
-      shooter.flyweelFullOn();
+      shooter.setCharging();
     //}
   } 
 
@@ -58,12 +58,12 @@ public class ChargeFlywheel extends CommandBase {
       shooter.setFlywheelState(FlywheelState.CHARGED);
       return true;
     } else if (xbox.getStartButtonPressed()) {
-      shooter.flyweelOff();
+      shooter.setOff();
       shooter.resetFlywheelPID();
       System.out.println("FLYWHEEL MANUALLY STOPPED!");
       return true;
     } else if (cycleCount > 500) {
-      shooter.flyweelOff();
+      shooter.setOff();
       shooter.resetFlywheelPID();
       System.out.println("FLYWHEEL CHARGING TIMED OUT!");
       return true;
