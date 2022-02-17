@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -15,6 +17,7 @@ import frc.robot.Robot.RobotMode;
 import frc.robot.commands.auto.actions.FLywheelTest;
 import frc.robot.commands.auto.actions.IntakeHopperIndexerTest;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
+import frc.robot.commands.climb.ArmMoveTest;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
@@ -52,6 +55,7 @@ public class RobotContainer {
   private final Drive driveSys = new Drive(pdpSys);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
+  private final WPI_TalonFX climbArmSys = new WPI_TalonFX(Constants.CLIMBER_L_ID);
   // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
@@ -89,6 +93,9 @@ public class RobotContainer {
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
+    new JoystickButton(xboxSys, Constants.L_BUMP).whenPressed(new ArmMoveTest(-0.5, climbArmSys));
+    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ArmMoveTest(0.5, climbArmSys));
+    new JoystickButton(xboxSys, Constants.X).whenPressed(new ArmMoveTest(0, climbArmSys));
     // new JoystickButton(xbox, Constants.UP).whenPressed(new RunClimbSequence(climbSys, imuSys));
   }
 

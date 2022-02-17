@@ -54,7 +54,8 @@ public class Climber extends SubsystemBase {
   }
 
   public void extendClimb(double climbSpeedArg) {
-    climbMotors.set(climbSpeedArg + artClimbFeedForward);
+    climbMotors.set(climbSpeedArg);
+    // climbMotors.set(climbSpeedArg + artClimbFeedForward);
   }
 
   public double getClimbTicks() {
