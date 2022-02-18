@@ -29,6 +29,7 @@ public class ToggleShooterMode extends InstantCommand {
         break;
       case LAUNCH:
         shooter.setShootMode(ShooterMode.HUB);
+        break;
       default:
         shooter.setShootMode(ShooterMode.HUB);
         break;
