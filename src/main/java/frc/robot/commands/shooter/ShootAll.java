@@ -7,6 +7,7 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -43,7 +44,7 @@ public class ShootAll extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("STARTED SHOOTING");
+    DashboardControl.log("STARTED SHOOTING");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,7 +56,7 @@ public class ShootAll extends CommandBase {
       shooter.isShooting = true;
       hopper.activateHopper();
       intake.toggleHopperFeed();
-      System.out.println("SHOOTER STARTED!");
+      DashboardControl.log("SHOOTER STARTED!");
     }
     System.out.println(shooter.getFlywheelTPS());
     if (!hopper.slot2IsFull() && !hopper.slot1IsFull()) { //&& hopper.slot1IsFull() == false
@@ -82,16 +83,16 @@ public class ShootAll extends CommandBase {
   @Override
   public boolean isFinished() {
     if (shooter.getFlywheelState() == FlywheelState.OFF) {
-      System.out.println("HOPPER DEPLETED - SHOOTER STOPED!");
+      DashboardControl.log("HOPPER DEPLETED - SHOOTER STOPED!");
       return true;
     } else if (xbox.getStartButtonPressed()) {
-      System.out.println("SHOOTER MANUALY STOPED!");
+      DashboardControl.log("SHOOTER MANUALY STOPED!");
       hopper.deactivateHopper();
       shooter.setOff();
       intake.deactivateIntake();
       return true;
     } else if (cycleCount > 400) {
-      System.out.println("SHOOTER TIMED OUT!");
+      DashboardControl.log("SHOOTER TIMED OUT!");
       hopper.deactivateHopper();
       shooter.setOff();
       intake.deactivateIntake();

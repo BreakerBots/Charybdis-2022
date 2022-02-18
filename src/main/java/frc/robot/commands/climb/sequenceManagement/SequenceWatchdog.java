@@ -6,6 +6,7 @@ package frc.robot.commands.climb.sequenceManagement;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DashboardControl;
 
 public class SequenceWatchdog extends CommandBase {
   /** Creates a new ManualTerminateSequence. */
@@ -36,10 +37,10 @@ public class SequenceWatchdog extends CommandBase {
   @Override
   public boolean isFinished() {
     if (xbox.getStartButtonPressed()) {
-      System.out.println("CLIMB SEQUENCE MANUALLY STOPPED!");
+      DashboardControl.log("CLIMB SEQUENCE MANUALLY STOPPED!");
       return true;
     } else if (cycleCount > 2250) {
-      System.out.println("CLIMB SEQUENCE TIMED OUT!");
+      DashboardControl.log("CLIMB SEQUENCE TIMED OUT!");
       return true;
     }
     else {

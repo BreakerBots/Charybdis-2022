@@ -5,6 +5,7 @@
 package frc.robot.subsystems.devices;
 
 import frc.robot.Constants;
+import frc.robot.subsystems.DashboardControl;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,7 +41,7 @@ public class AirCompressor extends SubsystemBase {
         if (cycleCount > 6000) {
           stopCompressor();
           cycleCount = 0;
-          System.out.println("COMPRESSOR TIMED OUT!");
+          DashboardControl.log("COMPRESSOR TIMED OUT!");
         }
     } else {
       cycleCount = 0;

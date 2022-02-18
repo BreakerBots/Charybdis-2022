@@ -54,7 +54,7 @@ public class Climber extends SubsystemBase {
     // This method will be called once per scheduler run
 
     if (climbSequenceProgress == climbSequenceTotal) {
-      System.out.println("CLIMB SEQUENCE COMPLETE!");
+      DashboardControl.log("CLIMB SEQUENCE COMPLETE!");
       climbSequenceTotal = 0;
       climbSequenceProgress = 0;
     }

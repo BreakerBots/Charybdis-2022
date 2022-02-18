@@ -6,6 +6,7 @@ package frc.robot.commands.climb.actions;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DashboardControl;
 
 public class MoveClimb extends CommandBase {
   private Climber climber;
@@ -22,7 +23,9 @@ public class MoveClimb extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    DashboardControl.log("MOVEING CLIMB");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

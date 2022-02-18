@@ -7,6 +7,7 @@ package frc.robot.commands.climb.actions;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.devices.IMU;
 
 public class ClimbStablityCheck extends CommandBase {
@@ -27,7 +28,9 @@ public class ClimbStablityCheck extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    DashboardControl.log("CHECKING CLIMB STABLITY");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -42,7 +45,7 @@ public class ClimbStablityCheck extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("CLIMB STABLITY CHECK PASSED!");
+    DashboardControl.log("CLIMB STABLITY CHECK PASSED!");
     climber.climbSequenceProgress ++;
     System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }

@@ -6,6 +6,7 @@ package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Shooter.FlywheelState;
 
@@ -32,7 +33,7 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public void initialize() {
     shooter.resetFlywheelPID();
-    System.out.println("ChargeFlywheel initaited");
+    DashboardControl.log("ChargeFlywheel initaited");
     if (shooter.getFlywheelState() == FlywheelState.IDLE || shooter.getFlywheelState() == FlywheelState.OFF) {
       shooter.chargeFlywheel();
     }
@@ -55,18 +56,18 @@ public class ChargeFlywheel extends CommandBase {
   public boolean isFinished() {
     // Move state setting into shooter periodic?
     if (shooter.flywheelPIDAtSetpoint()) {
-      System.out.println("FLYWHEEL CHARGED!");
+      DashboardControl.log("FLYWHEEL CHARGED!");
       shooter.setFlywheelState(FlywheelState.CHARGED);
       return true;
     } else if (xbox.getStartButtonPressed()) {
       shooter.setOff();
       shooter.resetFlywheelPID();
-      System.out.println("FLYWHEEL MANUALLY STOPPED!");
+      DashboardControl.log("FLYWHEEL MANUALLY STOPPED!");
       return true;
     } else if (cycleCount > 500) {
       shooter.setOff();
       shooter.resetFlywheelPID();
-      System.out.println("FLYWHEEL CHARGING TIMED OUT!");
+      DashboardControl.log("FLYWHEEL CHARGING TIMED OUT!");
       return true;
     } else {
       return false;

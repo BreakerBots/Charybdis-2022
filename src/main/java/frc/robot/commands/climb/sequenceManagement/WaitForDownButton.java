@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DashboardControl;
 
 public class WaitForDownButton extends CommandBase {
   /** Creates a new WaitForButtonPress. */
@@ -24,7 +25,7 @@ public class WaitForDownButton extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("PLEASE PRESS D-PAD DOWN BUTTON TO COMPLETE CLIMB");
+    DashboardControl.log("PLEASE PRESS D-PAD DOWN BUTTON TO COMPLETE CLIMB");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +33,7 @@ public class WaitForDownButton extends CommandBase {
   public void execute() {
     cycleCount++;
     if ((cycleCount % 400) == 0) {
-      System.out.println("PLEASE PRESS D-PAD DOWN BUTTON TO COMPLETE CLIMB");
+      DashboardControl.log("PLEASE PRESS D-PAD DOWN BUTTON TO COMPLETE CLIMB");
     }
 
   }
