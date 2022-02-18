@@ -22,7 +22,7 @@ public class PivotClimb extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.toggleClimbSol();
+   // climber.toggleClimbSol();
     climber.climbSequenceProgress ++;
     System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }

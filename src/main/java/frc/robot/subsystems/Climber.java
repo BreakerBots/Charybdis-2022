@@ -35,10 +35,10 @@ public class Climber extends SubsystemBase {
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
     climbMotors = new MotorControllerGroup(climberL, climberR);
-    climbSolL = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
-    Constants.CLIMBSOL_L_FWD, Constants.CLIMBSOL_L_REV);
-    climbSolR = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
-    Constants.CLIMBSOL_R_FWD, Constants.CLIMBSOL_R_REV);
+    // climbSolL = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
+    // Constants.CLIMBSOL_L_FWD, Constants.CLIMBSOL_L_REV);
+    // climbSolR = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
+    // Constants.CLIMBSOL_R_FWD, Constants.CLIMBSOL_R_REV);
   }
 
   public void setManualArmSpd(double speedArg) {
@@ -66,18 +66,18 @@ public class Climber extends SubsystemBase {
     return climberL.getSelectedSensorPosition();
   }
 
-  public void toggleClimbSol() {
-    if (climbSolState == true) {
-      climbSolL.set(Value.kForward);
-      climbSolR.set(Value.kForward);
-      climbSolState = false;
-    }
-    else {
-      climbSolL.set(Value.kReverse);
-      climbSolR.set(Value.kReverse);
-      climbSolState = true;
-    }
-  }
+  // public void toggleClimbSol() {
+  //   if (climbSolState == true) {
+  //     climbSolL.set(Value.kForward);
+  //     climbSolR.set(Value.kForward);
+  //     climbSolState = false;
+  //   }
+  //   else {
+  //     climbSolL.set(Value.kReverse);
+  //     climbSolR.set(Value.kReverse);
+  //     climbSolState = true;
+  //   }
+  //}
 /** Returns rounded value for the precent the climber is currently extended or retracted relative to its max value */
   public double getClimbExtPrct() {
     return Math.round((getClimbTicks() * 100) / Constants.CLIMB_EXT_THRESH);
