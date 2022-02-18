@@ -36,7 +36,7 @@ public class SequenceWatchdog extends CommandBase {
   @Override
   public boolean isFinished() {
     if (xbox.getStartButtonPressed()) {
-      System.out.println("CLIMB SEQUENCE MANUALY STOPED!");
+      System.out.println("CLIMB SEQUENCE MANUALLY STOPPED!");
       return true;
     } else if (cycleCount > 2250) {
       System.out.println("CLIMB SEQUENCE TIMED OUT!");

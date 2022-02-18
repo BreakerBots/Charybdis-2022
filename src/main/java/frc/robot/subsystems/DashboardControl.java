@@ -42,6 +42,10 @@ public class DashboardControl extends SubsystemBase {
     // climber = climbArg;
   }
 
+  public static void log(String output) {
+    SmartDashboard.putString("LOG", output);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -64,6 +68,8 @@ public class DashboardControl extends SubsystemBase {
     SmartDashboard.putNumber("MATCH TIME", DriverStation.getMatchTime());
     SmartDashboard.putNumber("MATCH #", DriverStation.getMatchNumber());
     SmartDashboard.putBoolean("FMS CONNECTED", DriverStation.isFMSAttached());
+    // last print
+    
     // climber widgets
     // SmartDashboard.putString("CLIMB EXT", "%" + climber.getClimbExtPrct());
     // climbProg[0] = climber.climbSequenceTotal;
