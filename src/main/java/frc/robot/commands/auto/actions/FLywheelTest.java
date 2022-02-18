@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.BreakerMath;
 import frc.robot.subsystems.Shooter;
 
-public class FlywheelTest extends CommandBase {
+public class FLywheelTest extends CommandBase {
   /** Creates a new FLywheelTest. */
   private Shooter shooter;
   private double flywheelLSupAvg;
@@ -20,7 +20,7 @@ public class FlywheelTest extends CommandBase {
   private double time;
   private long cycleCount;
   private double speed;
-  public FlywheelTest(double secArg, double speedArg, Shooter shooterArg) {
+  public FLywheelTest(double secArg, double speedArg, Shooter shooterArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     time = secArg * 50;
     speed = speedArg;

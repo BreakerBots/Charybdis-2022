@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot.RobotMode;
-import frc.robot.commands.auto.actions.FlywheelTest;
+import frc.robot.commands.auto.actions.FLywheelTest;
 import frc.robot.commands.auto.actions.IntakeHopperIndexerTest;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.climb.actions.ArmMoveTest;
@@ -103,6 +103,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new FlywheelTest(15, 0.55, shooterSys);
+    return new FLywheelTest(15, 0.55, shooterSys);
   }
 }

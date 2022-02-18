@@ -50,24 +50,24 @@ public class DashboardControl extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.updateValues();
-    //shooter widgets
+    // Shooter widgets
     SmartDashboard.putString("SHOOTER MODE", shooter.getShootMode().toString());
     SmartDashboard.putString("FLYWHEEL", shooter.getFlywheelState().toString());
     SmartDashboard.putBoolean("SHOOTING", shooter.isShooting);
-    //intake widgets
+    // Intake widgets
     SmartDashboard.putBoolean("INTAKING", intake.intakeIsRunning());
     SmartDashboard.putBoolean("ARM EXTENDED", intake.armIsExtended());
-    //compressor widgets
+    // Compressor widgets
     SmartDashboard.putBoolean("COMPRESSOR", compressor.getCompressorState());
-    // eletrical widgets
+    // Electrical widgets
     SmartDashboard.putNumber("BATTERY V", pdp.getVoltage());
-    SmartDashboard.putBoolean("BROWNOUT", RobotController.isBrownedOut());
-    // comp widgets
+    SmartDashboard.putBoolean("ROBORIO", RobotController.isBrownedOut());
+    // Comp widgets
     SmartDashboard.putBoolean("ALLIANCE", fms.getAllianceBool());
     SmartDashboard.putNumber("STATION #", DriverStation.getLocation());
     SmartDashboard.putNumber("MATCH TIME", DriverStation.getMatchTime());
     SmartDashboard.putNumber("MATCH #", DriverStation.getMatchNumber());
-    SmartDashboard.putBoolean("FMS CONNECTED", DriverStation.isFMSAttached());
+    SmartDashboard.putBoolean("FMS CONNTECTED", DriverStation.isFMSAttached());
     // last print
     
     // climber widgets
