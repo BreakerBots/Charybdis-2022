@@ -45,6 +45,7 @@ public class Shooter extends SubsystemBase {
   public boolean isShooting = false;
 
   public Shooter(Hopper hopperArg) {
+    setName("Shooter");
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
     // Constants.FLYWHEEL_KV);
     flywheelPID = new PIDController(Constants.FLYWHEEL_KP, Constants.FLYWHEEL_KI, Constants.FLYWHEEL_KD);
@@ -186,6 +187,9 @@ public class Shooter extends SubsystemBase {
         }
       break;
     }
+    addChild("Flywheel", flywheel);
+    addChild("Shooter Piston", shooterSol);
+    addChild("Flywheel PID", flywheelPID);
   }
 
   public void setflywheelManualSpeed(double speed) {

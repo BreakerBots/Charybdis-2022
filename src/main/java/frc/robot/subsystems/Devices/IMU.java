@@ -13,6 +13,9 @@ import frc.robot.Constants;
 public class IMU extends SubsystemBase {
   private WPI_Pigeon2 pigeon;
   private double imuInvert;
+  private double pitch;
+  private double yaw;
+  private double roll;
 
   /** Creates a new PigeonIMU. */
   public IMU() {
@@ -28,21 +31,27 @@ public class IMU extends SubsystemBase {
     } else {
       imuInvert = 1;
     }
+    pitch = BreakerMath.constrainAngle(pigeon.getPitch());
+    yaw = BreakerMath.constrainAngle(pigeon.getYaw()) * imuInvert;
+    roll = BreakerMath.constrainAngle(pigeon.getRoll());
+    
+    setName("IMU");
+    addChild("Pigeon", pigeon);
   }
 
-  /** Returns pitch angle within +- 180 degrees */
+  /** Returns pitch angle within +- 360 degrees */
   public double getPitch() {
-    return BreakerMath.constrainAngle(pigeon.getPitch());
+    return pitch;
   }
 
-  /** Returns yaw angle within +- 180 degrees */
+  /** Returns yaw angle within +- 360 degrees */
   public double getYaw() {
-    return imuInvert * (BreakerMath.constrainAngle(pigeon.getYaw())); // Convert.ANGLE_CONVERT(pigeon.getYaw());
+    return yaw;
   }
 
-  /** Returns roll angle within +- 180 degrees */
+  /** Returns roll angle within +- 360 degrees */
   public double getRoll() {
-    return BreakerMath.constrainAngle(pigeon.getRoll());
+    return roll;
   }
 
   /** Returns raw yaw, pitch, and roll angles in an array */

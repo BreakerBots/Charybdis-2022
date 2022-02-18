@@ -25,6 +25,7 @@ public class Hopper extends SubsystemBase {
   private long pauseCountB;
 
   public Hopper(Intake intakeArg) {
+    setName("Hopper");
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
     slot1 = new DigitalInput(Constants.SLOT_1_CHANNEL);
@@ -109,6 +110,9 @@ public class Hopper extends SubsystemBase {
         }
       }
     }
+    addChild("Hopper Motor", hopperMotor);
+    addChild("Bottom Sensor", slot1);
+    addChild("Top Sensor", slot1);
   }
 
   @Override

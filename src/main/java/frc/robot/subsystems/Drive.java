@@ -39,6 +39,7 @@ public class Drive extends SubsystemBase {
 
   /** Creates a new Drive. */
   public Drive(PowerDistribution pdpArg) {
+    setName("Drive");
     pdp = pdpArg;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     anglePID.setTolerance(Constants.ANG_POS_TOLERANCE, Constants.ANG_VEL_TOLERANCE);
@@ -105,6 +106,9 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
+    addChild("Drivetrain", driveTrainDiff);
+    addChild("Angle PID", anglePID);
+    addChild("Distance PID", distPID);
   }
 
   /** Returns number of ticks on left motors */

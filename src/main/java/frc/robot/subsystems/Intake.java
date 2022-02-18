@@ -24,6 +24,7 @@ public class Intake extends SubsystemBase {
 
     /** Creates a new Intake. */
     public Intake() {
+        setName("Intake");
         intakeMotor = new WPI_TalonSRX(Constants.INTAKEMAIN_ID);
         intakeMotor.setInverted(true); // Spins backwards
         indexerL = new WPI_TalonSRX(Constants.INTAKE_L_ID);
@@ -177,6 +178,10 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
+        addChild("Arm", intakeSol);
+        addChild("Intake Motor", intakeMotor);
+        addChild("Left Indexer", indexerL);
+        addChild("Right Indexer", indexerR);
         // This method will be called once per scheduler run
     }
 }

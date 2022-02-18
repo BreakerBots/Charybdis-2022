@@ -27,17 +27,21 @@ public class Climber extends SubsystemBase {
   public PIDController climbPID;
   private final double artClimbFeedForward = 0.3;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
-  public boolean climbSolState; //true is extended
+  public boolean climbSolState; // true is extended
   public int climbSequenceTotal;
   public int climbSequenceProgress;
+
   public Climber() {
+    setName("Climber");
     climbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
     climbMotors = new MotorControllerGroup(climberL, climberR);
-    // climbSolL = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
+    // climbSolL = new DoubleSolenoid(Constants.PCM_ID,
+    // PneumaticsModuleType.CTREPCM,
     // Constants.CLIMBSOL_L_FWD, Constants.CLIMBSOL_L_REV);
-    // climbSolR = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
+    // climbSolR = new DoubleSolenoid(Constants.PCM_ID,
+    // PneumaticsModuleType.CTREPCM,
     // Constants.CLIMBSOL_R_FWD, Constants.CLIMBSOL_R_REV);
   }
 
@@ -45,16 +49,20 @@ public class Climber extends SubsystemBase {
     climbMotors.set(speedArg);
   }
 
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
 
-      if (climbSequenceProgress == climbSequenceTotal) {
-        System.out.println("CLIMB SEQUENCE COMPLETE!");
-        climbSequenceTotal = 0;
-        climbSequenceProgress = 0;
-      }
+    if (climbSequenceProgress == climbSequenceTotal) {
+      System.out.println("CLIMB SEQUENCE COMPLETE!");
+      climbSequenceTotal = 0;
+      climbSequenceProgress = 0;
+    }
+
+    addChild("Winching Motors", climbMotors);
+    addChild("Climb PID", climbPID);
+    addChild("Left Piston", climbSolL);
+    addChild("Right Piston", climbSolR);
   }
 
   public void extendClimb(double climbSpeedArg) {
@@ -67,22 +75,23 @@ public class Climber extends SubsystemBase {
   }
 
   // public void toggleClimbSol() {
-  //   if (climbSolState == true) {
-  //     climbSolL.set(Value.kForward);
-  //     climbSolR.set(Value.kForward);
-  //     climbSolState = false;
-  //   }
-  //   else {
-  //     climbSolL.set(Value.kReverse);
-  //     climbSolR.set(Value.kReverse);
-  //     climbSolState = true;
-  //   }
-  //}
-/** Returns rounded value for the precent the climber is currently extended or retracted relative to its max value */
+  // if (climbSolState == true) {
+  // climbSolL.set(Value.kForward);
+  // climbSolR.set(Value.kForward);
+  // climbSolState = false;
+  // }
+  // else {
+  // climbSolL.set(Value.kReverse);
+  // climbSolR.set(Value.kReverse);
+  // climbSolState = true;
+  // }
+  // }
+  /**
+   * Returns rounded value for the precent the climber is currently extended or
+   * retracted relative to its max value
+   */
   public double getClimbExtPrct() {
     return Math.round((getClimbTicks() * 100) / Constants.CLIMB_EXT_THRESH);
   }
 
-
-  
 }
