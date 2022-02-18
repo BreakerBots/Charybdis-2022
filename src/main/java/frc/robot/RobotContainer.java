@@ -29,7 +29,7 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SmartDashboardControl;
+import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.FMS_Handler;
 import frc.robot.subsystems.devices.IMU;
@@ -60,7 +60,7 @@ public class RobotContainer {
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final SmartDashboardControl dashbordSys = new SmartDashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys);
+  private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys);
 
   private final DriveWithJoystick driveWithJoystick;
 

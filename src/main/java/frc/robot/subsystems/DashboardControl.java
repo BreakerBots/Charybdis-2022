@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.FMS_Handler;
 
-public class SmartDashboardControl extends SubsystemBase {
+public class DashboardControl extends SubsystemBase {
   /** Creates a new SmartDashbord. */
   private Shooter shooter;
   private Intake intake;
@@ -33,7 +33,7 @@ public class SmartDashboardControl extends SubsystemBase {
   private FMS_Handler fms;
  // private double[] climbProg = new double[2];
 
-  public SmartDashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg, PowerDistribution pdpArg, FMS_Handler fmsArg) { // , Climber climbArg
+  public DashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg, PowerDistribution pdpArg, FMS_Handler fmsArg) { // , Climber climbArg
     intake = intakeArg;
     shooter = shooterArg;
     compressor = compressorArg;

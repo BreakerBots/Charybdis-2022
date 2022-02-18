@@ -151,8 +151,8 @@ public final class Constants {
     
     // Climber constants
     // Climber motor IDs
-    public static final int CLIMBER_L_ID = FILLER;
-    public static final int CLIMBER_R_ID = FILLER;
+    public static final int CLIMBER_L_ID = 51;
+    public static final int CLIMBER_R_ID = 52;
     // Climber Solonoid IDs
     public static final int CLIMBSOL_L_FWD = FILLER;
     public static final int CLIMBSOL_L_REV = FILLER;
