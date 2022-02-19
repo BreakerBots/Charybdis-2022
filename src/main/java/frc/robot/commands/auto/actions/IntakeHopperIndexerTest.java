@@ -25,6 +25,10 @@ public class IntakeHopperIndexerTest extends CommandBase {
   private double hopperStaAvg;
   private double hopperSupMax = -1;
   private double hopperStaMax = -1;
+  private double indexerLSupMax = -1;
+  private double indexerLStaMax = -1;
+  private double indexerRSupMax = -1;
+  private double indexerRStaMax = -1;
 
   /** Creates a new IntakeHopperIndexerTest. */
   // Put time first?
@@ -59,6 +63,10 @@ public class IntakeHopperIndexerTest extends CommandBase {
     
     double hopperSup = hopper.getHopperSup();
     double hopperSta = hopper.getHopperSta();
+    double indexerLSta = intake.getIndexerLSta();
+    double indexerLSup = intake.getIndexerLSup();
+    double indexerRSta = intake.getIndexerRSta();
+    double indexerRSup = intake.getIndexerRSup();
 
     SmartDashboard.putNumber("HOPPER SUP", hopperSup);
     SmartDashboard.putNumber("HOPPER STA", hopperSup);
@@ -68,6 +76,19 @@ public class IntakeHopperIndexerTest extends CommandBase {
     }
     if (hopperSta > hopperStaMax) {
       hopperStaMax = hopperSta;
+    }
+
+    if (indexerLSta > indexerLStaMax) {
+      indexerLStaMax = indexerLSta;
+    }
+    if (indexerLSup > indexerLSupMax) {
+      indexerLSupMax = indexerLSup;
+    }
+    if (indexerRSta > indexerRStaMax) {
+      indexerRStaMax = indexerRSta;
+    }
+    if (indexerRSup > indexerRSupMax) {
+      indexerRSupMax = indexerRSup;
     }
 
     hopperStaAvg = BreakerMath.rollingAvg(hopperStaAvg, hopperSta);
@@ -92,8 +113,10 @@ public class IntakeHopperIndexerTest extends CommandBase {
       + " RIGHT INDEXER STATOR: " + indexRStaAvg + " RIGHT INDEXER SUPPLY: " + indexRSupAvg + "\n"
       + " HOPPER STATOR: " + hopperStaAvg + " HOPPER SUPPLY: " + hopperSupAvg + "\n\n"
     );
-    System.out.println("HOPPER STA MAX: " + hopperStaMax + "\n");
-    System.out.println("HOPPER SUP MAX: " + hopperSupMax + "\n\n");
+    System.out.println("LEFT INDEXER STA MAX: " + indexerLStaMax + "\n");
+    System.out.println("LEFT INDEXER SUP MAX: " + indexerLSupMax + "\n\n");
+    System.out.println("RIGHT INDEXER STA MAX: " + indexerRStaMax + "\n");
+    System.out.println("RIGHT INDEXER SUP MAX: " + indexerRSupMax + "\n\n");
     hopper.deactivateHopper();
     intake.deactivateIntake();
     cycleCount = 0;
