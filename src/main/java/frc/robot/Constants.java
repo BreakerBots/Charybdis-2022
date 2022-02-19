@@ -121,7 +121,7 @@ public final class Constants {
     // Amount of delay on hopper
     public static final long HOPPER_DELAY_CYCLES = 0;
     // Hopper specs
-    public static final double HOPPERSPEED = 0.6; // 0.8
+    public static final double HOPPERSPEED = 0.6; // 0.6
     public static final double HOPPER_WHEEL_DIAMETER = 1;
     public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
     public static final double HOPPER_GEAR_RATIO = FILLER;

@@ -109,6 +109,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new IntakeHopperIndexerTest(5, hopperSys, intakeSys);
+    return new IntakeHopperIndexerTest(3, hopperSys, intakeSys);
   }
 }
