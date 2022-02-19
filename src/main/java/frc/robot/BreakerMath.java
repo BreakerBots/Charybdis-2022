@@ -21,8 +21,7 @@ public class BreakerMath {
      * @return angle value within -360 to +360 degrees.
      */
     public static final double constrainAngle(double deg) {
-        deg = deg % 360;
-        return deg;
+        return deg % 360;
     }
 
     /**
@@ -47,6 +46,10 @@ public class BreakerMath {
 
     public static double rollingAvg(double avg, double newVal) {
         return (avg + newVal) / 2.0;
+    }
+
+    public static double getAvg(double lastAvg, double newVal, int cycleCount) {
+        return (((lastAvg * (cycleCount - 1)) + newVal) / cycleCount);
     }
 
     public static double voltsToSpdPer(double volts) {
