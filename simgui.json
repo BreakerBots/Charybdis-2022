@@ -3,8 +3,11 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/AirCompressor": "Subsystem",
+      "/LiveWindow/ClimbWatchdog": "Subsystem",
       "/LiveWindow/Climber": "Subsystem",
       "/LiveWindow/Climber/Climb PID": "PIDController",
+      "/LiveWindow/Climber/Left Climb PID": "PIDController",
+      "/LiveWindow/Climber/Right Climb PID": "PIDController",
       "/LiveWindow/Climber/Winching Motors": "Motor Controller",
       "/LiveWindow/DashboardControl": "Subsystem",
       "/LiveWindow/Drive": "Subsystem",
@@ -41,6 +44,9 @@
     }
   },
   "NetworkTables": {
+    "FMSInfo": {
+      "open": true
+    },
     "SmartDashboard": {
       "open": true
     }

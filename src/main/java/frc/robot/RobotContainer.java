@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -52,7 +53,7 @@ public class RobotContainer {
   // Devices
   private final AirCompressor compressorSys = new AirCompressor();
   private final IMU imuSys = new IMU();
-  private final PowerDistribution pdpSys = new PowerDistribution();
+  private final PowerDistribution pdpSys = new PowerDistribution(Constants.PDH_ID, ModuleType.kRev);
   private final PneumaticsControlModule pcmSys = new PneumaticsControlModule(Constants.PCM_ID);
   private final XboxController xboxSys = new XboxController(0);
   // Subsystems
@@ -64,7 +65,7 @@ public class RobotContainer {
   private final FMS_Handler fmsSys = new FMS_Handler();
   private final ClimbWatchdog watchdogSys = new ClimbWatchdog(climbSys, xboxSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys);
+  private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
 

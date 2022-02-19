@@ -28,18 +28,17 @@ public class DashboardControl extends SubsystemBase {
   private Shooter shooter;
   private Intake intake;
   private AirCompressor compressor;
-  //private Climber climber;
- // private PowerDistribution pdp;
+  private Climber climber;
+  private PowerDistribution pdp;
   private FMS_Handler fms;
- // private double[] climbProg = new double[2];
 
-  public DashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg, PowerDistribution pdpArg, FMS_Handler fmsArg) { // , Climber climbArg
+  public DashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg, PowerDistribution pdpArg, FMS_Handler fmsArg, Climber climbArg) {
     intake = intakeArg;
     shooter = shooterArg;
     compressor = compressorArg;
-   // pdp = pdpArg;
+    pdp = pdpArg;
     fms = fmsArg;
-    // climber = climbArg;
+    climber = climbArg;
   }
 
   public static void log(String output) {
@@ -60,7 +59,7 @@ public class DashboardControl extends SubsystemBase {
     // Compressor widgets
     SmartDashboard.putBoolean("COMPRESSOR", compressor.getCompressorState());
     // Electrical widgets
-  //  SmartDashboard.putNumber("BATTERY V", pdp.getVoltage());
+    SmartDashboard.putNumber("BATTERY V", pdp.getVoltage());
     SmartDashboard.putBoolean("ROBORIO", RobotController.isBrownedOut());
     // Comp widgets
     SmartDashboard.putBoolean("ALLIANCE", fms.getAllianceBool());
@@ -68,13 +67,10 @@ public class DashboardControl extends SubsystemBase {
     SmartDashboard.putNumber("MATCH TIME", DriverStation.getMatchTime());
     SmartDashboard.putNumber("MATCH #", DriverStation.getMatchNumber());
     SmartDashboard.putBoolean("FMS CONNTECTED", DriverStation.isFMSAttached());
-    // last print
-    
     // climber widgets
-    // SmartDashboard.putString("CLIMB EXT", "%" + climber.getClimbExtPrct());
-    // climbProg[0] = climber.climbSequenceTotal;
-    // climbProg[1] = climber.climbSequenceProgress;
-    // SmartDashboard.putNumberArray("CLIMB PROGRESS - A of B:", climbProg);
+    SmartDashboard.putString("CLIMB EXT", climber.getClimbExtPrct() + "%");
+    SmartDashboard.putString("CLIMB PROGRESS", climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
+    SmartDashboard.putBoolean("CLIMBING", climber.isClimbing());
     // // cameras
     // UsbCamera frontCam = new UsbCamera("Front Camera", 0);
     // UsbCamera backCam = new UsbCamera("Back Camera", 1);
