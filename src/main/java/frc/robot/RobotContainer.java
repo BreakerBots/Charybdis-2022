@@ -17,7 +17,8 @@ import frc.robot.Robot.RobotMode;
 import frc.robot.commands.auto.actions.FLywheelTest;
 import frc.robot.commands.auto.actions.IntakeHopperIndexerTest;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
-import frc.robot.commands.climb.actions.ArmMoveTest;
+import frc.robot.commands.climb.actions.ManualClimbExtend;
+import frc.robot.commands.climb.actions.ManualClimbRetract;
 import frc.robot.commands.climb.run.RunClimbSequence;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
@@ -90,7 +91,8 @@ public class RobotContainer {
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
-    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ArmMoveTest(xboxSys, 60, false, climbSys));
+    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ManualClimbExtend(climbSys));
+    new JoystickButton(xboxSys, Constants.L_BUMP).whenPressed(new ManualClimbRetract(climbSys));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys));
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
