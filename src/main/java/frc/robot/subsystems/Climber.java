@@ -50,8 +50,6 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    setManualArmSpd(0.1);
-
     if (climbSequenceProgress == climbSequenceTotal) {
       DashboardControl.log("CLIMB SEQUENCE COMPLETE!");
       climbSequenceTotal = 0;
@@ -64,7 +62,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void extendClimb(double climbSpeedArg) {
-    //climbMotors.set(climbSpeedArg);
+    climbMotors.set(climbSpeedArg);
     // climbMotors.set(climbSpeedArg + artClimbFeedForward);
   }
 
