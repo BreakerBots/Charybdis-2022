@@ -63,12 +63,12 @@ public class RobotContainer {
   private final Drive driveSys = new Drive(pdpSys);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
-  private final Climber climbSys = new Climber();
+  // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
-  private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
+  // private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
+  // private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
   private final ManuallyMoveClimb manuallyMoveClimb;

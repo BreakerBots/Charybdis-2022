@@ -102,7 +102,7 @@ public final class Constants {
     // Intake constants
     // Intake motor speeds
     public static final double INTAKE_SPD = 1; // 1
-    public static final double R_INDEX_SPD = 0.8; // 1
+    public static final double R_INDEX_SPD = 0.8; // 0.8
     public static final double L_INDEX_SPD = 0.8; // 0.8
     // Intake motor IDs
     public static final int INTAKEMAIN_ID = 21;
@@ -122,7 +122,7 @@ public final class Constants {
     // Amount of delay on hopper
     public static final long HOPPER_DELAY_CYCLES = 0;
     // Hopper specs
-    public static final double HOPPERSPEED = 0.6; // 0.8
+    public static final double HOPPERSPEED = 1; // 0.6
     public static final double HOPPER_WHEEL_DIAMETER = 1;
     public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
     public static final double HOPPER_GEAR_RATIO = FILLER;

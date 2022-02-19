@@ -4,6 +4,7 @@
 
 package frc.robot.commands.auto.actions;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.BreakerMath;
 import frc.robot.subsystems.Hopper;
@@ -22,6 +23,12 @@ public class IntakeHopperIndexerTest extends CommandBase {
   private double indexLStaAvg;
   private double indexRStaAvg;
   private double hopperStaAvg;
+  private double hopperSupMax = -1;
+  private double hopperStaMax = -1;
+  private double indexerLSupMax = -1;
+  private double indexerLStaMax = -1;
+  private double indexerRSupMax = -1;
+  private double indexerRStaMax = -1;
 
   /** Creates a new IntakeHopperIndexerTest. */
   // Put time first?
@@ -54,8 +61,38 @@ public class IntakeHopperIndexerTest extends CommandBase {
     hopper.activateHopper();
     intake.activateIntake();
     
-    hopperStaAvg = BreakerMath.rollingAvg(hopperStaAvg, hopper.getHopperSta());
-    hopperSupAvg = BreakerMath.rollingAvg(hopperSupAvg, hopper.getHopperSup());
+    double hopperSup = hopper.getHopperSup();
+    double hopperSta = hopper.getHopperSta();
+    double indexerLSta = intake.getIndexerLSta();
+    double indexerLSup = intake.getIndexerLSup();
+    double indexerRSta = intake.getIndexerRSta();
+    double indexerRSup = intake.getIndexerRSup();
+
+    SmartDashboard.putNumber("HOPPER SUP", hopperSup);
+    SmartDashboard.putNumber("HOPPER STA", hopperSup);
+
+    if (hopperSup > hopperSupMax) {
+      hopperSupMax = hopperSup;
+    }
+    if (hopperSta > hopperStaMax) {
+      hopperStaMax = hopperSta;
+    }
+
+    if (indexerLSta > indexerLStaMax) {
+      indexerLStaMax = indexerLSta;
+    }
+    if (indexerLSup > indexerLSupMax) {
+      indexerLSupMax = indexerLSup;
+    }
+    if (indexerRSta > indexerRStaMax) {
+      indexerRStaMax = indexerRSta;
+    }
+    if (indexerRSup > indexerRSupMax) {
+      indexerRSupMax = indexerRSup;
+    }
+
+    hopperStaAvg = BreakerMath.rollingAvg(hopperStaAvg, hopperSta);
+    hopperSupAvg = BreakerMath.rollingAvg(hopperSupAvg, hopperSup);
     indexLStaAvg = BreakerMath.rollingAvg(indexLStaAvg, intake.getIndexerLSta());
     indexLSupAvg = BreakerMath.rollingAvg(indexLSupAvg, intake.getIndexerLSup());
     indexRStaAvg = BreakerMath.rollingAvg(indexRStaAvg, intake.getIndexerRSta());
@@ -76,6 +113,10 @@ public class IntakeHopperIndexerTest extends CommandBase {
       + " RIGHT INDEXER STATOR: " + indexRStaAvg + " RIGHT INDEXER SUPPLY: " + indexRSupAvg + "\n"
       + " HOPPER STATOR: " + hopperStaAvg + " HOPPER SUPPLY: " + hopperSupAvg + "\n\n"
     );
+    System.out.println("LEFT INDEXER STA MAX: " + indexerLStaMax + "\n");
+    System.out.println("LEFT INDEXER SUP MAX: " + indexerLSupMax + "\n\n");
+    System.out.println("RIGHT INDEXER STA MAX: " + indexerRStaMax + "\n");
+    System.out.println("RIGHT INDEXER SUP MAX: " + indexerRSupMax + "\n\n");
     hopper.deactivateHopper();
     intake.deactivateIntake();
     cycleCount = 0;
