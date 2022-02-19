@@ -69,7 +69,6 @@ public class DashboardControl extends SubsystemBase {
     SmartDashboard.putBoolean("FMS CONNTECTED", DriverStation.isFMSAttached());
     // climber widgets
     SmartDashboard.putString("CLIMB EXT", climber.getClimbExtPrct() + "%");
-    SmartDashboard.putString("CLIMB PROGRESS", climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
     SmartDashboard.putBoolean("CLIMBING", climber.isClimbing());
     // // cameras
     // UsbCamera frontCam = new UsbCamera("Front Camera", 0);

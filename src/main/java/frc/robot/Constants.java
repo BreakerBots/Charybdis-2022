@@ -97,6 +97,7 @@ public final class Constants {
     // IMU constants
     public static final int IMU_ID = 10; // Alpha = 10
     public static boolean IMU_INVERTED = true;
+    public static final double kCatchup = 0.01;
 
     // Intake constants
     // Intake motor speeds

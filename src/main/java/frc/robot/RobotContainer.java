@@ -17,9 +17,12 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot.RobotMode;
 import frc.robot.commands.auto.actions.FLywheelTest;
 import frc.robot.commands.auto.actions.IntakeHopperIndexerTest;
+import frc.robot.commands.auto.paths.OffTarmack_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
-import frc.robot.commands.climb.actions.ManualClimbExtend;
-import frc.robot.commands.climb.actions.ManualClimbRetract;
+import frc.robot.commands.auto.paths.Pickup1_Shoot2_H3;
+import frc.robot.commands.climb.actions.ManuallyMoveClimb;
+import frc.robot.commands.climb.actions.MoveClimb;
+import frc.robot.commands.climb.actions.PivotClimb;
 import frc.robot.commands.climb.sequences.HighbarClimbSequence;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
@@ -68,6 +71,7 @@ public class RobotContainer {
   private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
+  private final ManuallyMoveClimb manuallyMoveClimb;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -76,6 +80,11 @@ public class RobotContainer {
     driveWithJoystick = new DriveWithJoystick(xboxSys, pdpSys, driveSys);
     driveWithJoystick.addRequirements(driveSys);
     driveSys.setDefaultCommand(driveWithJoystick);
+    
+    manuallyMoveClimb = new ManuallyMoveClimb(climbSys, xboxSys);
+    manuallyMoveClimb.addRequirements(climbSys);
+    climbSys.setDefaultCommand(manuallyMoveClimb);
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -94,13 +103,12 @@ public class RobotContainer {
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
-    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ManualClimbExtend(climbSys));
-    new JoystickButton(xboxSys, Constants.L_BUMP).whenPressed(new ManualClimbRetract(climbSys));
+    new JoystickButton(xboxSys, Constants.Y).whenPressed(new PivotClimb(climbSys, watchdogSys, true));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-    new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+    //new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
   }
 
   /**
@@ -109,6 +117,16 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new FLywheelTest(15, 0.55, shooterSys);
+//return new Pickup1_Shoot2_H3(controllerArg, driveArg, imuArg, intakeArg, hopperArg, shooterArg);
+    
+    int PathNum = 1; // sets auto path
+
+    switch (PathNum) {
+    case 0: return null;
+    case 1: return new Pickup1_Shoot2_H3(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
+    case 2: return new Pickup1_Shoot2_ARC_H3(driveSys, imuSys);
+    case 3: return new OffTarmack_H1(driveSys, imuSys);
+    default: return null;
+    }
   }
 }

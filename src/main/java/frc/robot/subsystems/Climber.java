@@ -19,7 +19,6 @@ public class Climber extends SubsystemBase {
   // Extend/retracts climbing arms.
   private WPI_TalonFX climberL;
   private WPI_TalonFX climberR;
-  private MotorControllerGroup climbMotors;
   // Rotates the climb arms.
   private DoubleSolenoid climbSol;
   // Makes sure we get to desired position
@@ -28,7 +27,7 @@ public class Climber extends SubsystemBase {
   private final double artClimbFeedForward = 0.3;
   private boolean climbing;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
-  public boolean climbSolState; // true is extended
+  public boolean climbSolRetracted; // true is extended
   public int climbSequenceTotal = 0;
   public int climbSequenceProgress = 0;
 
@@ -39,11 +38,10 @@ public class Climber extends SubsystemBase {
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
     climberR.setInverted(true);
-    climbMotors = new MotorControllerGroup(climberL, climberR);
     climbSol = new DoubleSolenoid(Constants.PCM_ID,
     PneumaticsModuleType.CTREPCM,
     Constants.CLIMBSOL_FWD, Constants.CLIMBSOL_REV);
-    
+    resetClimbEncoders();
   }
 
   @Override
@@ -60,7 +58,8 @@ public class Climber extends SubsystemBase {
   }
 
   public void moveClimb(double climbSpeedArg) {
-    climbMotors.set(climbSpeedArg);
+    climberL.set(climbSpeedArg);
+    climberR.set(climbSpeedArg);
     // climbMotors.set(climbSpeedArg + artClimbFeedForward);
   }
 
@@ -81,14 +80,8 @@ public class Climber extends SubsystemBase {
   }
 
   public void toggleClimbSol() {
-  if (climbSolState == true) {
-  climbSol.set(Value.kForward);
-  climbSolState = false;
-  }
-  else {
-  climbSol.set(Value.kReverse);
-  climbSolState = true;
-  }
+    climbSol.set(climbSolRetracted ? Value.kForward : Value.kReverse);
+    climbSolRetracted = !climbSolRetracted;
   }
   /**
    * Returns rounded value for the precent the climber is currently extended or

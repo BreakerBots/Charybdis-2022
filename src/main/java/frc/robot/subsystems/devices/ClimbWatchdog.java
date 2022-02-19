@@ -27,11 +27,13 @@ public class ClimbWatchdog extends SubsystemBase {
       cycleCount ++;
       if (xbox.getStartButtonPressed() || cycleCount > 2250) {
         forceEndSequence = true;
+        cycleCount = 0;
       } else {
         forceEndSequence = false;
       }
     } else {
       forceEndSequence = false;
+      cycleCount = 0;
     }
     if (forceEndSequence) {
       DashboardControl.log("CLIMB MANUALY ABORTED!");

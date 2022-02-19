@@ -29,6 +29,7 @@ public class WaitForDownButton extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climber.setIsClimbing(true);
     if (!husky.getClimbForceEnd()) {
     DashboardControl.log("PLEASE PRESS D-PAD DOWN BUTTON TO COMPLETE CLIMB");
     }
@@ -48,8 +49,6 @@ public class WaitForDownButton extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.climbSequenceProgress ++;
-    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 
   // Returns true when the command should end.

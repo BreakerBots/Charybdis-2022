@@ -28,13 +28,14 @@ public class ClimbStablityCheck extends CommandBase {
     climber = climberArg;
     dachshund = watchdogArg;
     addRequirements(imu);
-    addRequirements(climberArg);
+    addRequirements(climber);
     addRequirements(dachshund);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climber.setIsClimbing(true);
     DashboardControl.log("CHECKING CLIMB STABLITY");
   }
 
@@ -56,8 +57,6 @@ public class ClimbStablityCheck extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     DashboardControl.log("CLIMB STABLITY CHECK PASSED!");
-    climber.climbSequenceProgress ++;
-    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 
   // Returns true when the command should end.

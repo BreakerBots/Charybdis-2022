@@ -10,10 +10,8 @@ import frc.robot.Constants;
 import frc.robot.commands.climb.actions.ClimbStablityCheck;
 import frc.robot.commands.climb.actions.MoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
-import frc.robot.commands.climb.sequenceManagement.SetSequenceTotal;
 import frc.robot.commands.climb.sequenceManagement.WaitForDownButton;
 import frc.robot.commands.climb.sequenceManagement.EndClimbSequence;
-import frc.robot.commands.climb.sequenceManagement.StartClimbSequence;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.IMU;
@@ -32,20 +30,18 @@ public class HighbarClimbSequence extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new StartClimbSequence(climbArg),
-      new SetSequenceTotal(climbArg, 15),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST, watchdogArg),
       new WaitForDownButton(controllerArg, climbArg, watchdogArg),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_RET_DIST, watchdogArg),
       new MoveClimb(climbArg, Constants.CLIMB_MIRACLE_GRAB_EXT_DIST, watchdogArg),
-      new PivotClimb(climbArg, watchdogArg),
+      new PivotClimb(climbArg, watchdogArg, false),
       new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST, watchdogArg),
       new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
-      new PivotClimb(climbArg, watchdogArg),
+      new PivotClimb(climbArg, watchdogArg, false),
       new MoveClimb(climbArg, Constants.CLIMB_LIFT_OF_MID_DIST, watchdogArg),
       new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
-      new PivotClimb(climbArg, watchdogArg),
+      new PivotClimb(climbArg, watchdogArg, false),
       new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
       new MoveClimb(climbArg, Constants.LIFT_ONTO_HIGH_DIST, watchdogArg),
       new MoveClimb(climbArg, Constants.SECOND_MIRACLE_GRAB_EXT_DIST, watchdogArg),

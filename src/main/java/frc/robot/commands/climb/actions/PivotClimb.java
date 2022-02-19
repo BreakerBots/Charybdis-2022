@@ -15,11 +15,13 @@ import frc.robot.subsystems.devices.ClimbWatchdog;
 public class PivotClimb extends InstantCommand {
   private Climber climber;
   private ClimbWatchdog terrier;
+  private boolean manual;
   /** Toggles climber pistons to move arms between extended and retracted positions */
-  public PivotClimb(Climber climbArg, ClimbWatchdog watchdogArg) {
+  public PivotClimb(Climber climbArg, ClimbWatchdog watchdogArg, boolean isManual) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = climbArg;
     terrier = watchdogArg;
+    manual = isManual;
     addRequirements(climber);
     addRequirements(terrier);
   }
@@ -27,11 +29,12 @@ public class PivotClimb extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    if (!manual) {
+      climber.setIsClimbing(true);
+    }
     if (!terrier.getClimbForceEnd()) {
       climber.toggleClimbSol();
       DashboardControl.log("CLIMB ARM PIVOTED");
     }
-    climber.climbSequenceProgress ++;
-    System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }
 }
