@@ -10,9 +10,9 @@ import frc.robot.subsystems.Climber;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class endClimbSequence extends InstantCommand {
+public class EndClimbSequence extends InstantCommand {
   Climber climb;
-  public endClimbSequence(Climber climbArg) {
+  public EndClimbSequence(Climber climbArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     climb = climbArg;
   }

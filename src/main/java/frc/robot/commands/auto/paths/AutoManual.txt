@@ -5,4 +5,4 @@ H3 - alligned with edge of furthest end of the tarmac from hanger on hangers sid
 P4 - closest position to the human player on the human player's side of the field.
 P5 - furthest position to the human player on the human player's side of the field.
 
-robot should be allighned with the edge and panle of the broad side of the hub when starting!!
+robot should be allighned with the edge and panle of the broad side of the hub when starting!! (unless in H3)

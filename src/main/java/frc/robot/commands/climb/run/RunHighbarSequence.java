@@ -15,9 +15,9 @@ import frc.robot.subsystems.devices.IMU;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class RunClimbSequence extends ParallelRaceGroup {
+public class RunHighbarSequence extends ParallelRaceGroup {
   /** Creates a new RunClimbSequence. */
-  public RunClimbSequence(Climber climbArg, IMU imuArg, XboxController controllerArg, ClimbWatchdog watchdogArg) {
+  public RunHighbarSequence(Climber climbArg, IMU imuArg, XboxController controllerArg, ClimbWatchdog watchdogArg) {
     addRequirements(climbArg);
     addRequirements(imuArg);
     // Add your commands in the addCommands() call, e.g.

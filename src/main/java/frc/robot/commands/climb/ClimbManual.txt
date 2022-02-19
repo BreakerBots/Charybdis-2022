@@ -1,17 +1,20 @@
 Sequences:
     automated action sequences in which the robot wil move between bars on its own. (NOTE: Requires user imput to continue after initial extension)
-        HOW TO USE: create sequecen by chaining togetehr desired action in order (with stability checks regurly spaced throughout).Then put this sequence into 
-            the "RunClimbSequence" command group called in robot contaner. In addition to your action sequence, the "RunClimbSequence" group should also
-            call the "SequenceWatchdog" command.
+        HOW TO USE: create sequence by chaining togeteher desired Actions in order (with stability checks regurly spaced throughout).
+            1. HighbarClimbSequence: robot starts from mid bar then climbs up and trevrses to high bar
+Run:
+    contains wrapper paralell race command groups used to run climb sequences. These run command groups will contain an instance of the sequence you are trying to run
+    in adition to an instance of the SequenceWatchdog command. (NOTE: THIS IS WAHT WILL BE CALLED IN "RobotContainer" NOT THE SEQUENCE ITSELF)
+        1. RunHighbarSequence: group that runs "HighbarClimbSequence"
 Actions:
     commands that are linked together in a series to form a climb sequence:
         1. MoveClimb: Extends or retracts climber arms to a spesified length in ticks of winch motor.
         2. PivotClimb: Extends or retracts pistons for climber arms. Used when climber is grabing new bars.
         3. climbStablityCheck: Waits for IMU's returned rate of YPR change to be below 5 degrees per second for 3 seconds befor allowing sequence to progress.
 SequenceManagement:
-    commands called within a climb sequence that do not directly effect the climber and that insted have support roles.
-        1. ResetSequenceNums: sets the total number of actions in a climb sequence to 0 of 0 for progress counter.
+    commands called within a climb sequence that do not directly effect the climber and that insted have support roles (dashboard, failsafes, etc).
+        1. StartClimbSequence: resets climb progress counter to 0 of 0, resets climb motor encoders, and sets "isClimbing" to true.
+        2. EndClimbSequence: basicly just sets "isClimbing" to false.
         2. SetSequenceNums: sets the total number of actions in a climb sequence for progress counter.
         3. WaitForDownButton: Waits for user imput to continue with sequence after initial climber extension.
-        4. SequenceWatchdog: allows for manual or automatic termination of an active climb sequence by pressing the menu button or by the sequence exceading
-            45 seconds in length. The latter of which will trigure a "Timed Out" cancel statement.
+        4. SequenceWatchdog: allows ClimbWatchdog class to interact with (and cancle) active climb sequence.

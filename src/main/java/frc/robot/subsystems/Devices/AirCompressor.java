@@ -21,12 +21,12 @@ public class AirCompressor extends SubsystemBase {
   }
 
   public void startCompressor() {
-    System.out.print("Compressor enabled!\n");
+    DashboardControl.log("Compressor enabled!");
     compressor.enableDigital();
   }
 
   public void stopCompressor() {
-    System.out.print("Compressor disabled!\n");
+    DashboardControl.log("Compressor disabled!");
     compressor.disable();
   }
 
