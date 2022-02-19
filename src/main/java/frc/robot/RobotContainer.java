@@ -60,12 +60,12 @@ public class RobotContainer {
   private final Drive driveSys = new Drive(pdpSys);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
-  private final Climber climbSys = new Climber();
+  // private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
-  private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
+  // private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
+  // private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
 
@@ -94,13 +94,13 @@ public class RobotContainer {
     // MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
-    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ManualClimbExtend(climbSys));
-    new JoystickButton(xboxSys, Constants.L_BUMP).whenPressed(new ManualClimbRetract(climbSys));
+    // new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ManualClimbExtend(climbSys));
+    // new JoystickButton(xboxSys, Constants.L_BUMP).whenPressed(new ManualClimbRetract(climbSys));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-    new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
   }
 
   /**
@@ -109,6 +109,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new FLywheelTest(15, 0.55, shooterSys);
+    return new IntakeHopperIndexerTest(5, hopperSys, intakeSys);
   }
 }
