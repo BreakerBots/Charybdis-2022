@@ -4,26 +4,32 @@
 
 package frc.robot.commands.climb.actions;
 
+import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DashboardControl;
+import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.IMU;
 
 public class ClimbStablityCheck extends CommandBase {
   /** Creates a new ClimbStablityCheck. */
-  IMU imu;
-  Climber climber;
+  private IMU imu;
+  private Climber climber;
+  private ClimbWatchdog dachshund;
   private long stableTimeCount;
   /** Checks if robot is stable enough to continue climbing. 
    * Uses rate of gyro change. Rate of change must return as 
    * below passing threshhold for a cirtan amount of time before it can continue.*/
-  public ClimbStablityCheck(Climber climberArg, IMU imuArg) {
+  public ClimbStablityCheck(Climber climberArg, IMU imuArg, ClimbWatchdog watchdogArg) {
     // Use addRequirements() here to declare subsystem dependencies.
+    
     imu = imuArg;
     climber = climberArg;
+    dachshund = watchdogArg;
     addRequirements(imu);
     addRequirements(climberArg);
+    addRequirements(dachshund);
   }
 
   // Called when the command is initially scheduled.
@@ -35,12 +41,14 @@ public class ClimbStablityCheck extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOL 
-    && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOL 
-    && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOL) {
-      stableTimeCount ++;
-    } else {
-      stableTimeCount = 0;
+    if (!dachshund.getClimbForceEnd()) {
+      if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOL 
+      && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOL 
+      && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOL) {
+        stableTimeCount ++;
+      } else {
+        stableTimeCount = 0;
+      }
     }
   }
 
@@ -55,14 +63,9 @@ public class ClimbStablityCheck extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOL 
+    return (Math.abs(imu.getPitchRate()) < Constants.CLIMB_PITCH_TOL 
     && Math.abs(imu.getYawRate()) < Constants.CLIMB_YAW_TOL 
     && Math.abs(imu.getRollRate()) < Constants.CLIMB_ROLL_TOL 
-    && stableTimeCount > Constants.CLIMB_MIN_STABLE_TIME) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    && stableTimeCount > Constants.CLIMB_MIN_STABLE_TIME) || dachshund.getClimbForceEnd();
   }
 }

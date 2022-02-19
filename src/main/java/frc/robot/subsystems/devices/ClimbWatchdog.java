@@ -7,34 +7,34 @@ package frc.robot.subsystems.devices;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DashboardControl;
 
 public class ClimbWatchdog extends SubsystemBase {
   /** Creates a new ClimbWatchdog. */
   private boolean forceEndSequence = false;
+  private XboxController xbox;
+  private Climber climb;
   private int cycleCount;
-  Climber climb;
-  XboxController xbox;
-  public ClimbWatchdog(Climber climbArg, XboxController controllerArg) {
-    climb = climbArg;
+  public ClimbWatchdog(XboxController controllerArg, Climber climbArg) {
     xbox = controllerArg;
+    climb = climbArg;
   }
   
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(climb.isClimbing()) {
+    if (climb.isClimbing()) {
       cycleCount ++;
-      if (xbox.getStartButtonPressed()) {
+      if (xbox.getStartButtonPressed() || cycleCount > 2250) {
         forceEndSequence = true;
-        cycleCount = 0;
-      } else if (cycleCount > 2250) {
-        forceEndSequence = true;
-        cycleCount = 0;
       } else {
         forceEndSequence = false;
       }
     } else {
       forceEndSequence = false;
+    }
+    if (forceEndSequence) {
+      DashboardControl.log("CLIMB MANUALY ABORTED!");
     }
   }
 

@@ -44,7 +44,7 @@ public class ShootAll extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    DashboardControl.log("STARTED SHOOTING");
+    DashboardControl.log("SHOOTALL INITIALIZED");
   }
 
   // Called every time the scheduler runs while the command is scheduled.

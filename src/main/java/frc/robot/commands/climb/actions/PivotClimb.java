@@ -7,24 +7,30 @@ package frc.robot.commands.climb.actions;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DashboardControl;
+import frc.robot.subsystems.devices.ClimbWatchdog;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PivotClimb extends InstantCommand {
   private Climber climber;
+  private ClimbWatchdog terrier;
   /** Toggles climber pistons to move arms between extended and retracted positions */
-  public PivotClimb(Climber climbArg) {
+  public PivotClimb(Climber climbArg, ClimbWatchdog watchdogArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = climbArg;
+    terrier = watchdogArg;
     addRequirements(climber);
+    addRequirements(terrier);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.toggleClimbSol();
-    DashboardControl.log("CLIMB ARM PIVOTED");
+    if (!terrier.getClimbForceEnd()) {
+      climber.toggleClimbSol();
+      DashboardControl.log("CLIMB ARM PIVOTED");
+    }
     climber.climbSequenceProgress ++;
     System.out.println("CLIMB SEQUENCE PROGRESS: " + climber.climbSequenceProgress + " of " + climber.climbSequenceTotal);
   }

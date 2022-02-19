@@ -1,11 +1,7 @@
 Sequences:
     automated action sequences in which the robot wil move between bars on its own. (NOTE: Requires user imput to continue after initial extension)
         HOW TO USE: create sequence by chaining togeteher desired Actions in order (with stability checks regurly spaced throughout).
-            1. HighbarClimbSequence: robot starts from mid bar then climbs up and trevrses to high bar
-Run:
-    contains wrapper paralell race command groups used to run climb sequences. These run command groups will contain an instance of the sequence you are trying to run
-    in adition to an instance of the SequenceWatchdog command. (NOTE: THIS IS WAHT WILL BE CALLED IN "RobotContainer" NOT THE SEQUENCE ITSELF)
-        1. RunHighbarSequence: group that runs "HighbarClimbSequence"
+            1. HighbarClimbSequence: robot starts from mid bar then climbs up and trevrses to high bar.
 Actions:
     commands that are linked together in a series to form a climb sequence:
         1. MoveClimb: Extends or retracts climber arms to a spesified length in ticks of winch motor.

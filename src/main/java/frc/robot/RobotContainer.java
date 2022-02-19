@@ -20,7 +20,7 @@ import frc.robot.commands.auto.actions.IntakeHopperIndexerTest;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.climb.actions.ManualClimbExtend;
 import frc.robot.commands.climb.actions.ManualClimbRetract;
-import frc.robot.commands.climb.run.RunHighbarSequence;
+import frc.robot.commands.climb.sequences.HighbarClimbSequence;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
@@ -63,7 +63,7 @@ public class RobotContainer {
   private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
-  private final ClimbWatchdog watchdogSys = new ClimbWatchdog(climbSys, xboxSys);
+  private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
   private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
 
@@ -100,7 +100,7 @@ public class RobotContainer {
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-   //new JoystickButton(xboxSys, Constants.UP).whenPressed(new RunHighbarSequence(climbSys, imuSys, xboxSys));
+    new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
   }
 
   /**

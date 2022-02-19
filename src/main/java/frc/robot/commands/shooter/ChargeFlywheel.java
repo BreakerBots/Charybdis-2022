@@ -32,7 +32,7 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public void initialize() {
     shooter.resetFlywheelPID();
-    DashboardControl.log("ChargeFlywheel initaited");
+    DashboardControl.log("CHARGEING FLYWHEEL");
     if (shooter.getFlywheelState() == FlywheelState.IDLE || shooter.getFlywheelState() == FlywheelState.OFF) {
       shooter.chargeFlywheel();
     }
@@ -41,7 +41,7 @@ public class ChargeFlywheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    cycleCount++;
+    cycleCount ++;
   }
 
   // Called once the command ends or is interrupted.
