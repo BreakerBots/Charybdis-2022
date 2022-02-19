@@ -21,8 +21,7 @@ public class Climber extends SubsystemBase {
   private WPI_TalonFX climberR;
   private MotorControllerGroup climbMotors;
   // Rotates the climb arms.
-  private DoubleSolenoid climbSolL;
-  private DoubleSolenoid climbSolR;
+  private DoubleSolenoid climbSol;
   // Makes sure we get to desired position
   public PIDController climbPID;
   private final double artClimbFeedForward = 0.3;
@@ -36,13 +35,12 @@ public class Climber extends SubsystemBase {
     climbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
+    climberR.setInverted(true);
     climbMotors = new MotorControllerGroup(climberL, climberR);
-    // climbSolL = new DoubleSolenoid(Constants.PCM_ID,
-    // PneumaticsModuleType.CTREPCM,
-    // Constants.CLIMBSOL_L_FWD, Constants.CLIMBSOL_L_REV);
-    // climbSolR = new DoubleSolenoid(Constants.PCM_ID,
-    // PneumaticsModuleType.CTREPCM,
-    // Constants.CLIMBSOL_R_FWD, Constants.CLIMBSOL_R_REV);
+    climbSol = new DoubleSolenoid(Constants.PCM_ID,
+    PneumaticsModuleType.CTREPCM,
+    Constants.CLIMBSOL_FWD, Constants.CLIMBSOL_REV);
+    
   }
 
   public void setManualArmSpd(double speedArg) {
@@ -52,6 +50,7 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    setManualArmSpd(0.1);
 
     if (climbSequenceProgress == climbSequenceTotal) {
       DashboardControl.log("CLIMB SEQUENCE COMPLETE!");
@@ -59,14 +58,13 @@ public class Climber extends SubsystemBase {
       climbSequenceProgress = 0;
     }
 
-    addChild("Winching Motors", climbMotors);
+    //addChild("Winching Motors", climbMotors);
     addChild("Climb PID", climbPID);
-    addChild("Left Piston", climbSolL);
-    addChild("Right Piston", climbSolR);
+    addChild("Pistons", climbSol);
   }
 
   public void extendClimb(double climbSpeedArg) {
-    climbMotors.set(climbSpeedArg);
+    //climbMotors.set(climbSpeedArg);
     // climbMotors.set(climbSpeedArg + artClimbFeedForward);
   }
 
@@ -74,24 +72,27 @@ public class Climber extends SubsystemBase {
     return climberL.getSelectedSensorPosition();
   }
 
-  // public void toggleClimbSol() {
-  // if (climbSolState == true) {
-  // climbSolL.set(Value.kForward);
-  // climbSolR.set(Value.kForward);
-  // climbSolState = false;
-  // }
-  // else {
-  // climbSolL.set(Value.kReverse);
-  // climbSolR.set(Value.kReverse);
-  // climbSolState = true;
-  // }
-  // }
+  public void toggleClimbSol() {
+  if (climbSolState == true) {
+  climbSol.set(Value.kForward);
+  climbSolState = false;
+  }
+  else {
+  climbSol.set(Value.kReverse);
+  climbSolState = true;
+  }
+  }
   /**
    * Returns rounded value for the precent the climber is currently extended or
    * retracted relative to its max value
    */
   public double getClimbExtPrct() {
     return Math.round((getClimbTicks() * 100) / Constants.CLIMB_EXT_THRESH);
+  }
+
+  public void resetClimbEncoders() {
+    climberL.setSelectedSensorPosition(0);
+    climberR.setSelectedSensorPosition(0);
   }
 
 }

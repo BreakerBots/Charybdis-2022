@@ -104,9 +104,9 @@ public final class Constants {
     public static final double R_INDEX_SPD = 0.8; // 1
     public static final double L_INDEX_SPD = 0.8; // 0.8
     // Intake motor IDs
-    public static final int INTAKEMAIN_ID = 30;
-    public static final int INTAKE_L_ID = 27;
-    public static final int INTAKE_R_ID = 26;
+    public static final int INTAKEMAIN_ID = 21;
+    public static final int INTAKE_L_ID = 22;
+    public static final int INTAKE_R_ID = 23;
     public static final int PWR_DISTR = 0;
     // Intake Solonoid IDs
     public static final int INTAKESOL_FWD = 0;
@@ -114,7 +114,7 @@ public final class Constants {
 
     // Hopper constants
     // Hopper motor ID
-    public static final int HOPPER_ID = 19;
+    public static final int HOPPER_ID = 31;
     // Hopper ball position sensor channels
     public static final int SLOT_1_CHANNEL = 9;
     public static final int SLOT_2_CHANNEL = 8;
@@ -137,8 +137,8 @@ public final class Constants {
     // Flywheel speed in TPS
     public static final int FLYWHEEL_MAX_TPS = 1780;
     // Shooter motor IDs
-    public static final int SHOOTER_L_ID = 20;
-    public static final int SHOOTER_R_ID = 21;
+    public static final int SHOOTER_L_ID = 41;
+    public static final int SHOOTER_R_ID = 42;
     // Shooter Solonoid IDs
     public static final int SHOOTERSOL_FWD = 2;
     public static final int SHOOTERSOL_REV = 3;
@@ -154,10 +154,8 @@ public final class Constants {
     public static final int CLIMBER_L_ID = 51;
     public static final int CLIMBER_R_ID = 52;
     // Climber Solonoid IDs
-    public static final int CLIMBSOL_L_FWD = FILLER;
-    public static final int CLIMBSOL_L_REV = FILLER;
-    public static final int CLIMBSOL_R_FWD = FILLER;
-    public static final int CLIMBSOL_R_REV = FILLER;
+    public static final int CLIMBSOL_FWD = 7;
+    public static final int CLIMBSOL_REV = 6;
     // Trigger thresholds for climber states (in ticks)
     public static final double CLIMB_RET_THRESH = 0;
     public static final double CLIMB_EXT_THRESH = 0;

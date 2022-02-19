@@ -29,7 +29,7 @@ public class DashboardControl extends SubsystemBase {
   private Intake intake;
   private AirCompressor compressor;
   //private Climber climber;
-  private PowerDistribution pdp;
+ // private PowerDistribution pdp;
   private FMS_Handler fms;
  // private double[] climbProg = new double[2];
 
@@ -37,7 +37,7 @@ public class DashboardControl extends SubsystemBase {
     intake = intakeArg;
     shooter = shooterArg;
     compressor = compressorArg;
-    pdp = pdpArg;
+   // pdp = pdpArg;
     fms = fmsArg;
     // climber = climbArg;
   }
@@ -60,7 +60,7 @@ public class DashboardControl extends SubsystemBase {
     // Compressor widgets
     SmartDashboard.putBoolean("COMPRESSOR", compressor.getCompressorState());
     // Electrical widgets
-    SmartDashboard.putNumber("BATTERY V", pdp.getVoltage());
+  //  SmartDashboard.putNumber("BATTERY V", pdp.getVoltage());
     SmartDashboard.putBoolean("ROBORIO", RobotController.isBrownedOut());
     // Comp widgets
     SmartDashboard.putBoolean("ALLIANCE", fms.getAllianceBool());

@@ -23,6 +23,7 @@ public class ResetSequenceNums extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climber.resetClimbEncoders();
     climber.climbSequenceTotal = 0;
     climber.climbSequenceProgress = 0;
   }

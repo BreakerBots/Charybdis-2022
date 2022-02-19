@@ -32,8 +32,10 @@ public class ArmMoveTest extends CommandBase {
 
   @Override
   public void execute() {
+    double armspd = 0.5 * xbox.getRightY();
     cycleCount ++;
-    climb.setManualArmSpd(xbox.getRightY());
+    System.out.println("ArmMoveTestExecute:" + armspd);
+    climb.setManualArmSpd(0.1);
   }
 
   @Override

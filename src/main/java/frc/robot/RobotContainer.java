@@ -18,6 +18,7 @@ import frc.robot.commands.auto.actions.FLywheelTest;
 import frc.robot.commands.auto.actions.IntakeHopperIndexerTest;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
 import frc.robot.commands.climb.actions.ArmMoveTest;
+import frc.robot.commands.climb.run.RunClimbSequence;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
@@ -94,7 +95,7 @@ public class RobotContainer {
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-    // new JoystickButton(xbox, Constants.UP).whenPressed(new RunClimbSequence(climbSys, imuSys));
+   //new JoystickButton(xboxSys, Constants.UP).whenPressed(new RunClimbSequence(climbSys, imuSys, xboxSys));
   }
 
   /**
