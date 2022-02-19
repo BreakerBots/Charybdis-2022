@@ -5,6 +5,7 @@
 package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -12,15 +13,21 @@ import frc.robot.subsystems.Intake;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ToggleIntakeArm extends InstantCommand {
   Intake intake;
-  public ToggleIntakeArm(Intake intakeArg) {
+  Hopper hopper;
+  public ToggleIntakeArm(Intake intakeArg, Hopper hopperArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     intake = intakeArg;
+    hopper = hopperArg;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(intake.armIsExtended()) {
+    if(!intake.intakeIsRunning() && intake.armIsExtended()) {
+      intake.retractIntakeArm();
+    } else if (intake.intakeIsRunning() && intake.armIsExtended()) {
+      intake.deactivateIntake();
+      hopper.deactivateHopper();
       intake.retractIntakeArm();
     } else {
       intake.extendIntakeArm();
