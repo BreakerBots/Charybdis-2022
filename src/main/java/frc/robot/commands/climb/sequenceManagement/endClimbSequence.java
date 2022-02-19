@@ -6,6 +6,7 @@ package frc.robot.commands.climb.sequenceManagement;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DashboardControl;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,6 +21,7 @@ public class EndClimbSequence extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    DashboardControl.log("CLIMB SEQUENCE END!");
     climb.setIsClimbing(false);
   }
 }

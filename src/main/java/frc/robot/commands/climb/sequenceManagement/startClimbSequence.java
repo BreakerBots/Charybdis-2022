@@ -6,6 +6,7 @@ package frc.robot.commands.climb.sequenceManagement;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DashboardControl;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -27,5 +28,6 @@ public class StartClimbSequence extends InstantCommand {
     climber.setIsClimbing(true);
     climber.climbSequenceTotal = 0;
     climber.climbSequenceProgress = 0;
+    DashboardControl.log("CLIMB SEQUENCE START!");
   }
 }
