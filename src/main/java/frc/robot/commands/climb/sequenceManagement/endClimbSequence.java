@@ -10,21 +10,16 @@ import frc.robot.subsystems.Climber;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ResetSequenceNums extends InstantCommand {
-  Climber climber;
-  /** resets climb sequence progress counter to "0 of 0" before it is set.
-   */
-  public ResetSequenceNums(Climber climberArg) {
+public class endClimbSequence extends InstantCommand {
+  Climber climb;
+  public endClimbSequence(Climber climbArg) {
     // Use addRequirements() here to declare subsystem dependencies.
-    climber = climberArg;
-    addRequirements(climber);
+    climb = climbArg;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.resetClimbEncoders();
-    climber.climbSequenceTotal = 0;
-    climber.climbSequenceProgress = 0;
+    climb.setIsClimbing(false);
   }
 }

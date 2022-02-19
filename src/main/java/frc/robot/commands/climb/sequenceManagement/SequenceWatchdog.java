@@ -4,17 +4,15 @@
 
 package frc.robot.commands.climb.sequenceManagement;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DashboardControl;
+import frc.robot.subsystems.devices.ClimbWatchdog;
 
 public class SequenceWatchdog extends CommandBase {
   /** Creates a new ManualTerminateSequence. */
-  XboxController xbox;
-  private long cycleCount;
-  public SequenceWatchdog(XboxController controllerArg) {
+  ClimbWatchdog chiwawa;
+  public SequenceWatchdog(ClimbWatchdog watchdogArg) {
     // Use addRequirements() here to declare subsystem dependencies.
-    xbox = controllerArg;
+    chiwawa = watchdogArg;
   }
 
   // Called when the command is initially scheduled.
@@ -24,27 +22,16 @@ public class SequenceWatchdog extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    cycleCount ++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    cycleCount = 0;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (xbox.getStartButtonPressed()) {
-      DashboardControl.log("CLIMB SEQUENCE MANUALLY STOPPED!");
-      return true;
-    } else if (cycleCount > 2250) {
-      DashboardControl.log("CLIMB SEQUENCE TIMED OUT!");
-      return true;
-    }
-    else {
-      return false;
-    }
+    return chiwawa.getClimbForceEnd();
   }
 }

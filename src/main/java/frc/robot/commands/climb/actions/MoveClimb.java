@@ -30,9 +30,12 @@ public class MoveClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double curExt = climber.getClimbTicks();
-    double climbMoveSpeed = climber.climbPID.calculate(curExt, target);
-    climber.extendClimb(climbMoveSpeed);
+    double curExtL = climber.getLeftClimbTicks();
+    double lSpeed = climber.lClimbPID.calculate(curExtL, target);
+    climber.moveLClimb(lSpeed);
+    double curExtR = climber.getLeftClimbTicks();
+    double rSpeed = climber.rClimbPID.calculate(curExtR, target);
+    climber.moveLClimb(rSpeed);
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +48,6 @@ public class MoveClimb extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return climber.climbPID.atSetpoint();
+    return climber.lClimbPID.atSetpoint() && climber.rClimbPID.atSetpoint();
   }
 }

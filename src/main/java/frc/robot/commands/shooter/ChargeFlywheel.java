@@ -14,7 +14,6 @@ import frc.robot.subsystems.Shooter.FlywheelState;
 public class ChargeFlywheel extends CommandBase {
   private Shooter shooter;
   private XboxController xbox;
-  private long atRPM;
   private long cycleCount;
 
   /**

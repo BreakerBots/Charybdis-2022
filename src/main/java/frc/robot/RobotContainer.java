@@ -33,6 +33,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.devices.AirCompressor;
+import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.FMS_Handler;
 import frc.robot.subsystems.devices.IMU;
 
@@ -61,6 +62,7 @@ public class RobotContainer {
   private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
+  private final ClimbWatchdog watchdogSys = new ClimbWatchdog(climbSys, xboxSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
   private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys);
 

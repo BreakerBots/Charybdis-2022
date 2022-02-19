@@ -20,6 +20,6 @@ public class ManualClimbExtend extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climb.setManualArmSpd(-0.4);
+    climb.moveClimb(-0.4);
   }
 }

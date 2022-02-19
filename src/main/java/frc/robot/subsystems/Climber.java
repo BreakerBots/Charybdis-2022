@@ -23,16 +23,19 @@ public class Climber extends SubsystemBase {
   // Rotates the climb arms.
   private DoubleSolenoid climbSol;
   // Makes sure we get to desired position
-  public PIDController climbPID;
+  public PIDController lClimbPID;
+  public PIDController rClimbPID;
   private final double artClimbFeedForward = 0.3;
+  private boolean climbing;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
   public boolean climbSolState; // true is extended
-  public int climbSequenceTotal;
-  public int climbSequenceProgress;
+  public int climbSequenceTotal = 0;
+  public int climbSequenceProgress = 0;
 
   public Climber() {
     setName("Climber");
-    climbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
+    lClimbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
+    rClimbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
     climberR.setInverted(true);
@@ -43,31 +46,38 @@ public class Climber extends SubsystemBase {
     
   }
 
-  public void setManualArmSpd(double speedArg) {
-    climbMotors.set(speedArg);
-  }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     if (climbSequenceProgress == climbSequenceTotal) {
-      DashboardControl.log("CLIMB SEQUENCE COMPLETE!");
       climbSequenceTotal = 0;
       climbSequenceProgress = 0;
     }
-
     //addChild("Winching Motors", climbMotors);
-    addChild("Climb PID", climbPID);
+    addChild("Left Climb PID", lClimbPID);
+    addChild("Right Climb PID", rClimbPID);
     addChild("Pistons", climbSol);
   }
 
-  public void extendClimb(double climbSpeedArg) {
+  public void moveClimb(double climbSpeedArg) {
     climbMotors.set(climbSpeedArg);
     // climbMotors.set(climbSpeedArg + artClimbFeedForward);
   }
 
-  public double getClimbTicks() {
+  public void moveLClimb(double climbSpeedArg) {
+    climberL.set(climbSpeedArg);
+  }
+
+  public void moveRClimb(double climbSpeedArg) {
+    climberR.set(climbSpeedArg);
+  }
+
+  public double getLeftClimbTicks() {
     return climberL.getSelectedSensorPosition();
+  }
+
+  public double getRightClimbTicks() {
+    return climberR.getSelectedSensorPosition();
   }
 
   public void toggleClimbSol() {
@@ -85,7 +95,7 @@ public class Climber extends SubsystemBase {
    * retracted relative to its max value
    */
   public double getClimbExtPrct() {
-    return Math.round((getClimbTicks() * 100) / Constants.CLIMB_EXT_THRESH);
+    return Math.round((((getLeftClimbTicks() + getRightClimbTicks()) / 2) * 100) / Constants.CLIMB_EXT_THRESH);
   }
 
   public void resetClimbEncoders() {
@@ -93,4 +103,11 @@ public class Climber extends SubsystemBase {
     climberR.setSelectedSensorPosition(0);
   }
 
+  public boolean isClimbing() {
+    return climbing;
+  }
+
+  public void setIsClimbing(boolean val) {
+    climbing = val;
+  }
 }
