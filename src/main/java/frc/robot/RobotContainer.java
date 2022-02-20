@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot.RobotMode;
-import frc.robot.commands.auto.paths.OffTarmack_H1;
-import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_H3;
-import frc.robot.commands.auto.paths.Pickup1_Shoot2_H3;
+import frc.robot.commands.auto.paths.OffTarmack_G;
+import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_P1;
+import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
 import frc.robot.commands.climb.actions.ManuallyMoveClimb;
 import frc.robot.commands.climb.actions.MoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
@@ -28,8 +28,6 @@ import frc.robot.commands.intake.ToggleIntake;
 import frc.robot.commands.intake.ToggleIntakeArm;
 import frc.robot.commands.shooter.ChargeThenShoot;
 import frc.robot.commands.shooter.ToggleShooterMode;
-import frc.robot.commands.test.FlywheelTest;
-import frc.robot.commands.test.IntakeHopperIndexerTest;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
@@ -120,9 +118,9 @@ public class RobotContainer {
 
     switch (PathNum) {
     case 0: return null;
-    case 1: return new Pickup1_Shoot2_H3(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
-    case 2: return new Pickup1_Shoot2_ARC_H3(driveSys, imuSys);
-    case 3: return new OffTarmack_H1(driveSys, imuSys);
+    case 1: return new Pickup1_Shoot2_P1(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
+    case 2: return new Pickup1_Shoot2_ARC_P1(driveSys, imuSys);
+    case 3: return new OffTarmack_G(driveSys, imuSys);
     default: return null;
     }
   }
