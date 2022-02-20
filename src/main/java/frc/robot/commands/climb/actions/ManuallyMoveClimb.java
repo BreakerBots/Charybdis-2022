@@ -14,7 +14,6 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
 public class ManuallyMoveClimb extends CommandBase {
-  /** Creates a new ManualExtendClimb. */
   private Climber climb;
   private XboxController xbox;
   public ManuallyMoveClimb(Climber climbArg, XboxController controllerArg) {

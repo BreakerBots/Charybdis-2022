@@ -29,7 +29,7 @@ public class MoveClimb extends CommandBase {
   @Override
   public void initialize() {
     climber.setIsClimbing(true);
-    DashboardControl.log("MOVEING CLIMB");
+    DashboardControl.log("MOVING CLIMB");
   }
 
   // Called every time the scheduler runs while the command is scheduled.

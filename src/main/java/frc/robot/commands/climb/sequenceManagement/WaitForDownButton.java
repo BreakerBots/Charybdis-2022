@@ -12,7 +12,6 @@ import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.devices.ClimbWatchdog;
 
 public class WaitForDownButton extends CommandBase {
-  /** Creates a new WaitForButtonPress. */
   private XboxController xbox;
   private Climber climber;
   private ClimbWatchdog husky;

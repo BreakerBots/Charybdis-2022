@@ -14,16 +14,16 @@ import frc.robot.subsystems.devices.ClimbWatchdog;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PivotClimb extends InstantCommand {
   private Climber climber;
-  private ClimbWatchdog terrier;
+  private ClimbWatchdog watchdog;
   private boolean manual;
   /** Toggles climber pistons to move arms between extended and retracted positions */
   public PivotClimb(Climber climbArg, ClimbWatchdog watchdogArg, boolean isManual) {
     // Use addRequirements() here to declare subsystem dependencies.
     climber = climbArg;
-    terrier = watchdogArg;
+    watchdog = watchdogArg;
     manual = isManual;
     addRequirements(climber);
-    addRequirements(terrier);
+    addRequirements(watchdog);
   }
 
   // Called when the command is initially scheduled.
@@ -32,7 +32,7 @@ public class PivotClimb extends InstantCommand {
     if (!manual) {
       climber.setIsClimbing(true);
     }
-    if (!terrier.getClimbForceEnd()) {
+    if (!watchdog.getClimbForceEnd()) {
       climber.toggleClimbSol();
       DashboardControl.log("CLIMB ARM PIVOTED");
     }
