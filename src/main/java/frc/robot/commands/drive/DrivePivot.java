@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.auto.actions;
+package frc.robot.commands.drive;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -10,14 +10,14 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.devices.IMU;
 
-public class Pivot extends CommandBase {
+public class DrivePivot extends CommandBase {
   Drive drive;
   IMU imu;
   double target;
   double speedClamp;
   double lastAngle;
 
-  public Pivot(Drive driveArg, IMU imuArg, double targetDegrees, double speedLimit) {
+  public DrivePivot(Drive driveArg, IMU imuArg, double targetDegrees, double speedLimit) {
     drive = driveArg;
     addRequirements(drive);
     imu = imuArg;

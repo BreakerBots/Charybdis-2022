@@ -2,13 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.auto.actions;
+package frc.robot.commands.test;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.BreakerMath;
 import frc.robot.subsystems.Shooter;
 
-public class FLywheelTest extends CommandBase {
+public class FlywheelTest extends CommandBase {
   /** Creates a new FLywheelTest. */
   private Shooter shooter;
   private double flywheelLSupAvg;
@@ -20,7 +20,7 @@ public class FLywheelTest extends CommandBase {
   private double time;
   private long cycleCount;
   private double speed;
-  public FLywheelTest(double secArg, double speedArg, Shooter shooterArg) {
+  public FlywheelTest(double secArg, double speedArg, Shooter shooterArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     time = secArg * 50;
     speed = speedArg;

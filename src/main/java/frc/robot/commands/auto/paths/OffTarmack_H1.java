@@ -5,9 +5,9 @@
 package frc.robot.commands.auto.paths;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.auto.actions.MoveStraight;
-import frc.robot.commands.auto.actions.Pivot;
-import frc.robot.commands.auto.actions.Turn;
+import frc.robot.commands.drive.DriveStraight;
+import frc.robot.commands.drive.DrivePivot;
+import frc.robot.commands.drive.DriveTurn;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.devices.IMU;
 
@@ -20,12 +20,12 @@ public class OffTarmack_H1 extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     //addCommands( new Pivot(driveArg, imuArg, 180, 0.5));
-    addCommands(new Turn(driveArg, imuArg, 90, 72, 0.65),
-                new MoveStraight(driveArg, imuArg, -72, 0.3),
-                new Turn(driveArg, imuArg, 90, 72, 0.65),
-                new Pivot(driveArg, imuArg, 90, 0.5), 
-                new MoveStraight(driveArg, imuArg, 60, 0.3),
-                new Pivot(driveArg, imuArg, 90, 0.5)
+    addCommands(new DriveTurn(driveArg, imuArg, 90, 72, 0.65),
+                new DriveStraight(driveArg, imuArg, -72, 0.3),
+                new DriveTurn(driveArg, imuArg, 90, 72, 0.65),
+                new DrivePivot(driveArg, imuArg, 90, 0.5), 
+                new DriveStraight(driveArg, imuArg, 60, 0.3),
+                new DrivePivot(driveArg, imuArg, 90, 0.5)
                 // new MoveStraight(driveArg, 60, 0.3)
                 );
   }

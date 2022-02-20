@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.auto.actions;
+package frc.robot.commands.drive;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -11,13 +11,13 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.devices.IMU;
 
 /** Robot moves forward/back to target distance */
-public class MoveStraight extends CommandBase {
+public class DriveStraight extends CommandBase {
   private Drive drive;
   private IMU imu;
   private double targetDistance;
   private double speedClamp;
   /** Creates a new MoveStraight. */
-  public MoveStraight(Drive driveArg, IMU imuArg, double distanceInches, double speedLimit) {
+  public DriveStraight(Drive driveArg, IMU imuArg, double distanceInches, double speedLimit) {
     drive = driveArg;
     imu = imuArg;
     addRequirements(drive);

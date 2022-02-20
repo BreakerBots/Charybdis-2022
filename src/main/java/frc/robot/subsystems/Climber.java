@@ -29,8 +29,6 @@ public class Climber extends SubsystemBase {
   private boolean climbing;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
   public boolean climbSolRetracted; // true is extended
-  public int climbSequenceTotal = 0;
-  public int climbSequenceProgress = 0;
 
   public Climber() {
     setName("Climber");
@@ -50,10 +48,6 @@ public class Climber extends SubsystemBase {
     String log_str = "LClimb Ticks: " + climberL.getSelectedSensorPosition() + " RClimb Ticks: " + climberR.getSelectedSensorPosition();
     DashboardControl.log(log_str);
     // This method will be called once per scheduler run
-    if (climbSequenceProgress == climbSequenceTotal) {
-      climbSequenceTotal = 0;
-      climbSequenceProgress = 0;
-    }
     //addChild("Winching Motors", climbMotors);
     addChild("Left Climb PID", lClimbPID);
     addChild("Right Climb PID", rClimbPID);
