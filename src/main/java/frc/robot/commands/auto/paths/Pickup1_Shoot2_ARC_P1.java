@@ -20,11 +20,11 @@ public class Pickup1_Shoot2_ARC_P1 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new DriveStraight(driveArg, imuArg, 60, 0.3),
+    new DriveStraight(driveArg, imuArg, 60, 0.3, 4),
     new DrivePivot(driveArg, imuArg, 40, 0.3),
-    new DriveStraight(driveArg, imuArg, -44, 0.3),
+    new DriveStraight(driveArg, imuArg, -44, 0.3, 4),
     new DriveTurn(driveArg, imuArg, 65, 48, -0.7),
-    new DriveStraight(driveArg, imuArg, -20, 0.3)
+    new DriveStraight(driveArg, imuArg, -20, 0.3, 4)
     );
   }
 }

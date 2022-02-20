@@ -17,7 +17,10 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot.RobotMode;
 import frc.robot.commands.auto.paths.OffTarmack_G;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_P1;
+import frc.robot.commands.auto.paths.Pickup1_Shoot2_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
+import frc.robot.commands.auto.paths.Pickup1_Shoot2_P2;
+import frc.robot.commands.auto.paths.Pickup2_Shoot3_P2;
 import frc.robot.commands.climb.actions.ManuallyMoveClimb;
 import frc.robot.commands.climb.actions.MoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
@@ -69,6 +72,7 @@ public class RobotContainer {
   private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
+  private Hopper hopperArg;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -121,6 +125,9 @@ public class RobotContainer {
     case 1: return new Pickup1_Shoot2_P1(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
     case 2: return new Pickup1_Shoot2_ARC_P1(driveSys, imuSys);
     case 3: return new OffTarmack_G(driveSys, imuSys);
+    case 4: return new Pickup1_Shoot2_H1(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+    case 5: return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+    case 6: return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
     default: return null;
     }
   }

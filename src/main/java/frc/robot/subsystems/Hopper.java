@@ -100,26 +100,26 @@ public class Hopper extends SubsystemBase {
       if (slot1IsFull() && !slot2IsFull()) { // Only bottom is full
         activateHopper(); // Turns on hopper
       } else if (!slot1IsFull() && slot2IsFull()) { // Only top is full
-        pauseCountA++;
-        if (pauseCountA > Constants.HOPPER_DELAY_CYCLES) { // Waits to turn off hopper
+       // pauseCountA++;
+       // if (pauseCountA > Constants.HOPPER_DELAY_CYCLES) { // Waits to turn off hopper
           deactivateHopper();
-          pauseCountA = 0;
-        }
+       //   pauseCountA = 0;
+      //}
       } else if (!slot1IsFull() && !slot2IsFull()) { // Both ar empty
         deactivateHopper();
       } else if (bothSlotsAreFull()) { // Both are full
         pauseCountB++;
-        if (pauseCountB > 0) { // Waits to turn off hopper and intake.
+        if (pauseCountB > 25) { // Waits to turn off hopper and intake.
           intake.deactivateIntake();
           deactivateHopper();
           pauseCountB = 0;
         }
-      }
+      }}
+      addChild("Hopper Motor", hopperMotor);
+      addChild("Bottom Sensor", slot1);
+      addChild("Top Sensor", slot2);
     }
-    addChild("Hopper Motor", hopperMotor);
-    addChild("Bottom Sensor", slot1);
-    addChild("Top Sensor", slot2);
-  }
+  
 
   @Override
   public void periodic() {

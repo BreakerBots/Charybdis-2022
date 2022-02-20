@@ -12,12 +12,15 @@ import frc.robot.subsystems.devices.IMU;
 
 /** Robot moves forward/back to target distance */
 public class DriveStraight extends CommandBase {
+  private int cyclecount;
   private Drive drive;
   private IMU imu;
   private double targetDistance;
   private double speedClamp;
+  private double time;
   /** Creates a new MoveStraight. */
-  public DriveStraight(Drive driveArg, IMU imuArg, double distanceInches, double speedLimit) {
+  public DriveStraight(Drive driveArg, IMU imuArg, double distanceInches, double speedLimit, double secArg) {
+    time = secArg * 50; 
     drive = driveArg;
     imu = imuArg;
     addRequirements(drive);
@@ -37,6 +40,7 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    cyclecount ++;
     double curDist = BreakerMath.ticksToInches(drive.getLeftTicks());
     System.out.println("Ticks: " + drive.getLeftTicks());
     // System.out.println(drive.feedForwardCalc(4, 2)); // Constants for desired vel, desired acc
@@ -52,11 +56,14 @@ public class DriveStraight extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    cyclecount = 0;
+    drive.autoMove(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return drive.atSetpointDist();
+    return drive.atSetpointDist() || cyclecount >= time;
   }
 }

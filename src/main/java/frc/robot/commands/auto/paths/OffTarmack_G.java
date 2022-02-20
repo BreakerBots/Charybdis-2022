@@ -19,7 +19,7 @@ public class OffTarmack_G extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     //addCommands( new Pivot(driveArg, imuArg, 180, 0.5));
-    addCommands(new DriveStraight(driveArg, imuArg, 72, 0.3)
+    addCommands(new DriveStraight(driveArg, imuArg, 72, 0.3, 4)
                 // new MoveStraight(driveArg, 60, 0.3)
                 );
   }
