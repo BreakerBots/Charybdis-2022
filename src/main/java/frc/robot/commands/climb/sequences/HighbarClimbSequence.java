@@ -7,7 +7,7 @@ package frc.robot.commands.climb.sequences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.climb.actions.ClimbStablityCheck;
+import frc.robot.commands.climb.actions.ClimbStabilityCheck;
 import frc.robot.commands.climb.actions.MoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
 import frc.robot.commands.climb.sequenceManagement.WaitForDownButton;
@@ -35,14 +35,14 @@ public class HighbarClimbSequence extends SequentialCommandGroup {
       new MoveClimb(climbArg, Constants.CLIMB_FULL_RET_DIST, watchdogArg),
       new MoveClimb(climbArg, Constants.CLIMB_MIRACLE_GRAB_EXT_DIST, watchdogArg),
       new PivotClimb(climbArg, watchdogArg, false),
-      new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
+      new ClimbStabilityCheck(climbArg, imuArg, watchdogArg),
       new MoveClimb(climbArg, Constants.CLIMB_FULL_EXT_DIST, watchdogArg),
-      new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
+      new ClimbStabilityCheck(climbArg, imuArg, watchdogArg),
       new PivotClimb(climbArg, watchdogArg, false),
       new MoveClimb(climbArg, Constants.CLIMB_LIFT_OF_MID_DIST, watchdogArg),
-      new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
+      new ClimbStabilityCheck(climbArg, imuArg, watchdogArg),
       new PivotClimb(climbArg, watchdogArg, false),
-      new ClimbStablityCheck(climbArg, imuArg, watchdogArg),
+      new ClimbStabilityCheck(climbArg, imuArg, watchdogArg),
       new MoveClimb(climbArg, Constants.LIFT_ONTO_HIGH_DIST, watchdogArg),
       new MoveClimb(climbArg, Constants.SECOND_MIRACLE_GRAB_EXT_DIST, watchdogArg),
       new EndClimbSequence(climbArg)
