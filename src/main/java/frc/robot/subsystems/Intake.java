@@ -110,7 +110,7 @@ public class Intake extends SubsystemBase {
 
     /**
      * Toggles left indexer on/off when intake is off to feed in balls to the
-     * hopper.
+     * hopper. MIGHT BE DEPRECATED!!!
      */
     public void toggleHopperFeed() {
         if (!intakeIsRunning) {

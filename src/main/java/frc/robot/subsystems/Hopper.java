@@ -16,7 +16,9 @@ public class Hopper extends SubsystemBase {
   // Hopper motor
   private WPI_TalonSRX hopperMotor;
   // Sensors for checking hopper inventory
+  /** Bottom slot of hopper. */
   private DigitalInput slot1;
+  /** Top slot of hopper */
   private DigitalInput slot2;
   // Intake pass-in
   private Intake intake;
@@ -49,7 +51,7 @@ public class Hopper extends SubsystemBase {
   }
 
   /**
-   * Top slot of hopper.
+   * Bottom slot of hopper.
    * 
    * @return true if full, false if empty.
    */
@@ -59,7 +61,7 @@ public class Hopper extends SubsystemBase {
   }
 
   /**
-   * Bottom slot of hopper.
+   * Top slot of hopper.
    * 
    * @return true if full, false if empty.
    */
@@ -69,6 +71,10 @@ public class Hopper extends SubsystemBase {
 
   public boolean bothSlotsAreFull() {
     return slot1IsFull() && slot2IsFull();
+  }
+
+  public boolean bothSlotsAreEmpty() {
+    return !slot1IsFull() && !slot2IsFull();
   }
 
   /**
@@ -101,7 +107,7 @@ public class Hopper extends SubsystemBase {
         }
       } else if (!slot1IsFull() && !slot2IsFull()) { // Both ar empty
         deactivateHopper();
-      } else if (slot1IsFull() && slot2IsFull()) { // Both are full
+      } else if (bothSlotsAreFull()) { // Both are full
         pauseCountB++;
         if (pauseCountB > 0) { // Waits to turn off hopper and intake.
           intake.deactivateIntake();
@@ -112,7 +118,7 @@ public class Hopper extends SubsystemBase {
     }
     addChild("Hopper Motor", hopperMotor);
     addChild("Bottom Sensor", slot1);
-    addChild("Top Sensor", slot1);
+    addChild("Top Sensor", slot2);
   }
 
   @Override

@@ -55,19 +55,20 @@ public class ShootAll extends CommandBase {
     if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
       shooter.isShooting = true;
       hopper.activateHopper();
-      intake.toggleHopperFeed();
+      intake.toggleHopperFeed(); // May be removed
       DashboardControl.log("SHOOTER STARTED!");
     }
-    System.out.println(shooter.getFlywheelTPS());
-    if (!hopper.slot2IsFull() && !hopper.slot1IsFull()) { //&& hopper.slot1IsFull() == false
-      timedStopCount++;
-    }
-    if (!hopper.slot2IsFull() && !hopper.slot1IsFull() && timedStopCount > 150) { // && hopper.slot1IsFull() == false 
-      hopper.deactivateHopper();
-      intake.deactivateIntake();
-      timedStopCount = 0;
-      shooter.setOff();
-      shooter.setFlywheelState(FlywheelState.OFF);
+    //  REMOVE THIS! System.out.println(shooter.getFlywheelTPS());
+    if (hopper.bothSlotsAreEmpty()) {
+      if (timedStopCount > 150) {
+        hopper.deactivateHopper();
+        intake.deactivateIntake();
+        timedStopCount = 0;
+        shooter.setOff();
+        shooter.setFlywheelState(FlywheelState.OFF);
+      } else {
+        timedStopCount++;
+      }
     }
   }
 

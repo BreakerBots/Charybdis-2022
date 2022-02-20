@@ -37,7 +37,6 @@ public class Shooter extends SubsystemBase {
   private double flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
   private double flyIdleSpd = flyTgtSpdPrct * 0.8;
   private MotorControllerGroup flywheel;
-  // public boolean autoShoot; Remove due to being unused.
   private DoubleSolenoid shooterSol;
   private Hopper hopper;
   public boolean isShooting = false;
@@ -67,7 +66,7 @@ public class Shooter extends SubsystemBase {
     flywheel.set(0);
     flywheelState = FlywheelState.OFF;
   }
-  
+
   /** Sets flywheel into idling state. */
   public void setIdle() {
     flywheel.set(flyIdleSpd);
@@ -183,14 +182,14 @@ public class Shooter extends SubsystemBase {
         } else {
           setOff();
         }
-      break;
+        break;
     }
     addChild("Flywheel", flywheel);
     addChild("Shooter Piston", shooterSol);
     addChild("Flywheel PID", flywheelPID);
   }
 
-  public void setflywheelManualSpeed(double speed) {
+  public void setFlywheelManualSpeed(double speed) {
     flywheel.set(speed);
   }
 }
