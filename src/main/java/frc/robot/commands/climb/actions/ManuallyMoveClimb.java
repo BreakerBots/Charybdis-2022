@@ -6,6 +6,7 @@ package frc.robot.commands.climb.actions;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -43,12 +44,13 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = xbox.getRightY();
+    double speed = -1 * MathUtil.applyDeadband(xbox.getRightY(), 0.05);
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();
-    double catchup = Constants.kCatchup * (leftTicks - rightTicks) * (speed > 0 ? 1 : -1);
+    System.out.println();
+    //double catchup = Constants.kCatchup * (leftTicks - rightTicks) * (speed > 0 ? 1 : -1);
     climb.moveLClimb(driveClimb(speed, climb.getLeftClimbTicks()));
-    climb.moveRClimb(driveClimb(speed+catchup, climb.getRightClimbTicks()));
+    climb.moveRClimb(driveClimb(speed, climb.getRightClimbTicks()));
   }
 
   // Called once the command ends or is interrupted.

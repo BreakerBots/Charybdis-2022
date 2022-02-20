@@ -170,7 +170,7 @@ public final class Constants {
     public static final double CLIMB_ROLL_TOL = 5;
     public static final long CLIMB_MIN_STABLE_TIME = 150;
     // Climber extension values (ticks)
-    public static final double CLIMB_FULL_EXT_DIST = FILLER;
+    public static final double CLIMB_FULL_EXT_DIST = 2000000000;
     public static final double CLIMB_FULL_RET_DIST = FILLER;
     public static final double CLIMB_MIRACLE_GRAB_EXT_DIST = FILLER;
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;

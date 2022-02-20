@@ -68,10 +68,9 @@ public class RobotContainer {
   private final FMS_Handler fmsSys = new FMS_Handler();
   private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final DashboardControl dashbordSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
+  private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
-  private final ManuallyMoveClimb manuallyMoveClimb;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -80,10 +79,6 @@ public class RobotContainer {
     driveWithJoystick = new DriveWithJoystick(xboxSys, pdpSys, driveSys);
     driveWithJoystick.addRequirements(driveSys);
     driveSys.setDefaultCommand(driveWithJoystick);
-    
-    manuallyMoveClimb = new ManuallyMoveClimb(climbSys, xboxSys);
-    manuallyMoveClimb.addRequirements(climbSys);
-    climbSys.setDefaultCommand(manuallyMoveClimb);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -99,12 +94,14 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
+
     // new JoystickButton(xbox, Constants.A).whenPressed(new
-    // MoveStraight(driveTrain, imuSys, 80, 0.5));
+    //  MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
     new JoystickButton(xboxSys, Constants.Y).whenPressed(new PivotClimb(climbSys, watchdogSys, true));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
+    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     // // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));

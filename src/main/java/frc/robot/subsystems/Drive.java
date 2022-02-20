@@ -64,10 +64,10 @@ public class Drive extends SubsystemBase {
   /** Wraps around arcadeDrive to allow for movement */
   public void teleopMove(double netSpd, double turnSpd) {
     double logSpd = netSpd; // Convert.logisticCurve(netSpd);
-    if (pdp.getVoltage() < 8.5) {
-      logSpd *= 0.85;
-      turnSpd *= 0.85;
-    }
+    // if (pdp.getVoltage() < 8.5) {
+    //   logSpd *= 0.85;
+    //   turnSpd *= 0.85;
+    // }
     // System.out.println("netSpd: " + netSpd + " logSpd: " + logSpd + " turnSpd: "
     // + turnSpd + " logTurn: ");
     driveTrainDiff.arcadeDrive(logSpd, turnSpd); // Calculates speed and turn outputs
