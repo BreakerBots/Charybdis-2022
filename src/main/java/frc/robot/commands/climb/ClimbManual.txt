@@ -1,6 +1,6 @@
 Sequences:
     automated action sequences in which the robot wil move between bars on its own. (NOTE: Requires user imput to continue after initial extension)
-        HOW TO USE: create sequence by chaining togeteher desired Actions in order (with stability checks regurly spaced throughout).
+        HOW TO USE: create sequence by chaining together desired Actions in order (with stability checks regurly spaced throughout).
             1. HighbarClimbSequence: robot starts from mid bar then climbs up and trevrses to high bar.
 Actions:
     commands that are linked together in a series to form a climb sequence:
@@ -8,9 +8,16 @@ Actions:
         2. PivotClimb: Extends or retracts pistons for climber arms. Used when climber is grabing new bars.
         3. climbStablityCheck: Waits for IMU's returned rate of YPR change to be below 5 degrees per second for 3 seconds befor allowing sequence to progress.
 SequenceManagement:
-    commands called within a climb sequence that do not directly effect the climber and that insted have support roles (dashboard, failsafes, etc).
-        1. StartClimbSequence: resets climb progress counter to 0 of 0, resets climb motor encoders, and sets "isClimbing" to true.
+    commands called within a climb sequence that do not directly effect the climber and that insted have support roles (imput checks, state changers, etc).
         2. EndClimbSequence: basicly just sets "isClimbing" to false.
-        2. SetSequenceNums: sets the total number of actions in a climb sequence for progress counter.
         3. WaitForDownButton: Waits for user imput to continue with sequence after initial climber extension.
-        4. SequenceWatchdog: allows ClimbWatchdog class to interact with (and cancle) active climb sequence.
+Manual Control: 
+    if desired, the driver may take control of climb form the robot, allowing them full control over the robots climb
+        - Controls: 
+            a. D-PAD left engages Manual arm movement control (must be renabled after arm piviot).
+            c. Right Joystick Y-axis controls climber arm movment after manual control has been enabled
+            b. Y button toggles climb arm piviot (when activated manual arm control will stop untill renabled)
+        - How To:
+            a. If automated sequence has NOT been activated yet, than manual control can be assumed just as any outher teleop action would.
+            b. If automated HAS been activated, then the dirver will first need to cancle the sequence useing the menu button, after that, manual control can be assumed as normal.
+        - WARNING: AUTOMATED SEQUENCE CAN NOT BE REACTIVAED AFTER A MANUAL CLIMB HAS BEGUN OR THE AUTOMATED SEQUENCE HAS BEEN INTERUPTED

@@ -50,7 +50,6 @@ public class ShootAll extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // STOP SETTING FLYWHEEL STATES! REWORK LOGIC!
     cycleCount++;
     if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
       shooter.isShooting = true;
@@ -58,7 +57,6 @@ public class ShootAll extends CommandBase {
       intake.toggleHopperFeed(); // May be removed
       DashboardControl.log("SHOOTER STARTED!");
     }
-    //  REMOVE THIS! System.out.println(shooter.getFlywheelTPS());
     if (hopper.bothSlotsAreEmpty()) {
       if (timedStopCount > 150) {
         hopper.deactivateHopper();

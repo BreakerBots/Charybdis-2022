@@ -16,7 +16,14 @@ public class DrivePivot extends CommandBase {
   double target;
   double speedClamp;
   double lastAngle;
-
+  /** Autonomous command used to turn the robot in place a specified number of degrees 
+   * relative to the direction in which it was facing when the command is first called 
+   * 
+   * @param driveArg Drive subsystem from RobotContainer
+   * @param imuArg IMU subsystem from RobotContainer
+   * @param targetDegrees the number of degrees you want the robot to turn relative to its orientation on command start (+ is right and - is left)
+   * @param speedLimit the precent of max speed you wish the robot to be caped at (0.0 to 1.0) (DO NOT make argument negative) (NOTE: 3.0 or below tends to be quite slow)
+   */
   public DrivePivot(Drive driveArg, IMU imuArg, double targetDegrees, double speedLimit) {
     drive = driveArg;
     addRequirements(drive);

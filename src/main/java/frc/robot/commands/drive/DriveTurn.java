@@ -18,7 +18,7 @@ public class DriveTurn extends CommandBase {
   private double angleError;
 
   private double tgtSpeed;
-
+/** Autonomous command for turning the robot along a specified arc  */
   public DriveTurn(Drive driveTrainArg, IMU imuArg, double angleArg, double radiusArg, double speedArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     driveTrain = driveTrainArg;

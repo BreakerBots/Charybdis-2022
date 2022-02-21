@@ -18,7 +18,14 @@ public class DriveStraight extends CommandBase {
   private double targetDistance;
   private double speedClamp;
   private double time;
-  /** Creates a new MoveStraight. */
+  /** Autonomous command used to move the robot forward or backward a specified number of inches
+   * 
+   * @param driveArg Drive subsystem from RobotContainer
+   * @param imuArg IMU device from RobotContainer
+   * @param distanceInches the distance in inches you want the robot to travel (+ is forward and - is reverse) (relative to intake as front)
+   * @param speedLimit the precent of max speed you wish the robot to be caped at (0.0 to 1.0) (DO NOT make argument negative) (WARNING: 7.0 or above is EXTREAMLY FAST)
+   * @param secArg the time limit (in seconds) on this particular instance of this command befor it times out and cancles (safty feature to prevent accadents)
+   */
   public DriveStraight(Drive driveArg, IMU imuArg, double distanceInches, double speedLimit, double secArg) {
     time = secArg * 50; 
     drive = driveArg;

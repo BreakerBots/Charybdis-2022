@@ -10,6 +10,8 @@ import frc.robot.commands.drive.DrivePivot;
 import frc.robot.commands.drive.DriveStraight;
 import frc.robot.commands.drive.DriveTurn;
 import frc.robot.commands.intake.ToggleIntake;
+import frc.robot.commands.shooter.ChargeFlywheel;
+import frc.robot.commands.shooter.ChargeFlywheelWhile;
 import frc.robot.commands.shooter.ChargeThenShoot;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;

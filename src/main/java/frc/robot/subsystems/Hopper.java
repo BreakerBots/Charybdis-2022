@@ -55,7 +55,7 @@ public class Hopper extends SubsystemBase {
    * 
    * @return true if full, false if empty.
    */
-  public boolean slot1IsFull() {
+  public boolean hopperBottomIsFull() {
     return !(slot1.get());
 
   }
@@ -65,16 +65,16 @@ public class Hopper extends SubsystemBase {
    * 
    * @return true if full, false if empty.
    */
-  public boolean slot2IsFull() {
+  public boolean hopperTopIsFull() {
     return !(slot2.get());
   }
 
   public boolean bothSlotsAreFull() {
-    return slot1IsFull() && slot2IsFull();
+    return hopperBottomIsFull() && hopperTopIsFull();
   }
 
   public boolean bothSlotsAreEmpty() {
-    return !slot1IsFull() && !slot2IsFull();
+    return !hopperBottomIsFull() && !hopperTopIsFull();
   }
 
   /**
@@ -97,15 +97,15 @@ public class Hopper extends SubsystemBase {
 
   public void hopperLogicLoop() {
     if (intake.intakeIsRunning()) {
-      if (slot1IsFull() && !slot2IsFull()) { // Only bottom is full
+      if (hopperBottomIsFull() && !hopperTopIsFull()) { // Only bottom is full
         activateHopper(); // Turns on hopper
-      } else if (!slot1IsFull() && slot2IsFull()) { // Only top is full
+      } else if (!hopperBottomIsFull() && hopperTopIsFull()) { // Only top is full
        pauseCountA++;
        if (pauseCountA > 25) { // Waits to turn off hopper
           deactivateHopper();
          pauseCountA = 0;
       }
-      } else if (!slot1IsFull() && !slot2IsFull()) { // Both ar empty
+      } else if (!hopperBottomIsFull() && !hopperTopIsFull()) { // Both ar empty
         deactivateHopper();
       } else if (bothSlotsAreFull()) { // Both are full
         pauseCountB++;

@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Robot.RobotMode;
 import frc.robot.commands.auto.paths.OffTarmack_G;
-import frc.robot.commands.auto.paths.Pickup1_Shoot2_ARC_P1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P2;
@@ -96,15 +95,12 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-
-    // new JoystickButton(xbox, Constants.A).whenPressed(new
-    //  MoveStraight(driveTrain, imuSys, 80, 0.5));
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
     new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
     new JoystickButton(xboxSys, Constants.Y).whenPressed(new PivotClimb(climbSys, watchdogSys, true));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
-    new JoystickButton(xboxSys, Constants.R_BUMP).whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
-    // // B button shoots, Left Menu cancles
+    new JoystickButton(xboxSys, Constants.LEFT).whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
+    // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
     //new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
@@ -116,18 +112,20 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-//return new Pickup1_Shoot2_H3(controllerArg, driveArg, imuArg, intakeArg, hopperArg, shooterArg);
     
-    int PathNum = 1; // sets auto path
+    // CHANGE AUTOPATH HERE \/
+    
+    int pathNumber = 1; //    <<<    IMPORTANT: The number after "=" refers to the selected autopath from the list below. To change use the desired paths sumber from the list below.
 
-    switch (PathNum) {
+    
+    
+    switch (pathNumber) {
     case 0: return null;
-    case 1: return new Pickup1_Shoot2_P1(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
-    case 2: return new Pickup1_Shoot2_ARC_P1(driveSys, imuSys);
-    case 3: return new OffTarmack_G(driveSys, imuSys);
-    case 4: return new Pickup1_Shoot2_H1(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-    case 5: return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-    case 6: return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+    case 1: return new OffTarmack_G(driveSys, imuSys);
+    case 2: return new Pickup1_Shoot2_H1(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+    case 3: return new Pickup1_Shoot2_P1(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
+    case 4: return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+    case 5: return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
     default: return null;
     }
   }

@@ -1,2 +1,11 @@
+Nameing Convention:
+    - What the path does_Starting position
+    - EX: Pickup1_Shoot2_H1 (the path intakes one ball, shoots two balls, and starts at position 1 on the hangars side of the field)
 Starting positions: 
+    - LINK TO MAP OF FIELD WITH POSITIONS: https://imgur.com/a/MUe3EEY (only accesable through link)
+    - Please align robot as carfuly and precicely as possable.
+    - A path with "G" as it's starting position indicates that it can be used from any position.
+Paths:
+    paths are sequences of actions that the robot will preform during autonomous.
+        - HOW TO USE: Put each of the desired actions in a sequential command group, and call them in the order in which they must be preformed.
 
