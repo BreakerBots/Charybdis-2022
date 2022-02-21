@@ -18,18 +18,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   /** Operating state of the robot, based on FRC Drive Station.*/
-  public enum RobotMode {
-    /** Robot is disabled in any mode. */
-    DISABLED,
-    /** Robot is enabled in teleop mode. */
-    TELEOP,
-    /** Robot is enabled in autonomous mode. */
-    AUTO,
-    /** Robot is enabled in test mode. */
-    TEST
-  }
-  public static RobotMode mode;
   private Command m_autonomousCommand;
+  private Command m_testCommand;
   private RobotContainer m_robotContainer;
   
 
@@ -63,7 +53,6 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    mode = RobotMode.DISABLED;
   }
 
   @Override
@@ -72,7 +61,6 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    mode = RobotMode.AUTO;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -104,6 +92,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    m_testCommand = m_robotContainer.getTestCommand();
   }
 
   /** This function is called periodically during test mode. */

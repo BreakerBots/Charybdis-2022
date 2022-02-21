@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.Robot.RobotMode;
 import frc.robot.commands.auto.paths.OffTarmack_G;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
@@ -52,7 +51,6 @@ import frc.robot.subsystems.devices.IMU;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public RobotMode robotMode = Robot.mode;
   // Devices
   private final PneumaticsControlModule pcmSys = new PneumaticsControlModule(Constants.PCM_ID);
   private final AirCompressor compressorSys = new AirCompressor(pcmSys);
@@ -137,5 +135,9 @@ public class RobotContainer {
       default:
         return null;
     }
+  }
+
+  public Command getTestCommand() {
+    return null;
   }
 }
