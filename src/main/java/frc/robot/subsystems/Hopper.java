@@ -16,10 +16,8 @@ public class Hopper extends SubsystemBase {
   // Hopper motor
   private WPI_TalonSRX hopperMotor;
   // Sensors for checking hopper inventory
-  /** Bottom slot of hopper. */
-  private DigitalInput slot1;
-  /** Top slot of hopper */
-  private DigitalInput slot2;
+  private DigitalInput bottomSlot;
+  private DigitalInput topSlot;
   // Intake pass-in
   private Intake intake;
   // Pause times for hopper logic
@@ -30,8 +28,8 @@ public class Hopper extends SubsystemBase {
     setName("Hopper");
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     intake = intakeArg;
-    slot1 = new DigitalInput(Constants.SLOT_1_CHANNEL);
-    slot2 = new DigitalInput(Constants.SLOT_2_CHANNEL);
+    bottomSlot = new DigitalInput(Constants.SLOT_1_CHANNEL);
+    topSlot = new DigitalInput(Constants.SLOT_2_CHANNEL);
   }
 
   /** Turns on hopper */
@@ -46,6 +44,11 @@ public class Hopper extends SubsystemBase {
     hopperIsRunning = false;
   }
 
+  /**
+   * Current state of hopper.
+   * 
+   * @return true if the hopper is running, false if the hopper is not.
+   */
   public boolean hopperIsRunning() {
     return hopperIsRunning;
   }
@@ -55,8 +58,8 @@ public class Hopper extends SubsystemBase {
    * 
    * @return true if full, false if empty.
    */
-  public boolean hopperBottomIsFull() {
-    return !(slot1.get());
+  public boolean bottomSlotIsFull() {
+    return !(bottomSlot.get());
 
   }
 
@@ -65,16 +68,26 @@ public class Hopper extends SubsystemBase {
    * 
    * @return true if full, false if empty.
    */
-  public boolean hopperTopIsFull() {
-    return !(slot2.get());
+  public boolean topSlotIsFull() {
+    return !(topSlot.get());
   }
 
+  /**
+   * Checks both hopper slots for fullness.
+   * 
+   * @return true if both are full, false otherwise.
+   */
   public boolean bothSlotsAreFull() {
-    return hopperBottomIsFull() && hopperTopIsFull();
+    return bottomSlotIsFull() && topSlotIsFull();
   }
 
+  /**
+   * Checks both hopper slots for emptiness.
+   * 
+   * @return true if both are empty, false otherwise.
+   */
   public boolean bothSlotsAreEmpty() {
-    return !hopperBottomIsFull() && !hopperTopIsFull();
+    return !bottomSlotIsFull() && !topSlotIsFull();
   }
 
   /**
@@ -95,17 +108,25 @@ public class Hopper extends SubsystemBase {
     return hopperMotor.getStatorCurrent();
   }
 
+  /**
+   * Persistent hopper logic based on other subsystems and fullness of slots.
+   * <p>
+   * NOTE: Top slot is filled first, then bottom
+   * <p>
+   * NOTE: Pauses are to assure that the balls are fully moved into proper
+   * position.
+   */
   public void hopperLogicLoop() {
     if (intake.intakeIsRunning()) {
-      if (hopperBottomIsFull() && !hopperTopIsFull()) { // Only bottom is full
+      if (bottomSlotIsFull() && !topSlotIsFull()) { // Only bottom is full
         activateHopper(); // Turns on hopper
-      } else if (!hopperBottomIsFull() && hopperTopIsFull()) { // Only top is full
-       pauseCountA++;
-       if (pauseCountA > 25) { // Waits to turn off hopper
+      } else if (!bottomSlotIsFull() && topSlotIsFull()) { // Only top is full
+        pauseCountA++;
+        if (pauseCountA > 25) { // Waits to turn off hopper
           deactivateHopper();
-         pauseCountA = 0;
-      }
-      } else if (!hopperBottomIsFull() && !hopperTopIsFull()) { // Both ar empty
+          pauseCountA = 0;
+        }
+      } else if (bothSlotsAreEmpty()) { // Both are empty
         deactivateHopper();
       } else if (bothSlotsAreFull()) { // Both are full
         pauseCountB++;
@@ -114,15 +135,15 @@ public class Hopper extends SubsystemBase {
           deactivateHopper();
           pauseCountB = 0;
         }
-      }}
-      addChild("Hopper Motor", hopperMotor);
-      addChild("Bottom Sensor", slot1);
-      addChild("Top Sensor", slot2);
+      }
     }
-  
+  }
 
   @Override
   public void periodic() {
     hopperLogicLoop();
+    addChild("Hopper Motor", hopperMotor);
+    addChild("Bottom Sensor", bottomSlot);
+    addChild("Top Sensor", topSlot);
   }
 }
