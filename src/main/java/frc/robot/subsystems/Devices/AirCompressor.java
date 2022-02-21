@@ -22,6 +22,7 @@ public class AirCompressor extends SubsystemBase {
   public AirCompressor(PneumaticsControlModule pcmArg) {
     compressor = new Compressor(Constants.PCM_ID, PneumaticsModuleType.CTREPCM);
     pcm = pcmArg;
+    compressor.enableDigital();
     compressor.disable();
     // compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
   }
@@ -40,15 +41,19 @@ public class AirCompressor extends SubsystemBase {
     return compressor.enabled();
   }
 
+  public double getPressure() {
+    return pcm.getCompressorCurrent();
+  }
+
   @Override
   public void periodic() {
     SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
     if (compressorIsEnabled()) {
       cycleCount++;
-      if (cycleCount > 600) {
+      if (cycleCount > 6000) {
         stopCompressor();
         cycleCount = 0;
-        DashboardControl.log("COMPRESSOR TIMED OUT!");
+        SmartDashboard.putString("WARNING","COMPRESSOR TIMED OUT!");
       }
     } else {
       cycleCount = 0;
