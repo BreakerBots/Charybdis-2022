@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.auto.paths.OffTarmack_G;
@@ -121,6 +122,7 @@ public class RobotContainer {
 
     switch (pathNumber) {
       case 0:
+      default:
         return null;
       case 1:
         return new OffTarmack_G(driveSys, imuSys);
@@ -132,12 +134,20 @@ public class RobotContainer {
         return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 5:
         return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-      default:
-        return null;
     }
   }
 
   public Command getTestCommand() {
-    return null;
+
+    int cmdNum = 1; // Number for selecting command for use in Test mode.
+
+    switch (cmdNum) {
+      case 0:
+      default:
+        return null;
+      case 1:
+        System.out.println("I think we did it!");
+        return new InstantCommand(compressorSys::startCompressor);
+    }
   }
 }
