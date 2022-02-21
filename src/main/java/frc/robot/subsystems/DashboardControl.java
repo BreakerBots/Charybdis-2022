@@ -57,7 +57,7 @@ public class DashboardControl extends SubsystemBase {
     SmartDashboard.putBoolean("INTAKING", intake.intakeIsRunning());
     SmartDashboard.putBoolean("ARM EXTENDED", intake.armIsExtended());
     // Compressor widgets
-    SmartDashboard.putBoolean("COMPRESSOR", compressor.getCompressorState());
+    SmartDashboard.putBoolean("COMPRESSOR", compressor.compressorIsEnabled());
     // Electrical widgets
     SmartDashboard.putNumber("BATTERY V", pdp.getVoltage());
     SmartDashboard.putBoolean("ROBORIO", RobotController.isBrownedOut());

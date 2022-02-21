@@ -54,10 +54,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public RobotMode robotMode = Robot.mode;
   // Devices
-  private final AirCompressor compressorSys = new AirCompressor();
+  private final PneumaticsControlModule pcmSys = new PneumaticsControlModule(Constants.PCM_ID);
+  private final AirCompressor compressorSys = new AirCompressor(pcmSys);
   private final IMU imuSys = new IMU();
   private final PowerDistribution pdpSys = new PowerDistribution(Constants.PDH_ID, ModuleType.kRev);
-  private final PneumaticsControlModule pcmSys = new PneumaticsControlModule(Constants.PCM_ID);
   private final XboxController xboxSys = new XboxController(0);
   // Subsystems
   private final Drive driveSys = new Drive(pdpSys);
@@ -68,7 +68,8 @@ public class RobotContainer {
   private final FMS_Handler fmsSys = new FMS_Handler();
   private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
-  private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys, fmsSys, climbSys);
+  private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys,
+      fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
   private Hopper hopperArg;
@@ -101,9 +102,11 @@ public class RobotContainer {
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     new JoystickButton(xboxSys, Constants.LEFT).whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     // B button shoots, Left Menu cancles
-    new JoystickButton(xboxSys, Constants.B).whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
+    new JoystickButton(xboxSys, Constants.B)
+        .whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-    //new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
+    // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
   }
 
   /**
@@ -112,21 +115,27 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    
-    // CHANGE AUTOPATH HERE \/
-    
-    int pathNumber = 1; //    <<<    IMPORTANT: The number after "=" refers to the selected autopath from the list below. To change use the desired paths sumber from the list below.
 
-    
-    
+    // CHANGE AUTOPATH HERE \/
+
+    int pathNumber = 1; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+                        // list below. To change use the desired paths sumber from the list below.
+
     switch (pathNumber) {
-    case 0: return null;
-    case 1: return new OffTarmack_G(driveSys, imuSys);
-    case 2: return new Pickup1_Shoot2_H1(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-    case 3: return new Pickup1_Shoot2_P1(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
-    case 4: return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-    case 5: return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-    default: return null;
+      case 0:
+        return null;
+      case 1:
+        return new OffTarmack_G(driveSys, imuSys);
+      case 2:
+        return new Pickup1_Shoot2_H1(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+      case 3:
+        return new Pickup1_Shoot2_P1(xboxSys, driveSys, imuSys, intakeSys, hopperSys, shooterSys);
+      case 4:
+        return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+      case 5:
+        return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+      default:
+        return null;
     }
   }
 }

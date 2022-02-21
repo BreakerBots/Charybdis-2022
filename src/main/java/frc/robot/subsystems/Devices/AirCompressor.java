@@ -7,15 +7,21 @@ package frc.robot.subsystems.devices;
 import frc.robot.Constants;
 import frc.robot.subsystems.DashboardControl;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AirCompressor extends SubsystemBase {
   private Compressor compressor;
+  private PneumaticsControlModule pcm;
   private long cycleCount;
+
+
   /** Creates a new AirCompressor. */
-  public AirCompressor() {
+  public AirCompressor(PneumaticsControlModule pcmArg) {
     compressor = new Compressor(Constants.PCM_ID, PneumaticsModuleType.CTREPCM);
+    pcm = pcmArg;
     compressor.disable();
     // compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
   }
@@ -30,19 +36,20 @@ public class AirCompressor extends SubsystemBase {
     compressor.disable();
   }
 
-  public boolean getCompressorState() {
+  public boolean compressorIsEnabled() {
     return compressor.enabled();
   }
 
   @Override
   public void periodic() {
-    if (getCompressorState()) {
-      cycleCount ++;
-        if (cycleCount > 6000) {
-          stopCompressor();
-          cycleCount = 0;
-          DashboardControl.log("COMPRESSOR TIMED OUT!");
-        }
+    SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
+    if (compressorIsEnabled()) {
+      cycleCount++;
+      if (cycleCount > 600) {
+        stopCompressor();
+        cycleCount = 0;
+        DashboardControl.log("COMPRESSOR TIMED OUT!");
+      }
     } else {
       cycleCount = 0;
     }
