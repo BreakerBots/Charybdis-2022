@@ -45,7 +45,7 @@ public class Shooter extends SubsystemBase {
     setName("Shooter");
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
     // Constants.FLYWHEEL_KV);
-    flywheelPID = new PIDController(Constants.FLYWHEEL_KP, Constants.FLYWHEEL_KI, Constants.FLYWHEEL_KD);
+    flywheelPID = new PIDController(Constants.KP_FLYWHEEL, Constants.KI_FLYWHEEL, Constants.KD_FLYWHEEL);
     hopper = hopperArg;
     flywheelPID.setTolerance(20);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);

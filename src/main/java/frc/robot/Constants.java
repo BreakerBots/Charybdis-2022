@@ -37,8 +37,8 @@ public final class Constants {
     public static final int R_BUMP = 6;
     public static final int BACK = 7;
     public static final int START = 8;
-    public static final int L_STICK = 9;
-    public static final int R_STICK = 10;
+    public static final int L_STICK_PRESS = 9;
+    public static final int R_STICK_PRESS = 10;
     // Xbox axis constants
     public static final int LEFT_X = 0;
     public static final int LEFT_Y = 1;
@@ -47,10 +47,15 @@ public final class Constants {
     public static final int RIGHT_X = 4;
     public static final int RIGHT_Y = 5;
     // Xbox D-Pad angle constants
-    public static final int UP = 0;
-    public static final int RIGHT = 90;
-    public static final int DOWN = 180;
-    public static final int LEFT = 270;
+    public static final int D_UP = 0;
+    public static final int D_RIGHT = 90;
+    public static final int D_DOWN = 180;
+    public static final int D_LEFT = 270;
+
+    // PDP constants
+    // Power Distribution IDs
+    /** CAN ID for robot's Power Distribution HUB (PDH) */
+    public static final int PDH_ID = 1;
 
     // Compressor constants
     /** CAN ID for robot's Pneumatics Control Module (PCM) */
@@ -66,10 +71,10 @@ public final class Constants {
     public static final double KP_DIST = 0.05;
     public static final double KI_DIST = 0;
     public static final double KD_DIST = 0;
-    public static final double ANG_POS_TOLERANCE = 2.5;
-    public static final double ANG_VEL_TOLERANCE = 1;
-    public static final double DIST_POS_TOLERANCE = 1;
-    public static final double DIST_VEL_TOLERANCE = 0.1;
+    public static final double ANG_POS_TOL = 2.5;
+    public static final double ANG_VEL_TOL = 1;
+    public static final double DIST_POS_TOL = 1;
+    public static final double DIST_VEL_TOL = 0.1;
     // Drive feedForward values
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
@@ -95,7 +100,7 @@ public final class Constants {
     public static final double DRIVE_TICKS_PER_INCH = DRIVE_TICKS_PER_ROTATION / (COLSON_CIRCUMFERENCE);
 
     // IMU constants
-    public static final int IMU_ID = 10; // Alpha = 10
+    public static final int IMU_ID = 10;
     public static boolean IMU_INVERTED = true;
     public static final double kCatchup = 0.01;
 
@@ -105,10 +110,10 @@ public final class Constants {
     public static final double R_INDEX_SPD = 0.8; // 0.8
     public static final double L_INDEX_SPD = 0.8; // 0.8
     // Intake motor IDs
-    public static final int INTAKEMAIN_ID = 21;
-    public static final int INTAKE_L_ID = 22;
-    public static final int INTAKE_R_ID = 23;
-    public static final int PWR_DISTR = 0;
+    public static final int INTAKE_ID = 21;
+    public static final int L_INDEX_ID = 22;
+    public static final int R_INDEX_ID = 23;
+    public static final int PWR_DISTR = 0; // Unused?
     // Intake Solonoid IDs
     public static final int INTAKESOL_FWD = 0;
     public static final int INTAKESOL_REV = 1;
@@ -116,17 +121,18 @@ public final class Constants {
     // Hopper constants
     // Hopper motor ID
     public static final int HOPPER_ID = 31;
+    // Hopper motor speed
+    public static final double HOPPER_SPD = 1; // 0.6
     // Hopper ball position sensor channels
     public static final int SLOT_1_CHANNEL = 9;
     public static final int SLOT_2_CHANNEL = 8;
     // Amount of delay on hopper
     public static final long HOPPER_DELAY_CYCLES = 0;
     // Hopper specs
-    public static final double HOPPERSPEED = 1; // 0.6
-    public static final double HOPPER_WHEEL_DIAMETER = 1;
-    public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI;
-    public static final double HOPPER_GEAR_RATIO = FILLER;
-    public static final double HOPPER_TICKS_PER_INCH = (TALON_FX_TICKS * HOPPER_GEAR_RATIO)
+    public static final double HOPPER_WHEEL_DIAMETER = 1; // Unused?
+    public static final double HOPPER_WHEEL_CIRCUMFERENCE = HOPPER_WHEEL_DIAMETER * Math.PI; // Unused?
+    public static final double HOPPER_GEAR_RATIO = FILLER; // Unused?
+    public static final double HOPPER_TICKS_PER_INCH = (TALON_FX_TICKS * HOPPER_GEAR_RATIO) // Unused?
             / (HOPPER_WHEEL_CIRCUMFERENCE);
 
     // Shooter constants
@@ -134,7 +140,7 @@ public final class Constants {
     public static final double HUB_SHOOT_SPD = 0.44; // Upper is 0.48
     public static final double LOW_SHOOT_SPD = 0.25; // Hood must be up
     public static final double LAUNCH_SHOOT_SPD = 0.55; // Hood up
-    public static final double FLYWHEEL_CANCEL_RPM = 0;
+    public static final double FLYWHEEL_CANCEL_RPM = 0; // Change to TPS?
     // Flywheel speed in TPS
     public static final int FLYWHEEL_MAX_TPS = 1780;
     // Shooter motor IDs
@@ -144,11 +150,11 @@ public final class Constants {
     public static final int SHOOTERSOL_FWD = 2;
     public static final int SHOOTERSOL_REV = 3;
     // Flywheel PID
-    public static final double FLYWHEEL_KP = 0.5;
-    public static final double FLYWHEEL_KI = 0;
-    public static final double FLYWHEEL_KD = 0.3;
-    public static final double FLYWHEEL_SPD_TOL = 20; // Used as position tolerance.
-    public static final double FLYWHEEL_ACCEL_TOL = FILLER; // Unused
+    public static final double KP_FLYWHEEL = 0.5;
+    public static final double KI_FLYWHEEL = 0;
+    public static final double KD_FLYWHEEL = 0.3;
+    public static final double FLYWHEEL_VEL_TOL = 20; // Used as position tolerance.
+    public static final double FLYWHEEL_ACCEL_TOL = FILLER; // Unused. Would be used for velocity tolerance.
     
     // Climber constants
     // Climber motor IDs
@@ -168,7 +174,7 @@ public final class Constants {
     public static final double CLIMB_PITCH_TOL = 5;
     public static final double CLIMB_YAW_TOL = 5;
     public static final double CLIMB_ROLL_TOL = 5;
-    public static final long CLIMB_MIN_STABLE_TIME = 150;
+    public static final long CLIMB_MIN_STABLE_TIME = 150; // If in cycles, rename to "CLIMB_MIN_STABLE_CYCLES"?
     // Climber extension values (ticks)
     public static final double CLIMB_FULL_EXT_DIST = 2000000000;
     public static final double CLIMB_FULL_RET_DIST = FILLER;
@@ -176,7 +182,6 @@ public final class Constants {
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
-    // Power Distrabution IDs
-    public static final int PDH_ID = 1;
+    
 
 }

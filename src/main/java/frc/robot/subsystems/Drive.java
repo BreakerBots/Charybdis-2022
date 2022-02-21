@@ -43,9 +43,9 @@ public class Drive extends SubsystemBase {
     setName("Drive");
     pdp = pdpArg;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
-    anglePID.setTolerance(Constants.ANG_POS_TOLERANCE, Constants.ANG_VEL_TOLERANCE);
+    anglePID.setTolerance(Constants.ANG_POS_TOL, Constants.ANG_VEL_TOL);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
-    distPID.setTolerance(Constants.DIST_POS_TOLERANCE, Constants.DIST_VEL_TOLERANCE);
+    distPID.setTolerance(Constants.DIST_POS_TOL, Constants.DIST_VEL_TOL);
     driveFF = new SimpleMotorFeedforward(Constants.KS_DRIVE, Constants.KV_DRIVE, Constants.KA_DRIVE);
     // Left motors
     l1 = new WPI_TalonFX(Constants.L1_ID);

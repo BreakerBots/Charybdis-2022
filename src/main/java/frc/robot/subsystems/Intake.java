@@ -25,10 +25,10 @@ public class Intake extends SubsystemBase {
     /** Creates a new Intake. */
     public Intake() {
         setName("Intake");
-        intakeMotor = new WPI_TalonSRX(Constants.INTAKEMAIN_ID);
+        intakeMotor = new WPI_TalonSRX(Constants.INTAKE_ID);
         intakeMotor.setInverted(true); // Spins backwards
-        indexerL = new WPI_TalonSRX(Constants.INTAKE_L_ID);
-        indexerR = new WPI_TalonSRX(Constants.INTAKE_R_ID);
+        indexerL = new WPI_TalonSRX(Constants.L_INDEX_ID);
+        indexerR = new WPI_TalonSRX(Constants.R_INDEX_ID);
         intakeSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
         // intakeIsRunning = false;

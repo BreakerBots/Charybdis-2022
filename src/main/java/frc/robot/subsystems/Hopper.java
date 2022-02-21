@@ -34,7 +34,7 @@ public class Hopper extends SubsystemBase {
 
   /** Turns on hopper */
   public void activateHopper() {
-    hopperMotor.set(Constants.HOPPERSPEED);
+    hopperMotor.set(Constants.HOPPER_SPD);
     hopperIsRunning = true;
   }
 

@@ -53,6 +53,6 @@ public class WaitForDownButton extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-   return (xbox.getPOV() == Constants.DOWN) || husky.getClimbForceEnd();
+   return (xbox.getPOV() == Constants.D_DOWN) || husky.getClimbForceEnd();
   }
 }

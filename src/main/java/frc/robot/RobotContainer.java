@@ -4,13 +4,11 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -22,9 +20,7 @@ import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P2;
 import frc.robot.commands.auto.paths.Pickup2_Shoot3_P2;
 import frc.robot.commands.climb.actions.ManuallyMoveClimb;
-import frc.robot.commands.climb.actions.MoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
-import frc.robot.commands.climb.sequences.HighbarClimbSequence;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
@@ -35,11 +31,11 @@ import frc.robot.commands.test.DriveTrainTest;
 import frc.robot.commands.test.FlywheelTest;
 import frc.robot.commands.test.IntakeHopperIndexerTest;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.FMS_Handler;
@@ -75,7 +71,6 @@ public class RobotContainer {
       fmsSys, climbSys);
 
   private final DriveWithJoystick driveWithJoystick;
-  private Hopper hopperArg;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -100,10 +95,10 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
-    new POVButton(xboxSys, Constants.RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
+    new POVButton(xboxSys, Constants.D_RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
     new JoystickButton(xboxSys, Constants.Y).whenPressed(new PivotClimb(climbSys, watchdogSys, true));
     new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
-    new POVButton(xboxSys, Constants.LEFT).whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
+    new POVButton(xboxSys, Constants.D_LEFT).whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     // B button shoots, Left Menu cancles
     new JoystickButton(xboxSys, Constants.B)
         .whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
