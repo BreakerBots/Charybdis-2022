@@ -38,6 +38,12 @@ public class Hopper extends SubsystemBase {
     hopperIsRunning = true;
   }
 
+  /** Activates hopper specifically for feeding balls into the shooter. */
+  public void activateShooterHopper() {
+    hopperMotor.set(Constants.SHOOTER_HOPPER_SPD);
+    hopperIsRunning = true;
+  }
+
   /** Turns off hopper */
   public void deactivateHopper() {
     hopperMotor.set(0);

@@ -32,7 +32,7 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public void initialize() {
     shooter.resetFlywheelPID();
-    DashboardControl.log("CHARGEING FLYWHEEL");
+    DashboardControl.log("CHARGING FLYWHEEL");
     if (shooter.getFlywheelState() == FlywheelState.IDLE || shooter.getFlywheelState() == FlywheelState.OFF) {
       shooter.chargeFlywheel();
     }

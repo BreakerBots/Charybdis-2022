@@ -4,11 +4,8 @@
 
 package frc.robot.commands.climb.actions;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
@@ -16,6 +13,8 @@ import frc.robot.subsystems.Climber;
 public class ManuallyMoveClimb extends CommandBase {
   private Climber climb;
   private XboxController xbox;
+  private double targetTicks = 0;
+
   public ManuallyMoveClimb(Climber climbArg, XboxController controllerArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     climb = climbArg;
@@ -28,7 +27,7 @@ public class ManuallyMoveClimb extends CommandBase {
   public void initialize() {
   }
 
-  private double driveClimb (double speedArg, double ticks) {
+  private double driveClimb(double speedArg, double ticks) {
     boolean maxRetract = ticks <= 10;
     boolean maxExtend = ticks >= Constants.CLIMB_FULL_EXT_DIST;
     boolean inTransit = !maxExtend && !maxRetract;
@@ -43,13 +42,16 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = -1 * MathUtil.applyDeadband(xbox.getRightY(), 0.05);
+    double inputTicks = Math.round(-10 * MathUtil.applyDeadband(xbox.getRightY(), 0.05));
+    targetTicks += inputTicks;
+    targetTicks = MathUtil.clamp(targetTicks, 0, Constants.CLIMB_FULL_EXT_DIST);
+    targetTicks = MathUtil.clamp(targetTicks, 0, Constants.CLIMB_FULL_EXT_DIST);
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();
-    System.out.println();
-    //double catchup = Constants.kCatchup * (leftTicks - rightTicks) * (speed > 0 ? 1 : -1);
-    climb.moveLClimb(driveClimb(speed, climb.getLeftClimbTicks()));
-    climb.moveRClimb(driveClimb(speed, climb.getRightClimbTicks()));
+    double lSpeed = climb.lClimbPID.calculate(leftTicks, targetTicks);
+    double rSpeed = climb.rClimbPID.calculate(rightTicks, targetTicks);
+    climb.moveLClimb(driveClimb(lSpeed, climb.getLeftClimbTicks()));
+    climb.moveRClimb(driveClimb(rSpeed, climb.getRightClimbTicks()));
   }
 
   // Called once the command ends or is interrupted.

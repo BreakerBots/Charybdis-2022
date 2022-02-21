@@ -10,8 +10,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -25,7 +23,6 @@ public class Climber extends SubsystemBase {
   // Makes sure we get to desired position
   public PIDController lClimbPID;
   public PIDController rClimbPID;
-  private final double artClimbFeedForward = 0.3;
   private boolean climbing;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
   public boolean climbSolRetracted; // true is extended

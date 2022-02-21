@@ -121,8 +121,9 @@ public final class Constants {
     // Hopper constants
     // Hopper motor ID
     public static final int HOPPER_ID = 31;
-    // Hopper motor speed
-    public static final double HOPPER_SPD = 1; // 0.6
+    // Hopper motor speeds
+    public static final double HOPPER_SPD = 0.8;
+    public static final double SHOOTER_HOPPER_SPD = 0.6;
     // Hopper ball position sensor channels
     public static final int SLOT_1_CHANNEL = 9;
     public static final int SLOT_2_CHANNEL = 8;
@@ -167,9 +168,9 @@ public final class Constants {
     public static final double CLIMB_RET_THRESH = 0;
     public static final double CLIMB_EXT_THRESH = 0;
     // PID values for climber
-    public static final double KP_CLIMB = FILLER;
-    public static final double KI_CLIMB = FILLER;
-    public static final double KD_CLIMB = FILLER;
+    public static final double KP_CLIMB = 0.02;
+    public static final double KI_CLIMB = 0;
+    public static final double KD_CLIMB = 0;
     // Climber stablity tolerences
     public static final double CLIMB_PITCH_TOL = 5;
     public static final double CLIMB_YAW_TOL = 5;
@@ -182,6 +183,7 @@ public final class Constants {
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
+  
     
 
 }

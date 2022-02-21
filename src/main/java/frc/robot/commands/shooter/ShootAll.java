@@ -53,7 +53,7 @@ public class ShootAll extends CommandBase {
     cycleCount++;
     if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
       shooter.isShooting = true;
-      hopper.activateHopper();
+      hopper.activateShooterHopper();
       intake.toggleHopperFeed(); // May be removed
       DashboardControl.log("SHOOTER STARTED!");
     }
@@ -82,10 +82,10 @@ public class ShootAll extends CommandBase {
   @Override
   public boolean isFinished() {
     if (shooter.getFlywheelState() == FlywheelState.OFF) {
-      DashboardControl.log("HOPPER DEPLETED - SHOOTER STOPED!");
+      DashboardControl.log("HOPPER DEPLETED - SHOOTER STOPPED!");
       return true;
     } else if (xbox.getStartButtonPressed()) {
-      DashboardControl.log("SHOOTER MANUALY STOPED!");
+      DashboardControl.log("SHOOTER MANUALLY STOPPED!");
       hopper.deactivateHopper();
       shooter.setOff();
       intake.deactivateIntake();

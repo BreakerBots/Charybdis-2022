@@ -103,8 +103,7 @@ public class RobotContainer {
     new JoystickButton(xboxSys, Constants.B)
         .whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
-    // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
   }
 
   /**
