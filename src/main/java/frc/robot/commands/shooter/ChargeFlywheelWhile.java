@@ -16,12 +16,12 @@ import frc.robot.subsystems.Shooter;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ChargeFlywheelWhile extends ParallelCommandGroup {
   /** Allows youto charge flywheel in autonomous while running anouther command passed in as an argument */
-  public ChargeFlywheelWhile(Shooter shooterArg, XboxController controllerArg, Command outherCommand) {
+  public ChargeFlywheelWhile(Shooter shooterArg, XboxController controllerArg, Command otherCommand) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ChargeFlywheel(shooterArg, controllerArg),
-      new ScheduleCommand(outherCommand)
+      new ScheduleCommand(otherCommand)
     );
   }
 }
