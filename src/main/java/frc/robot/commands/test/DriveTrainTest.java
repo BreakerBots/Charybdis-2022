@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
 
-public class MotorTest extends CommandBase {
+public class DriveTrainTest extends CommandBase {
   /** Creates a new MotorRotationTest. */
   Drive drive;
   double speed;
@@ -42,7 +42,7 @@ public class MotorTest extends CommandBase {
   double r3SupAvg;
 
   private long cycleCount;
-  public MotorTest(Drive driveArg, double speedArg, int rotationsArg) {
+  public DriveTrainTest(double speedArg, double rotationsArg, Drive driveArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     drive = driveArg;
     speed = speedArg;

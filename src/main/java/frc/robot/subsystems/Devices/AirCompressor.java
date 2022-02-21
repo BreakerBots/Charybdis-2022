@@ -17,7 +17,6 @@ public class AirCompressor extends SubsystemBase {
   private PneumaticsControlModule pcm;
   private long cycleCount;
 
-
   /** Creates a new AirCompressor. */
   public AirCompressor(PneumaticsControlModule pcmArg) {
     compressor = new Compressor(Constants.PCM_ID, PneumaticsModuleType.CTREPCM);
@@ -27,36 +26,66 @@ public class AirCompressor extends SubsystemBase {
     // compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
   }
 
+  /**
+   * Starts the compressor.
+   * <p>
+   * NOTE: The compressor will turn off automatically when it reaches the desired
+   * pressure.
+   */
   public void startCompressor() {
     DashboardControl.log("Compressor enabled!");
     compressor.enableDigital();
   }
 
+  /**
+   * Completely disables the compressor.
+   * <p>
+   * NOTE: Only call this method when premature disabling of the compressor is
+   * desired.
+   */
   public void stopCompressor() {
     DashboardControl.log("Compressor disabled!");
     compressor.disable();
   }
 
+  /**
+   * Returns the state of the compressor.
+   * 
+   * @return true if enabled, false if disabled.
+   */
   public boolean compressorIsEnabled() {
     return compressor.enabled();
   }
 
+  /**
+   * Returns the pressurization of air on the robot.
+   * 
+   * @return Current air pressure, in PSI.
+   */
   public double getPressure() {
     return pcm.getCompressorCurrent();
   }
 
-  @Override
-  public void periodic() {
-    SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
+  /**
+   * Automatically disables the compressor if it has been running for more than
+   * 6000 cycles.
+   */
+  public void autoTimeout() {
     if (compressorIsEnabled()) {
       cycleCount++;
       if (cycleCount > 6000) {
         stopCompressor();
         cycleCount = 0;
-        SmartDashboard.putString("WARNING","COMPRESSOR TIMED OUT!");
+        SmartDashboard.putString("WARNING", "COMPRESSOR TIMED OUT!");
       }
     } else {
       cycleCount = 0;
     }
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
+    autoTimeout();
   }
 }

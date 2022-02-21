@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -30,6 +31,9 @@ import frc.robot.commands.intake.ToggleIntake;
 import frc.robot.commands.intake.ToggleIntakeArm;
 import frc.robot.commands.shooter.ChargeThenShoot;
 import frc.robot.commands.shooter.ToggleShooterMode;
+import frc.robot.commands.test.DriveTrainTest;
+import frc.robot.commands.test.FlywheelTest;
+import frc.robot.commands.test.IntakeHopperIndexerTest;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
@@ -111,7 +115,7 @@ public class RobotContainer {
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
-   * @return the command to run in autonomous
+   * @return The command to run in autonomous.
    */
   public Command getAutonomousCommand() {
 
@@ -137,6 +141,11 @@ public class RobotContainer {
     }
   }
 
+  /**
+   * Use this to pass the test command to the main {@link Robot} class.
+   *
+   * @return The command to run in test.
+   */
   public Command getTestCommand() {
 
     int cmdNum = 1; // Number for selecting command for use in Test mode.
@@ -146,8 +155,14 @@ public class RobotContainer {
       default:
         return null;
       case 1:
-        System.out.println("I think we did it!");
+        LiveWindow.setEnabled(false);
         return new InstantCommand(compressorSys::startCompressor);
+      case 2:
+        return new DriveTrainTest(0.5, 20, driveSys);
+      case 3:
+        return new IntakeHopperIndexerTest(5, hopperSys, intakeSys);
+      case 4:
+        return new FlywheelTest(3, 0.5, shooterSys);
     }
   }
 }

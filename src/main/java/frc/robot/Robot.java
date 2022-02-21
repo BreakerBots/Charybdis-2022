@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
 
     m_testCommand = m_robotContainer.getTestCommand();
 
-    // schedule the test command (example)
+    // schedule the test command
     if (m_testCommand != null) {
       m_testCommand.schedule();
     }
