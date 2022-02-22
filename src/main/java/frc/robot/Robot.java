@@ -17,9 +17,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
 public class Robot extends TimedRobot {
-  /** Operating state of the robot, based on FRC Drive Station.*/
   private Command m_autonomousCommand;
   private Command m_testCommand;
+  private Command m_disabledCommand;
+  private Command m_teleopCommand;
   private RobotContainer m_robotContainer;
   
 
@@ -53,6 +54,11 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    m_disabledCommand = m_robotContainer.getDisabledCommand();
+
+    if (m_disabledCommand != null) {
+      m_disabledCommand.schedule();
+    }
   }
 
   @Override
@@ -84,6 +90,12 @@ public class Robot extends TimedRobot {
     }
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+
+    m_teleopCommand = m_robotContainer.getTeleopCommand();
+
+    if (m_teleopCommand != null) {
+      m_teleopCommand.schedule();
     }
 
   }

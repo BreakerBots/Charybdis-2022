@@ -19,6 +19,12 @@ public class RobotConfig {
     public static final boolean useShooter = true;
     public static final boolean useClimb = true;
 
+    /**
+     * Sets brake mode for given CTRE motor controllers.
+     * 
+     * @param modeArg true for brake mode, false for default/coast mode.
+     * @param motors  CTRE motor controllers (Talon FX, Talon SRX, etc.).
+     */
     public static void setBrakeMode(boolean modeArg, BaseMotorController... motors) {
         for (int i = 0; i < motors.length; i++) {
             if (modeArg) {

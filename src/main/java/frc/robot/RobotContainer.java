@@ -159,4 +159,14 @@ public class RobotContainer {
         return new FlywheelTest(3, 0.5, shooterSys);
     }
   }
+
+  public Command getTeleopCommand() {
+    driveSys.setBrakeMode(true);
+    return null;
+  }
+
+  public Command getDisabledCommand() {
+    driveSys.setBrakeMode(false);
+    return null;
+  }
 }

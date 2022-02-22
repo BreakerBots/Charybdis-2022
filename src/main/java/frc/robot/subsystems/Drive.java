@@ -12,8 +12,10 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotConfig;
 
 public class Drive extends SubsystemBase {
   // Left motors (falcons)
@@ -55,7 +57,7 @@ public class Drive extends SubsystemBase {
     l3 = new WPI_TalonFX(Constants.L3_ID);
     l3.setNeutralMode(NeutralMode.Brake);
     driveL = new MotorControllerGroup(l1, l2, l3);
-    
+
     // Right motors
     r1 = new WPI_TalonFX(Constants.R1_ID);
     r1.setNeutralMode(NeutralMode.Brake);
@@ -73,8 +75,8 @@ public class Drive extends SubsystemBase {
   public void teleopMove(double netSpd, double turnSpd) {
     double logSpd = netSpd; // Convert.logisticCurve(netSpd);
     // if (pdp.getVoltage() < 8.5) {
-    //   logSpd *= 0.85;
-    //   turnSpd *= 0.85;
+    // logSpd *= 0.85;
+    // turnSpd *= 0.85;
     // }
     // System.out.println("netSpd: " + netSpd + " logSpd: " + logSpd + " turnSpd: "
     // + turnSpd + " logTurn: ");
@@ -137,6 +139,15 @@ public class Drive extends SubsystemBase {
     r1.setSelectedSensorPosition(0);
     r2.setSelectedSensorPosition(0);
     r3.setSelectedSensorPosition(0);
+  }
+
+  /**
+   * Sets brake mode for drivetrain motors.
+   * 
+   * @param modeArg true for brake mode, false for default/coast mode.
+   */
+  public void setBrakeMode(boolean modeArg) {
+    RobotConfig.setBrakeMode(modeArg, l1, l2, l3, r1, r2, r3);
   }
 
   /** Access feedForward .calculate() method */
