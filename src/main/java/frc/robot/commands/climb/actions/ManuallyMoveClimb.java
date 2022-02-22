@@ -6,6 +6,7 @@ package frc.robot.commands.climb.actions;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
@@ -25,6 +26,10 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climb.lClimbPID.reset();
+    climb.rClimbPID.reset();
+    climb.resetClimbEncoders();
+    targetTicks = 0;
   }
 
   private double driveClimb(double speedArg, double ticks) {
@@ -42,10 +47,10 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double inputTicks = Math.round(-10 * MathUtil.applyDeadband(xbox.getRightY(), 0.05));
+    double inputTicks = Math.round(-300 * MathUtil.applyDeadband(xbox.getRightY(), 0.05));
     targetTicks += inputTicks;
     targetTicks = MathUtil.clamp(targetTicks, 0, Constants.CLIMB_FULL_EXT_DIST);
-    targetTicks = MathUtil.clamp(targetTicks, 0, Constants.CLIMB_FULL_EXT_DIST);
+    SmartDashboard.putNumber("TargetTicks", targetTicks);
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();
     double lSpeed = climb.lClimbPID.calculate(leftTicks, targetTicks);

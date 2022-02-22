@@ -73,7 +73,7 @@ public class AirCompressor extends SubsystemBase {
   public void autoTimeout() {
     if (compressorIsEnabled()) {
       cycleCount++;
-      if (cycleCount > 6000) {
+      if (cycleCount > Constants.COMPRESSOR_TIMEOUT_CYCLES) {
         stopCompressor();
         cycleCount = 0;
         SmartDashboard.putString("WARNING", "COMPRESSOR TIMED OUT!");

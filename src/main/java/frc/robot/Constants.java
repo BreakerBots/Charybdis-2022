@@ -62,6 +62,7 @@ public final class Constants {
     public static final int PCM_ID = 5;
     public static final double MIN_PSI = 70;
     public static final double MAX_PSI = 120;
+    public static final double COMPRESSOR_TIMEOUT_CYCLES = 7000;
 
     // Drivetrain constants
     // Angle and distance PID
@@ -123,7 +124,7 @@ public final class Constants {
     public static final int HOPPER_ID = 31;
     // Hopper motor speeds
     public static final double HOPPER_SPD = 0.8;
-    public static final double SHOOTER_HOPPER_SPD = 0.6;
+    public static final double SHOOTER_HOPPER_SPD = 0.9;
     // Hopper ball position sensor channels
     public static final int SLOT_1_CHANNEL = 9;
     public static final int SLOT_2_CHANNEL = 8;
@@ -168,7 +169,7 @@ public final class Constants {
     public static final double CLIMB_RET_THRESH = 0;
     public static final double CLIMB_EXT_THRESH = 0;
     // PID values for climber
-    public static final double KP_CLIMB = 0.02;
+    public static final double KP_CLIMB = 0.0002;
     public static final double KI_CLIMB = 0;
     public static final double KD_CLIMB = 0;
     // Climber stablity tolerences
