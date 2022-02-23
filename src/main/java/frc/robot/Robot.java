@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    CommandScheduler.getInstance().run();
     robotMode = RobotMode.DISABLED;
     m_disabledCommand = m_robotContainer.getDisabledCommand();
     if (m_disabledCommand != null) {
@@ -82,6 +83,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    CommandScheduler.getInstance().run();
   }
 
   /**
