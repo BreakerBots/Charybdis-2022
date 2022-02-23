@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -98,16 +99,26 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-    buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
-    dRight.whenPressed(new ToggleShooterMode(shooterSys));
-    buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
-    buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
-    dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
-    // B button shoots, Left Menu cancles
-    buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
-    backButton.whenPressed(new ToggleCompressor(compressorSys));
-    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
-    // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+    CommandScheduler.getInstance().clearButtons();
+    switch (Robot.robotMode) {
+      case TELEOP:
+        buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
+        buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
+        buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
+        dRight.whenPressed(new ToggleShooterMode(shooterSys));
+        buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
+        dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
+        // B button shoots, Left Menu cancles
+        backButton.whenPressed(new ToggleCompressor(compressorSys));
+        // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
+        // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+        break;
+      case TEST:
+      case AUTO:
+      case DISABLED:
+        break;
+    }
+
   }
 
   /**
@@ -116,7 +127,7 @@ public class RobotContainer {
    * @return The command to run in autonomous.
    */
   public Command getAutonomousCommand() {
-
+    configureButtonBindings();
     // CHANGE AUTOPATH HERE \/
 
     int pathNumber = 1; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
@@ -145,6 +156,7 @@ public class RobotContainer {
    * @return The command to run in test.
    */
   public Command getTestCommand() {
+    configureButtonBindings();
 
     int cmdNum = 1; // Number for selecting command for use in Test mode.
 
@@ -170,7 +182,9 @@ public class RobotContainer {
    * @return The command to run in teleop.
    */
   public Command getTeleopCommand() {
-    int cmdNum = 0;
+    configureButtonBindings();
+
+    int cmdNum = 1;
 
     switch (cmdNum) {
       case 0:
@@ -188,7 +202,9 @@ public class RobotContainer {
    * @return The command to run when disabled.
    */
   public Command getDisabledCommand() {
-    int cmdNum = 0;
+    configureButtonBindings();
+
+    int cmdNum = 1;
 
     switch (cmdNum) {
       case 0:
