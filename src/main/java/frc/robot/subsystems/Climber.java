@@ -38,7 +38,8 @@ public class Climber extends SubsystemBase {
     climbSol = new DoubleSolenoid(Constants.PCM_ID,
     PneumaticsModuleType.CTREPCM,
     Constants.CLIMBSOL_FWD, Constants.CLIMBSOL_REV);
-    resetClimbEncoders();
+    climberL.setSelectedSensorPosition(0);
+    climberR.setSelectedSensorPosition(0);
   }
 
   @Override

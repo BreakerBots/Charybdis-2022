@@ -66,19 +66,23 @@ public class RobotContainer {
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
   private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
-  // private Joystick joystick1 = new Joystick(Constants.XBOX_PORT);
   private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys,
       fmsSys, climbSys);
 
-  private final DriveWithJoystick driveWithJoystick;
+  private JoystickButton buttonA = new JoystickButton(xboxSys, Constants.A);
+  private JoystickButton buttonB = new JoystickButton(xboxSys, Constants.B);
+  private JoystickButton buttonX = new JoystickButton(xboxSys, Constants.X);
+  private JoystickButton buttonY = new JoystickButton(xboxSys, Constants.Y);
+  private JoystickButton backButton = new JoystickButton(xboxSys, Constants.BACK);
+
+  private POVButton dRight = new POVButton(xboxSys, Constants.D_RIGHT);
+  private POVButton dLeft = new POVButton(xboxSys, Constants.D_LEFT);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    driveWithJoystick = new DriveWithJoystick(xboxSys, pdpSys, driveSys);
-    driveWithJoystick.addRequirements(driveSys);
-    driveSys.setDefaultCommand(driveWithJoystick);
+    driveSys.setDefaultCommand(new DriveWithJoystick(xboxSys, pdpSys, driveSys));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -94,16 +98,16 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-    new JoystickButton(xboxSys, Constants.A).whenPressed(new ToggleIntake(intakeSys, hopperSys));
-    new POVButton(xboxSys, Constants.D_RIGHT).whenPressed(new ToggleShooterMode(shooterSys));
-    new JoystickButton(xboxSys, Constants.Y).whenPressed(new PivotClimb(climbSys, watchdogSys, true));
-    new JoystickButton(xboxSys, Constants.X).whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
-    new POVButton(xboxSys, Constants.D_LEFT).whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
+    buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
+    dRight.whenPressed(new ToggleShooterMode(shooterSys));
+    buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
+    buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
+    dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     // B button shoots, Left Menu cancles
-    new JoystickButton(xboxSys, Constants.B)
-        .whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
-    new JoystickButton(xboxSys, Constants.BACK).whenPressed(new ToggleCompressor(compressorSys));
-    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+    buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
+    backButton.whenPressed(new ToggleCompressor(compressorSys));
+    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
+    // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
   }
 
   /**
@@ -160,13 +164,39 @@ public class RobotContainer {
     }
   }
 
+  /**
+   * Use this to pass the teleop command to the main {@link Robot} class.
+   *
+   * @return The command to run in teleop.
+   */
   public Command getTeleopCommand() {
-    driveSys.setBrakeMode(true);
-    return null;
+    int cmdNum = 0;
+
+    switch (cmdNum) {
+      case 0:
+      default:
+        return null;
+      case 1:
+        driveSys.setBrakeMode(true);
+        return null;
+    }
   }
 
+  /**
+   * Use this to pass the disabled command to the main {@link Robot} class.
+   *
+   * @return The command to run when disabled.
+   */
   public Command getDisabledCommand() {
-    driveSys.setBrakeMode(false);
-    return null;
+    int cmdNum = 0;
+
+    switch (cmdNum) {
+      case 0:
+      default:
+        return null;
+      case 1:
+        driveSys.setBrakeMode(false);
+        return null;
+    }
   }
 }

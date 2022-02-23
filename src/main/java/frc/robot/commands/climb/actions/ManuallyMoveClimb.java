@@ -15,6 +15,10 @@ public class ManuallyMoveClimb extends CommandBase {
   private Climber climb;
   private XboxController xbox;
   private double targetTicks = 0;
+  private double prevTgtTicks = 0;
+  private int cycleCount = 0;
+  private double lTgtCatchup = 0;
+  private double rTgtCatchup = 0;
 
   public ManuallyMoveClimb(Climber climbArg, XboxController controllerArg) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,16 +29,11 @@ public class ManuallyMoveClimb extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    climb.lClimbPID.reset();
-    climb.rClimbPID.reset();
-    climb.resetClimbEncoders();
-    targetTicks = 0;
-  }
+  public void initialize() {}
 
   private double driveClimb(double speedArg, double ticks) {
-    boolean maxRetract = ticks <= 10;
-    boolean maxExtend = ticks >= Constants.CLIMB_FULL_EXT_DIST;
+    boolean maxRetract = false; //ticks <= 10;
+    boolean maxExtend = false; //ticks >= Constants.CLIMB_FULL_EXT_DIST;
     boolean inTransit = !maxExtend && !maxRetract;
     boolean extending = speedArg >= 0;
     if ((maxRetract && extending) || (maxExtend && !extending) || inTransit) {
@@ -47,16 +46,39 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double inputTicks = Math.round(-300 * MathUtil.applyDeadband(xbox.getRightY(), 0.05));
+    double inputTicks = Math.round(Constants.WINCH_INPUT_MULTIPLIER * MathUtil.applyDeadband(xbox.getRightY(), 0.05));
     targetTicks += inputTicks;
     targetTicks = MathUtil.clamp(targetTicks, 0, Constants.CLIMB_FULL_EXT_DIST);
     SmartDashboard.putNumber("TargetTicks", targetTicks);
+
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();
-    double lSpeed = climb.lClimbPID.calculate(leftTicks, targetTicks);
-    double rSpeed = climb.rClimbPID.calculate(rightTicks, targetTicks);
+    
+    if (leftTicks != rightTicks) {
+      rTgtCatchup = leftTicks - rightTicks;
+      lTgtCatchup = rightTicks - leftTicks;
+    } else {
+      rTgtCatchup = 0;
+      lTgtCatchup = 0;
+    }
+
+    double lSpeed = climb.lClimbPID.calculate(leftTicks, targetTicks + lTgtCatchup);
+    double rSpeed = climb.rClimbPID.calculate(rightTicks, targetTicks + rTgtCatchup);
+
+    if (targetTicks == prevTgtTicks) {
+      cycleCount ++;
+      if (cycleCount > Constants.CLIMB_SPD_RESET_CYCLES) {
+        lSpeed = 0;
+        rSpeed = 0;
+      }
+    } else {
+      cycleCount = 0;
+    }
+
     climb.moveLClimb(driveClimb(lSpeed, climb.getLeftClimbTicks()));
     climb.moveRClimb(driveClimb(rSpeed, climb.getRightClimbTicks()));
+    
+    prevTgtTicks = targetTicks;
   }
 
   // Called once the command ends or is interrupted.
