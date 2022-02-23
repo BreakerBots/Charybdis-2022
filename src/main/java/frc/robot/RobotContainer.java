@@ -78,12 +78,14 @@ public class RobotContainer {
 
   private POVButton dRight = new POVButton(xboxSys, Constants.D_RIGHT);
   private POVButton dLeft = new POVButton(xboxSys, Constants.D_LEFT);
+  private DriveWithJoystick driveWithJoystick = new DriveWithJoystick(xboxSys, pdpSys, driveSys);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    driveSys.setDefaultCommand(new DriveWithJoystick(xboxSys, pdpSys, driveSys));
+    driveWithJoystick.addRequirements(driveSys);
+    driveSys.setDefaultCommand(driveWithJoystick);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -100,8 +102,8 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     CommandScheduler.getInstance().clearButtons();
-    switch (Robot.robotMode) {
-      case TELEOP:
+    // switch (Robot.robotMode) {
+    //   case TELEOP:
         buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
         buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
         buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
@@ -112,12 +114,13 @@ public class RobotContainer {
         backButton.whenPressed(new ToggleCompressor(compressorSys));
         // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
         // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
-        break;
-      case TEST:
-      case AUTO:
-      case DISABLED:
-        break;
-    }
+      //   break;
+      // case TEST:
+      // case AUTO:
+      // case DISABLED:
+      // default:
+      //   break;
+    //}
 
   }
 
@@ -127,7 +130,7 @@ public class RobotContainer {
    * @return The command to run in autonomous.
    */
   public Command getAutonomousCommand() {
-    configureButtonBindings();
+    // configureButtonBindings();
     // CHANGE AUTOPATH HERE \/
 
     int pathNumber = 1; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
@@ -156,7 +159,7 @@ public class RobotContainer {
    * @return The command to run in test.
    */
   public Command getTestCommand() {
-    configureButtonBindings();
+    // configureButtonBindings();
 
     int cmdNum = 1; // Number for selecting command for use in Test mode.
 
@@ -182,7 +185,7 @@ public class RobotContainer {
    * @return The command to run in teleop.
    */
   public Command getTeleopCommand() {
-    configureButtonBindings();
+    // configureButtonBindings();
 
     int cmdNum = 1;
 
@@ -202,7 +205,7 @@ public class RobotContainer {
    * @return The command to run when disabled.
    */
   public Command getDisabledCommand() {
-    configureButtonBindings();
+    // configureButtonBindings();
 
     int cmdNum = 1;
 

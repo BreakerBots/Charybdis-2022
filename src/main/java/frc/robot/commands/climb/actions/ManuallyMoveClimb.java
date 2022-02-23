@@ -14,7 +14,8 @@ import frc.robot.subsystems.Climber;
 public class ManuallyMoveClimb extends CommandBase {
   private Climber climb;
   private XboxController xbox;
-  private double targetTicks = 0;
+  private double lTargetTicks = 0;
+  private double rTargetTicks = 0;
   private double prevTgtTicks = 0;
   private int cycleCount = 0;
   private double lTgtCatchup = 0;
@@ -47,38 +48,46 @@ public class ManuallyMoveClimb extends CommandBase {
   @Override
   public void execute() {
     double inputTicks = Math.round(Constants.WINCH_INPUT_MULTIPLIER * MathUtil.applyDeadband(xbox.getRightY(), 0.05));
-    targetTicks += inputTicks;
-    targetTicks = MathUtil.clamp(targetTicks, 0, Constants.CLIMB_FULL_EXT_DIST);
-    SmartDashboard.putNumber("TargetTicks", targetTicks);
+    if (xbox.getLeftBumper() && !xbox.getRightBumper()) {
+      lTargetTicks += inputTicks;
+    } else if (!xbox.getLeftBumper() && xbox.getRightBumper()) {
+      rTargetTicks += inputTicks;
+    } else {
+      lTargetTicks += inputTicks;
+      rTargetTicks += inputTicks;
+    }
+    
+    // targetTicks = MathUtil.clamp(targetTicks, 0, Constants.CLIMB_FULL_EXT_DIST);
+   // SmartDashboard.putNumber("TargetTicks", targetTicks);
 
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();
     
-    if (leftTicks != rightTicks) {
-      rTgtCatchup = leftTicks - rightTicks;
-      lTgtCatchup = rightTicks - leftTicks;
-    } else {
+    // if (leftTicks != rightTicks) {
+    //   rTgtCatchup = leftTicks - rightTicks;
+    //   lTgtCatchup = rightTicks - leftTicks;
+    // } else {
       rTgtCatchup = 0;
       lTgtCatchup = 0;
-    }
+    // }
 
-    double lSpeed = climb.lClimbPID.calculate(leftTicks, targetTicks + lTgtCatchup);
-    double rSpeed = climb.rClimbPID.calculate(rightTicks, targetTicks + rTgtCatchup);
+    double lSpeed = climb.lClimbPID.calculate(leftTicks, lTargetTicks);
+    double rSpeed = climb.rClimbPID.calculate(rightTicks, rTargetTicks);
 
-    if (targetTicks == prevTgtTicks) {
-      cycleCount ++;
-      if (cycleCount > Constants.CLIMB_SPD_RESET_CYCLES) {
-        lSpeed = 0;
-        rSpeed = 0;
-      }
-    } else {
-      cycleCount = 0;
-    }
+    // if (targetTicks == prevTgtTicks) {
+    //   cycleCount ++;
+    //   if (cycleCount > Constants.CLIMB_SPD_RESET_CYCLES) {
+    //     lSpeed = 0;
+    //     rSpeed = 0;
+    //   }
+    // } else {
+    //   cycleCount = 0;
+    // }
 
     climb.moveLClimb(driveClimb(lSpeed, climb.getLeftClimbTicks()));
     climb.moveRClimb(driveClimb(rSpeed, climb.getRightClimbTicks()));
     
-    prevTgtTicks = targetTicks;
+    //prevTgtTicks = targetTicks;
   }
 
   // Called once the command ends or is interrupted.
