@@ -31,8 +31,6 @@ public class Intake extends SubsystemBase {
         indexerR = new WPI_TalonSRX(Constants.R_INDEX_ID);
         intakeSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
                 Constants.INTAKESOL_FWD, Constants.INTAKESOL_REV);
-        // intakeIsRunning = false;
-        // indexerIsRunning = false;
     }
 
     public void extendIntakeArm() {

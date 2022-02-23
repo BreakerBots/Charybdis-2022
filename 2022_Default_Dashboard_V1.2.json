@@ -100,33 +100,6 @@
               ]
             }
           },
-          "4,0": {
-            "size": [
-              4,
-              5
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_title": "INTAKE",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/INTAKING",
-                  "_title": "INTAKING",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/ARM EXTENDED",
-                  "_title": "ARM EXTENDED",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                }
-              ]
-            }
-          },
           "12,0": {
             "size": [
               2,
@@ -151,59 +124,136 @@
                   "_type": "Boolean Box",
                   "_source0": "network_table:///SmartDashboard/ROBORIO",
                   "_title": "ROBORIO",
-                  "Colors/Color when true": "#996600FF",
+                  "Colors/Color when true": "#800000FF",
                   "Colors/Color when false": "#008000FF"
                 }
               ]
             }
           },
-          "8,0": {
+          "6,0": {
             "size": [
-              4,
-              4
+              3,
+              3
             ],
             "content": {
               "_type": "List Layout",
-              "_title": "CLIMBER",
+              "_title": "LEFT CLIMB",
               "Layout/Label position": "BOTTOM",
               "_children": [
                 {
                   "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/CLIMB EXT",
-                  "_title": "CLIMB EXT"
+                  "_source0": "network_table:///SmartDashboard/LEFT CLIMB TICKS",
+                  "_title": "LEFT CLIMB TICKS"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/LEFT CLIMB TARGET",
+                  "_title": "LEFT CLIMB TARGET"
+                }
+              ]
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              5
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "INTAKE",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/INTAKING",
+                  "_title": "INTAKING",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/CLIMBING",
-                  "_title": "CLIMBING",
+                  "_source0": "network_table:///SmartDashboard/ARM EXTENDED",
+                  "_title": "ARM EXTENDED",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 }
               ]
             }
           },
-          "8,4": {
+          "9,0": {
             "size": [
-              2,
+              3,
+              3
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "RIGHT CLIMB",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/RIGHT CLIMB TICKS",
+                  "_title": "RIGHT CLIMB TICKS"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/RIGHT CLIMB TARGET",
+                  "_title": "RIGHT CLIMB TARGET"
+                }
+              ]
+            }
+          },
+          "9,3": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Grid Layout",
+              "_title": "COMPRESSOR",
+              "Layout/Number of columns": 3,
+              "Layout/Number of rows": 3,
+              "Layout/Label position": "BOTTOM",
+              "_children": {
+                "1,0": {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/STATE",
+                  "_title": "STATE",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                "0,0": {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/PSI",
+                  "_title": "PSI"
+                }
+              }
+            }
+          },
+          "6,4": {
+            "size": [
+              3,
               1
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/COMPRESSOR",
-              "_title": "COMPRESSOR",
+              "_source0": "network_table:///SmartDashboard/AUTO CLIMBING",
+              "_title": "AUTO CLIMBING",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "10,4": {
+          "6,3": {
             "size": [
-              2,
+              3,
               1
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PSI",
-              "_title": "PSI"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/CLIMB ARMS UP",
+              "_title": "CLIMB ARMS UP",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -788,17 +838,6 @@
               "_title": "Shooter/Shooter Piston/Value"
             }
           },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///LiveWindow/IMU/Pigeon/Heading",
-              "_title": "IMU/Pigeon/Heading"
-            }
-          },
           "5,4": {
             "size": [
               1,
@@ -810,6 +849,17 @@
               "_title": "Hopper/Bottom Sensor/Value",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///LiveWindow/IMU/Pigeon/Heading",
+              "_title": "IMU/Pigeon/Heading"
             }
           }
         }

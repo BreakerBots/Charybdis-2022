@@ -76,7 +76,7 @@ public class AirCompressor extends SubsystemBase {
       if (cycleCount > Constants.COMPRESSOR_TIMEOUT_CYCLES) {
         stopCompressor();
         cycleCount = 0;
-        SmartDashboard.putString("WARNING", "COMPRESSOR TIMED OUT!");
+        DashboardControl.log("WARNING: " + "COMPRESSOR TIMED OUT!");
       }
     } else {
       cycleCount = 0;

@@ -6,6 +6,7 @@ package frc.robot.commands.test;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.BreakerMath;
+import frc.robot.subsystems.DashboardControl;
 import frc.robot.subsystems.Shooter;
 
 public class FlywheelTest extends CommandBase {
@@ -18,7 +19,7 @@ public class FlywheelTest extends CommandBase {
   private double flywheelStaTotalAvg;
   private double flywheelSupTotalAvg;
   private double time;
-  private long cycleCount;
+  private int cycleCount;
   private double speed;
   public FlywheelTest(double secArg, double speedArg, Shooter shooterArg) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -42,22 +43,22 @@ public class FlywheelTest extends CommandBase {
   @Override
   public void execute() {
     cycleCount ++;
-    flywheelLStaAvg = BreakerMath.rollingAvg(flywheelLStaAvg, shooter.getLFlywheelSta());
-    flywheelLSupAvg = BreakerMath.rollingAvg(flywheelLSupAvg, shooter.getLFlywheelSup());
-    flywheelRStaAvg = BreakerMath.rollingAvg(flywheelRStaAvg, shooter.getRFlywheelSta());
-    flywheelRSupAvg = BreakerMath.rollingAvg(flywheelRSupAvg, shooter.getRFlywheelSup());
+    flywheelLStaAvg = BreakerMath.getAvg(flywheelLStaAvg, shooter.getLFlywheelSta(), cycleCount);
+    flywheelLSupAvg = BreakerMath.getAvg(flywheelLSupAvg, shooter.getLFlywheelSup(), cycleCount);
+    flywheelRStaAvg = BreakerMath.getAvg(flywheelRStaAvg, shooter.getRFlywheelSta(), cycleCount);
+    flywheelRSupAvg = BreakerMath.getAvg(flywheelRSupAvg, shooter.getRFlywheelSup(), cycleCount);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     cycleCount = 0;
-    flywheelStaTotalAvg = (flywheelLStaAvg + flywheelRStaAvg) / 2.0;
-    flywheelSupTotalAvg = (flywheelLSupAvg + flywheelRSupAvg) / 2.0;
-    System.out.println(
+    flywheelStaTotalAvg = (flywheelLStaAvg + flywheelRStaAvg);
+    flywheelSupTotalAvg = (flywheelLSupAvg + flywheelRSupAvg);
+    DashboardControl.log(
       "AVERAGES: \n\n"
-      + " LEFT FLYWHEEL STATOR: " + flywheelLStaAvg + " LEFT FLYWHEEL SUPPLY: " + "\n"
-      + " RIGHT FLYWHEEL STATOR:  " + flywheelRStaAvg + " RIGHT FLYWHEEL SUPPLY: " + "\n"
+      + " LEFT FLYWHEEL STATOR: " + flywheelLStaAvg + " LEFT FLYWHEEL SUPPLY: " + flywheelLSupAvg +"\n"
+      + " RIGHT FLYWHEEL STATOR:  " + flywheelRStaAvg + " RIGHT FLYWHEEL SUPPLY: " + flywheelRSupAvg + "\n"
       + " FLYWHEEL TOTAL AVERAGE STATOR: " + flywheelStaTotalAvg + " FLYWHEEL TOTAL AVERAGE SUPPLY: " + flywheelSupTotalAvg + "\n\n"
     );
     shooter.setManualFlywheelSpeed(0);

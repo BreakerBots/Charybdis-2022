@@ -44,8 +44,8 @@ public class Climber extends SubsystemBase {
 
   @Override
   public void periodic() {
-    String log_str = "LClimb Ticks: " + climberL.getSelectedSensorPosition() + " RClimb Ticks: " + climberR.getSelectedSensorPosition();
-    DashboardControl.log(log_str);
+    //String log_str = "LClimb Ticks: " + climberL.getSelectedSensorPosition() + " RClimb Ticks: " + climberR.getSelectedSensorPosition();
+    //DashboardControl.log(log_str);
     // This method will be called once per scheduler run
     //addChild("Winching Motors", climbMotors);
     addChild("Left Climb PID", lClimbPID);
@@ -78,13 +78,6 @@ public class Climber extends SubsystemBase {
   public void toggleClimbSol() {
     climbSol.set(climbSolRetracted ? Value.kForward : Value.kReverse);
     climbSolRetracted = !climbSolRetracted;
-  }
-  /**
-   * Returns rounded value for the precent the climber is currently extended or
-   * retracted relative to its max value
-   */
-  public double getClimbExtPrct() {
-    return Math.round((((getLeftClimbTicks() + getRightClimbTicks()) / 2) * 100) / Constants.CLIMB_EXT_THRESH);
   }
 
   public void resetClimbEncoders() {
