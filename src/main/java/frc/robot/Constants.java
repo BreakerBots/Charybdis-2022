@@ -169,9 +169,9 @@ public final class Constants {
     public static final double CLIMB_RET_THRESH = 0;
     public static final double CLIMB_EXT_THRESH = 0;
     // PID values for climber
-    public static final double KP_CLIMB = 0.0002;
-    public static final double KI_CLIMB = 0;
-    public static final double KD_CLIMB = 0;
+    public static final double KP_CLIMB = 0.00002;
+    public static final double KI_CLIMB = 0.0000001;
+    public static final double KD_CLIMB = 0.000001;
     // Climber stablity tolerences
     public static final double CLIMB_PITCH_TOL = 5;
     public static final double CLIMB_YAW_TOL = 5;
@@ -184,7 +184,7 @@ public final class Constants {
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
-    public static final double WINCH_INPUT_MULTIPLIER = -500;
+    public static final double WINCH_INPUT_MULTIPLIER = -700;
     public static final double CLIMB_SPD_RESET_CYCLES = 150;
   
     
