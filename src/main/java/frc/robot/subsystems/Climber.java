@@ -12,9 +12,13 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotConfig;
+import io.github.oblarg.oblog.Loggable;
+import io.github.oblarg.oblog.annotations.Config;
+import io.github.oblarg.oblog.annotations.Config.ToggleButton;
 
 /** Climber subsystem for robot. */
-public class Climber extends SubsystemBase {
+public class Climber extends SubsystemBase implements Loggable{
   // Extend/retracts climbing arms.
   private WPI_TalonFX climberL;
   private WPI_TalonFX climberR;
@@ -65,6 +69,10 @@ public class Climber extends SubsystemBase {
 
   public void moveRClimb(double climbSpeedArg) {
     climberR.set(climbSpeedArg);
+  }
+
+  public void setBrakeMode(boolean mode) {
+    RobotConfig.setBrakeMode(mode, climberL, climberR);
   }
 
   public double getLeftClimbTicks() {

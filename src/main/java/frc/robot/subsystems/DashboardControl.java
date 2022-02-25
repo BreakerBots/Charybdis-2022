@@ -22,8 +22,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.FMS_Handler;
+import io.github.oblarg.oblog.Loggable;
+import io.github.oblarg.oblog.annotations.Config;
 
-public class DashboardControl extends SubsystemBase {
+public class DashboardControl extends SubsystemBase implements Loggable {
   /** Creates a new SmartDashbord. */
   private Shooter shooter;
   private Intake intake;
@@ -32,7 +34,8 @@ public class DashboardControl extends SubsystemBase {
   private PowerDistribution pdp;
   private FMS_Handler fms;
 
-  public DashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg, PowerDistribution pdpArg, FMS_Handler fmsArg, Climber climbArg) {
+  public DashboardControl(AirCompressor compressorArg, Shooter shooterArg, Intake intakeArg, PowerDistribution pdpArg,
+      FMS_Handler fmsArg, Climber climbArg) {
     intake = intakeArg;
     shooter = shooterArg;
     compressor = compressorArg;
@@ -44,6 +47,11 @@ public class DashboardControl extends SubsystemBase {
   public static void log(String output) {
     SmartDashboard.putString("LOG", output);
   }
+
+  // @Config.ToggleButton(tabName = "DEFAULT")
+  // void BrakeMode(boolean enabled) {
+  //   climber.setBrakeMode(enabled);
+  // }
 
   @Override
   public void periodic() {
