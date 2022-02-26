@@ -40,11 +40,11 @@ public class RobotConfig {
      * @param motors  CTRE motor controllers (Talon FX, Talon SRX, etc.).
      */
     public static void setBrakeMode(boolean modeArg, BaseMotorController... motors) {
-        for (int i = 0; i < motors.length; i++) {
+        for (BaseMotorController motor : motors) {
             if (modeArg) {
-                motors[i].setNeutralMode(NeutralMode.Brake);
+                motor.setNeutralMode(NeutralMode.Brake);
             } else {
-                motors[i].setNeutralMode(NeutralMode.Coast);
+                motor.setNeutralMode(NeutralMode.Coast);
             }
         }
     }

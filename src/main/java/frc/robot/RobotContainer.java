@@ -70,15 +70,15 @@ public class RobotContainer {
   private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys,
       fmsSys, climbSys);
-
+  // Joystick buttons
   private JoystickButton buttonA = new JoystickButton(xboxSys, Constants.A);
   private JoystickButton buttonB = new JoystickButton(xboxSys, Constants.B);
   private JoystickButton buttonX = new JoystickButton(xboxSys, Constants.X);
   private JoystickButton buttonY = new JoystickButton(xboxSys, Constants.Y);
   private JoystickButton backButton = new JoystickButton(xboxSys, Constants.BACK);
-
   private POVButton dRight = new POVButton(xboxSys, Constants.D_RIGHT);
   private POVButton dLeft = new POVButton(xboxSys, Constants.D_LEFT);
+  // Default command
   private DriveWithJoystick driveWithJoystick = new DriveWithJoystick(xboxSys, pdpSys, driveSys);
 
   /**
@@ -184,6 +184,8 @@ public class RobotContainer {
 
   /**
    * Use this to pass the teleop command to the main {@link Robot} class.
+   * <p>
+   * NOTE: Only used for very minor applications.
    *
    * @return The command to run in teleop.
    */
@@ -204,6 +206,8 @@ public class RobotContainer {
 
   /**
    * Use this to pass the disabled command to the main {@link Robot} class.
+   * <p>
+   * NOTE: Very precarious - use with caution!!!
    *
    * @return The command to run when disabled.
    */

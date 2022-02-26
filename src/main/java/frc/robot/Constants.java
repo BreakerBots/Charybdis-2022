@@ -16,7 +16,6 @@ package frc.robot;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
-
 public final class Constants {
     /** General filler constant */
     public static final int FILLER = 99;
