@@ -41,8 +41,9 @@ public class DriveWithJoystick extends CommandBase {
         net = prevNet - 0.35;
       }
     }
-    if (pdp.getVoltage() < 8.5) {
-      net *= 0.85;
+    if (pdp.getVoltage() < 9) {
+      net *= 0.75;
+      turn *= 0.75;
     }
     prevNet = net;
     
