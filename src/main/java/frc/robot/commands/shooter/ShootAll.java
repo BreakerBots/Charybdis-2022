@@ -58,7 +58,7 @@ public class ShootAll extends CommandBase {
       DashboardControl.log("SHOOTER STARTED!");
     }
     if (hopper.bothSlotsAreEmpty()) {
-      if (timedStopCount > 150) {
+      if (timedStopCount > 50) {
         hopper.deactivateHopper();
         intake.deactivateIntake();
         timedStopCount = 0;

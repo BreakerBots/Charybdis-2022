@@ -28,10 +28,10 @@ public class Pickup1_Shoot2_P1 extends SequentialCommandGroup {
       new ToggleIntake(intakeArg, hopperArg),
       new DriveStraight(driveArg, imuArg, 70, 0.4, 4),
       new DrivePivot(driveArg, imuArg, 25, 0.4),
-      new ToggleIntake(intakeArg, hopperArg),
       new DriveStraight(driveArg, imuArg, -74, 0.6, 4),
+      new ToggleIntake(intakeArg, hopperArg),
       new DrivePivot(driveArg, imuArg, -70, 0.3),
-      new DriveStraight(driveArg, imuArg, -33, 0.2, 3.5),
+      new DriveStraight(driveArg, imuArg, -45, 0.2, 3.5),
       new ChargeThenShoot(controllerArg, intakeArg, hopperArg, shooterArg)
     );
   }

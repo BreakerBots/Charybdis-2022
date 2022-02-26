@@ -136,7 +136,7 @@ public class RobotContainer {
     // configureButtonBindings();
     // CHANGE AUTOPATH HERE \/
 
-    int pathNumber = 1; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+    int pathNumber = 4; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
                         // list below. To change use the desired paths sumber from the list below.
 
     switch (pathNumber) {

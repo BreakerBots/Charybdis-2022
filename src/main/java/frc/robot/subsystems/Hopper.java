@@ -128,7 +128,7 @@ public class Hopper extends SubsystemBase {
         activateHopper(); // Turns on hopper
       } else if (!bottomSlotIsFull() && topSlotIsFull()) { // Only top is full
         pauseCountA++;
-        if (pauseCountA > 25) { // Waits to turn off hopper
+        if (pauseCountA > 0) { // Waits to turn off hopper
           deactivateHopper();
           pauseCountA = 0;
         }
