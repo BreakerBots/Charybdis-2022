@@ -41,12 +41,12 @@ public class DriveWithJoystick extends CommandBase {
         net = prevNet - 0.35;
       }
     }
-    if (pdp.getVoltage() < 9) {
-      net *= 0.75;
-      turn *= 0.75;
+    if (pdp.getVoltage() < 11) {
+      double adjust = 0.9 - 0.15 * (11 - pdp.getVoltage());
+      turn *= adjust;
+      net *= adjust;
     }
     prevNet = net;
-    
     drive.teleopMove(net, turn); // Calculates speed and turn outputs
   }
 
