@@ -4,18 +4,21 @@
 
 package frc.robot.commands.drive;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
 
-
 public class DriveWithJoystick extends CommandBase {
 
   private final Drive drive;
-  private final XboxController xbox; 
+  private final XboxController xbox;
   private final PowerDistribution pdp;
+  private int throttleCycles = 0;
+  private double adjust = 1;
   private double prevNet;
+
   /** Creates a new DriveWithJoystick. */
   public DriveWithJoystick(XboxController controllerArg, PowerDistribution pdpArg, Drive driveTrainArg) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -26,7 +29,8 @@ public class DriveWithJoystick extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -41,10 +45,15 @@ public class DriveWithJoystick extends CommandBase {
         net = prevNet - 0.35;
       }
     }
-    if (pdp.getVoltage() < 11) {
-      double adjust = 0.9 - 0.15 * (11 - pdp.getVoltage());
-      turn *= adjust;
-      net *= adjust;
+    if (pdp.getVoltage() < 12) {
+      throttleCycles++;
+      if (throttleCycles < 200) {
+        adjust = MathUtil.clamp(0.9 - 0.15 * (12 - pdp.getVoltage()), adjust - 0.0005, adjust + 0.0005);
+        turn *= adjust;
+        net *= adjust;
+      }
+    } else {
+      throttleCycles = 0;
     }
     prevNet = net;
     drive.teleopMove(net, turn); // Calculates speed and turn outputs
@@ -52,7 +61,8 @@ public class DriveWithJoystick extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
