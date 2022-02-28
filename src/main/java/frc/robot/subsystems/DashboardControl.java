@@ -82,7 +82,7 @@ public class DashboardControl extends SubsystemBase implements Loggable {
     SmartDashboard.putNumber("RIGHT CLIMB TARGET", climber.lClimbPID.getSetpoint());
     SmartDashboard.putBoolean("AUTO CLIMBING", climber.isClimbing());
     SmartDashboard.putBoolean("CLIMB ARMS UP", climber.climbSolRetracted);
-    // // cameras
+    // cameras
     // UsbCamera frontCam = new UsbCamera("Front Camera", 0);
     // UsbCamera backCam = new UsbCamera("Back Camera", 1);
     // CameraServer.startAutomaticCapture(frontCam);
