@@ -112,7 +112,8 @@ public class DriveTrainTest extends CommandBase {
 
     "sup avg L1: " + l1SupAvg + "  sup avg R1: " + r1SupAvg + "\n" +   
     "sup avg L2: " + l2SupAvg + "  sup avg R2: " + r2SupAvg + "\n" +
-    "sup avg L3: " + l3SupAvg + "  sup avg R3: " + r3SupAvg + "\n\n\n"
+    "sup avg L3: " + l3SupAvg + "  sup avg R3: " + r3SupAvg + "\n" +
+    "Left Ticks: " + drive.getLeftTicks() + "  Right Tidks: " +  "\n\n\n"
     );
 
 

@@ -64,12 +64,12 @@ public class RobotContainer {
   private final Drive driveSys = new Drive(pdpSys);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
-  private final Climber climbSys = new Climber();
+  //private final Climber climbSys = new Climber();
   private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
-  private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
-  private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys,
-      fmsSys, climbSys);
+  //private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
+  //private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys,
+      //fmsSys, climbSys);
   // Joystick buttons
   private JoystickButton buttonA = new JoystickButton(xboxSys, Constants.A);
   private JoystickButton buttonB = new JoystickButton(xboxSys, Constants.B);
@@ -111,8 +111,8 @@ public class RobotContainer {
         buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
         buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
         dRight.whenPressed(new ToggleShooterMode(shooterSys));
-        buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
-        dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
+       // buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
+      //  dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
         // B button shoots, Left Menu cancles
         backButton.whenPressed(new ToggleCompressor(compressorSys));
         // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
@@ -164,7 +164,7 @@ public class RobotContainer {
   public Command getTestCommand() {
     // configureButtonBindings();
 
-    int cmdNum = 1; // Number for selecting command for use in Test mode.
+    int cmdNum = 2; // Number for selecting command for use in Test mode.
 
     switch (cmdNum) {
       case 0:
