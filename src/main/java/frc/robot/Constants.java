@@ -125,8 +125,8 @@ public final class Constants {
     public static final double HOPPER_SPD = 0.8;
     public static final double SHOOTER_HOPPER_SPD = 0.9;
     // Hopper ball position sensor channels
-    public static final int SLOT_1_CHANNEL = 9;
-    public static final int SLOT_2_CHANNEL = 8;
+    public static final int SLOT_1_CHANNEL = 0;
+    public static final int SLOT_2_CHANNEL = 1;
     // Amount of delay on hopper
     public static final long HOPPER_DELAY_CYCLES = 0;
     // Hopper specs
