@@ -40,6 +40,7 @@ public class Shooter extends SubsystemBase {
   private DoubleSolenoid shooterSol;
   private Hopper hopper;
   public boolean isShooting = false;
+  private double prevImpt;
 
   public Shooter(Hopper hopperArg) {
     setName("Shooter");
@@ -51,9 +52,15 @@ public class Shooter extends SubsystemBase {
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
+    shooterR.setInverted(false);
     flywheel = new MotorControllerGroup(shooterL, shooterR);
     shooterSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
         Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
+  }
+
+  /** Returns the TPS of the flywheel's Motors */
+  public double getFlywheelTPS() {
+    return Math.abs((shooterL.getSelectedSensorVelocity() / 10));
   }
 
   /** Flywheel is set to charging state. */
@@ -74,9 +81,12 @@ public class Shooter extends SubsystemBase {
   }
 
   /** Makes flywheel charge to desired speed. */
-  public void runFlywheel() {
+  private void runFlywheel() {
     double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
-    flywheel.set(flySpd);
+    double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
+    double motorImpt = prevImpt + (flydiff * 0.0001);
+    flywheel.set(motorImpt);
+    prevImpt = motorImpt;
   }
 
   /** Based on shoot mode, sets idle speed, target speed, and shoot position. */
@@ -97,11 +107,6 @@ public class Shooter extends SubsystemBase {
         break;
     }
     flyIdleSpd = flyTgtSpdPrct * 0.8;
-  }
-
-  /** Returns the TPS of the flywheel's Motors */
-  public double getFlywheelTPS() {
-    return Math.abs((shooterL.getSelectedSensorVelocity() / 10));
   }
 
   public double getLFlywheelSta() {
@@ -168,6 +173,10 @@ public class Shooter extends SubsystemBase {
     flywheel.set(speed);
   }
 
+  public void setFlywheelManualSpeed(double speed) {
+    flywheel.set(speed);
+  }
+
   public void periodic() {
     setShooter();
     switch (flywheelState) {
@@ -178,7 +187,8 @@ public class Shooter extends SubsystemBase {
       case OFF:
       case IDLE:
         if (hopper.bothSlotsAreFull()) {
-          setIdle();
+          //setIdle();
+          setOff();
         } else {
           setOff();
         }
@@ -187,9 +197,10 @@ public class Shooter extends SubsystemBase {
     addChild("Flywheel", flywheel);
     addChild("Shooter Piston", shooterSol);
     addChild("Flywheel PID", flywheelPID);
+    //setFlywheelManualSpeed(0.44);
+    // System.out.println("fly spd: " + getFlywheelTPS());
+    // System.out.println("fly err: " + flywheelPID.getPositionError());
   }
 
-  public void setFlywheelManualSpeed(double speed) {
-    flywheel.set(speed);
-  }
+ 
 }
