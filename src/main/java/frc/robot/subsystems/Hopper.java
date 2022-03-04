@@ -24,6 +24,7 @@ public class Hopper extends SubsystemBase {
   // Pause times for hopper logic
   private long pauseCountA;
   private long pauseCountB;
+  private boolean ballInTransit = false;
 
   public Hopper(Intake intakeArg) {
     setName("Hopper");
@@ -114,6 +115,14 @@ public class Hopper extends SubsystemBase {
     return hopperMotor.getStatorCurrent();
   }
 
+  public boolean getBallInTransit() {
+    return ballInTransit;
+  }
+
+  public void setBallInTransit(boolean state) {
+    ballInTransit = state;
+  }
+
   /**
    * Persistent hopper logic based on other subsystems and fullness of slots.
    * <p>
@@ -126,14 +135,17 @@ public class Hopper extends SubsystemBase {
     if (intake.intakeIsRunning()) {
       if (bottomSlotIsFull() && !topSlotIsFull()) { // Only bottom is full
         activateHopper(); // Turns on hopper
+        setBallInTransit(true);
       } else if (!bottomSlotIsFull() && topSlotIsFull()) { // Only top is full
         pauseCountA++;
+        setBallInTransit(false);
         if (pauseCountA > 0) { // Waits to turn off hopper
           deactivateHopper();
           pauseCountA = 0;
         }
-      } else if (bothSlotsAreEmpty()) { // Both are empty
+      } else if (bothSlotsAreEmpty() && !getBallInTransit()) { // Both are empty
         deactivateHopper();
+        //activateHopper();
       } else if (bothSlotsAreFull()) { // Both are full
         pauseCountB++;
         if (pauseCountB > 0) { // Waits to turn off hopper and intake.

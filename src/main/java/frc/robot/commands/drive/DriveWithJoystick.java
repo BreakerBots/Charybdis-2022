@@ -8,6 +8,8 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
+import frc.robot.Robot.RobotMode;
 import frc.robot.subsystems.Drive;
 
 public class DriveWithJoystick extends CommandBase {
@@ -46,18 +48,23 @@ public class DriveWithJoystick extends CommandBase {
       }
     }
     // if (pdp.getVoltage() < 12) {
-    //   throttleCycles++;
-    //   if (throttleCycles < 200) {
-    //     adjust = MathUtil.clamp(0.9 - 0.15 * (12 - pdp.getVoltage()), adjust - 0.0005, adjust + 0.0005);
-    //     turn *= adjust;
-    //     net *= adjust;
-    //   }
+    // throttleCycles++;
+    // if (throttleCycles < 200) {
+    // adjust = MathUtil.clamp(0.9 - 0.15 * (12 - pdp.getVoltage()), adjust -
+    // 0.0005, adjust + 0.0005);
+    // turn *= adjust;
+    // net *= adjust;
+    // }
     // } else {
-    //   throttleCycles = 0;
-    //   adjust = 1;
+    // throttleCycles = 0;
+    // adjust = 1;
     // }
     prevNet = net;
-    drive.teleopMove(net, turn); // Calculates speed and turn outputs
+    if (Robot.robotMode != RobotMode.TEST) {
+      drive.teleopMove(net, turn); // Calculates speed and turn outputs
+    } else {
+      drive.teleopMove(0, 0);
+    }
   }
 
   // Called once the command ends or is interrupted.
