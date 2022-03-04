@@ -86,7 +86,7 @@ public class AirCompressor extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
-    autoTimeout();
+    //autoTimeout();
    // System.out.println(compressor.getPressureSwitchValue());
   }
 }
