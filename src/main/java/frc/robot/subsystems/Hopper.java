@@ -66,7 +66,7 @@ public class Hopper extends SubsystemBase {
    * @return true if full, false if empty.
    */
   public boolean bottomSlotIsFull() {
-    return (bottomSlot.getVoltage() <= 4);
+    return (bottomSlot.getVoltage() >= 4);
   }
 
   /**
@@ -75,7 +75,7 @@ public class Hopper extends SubsystemBase {
    * @return true if full, false if empty.
    */
   public boolean topSlotIsFull() {
-    return (topSlot.getVoltage() <= 4);
+    return (topSlot.getVoltage() >= 4);
   }
 
   /**
