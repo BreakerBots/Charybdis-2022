@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.MathUtil;
 
 //easily accessible conversion equations
 public class BreakerMath {
@@ -38,7 +39,7 @@ public class BreakerMath {
      * @return Value between -1 and 1.
      */
     public static double driveCurve(double x) {
-        double absX = Math.abs(x);
+        double absX = MathUtil.applyDeadband(Math.abs(x), 0.05);
         double y = (Math.signum(x) * L) / (1 + Math.pow(Math.E, -k * (absX - x0))) + b;
         return y;
     }

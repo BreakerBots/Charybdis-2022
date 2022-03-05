@@ -48,7 +48,7 @@ public class Shooter extends SubsystemBase {
     // Constants.FLYWHEEL_KV);
     flywheelPID = new PIDController(Constants.KP_FLYWHEEL, Constants.KI_FLYWHEEL, Constants.KD_FLYWHEEL);
     hopper = hopperArg;
-    flywheelPID.setTolerance(20);
+    flywheelPID.setTolerance(20, 3);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
