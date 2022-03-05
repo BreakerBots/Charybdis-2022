@@ -5,6 +5,7 @@
 package frc.robot.commands.auto.paths;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.drive.DrivePivot;
 import frc.robot.commands.drive.DriveStraight;
@@ -25,7 +26,7 @@ public class Pickup1_Shoot2_H1 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ToggleIntake(intakeArg, hopperArg),
+      new InstantCommand(intakeArg :: activateIntake),
       new DriveStraight(driveArg, imuArg, 48, 0.4, 4),
       new DriveStraight(driveArg, imuArg, -60, 0.4, 4),
       new ToggleIntake(intakeArg, hopperArg),

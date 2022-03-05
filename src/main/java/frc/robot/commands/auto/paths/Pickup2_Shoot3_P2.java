@@ -34,7 +34,7 @@ public class Pickup2_Shoot3_P2 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ToggleIntake(intakeArg, hopperArg),
+      new InstantCommand(intakeArg :: activateIntake),
       new DriveStraight(driveArg, imuArg, 52, 0.4, 4),
       new ParallelCommandGroup(
         new ChargeFlywheel(shooterArg, controllerArg), 
