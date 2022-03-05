@@ -36,7 +36,7 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double inputTicks = Math.round(Constants.WINCH_INPUT_MULTIPLIER * MathUtil.applyDeadband(xbox.getRightY(), 0.05));
+    double inputTicks = Math.round(Constants.WINCH_INPUT_MULTIPLIER * MathUtil.applyDeadband(xbox.getRightY(), 0.1));
     if (xbox.getLeftBumper() && !xbox.getRightBumper()) {
       lTargetTicks += inputTicks;
     } else if (!xbox.getLeftBumper() && xbox.getRightBumper()) {
