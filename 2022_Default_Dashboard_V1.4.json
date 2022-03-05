@@ -11,10 +11,10 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "12,2": {
+          "13,0": {
             "size": [
-              4,
-              3
+              3,
+              5
             ],
             "content": {
               "_type": "Text View",
@@ -59,10 +59,10 @@
               ]
             }
           },
-          "12,0": {
+          "8,0": {
             "size": [
-              4,
-              2
+              5,
+              5
             ],
             "content": {
               "_type": "Text View",
@@ -72,72 +72,108 @@
           },
           "0,0": {
             "size": [
-              4,
+              6,
               5
             ],
             "content": {
-              "_type": "Subsystem Layout",
-              "_title": "SHOOTER",
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/INTAKING",
+              "_title": "INTAKING",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,0": {
+            "size": [
+              2,
+              5
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ARM EXTENDED",
+              "_title": "ARM EXTENDED",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "9,7": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/AUTO CLIMBING",
+              "_title": "AUTO CLIMBING",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "9,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/CLIMB ARMS UP",
+              "_title": "CLIMB ARMS UP",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,6": {
+            "size": [
+              5,
+              3
+            ],
+            "content": {
+              "_type": "Grid Layout",
+              "_title": "Grid Layout",
+              "Layout/Number of columns": 3,
+              "Layout/Number of rows": 3,
               "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
+              "_children": {
+                "0,0": {
                   "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/SHOOTER MODE",
                   "_title": "SHOOTER MODE"
                 },
-                {
+                "1,0": {
                   "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/FLYWHEEL",
                   "_title": "FLYWHEEL"
                 },
-                {
+                "2,0": {
                   "_type": "Boolean Box",
                   "_source0": "network_table:///SmartDashboard/SHOOTING",
                   "_title": "SHOOTING",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 }
-              ]
+              }
             }
           },
-          "10,0": {
+          "19,0": {
             "size": [
               2,
-              5
+              2
             ],
             "content": {
               "_type": "List Layout",
-              "_title": "ELETRICAL",
+              "_title": "List Layout",
               "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Voltage View",
-                  "_source0": "network_table:///SmartDashboard/BATTERY V",
-                  "_title": "BATTERY V",
-                  "Range/Min": 0.0,
-                  "Range/Max": 14.0,
-                  "Range/Center": 0.0,
-                  "Visuals/Orientation": "HORIZONTAL",
-                  "Visuals/Number of tick marks": 5
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/ROBORIO",
-                  "_title": "ROBORIO",
-                  "Colors/Color when true": "#800000FF",
-                  "Colors/Color when false": "#008000FF"
-                }
-              ]
+              "_children": []
             }
           },
-          "6,0": {
+          "5,6": {
             "size": [
               2,
               3
             ],
             "content": {
               "_type": "List Layout",
-              "_title": "LEFT CLIMB",
+              "_title": "L - CLIMB",
               "Layout/Label position": "BOTTOM",
               "_children": [
                 {
@@ -153,41 +189,14 @@
               ]
             }
           },
-          "4,0": {
-            "size": [
-              2,
-              5
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_title": "INTAKE",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/INTAKING",
-                  "_title": "INTAKING",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/ARM EXTENDED",
-                  "_title": "ARM EXTENDED",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                }
-              ]
-            }
-          },
-          "8,0": {
+          "7,6": {
             "size": [
               2,
               3
             ],
             "content": {
               "_type": "List Layout",
-              "_title": "RIGHT CLIMB",
+              "_title": "R - CLIMB",
               "Layout/Label position": "BOTTOM",
               "_children": [
                 {
@@ -203,9 +212,66 @@
               ]
             }
           },
-          "8,3": {
+          "19,2": {
             "size": [
-              2,
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BATTERY V",
+              "_title": "BATTERY V"
+            }
+          },
+          "19,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Grid Layout",
+              "_title": "Grid Layout",
+              "Layout/Number of columns": 3,
+              "Layout/Number of rows": 3,
+              "Layout/Label position": "BOTTOM",
+              "_children": {}
+            }
+          },
+          "14,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Grid Layout",
+              "_title": "ELECTRICAL",
+              "Layout/Number of columns": 3,
+              "Layout/Number of rows": 3,
+              "Layout/Label position": "BOTTOM",
+              "_children": {
+                "1,0": {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/ROBORIO",
+                  "_title": "ROBORIO",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                "0,0": {
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///SmartDashboard/BATTERY V",
+                  "_title": "BATTERY V",
+                  "Range/Min": 0.0,
+                  "Range/Max": 14.0,
+                  "Range/Center": 0.0,
+                  "Visuals/Orientation": "HORIZONTAL",
+                  "Visuals/Number of tick marks": 3
+                }
+              }
+            }
+          },
+          "11,6": {
+            "size": [
+              3,
               2
             ],
             "content": {
@@ -228,65 +294,6 @@
                   "_title": "PSI"
                 }
               }
-            }
-          },
-          "6,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/AUTO CLIMBING",
-              "_title": "AUTO CLIMBING",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/CLIMB ARMS UP",
-              "_title": "CLIMB ARMS UP",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName"
-            }
-          },
-          "1,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Interface",
-              "_title": "limelight_Interface"
-            }
-          },
-          "2,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream"
             }
           }
         }
@@ -317,13 +324,13 @@
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Winching Motors",
-                  "_title": "Winching Motors",
+                  "_title": "LiveWindow/Climber/Winching Motors",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Climb PID",
-                  "_title": "Climb PID"
+                  "_title": "LiveWindow/Climber/Climb PID"
                 },
                 {
                   "_type": "Text View",
@@ -333,12 +340,12 @@
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Right Climb PID",
-                  "_title": "Right Climb PID"
+                  "_title": "LiveWindow/Climber/Right Climb PID"
                 },
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Left Climb PID",
-                  "_title": "Left Climb PID"
+                  "_title": "LiveWindow/Climber/Left Climb PID"
                 }
               ]
             }
@@ -731,13 +738,13 @@
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [51]",
-                  "_title": "Talon FX [51]",
+                  "_title": "LiveWindow/Ungrouped/Talon FX [51]",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [52]",
-                  "_title": "Talon FX [52]",
+                  "_title": "LiveWindow/Ungrouped/Talon FX [52]",
                   "Visuals/Orientation": "HORIZONTAL"
                 }
               ]
@@ -757,17 +764,17 @@
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Drive/Distance PID",
-                  "_title": "Distance PID"
+                  "_title": "LiveWindow/Drive/Distance PID"
                 },
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Drive/Angle PID",
-                  "_title": "Angle PID"
+                  "_title": "LiveWindow/Drive/Angle PID"
                 },
                 {
                   "_type": "Differential Drivebase",
                   "_source0": "network_table:///LiveWindow/Drive/Drivetrain",
-                  "_title": "Drivetrain",
+                  "_title": "LiveWindow/Drive/Drivetrain",
                   "Wheels/Number of wheels": 4,
                   "Wheels/Wheel diameter": 80.0,
                   "Visuals/Show velocity vectors": true
@@ -789,25 +796,25 @@
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Intake/Intake Motor",
-                  "_title": "Intake Motor",
+                  "_title": "LiveWindow/Intake/Intake Motor",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Intake/Right Indexer",
-                  "_title": "Right Indexer",
+                  "_title": "LiveWindow/Intake/Right Indexer",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Intake/Left Indexer",
-                  "_title": "Left Indexer",
+                  "_title": "LiveWindow/Intake/Left Indexer",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Text View",
                   "_source0": "network_table:///LiveWindow/Intake/Arm/Value",
-                  "_title": "Arm/Value"
+                  "_title": "LiveWindow/Intake/Arm/Value"
                 }
               ]
             }
@@ -932,9 +939,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -8.0,
-    "y": 0.0,
-    "width": 1548.800048828125,
-    "height": 844.7999877929688
+    "x": -7.199999809265137,
+    "y": -7.199999809265137,
+    "width": 1550.4000244140625,
+    "height": 830.4000244140625
   }
 }
