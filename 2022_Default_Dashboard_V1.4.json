@@ -11,10 +11,10 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "13,0": {
+          "16,0": {
             "size": [
               3,
-              5
+              8
             ],
             "content": {
               "_type": "Text View",
@@ -22,10 +22,10 @@
               "_title": "LOG"
             }
           },
-          "16,0": {
+          "19,0": {
             "size": [
-              3,
-              5
+              4,
+              6
             ],
             "content": {
               "_type": "List Layout",
@@ -59,10 +59,10 @@
               ]
             }
           },
-          "8,0": {
+          "12,0": {
             "size": [
-              5,
-              5
+              4,
+              8
             ],
             "content": {
               "_type": "Text View",
@@ -72,8 +72,8 @@
           },
           "0,0": {
             "size": [
-              6,
-              5
+              9,
+              8
             ],
             "content": {
               "_type": "Boolean Box",
@@ -83,10 +83,10 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "6,0": {
+          "9,0": {
             "size": [
-              2,
-              5
+              3,
+              8
             ],
             "content": {
               "_type": "Boolean Box",
@@ -96,9 +96,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,7": {
+          "13,10": {
             "size": [
-              2,
+              3,
               1
             ],
             "content": {
@@ -109,9 +109,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,6": {
+          "13,9": {
             "size": [
-              2,
+              3,
               1
             ],
             "content": {
@@ -122,14 +122,14 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "0,6": {
+          "0,9": {
             "size": [
-              5,
+              7,
               3
             ],
             "content": {
               "_type": "Grid Layout",
-              "_title": "Grid Layout",
+              "_title": "SHOOTER",
               "Layout/Number of columns": 3,
               "Layout/Number of rows": 3,
               "Layout/Label position": "BOTTOM",
@@ -154,21 +154,9 @@
               }
             }
           },
-          "19,0": {
+          "7,9": {
             "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "List Layout",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "5,6": {
-            "size": [
-              2,
+              3,
               3
             ],
             "content": {
@@ -189,9 +177,9 @@
               ]
             }
           },
-          "7,6": {
+          "10,9": {
             "size": [
-              2,
+              3,
               3
             ],
             "content": {
@@ -212,34 +200,9 @@
               ]
             }
           },
-          "19,2": {
+          "16,9": {
             "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BATTERY V",
-              "_title": "BATTERY V"
-            }
-          },
-          "19,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Grid Layout",
-              "_title": "Grid Layout",
-              "Layout/Number of columns": 3,
-              "Layout/Number of rows": 3,
-              "Layout/Label position": "BOTTOM",
-              "_children": {}
-            }
-          },
-          "14,6": {
-            "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -257,21 +220,16 @@
                   "Colors/Color when false": "#8B0000FF"
                 },
                 "0,0": {
-                  "_type": "Voltage View",
+                  "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/BATTERY V",
-                  "_title": "BATTERY V",
-                  "Range/Min": 0.0,
-                  "Range/Max": 14.0,
-                  "Range/Center": 0.0,
-                  "Visuals/Orientation": "HORIZONTAL",
-                  "Visuals/Number of tick marks": 3
+                  "_title": "BATTERY V"
                 }
               }
             }
           },
-          "11,6": {
+          "19,6": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
@@ -294,39 +252,6 @@
                   "_title": "PSI"
                 }
               }
-            }
-          },
-          "21,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName"
-            }
-          },
-          "22,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Interface",
-              "_title": "limelight_Interface"
-            }
-          },
-          "23,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream"
             }
           }
         }
@@ -357,13 +282,13 @@
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Winching Motors",
-                  "_title": "LiveWindow/Climber/Winching Motors",
+                  "_title": "Winching Motors",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Climb PID",
-                  "_title": "LiveWindow/Climber/Climb PID"
+                  "_title": "Climb PID"
                 },
                 {
                   "_type": "Text View",
@@ -373,12 +298,12 @@
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Right Climb PID",
-                  "_title": "LiveWindow/Climber/Right Climb PID"
+                  "_title": "Right Climb PID"
                 },
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Climber/Left Climb PID",
-                  "_title": "LiveWindow/Climber/Left Climb PID"
+                  "_title": "Left Climb PID"
                 }
               ]
             }
@@ -771,13 +696,13 @@
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [51]",
-                  "_title": "LiveWindow/Ungrouped/Talon FX [51]",
+                  "_title": "Talon FX [51]",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [52]",
-                  "_title": "LiveWindow/Ungrouped/Talon FX [52]",
+                  "_title": "Talon FX [52]",
                   "Visuals/Orientation": "HORIZONTAL"
                 }
               ]
@@ -797,17 +722,17 @@
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Drive/Distance PID",
-                  "_title": "LiveWindow/Drive/Distance PID"
+                  "_title": "Distance PID"
                 },
                 {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Drive/Angle PID",
-                  "_title": "LiveWindow/Drive/Angle PID"
+                  "_title": "Angle PID"
                 },
                 {
                   "_type": "Differential Drivebase",
                   "_source0": "network_table:///LiveWindow/Drive/Drivetrain",
-                  "_title": "LiveWindow/Drive/Drivetrain",
+                  "_title": "Drivetrain",
                   "Wheels/Number of wheels": 4,
                   "Wheels/Wheel diameter": 80.0,
                   "Visuals/Show velocity vectors": true
@@ -829,25 +754,25 @@
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Intake/Intake Motor",
-                  "_title": "LiveWindow/Intake/Intake Motor",
+                  "_title": "Intake Motor",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Intake/Right Indexer",
-                  "_title": "LiveWindow/Intake/Right Indexer",
+                  "_title": "Right Indexer",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Motor Controller",
                   "_source0": "network_table:///LiveWindow/Intake/Left Indexer",
-                  "_title": "LiveWindow/Intake/Left Indexer",
+                  "_title": "Left Indexer",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Text View",
                   "_source0": "network_table:///LiveWindow/Intake/Arm/Value",
-                  "_title": "LiveWindow/Intake/Arm/Value"
+                  "_title": "Arm/Value"
                 }
               ]
             }
@@ -1012,9 +937,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -9.0,
-    "y": -9.0,
-    "width": 1938.0,
-    "height": 1048.0
+    "x": -1928.0,
+    "y": -8.0,
+    "width": 1936.0,
+    "height": 1096.0
   }
 }
