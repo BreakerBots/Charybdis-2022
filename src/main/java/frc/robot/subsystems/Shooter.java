@@ -48,7 +48,7 @@ public class Shooter extends SubsystemBase {
     // Constants.FLYWHEEL_KV);
     flywheelPID = new PIDController(Constants.KP_FLYWHEEL, Constants.KI_FLYWHEEL, Constants.KD_FLYWHEEL);
     hopper = hopperArg;
-    flywheelPID.setTolerance(20, 2);
+    flywheelPID.setTolerance(10, 2);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
@@ -84,7 +84,7 @@ public class Shooter extends SubsystemBase {
   private void runFlywheel() {
     double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
     double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
-    double motorImpt = prevImpt + (flydiff * 0.000070);
+    double motorImpt = prevImpt + (flydiff * 0.000065);
     flywheel.set(motorImpt);
     prevImpt = motorImpt;
   }
@@ -198,7 +198,7 @@ public class Shooter extends SubsystemBase {
     //addChild("Shooter Piston", shooterSol);
     addChild("Flywheel PID", flywheelPID);
     //setFlywheelManualSpeed(0.44);
-    // System.out.println("fly spd: " + getFlywheelTPS());
+    System.out.println("fly spd: " + getFlywheelTPS());
     // System.out.println("fly err: " + flywheelPID.getPositionError());
   }
 
