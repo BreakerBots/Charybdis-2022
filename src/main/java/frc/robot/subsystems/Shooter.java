@@ -37,7 +37,7 @@ public class Shooter extends SubsystemBase {
   private double flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
   private double flyIdleSpd = flyTgtSpdPrct * 0.8;
   private MotorControllerGroup flywheel;
-  private DoubleSolenoid shooterSol;
+  //private DoubleSolenoid shooterSol;
   private Hopper hopper;
   public boolean isShooting = false;
   private double prevImpt;
@@ -54,8 +54,8 @@ public class Shooter extends SubsystemBase {
     shooterL.setInverted(true);
     shooterR.setInverted(false);
     flywheel = new MotorControllerGroup(shooterL, shooterR);
-    shooterSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
-        Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
+    // shooterSol = new DoubleSolenoid(Constants.PCM_ID, PneumaticsModuleType.CTREPCM,
+    //     Constants.SHOOTERSOL_FWD, Constants.SHOOTERSOL_REV);
   }
 
   /** Returns the TPS of the flywheel's Motors */
@@ -128,7 +128,7 @@ public class Shooter extends SubsystemBase {
   /** Brings shooter to higher firing angle */
   public void raiseShooter() {
     if (!shooterIsUp) {
-      shooterSol.set(Value.kForward);
+      //shooterSol.set(Value.kForward);
       shooterIsUp = true;
     }
   }
@@ -136,7 +136,7 @@ public class Shooter extends SubsystemBase {
   /** Brings shooter to lower firing angle */
   public void lowerShooter() {
     if (shooterIsUp) {
-      shooterSol.set(Value.kReverse);
+      //shooterSol.set(Value.kReverse);
       shooterIsUp = false;
     }
   }
@@ -195,7 +195,7 @@ public class Shooter extends SubsystemBase {
         break;
     }
     addChild("Flywheel", flywheel);
-    addChild("Shooter Piston", shooterSol);
+    //addChild("Shooter Piston", shooterSol);
     addChild("Flywheel PID", flywheelPID);
     //setFlywheelManualSpeed(0.44);
     // System.out.println("fly spd: " + getFlywheelTPS());
