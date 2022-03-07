@@ -25,9 +25,12 @@ public class Shooter extends SubsystemBase {
     LAUNCH
   }
 
-  private PIDController flywheelPID;
+  
+  public boolean isShooting = false;
+
   private FlywheelState flywheelState = FlywheelState.OFF;
   private ShooterMode shooterMode = ShooterMode.HUB;
+  private PIDController flywheelPID;
   private boolean shooterIsUp;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
@@ -36,7 +39,6 @@ public class Shooter extends SubsystemBase {
   private MotorControllerGroup flywheel;
   // private DoubleSolenoid shooterSol;
   private Hopper hopper;
-  public boolean isShooting = false;
   private double prevImpt;
 
   public Shooter(Hopper hopperArg) {
