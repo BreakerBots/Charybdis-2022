@@ -13,12 +13,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotConfig;
-import io.github.oblarg.oblog.Loggable;
-import io.github.oblarg.oblog.annotations.Config;
-import io.github.oblarg.oblog.annotations.Config.ToggleButton;
 
 /** Climber subsystem for robot. */
-public class Climber extends SubsystemBase implements Loggable{
+public class Climber extends SubsystemBase{
   // Extend/retracts climbing arms.
   private WPI_TalonFX climberL;
   private WPI_TalonFX climberR;

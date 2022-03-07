@@ -22,10 +22,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.FMS_Handler;
-import io.github.oblarg.oblog.Loggable;
-import io.github.oblarg.oblog.annotations.Config;
 
-public class DashboardControl extends SubsystemBase implements Loggable {
+public class DashboardControl extends SubsystemBase{
   /** Creates a new SmartDashbord. */
   private Shooter shooter;
   private Intake intake;
