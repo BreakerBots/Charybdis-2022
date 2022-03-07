@@ -153,7 +153,7 @@ public final class Constants {
     // Flywheel PID
     public static final double KP_FLYWHEEL = 0;
     public static final double KI_FLYWHEEL = 0;
-    public static final double KD_FLYWHEEL = 0.003;
+    public static final double KD_FLYWHEEL = 0;
     public static final double FLYWHEEL_VEL_TOL = 20; // Used as position tolerance.
     public static final double FLYWHEEL_ACCEL_TOL = FILLER; // Unused. Would be used for velocity tolerance.
     
