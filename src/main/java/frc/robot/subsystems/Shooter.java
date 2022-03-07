@@ -7,9 +7,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -83,10 +80,11 @@ public class Shooter extends SubsystemBase {
   /** Makes flywheel charge to desired speed. */
   private void runFlywheel() {
     double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
-    double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
-    double motorImpt = prevImpt + (flydiff * 0.000055);
-    flywheel.set(motorImpt);
-    prevImpt = motorImpt;
+    flywheel.set(flySpd);
+    // double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
+    // double motorImpt = prevImpt + (flydiff * 0.000055);
+    // flywheel.set(motorImpt);
+    // prevImpt = motorImpt;
   }
 
   /** Based on shoot mode, sets idle speed, target speed, and shoot position. */
