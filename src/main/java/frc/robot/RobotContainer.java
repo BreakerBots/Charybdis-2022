@@ -41,7 +41,6 @@ import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.FMS_Handler;
 import frc.robot.subsystems.devices.IMU;
-import io.github.oblarg.oblog.Logger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
