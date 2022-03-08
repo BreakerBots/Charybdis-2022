@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AirCompressor extends SubsystemBase {
+  // REV Analog Pressure Sensor to be used at a later point?
   private Compressor compressor;
   private PneumaticsControlModule pcm;
   private long cycleCount;
@@ -21,7 +22,7 @@ public class AirCompressor extends SubsystemBase {
   public AirCompressor(PneumaticsControlModule pcmArg) {
     compressor = new Compressor(Constants.PCM_ID, PneumaticsModuleType.CTREPCM);
     pcm = pcmArg;
-    compressor.enableDigital();
+    compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
     compressor.disable();
     // compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
   }
@@ -34,7 +35,7 @@ public class AirCompressor extends SubsystemBase {
    */
   public void startCompressor() {
     DashboardControl.log("Compressor enabled!");
-    compressor.enableDigital();
+    compressor.enableAnalog(Constants.MIN_PSI, Constants.MAX_PSI);
   }
 
   /**
@@ -76,7 +77,7 @@ public class AirCompressor extends SubsystemBase {
       if (cycleCount > Constants.COMPRESSOR_TIMEOUT_CYCLES) {
         stopCompressor();
         cycleCount = 0;
-        DashboardControl.log("WARNING: " + "COMPRESSOR TIMED OUT!");
+        DashboardControl.log("WARNING: COMPRESSOR TIMED OUT!");
       }
     } else {
       cycleCount = 0;
@@ -86,7 +87,7 @@ public class AirCompressor extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
-    //autoTimeout();
-   // System.out.println(compressor.getPressureSwitchValue());
+    // autoTimeout();
+    // System.out.println(compressor.getPressureSwitchValue());
   }
 }
