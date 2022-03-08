@@ -63,8 +63,8 @@ public class ShootAll extends CommandBase {
       hopper.activateShooterHopper();
       intake.toggleHopperFeed(); // May be removed
       DashboardControl.log("SHOOTER STARTED!");
-    } else if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint() && startWithTwoCargo) {
-      if (hopper.bothSlotsAreFull()) {
+    } else if (shooter.getFlywheelState() == FlywheelState.CHARGED && startWithTwoCargo) {
+      if (hopper.bothSlotsAreFull() && shooter.flywheelPIDAtSetpoint()) {
         shooter.isShooting = true;
         hopper.activateShooterHopper();
         intake.toggleHopperFeed();
@@ -73,7 +73,7 @@ public class ShootAll extends CommandBase {
         hopper.deactivateHopper();
         intake.toggleHopperFeed();
         timedStartCount ++;
-        if (timedStopCount >= 35) {
+        if (timedStopCount >= 35 && shooter.flywheelPIDAtSetpoint()) {
           hopper.activateHopper();
           intake.toggleHopperFeed();
           timedStartCount = 0;
