@@ -23,6 +23,8 @@ public class ShootAll extends CommandBase {
   Intake intake;
   private long cycleCount;
   private long timedStopCount;
+  private long timedStartCount;
+  private boolean startWithTwoCargo;
 
   /**
    * Creates a new ShootAll.
@@ -45,17 +47,38 @@ public class ShootAll extends CommandBase {
   @Override
   public void initialize() {
     DashboardControl.log("SHOOTALL INITIALIZED");
+    if (hopper.bothSlotsAreFull()) {
+      startWithTwoCargo = true;
+    } else {
+      startWithTwoCargo = false;
+    } 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     cycleCount++;
-    if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
+    if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint() && !startWithTwoCargo) {
       shooter.isShooting = true;
       hopper.activateShooterHopper();
       intake.toggleHopperFeed(); // May be removed
       DashboardControl.log("SHOOTER STARTED!");
+    } else if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint() && startWithTwoCargo) {
+      if (hopper.bothSlotsAreFull()) {
+        shooter.isShooting = true;
+        hopper.activateShooterHopper();
+        intake.toggleHopperFeed();
+        DashboardControl.log("SHOOTER STARTED!");
+      } else if (hopper.topSlotIsFull() && !hopper.bottomSlotIsFull()) {
+        hopper.deactivateHopper();
+        intake.toggleHopperFeed();
+        timedStartCount ++;
+        if (timedStopCount >= 35) {
+          hopper.activateHopper();
+          intake.toggleHopperFeed();
+          timedStartCount = 0;
+        }
+      }
     }
     if (hopper.bothSlotsAreEmpty()) {
       if (timedStopCount > 75) {
