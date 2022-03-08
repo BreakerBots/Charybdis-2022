@@ -45,9 +45,9 @@ public class Shooter extends SubsystemBase {
     setName("Shooter");
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
     // Constants.FLYWHEEL_KV);
-    flywheelPID = new PIDController(Constants.KP_FLYWHEEL, Constants.KI_FLYWHEEL, Constants.KD_FLYWHEEL);
     hopper = hopperArg;
-    flywheelPID.setTolerance(10, 2);
+    flywheelPID = new PIDController(Constants.KP_FLYWHEEL, Constants.KI_FLYWHEEL, Constants.KD_FLYWHEEL);
+    flywheelPID.setTolerance(Constants.FLYWHEEL_VEL_TOL, Constants.FLYWHEEL_ACCEL_TOL);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
     shooterR = new WPI_TalonFX(Constants.SHOOTER_R_ID);
     shooterL.setInverted(true);
@@ -179,6 +179,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void periodic() {
+    DashboardControl.log("set point: " + getFlywheelTargetSpeed() + " speed: " + getFlywheelTPS());
     setShooter();
     switch (flywheelState) {
       case CHARGED:
