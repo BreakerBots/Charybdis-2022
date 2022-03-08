@@ -36,6 +36,7 @@ public class Drive extends SubsystemBase {
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
   public double prevNet;
+  private boolean kickstandOn = false;
   private PowerDistribution pdp;
 
   private final double artLinearFeedForward = 0.3;
@@ -75,6 +76,11 @@ public class Drive extends SubsystemBase {
   /** Wraps around arcadeDrive to allow for movement */
   public void teleopMove(double netSpd, double turnSpd) {
     double logSpd = netSpd;
+
+    if (kickstandOn) {
+      logSpd *= 0.5;
+      turnSpd *= 0.5;
+    }
 
          // BreakerMath.driveCurve(netSpd);
     // if (pdp.getVoltage() < 8.5) {
@@ -132,6 +138,14 @@ public class Drive extends SubsystemBase {
   /** Returns number of ticks on right motors */
   public double getRightTicks() {
     return r1.getSelectedSensorPosition();
+  }
+
+  public void toggleKickstand() {
+    if (kickstandOn) {
+      kickstandOn = false;
+    } else {
+      kickstandOn = true;
+    }
   }
 
   /*** Sets encoders of all drive motors to 0 */

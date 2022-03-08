@@ -41,7 +41,6 @@ import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.FMS_Handler;
 import frc.robot.subsystems.devices.IMU;
-import io.github.oblarg.oblog.Logger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -78,6 +77,7 @@ public class RobotContainer {
   private JoystickButton backButton = new JoystickButton(xboxSys, Constants.BACK);
   private POVButton dRight = new POVButton(xboxSys, Constants.D_RIGHT);
   private POVButton dLeft = new POVButton(xboxSys, Constants.D_LEFT);
+  private POVButton dUp = new POVButton(xboxSys, Constants.D_UP);
   // Default command
   private DriveWithJoystick driveWithJoystick = new DriveWithJoystick(xboxSys, pdpSys, driveSys);
 
@@ -85,7 +85,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    
+
     driveWithJoystick.addRequirements(driveSys);
     driveSys.setDefaultCommand(driveWithJoystick);
 
@@ -105,24 +105,25 @@ public class RobotContainer {
   private void configureButtonBindings() {
     CommandScheduler.getInstance().clearButtons();
     // switch (Robot.robotMode) {
-    //   case TELEOP:
-        buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
-        buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
-        buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
-        dRight.whenPressed(new ToggleShooterMode(shooterSys));
-        buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
-        dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
-        // B button shoots, Left Menu cancles
-        backButton.whenPressed(new ToggleCompressor(compressorSys));
-        // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
-        // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
-      //   break;
-      // case TEST:
-      // case AUTO:
-      // case DISABLED:
-      // default:
-      //   break;
-    //}
+    // case TELEOP:
+    buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
+    buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
+    buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
+    dRight.whenPressed(new ToggleShooterMode(shooterSys));
+    buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
+    dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
+    // B button shoots, Left Menu cancles
+    backButton.whenPressed(new ToggleCompressor(compressorSys));
+    dUp.whenPressed(new InstantCommand(driveSys::toggleKickstand));
+    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
+    // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
+    // break;
+    // case TEST:
+    // case AUTO:
+    // case DISABLED:
+    // default:
+    // break;
+    // }
 
   }
 
