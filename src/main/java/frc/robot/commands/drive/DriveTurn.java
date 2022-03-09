@@ -36,7 +36,7 @@ public class DriveTurn extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.resetEncoders();
-    imu.reset();;
+    imu.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -56,7 +56,7 @@ public class DriveTurn extends CommandBase {
     double leftMotor = (angleError>0 ? tgtSpeed : innerMotorSpeed);
     double rightMotor = (angleError>0 ? innerMotorSpeed: tgtSpeed);
 
-    System.out.println("CurrAng: " + currAngle + " TgtAng: " + tgtAngle + " AngErr: " + angleError + " LeftMtr: " + leftMotor + " RtMtr: " + rightMotor);
+   // System.out.println("CurrAng: " + currAngle + " TgtAng: " + tgtAngle + " AngErr: " + angleError + " LeftMtr: " + leftMotor + " RtMtr: " + rightMotor);
     driveTrain.tankMove(leftMotor,rightMotor);
   }
 
