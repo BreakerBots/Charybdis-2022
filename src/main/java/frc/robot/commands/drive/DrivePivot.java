@@ -50,7 +50,6 @@ public class DrivePivot extends CommandBase {
       turnPercent = MathUtil.clamp(turnPercent, -speedClamp, speedClamp); // Restricts motor speed
 
       System.out.println("CurrAng: " + curAngle + " TgtAng: " + target + " AngErr: " + drive.anglePID.getPositionError() + " Turn %: " + turnPercent);
-      // drive.move(0, turnPercent); // Turns in place
       drive.autoMove(0, turnPercent); // Turns in place
       
   }
