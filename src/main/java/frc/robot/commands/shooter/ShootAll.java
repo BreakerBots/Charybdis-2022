@@ -73,7 +73,7 @@ public class ShootAll extends CommandBase {
         hopper.deactivateHopper();
         intake.toggleHopperFeed();
         timedStartCount ++;
-        if (timedStopCount >= 35 && shooter.flywheelPIDAtSetpoint()) {
+        if (timedStartCount >= 35 && shooter.flywheelPIDAtSetpoint()) {
           hopper.activateHopper();
           intake.toggleHopperFeed();
           timedStartCount = 0;
