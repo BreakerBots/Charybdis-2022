@@ -151,9 +151,9 @@ public final class Constants {
     public static final int SHOOTERSOL_FWD = 4;
     public static final int SHOOTERSOL_REV = 1;
     // Flywheel PID
-    public static final double KP_FLYWHEEL = 0.0005;
-    public static final double KI_FLYWHEEL = 0.0003;
-    public static final double KD_FLYWHEEL = 0.0001;
+    public static final double KP_FLYWHEEL = 0.0;
+    public static final double KI_FLYWHEEL = 0.003;
+    public static final double KD_FLYWHEEL = 0.0;
     public static final double FLYWHEEL_VEL_TOL = 10; // Used as position tolerance.
     public static final double FLYWHEEL_ACCEL_TOL = 2; // Unused. Would be used for velocity tolerance.
     

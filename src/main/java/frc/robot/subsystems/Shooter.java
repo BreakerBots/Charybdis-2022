@@ -40,6 +40,7 @@ public class Shooter extends SubsystemBase {
   // private DoubleSolenoid shooterSol;
   private Hopper hopper;
   private double prevImpt;
+  private int counter = 0;
 
   public Shooter(Hopper hopperArg) {
     setName("Shooter");
@@ -81,13 +82,15 @@ public class Shooter extends SubsystemBase {
   }
 
   /** Makes flywheel charge to desired speed. */
-  private void runFlywheel() {
+  public void runFlywheel() {
     double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
     flywheel.set(flySpd);
     // double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
-    // double motorImpt = prevImpt + (flydiff * 0.000055);
+    // double motorImpt = prevImpt + (flydiff * 0.0000055);
     // flywheel.set(motorImpt);
     // prevImpt = motorImpt;
+    if (counter++ % 25 == 0)
+    System.out.println("Flywheel TPS: " + Math.round(getFlywheelTPS()) + "  Flywheel.set: " + String.format("%.2f", flySpd) + " fly tgt spd: " + getFlywheelTargetSpeed() + " at set pt: " + flywheelPID.atSetpoint());
   }
 
   /** Based on shoot mode, sets idle speed, target speed, and shoot position. */
@@ -200,7 +203,7 @@ public class Shooter extends SubsystemBase {
     // addChild("Shooter Piston", shooterSol);
     addChild("Flywheel PID", flywheelPID);
     // setFlywheelManualSpeed(0.44);
-    System.out.println("fly spd: " + getFlywheelTPS());
+    // System.out.println("fly spd: " + getFlywheelTPS() + "\n" + " impt V: " + (getLFlywheelSup()+getRFlywheelSup()));
     // System.out.println("fly err: " + flywheelPID.getPositionError());
   }
 

@@ -48,28 +48,30 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     cycleCount = 0;
+    shooter.setFlywheelState(FlywheelState.OFF);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     // Move state setting into shooter periodic?
-    if (shooter.flywheelPIDAtSetpoint()) {
-      DashboardControl.log("FLYWHEEL CHARGED!");
-      shooter.setFlywheelState(FlywheelState.CHARGED);
-      return true;
-    } else if (xbox.getStartButtonPressed()) {
-      shooter.setOff();
-      shooter.resetFlywheelPID();
-      DashboardControl.log("FLYWHEEL MANUALLY STOPPED!");
-      return true;
-    } else if (cycleCount > 500) {
-      shooter.setOff();
-      shooter.resetFlywheelPID();
-      DashboardControl.log("FLYWHEEL CHARGING TIMED OUT!");
-      return true;
-    } else {
-      return false;
-    }
+    // if (shooter.flywheelPIDAtSetpoint()) {
+    //   DashboardControl.log("FLYWHEEL CHARGED!");
+    //   shooter.setFlywheelState(FlywheelState.CHARGED);
+    //   return true;
+    // } else if (xbox.getStartButtonPressed()) {
+    //   shooter.setOff();
+    //   shooter.resetFlywheelPID();
+    //   DashboardControl.log("FLYWHEEL MANUALLY STOPPED!");
+    //   return true;
+    // } else if (cycleCount > 9999999) { //500
+    //   shooter.setOff();
+    //   shooter.resetFlywheelPID();
+    //   DashboardControl.log("FLYWHEEL CHARGING TIMED OUT!");
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return xbox.getStartButtonPressed();
   }
 }
