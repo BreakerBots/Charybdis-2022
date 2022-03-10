@@ -31,6 +31,7 @@ public class ChargeFlywheel extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    cycleCount = 0;
     shooter.resetFlywheelPID();
     DashboardControl.log("CHARGING FLYWHEEL");
     if (shooter.getFlywheelState() == FlywheelState.IDLE || shooter.getFlywheelState() == FlywheelState.OFF) {
@@ -48,7 +49,6 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     System.out.println("Charge time: " + (cycleCount / 50));
-    cycleCount = 0;
   }
 
   // Returns true when the command should end.

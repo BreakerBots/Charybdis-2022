@@ -84,7 +84,7 @@ public class Shooter extends SubsystemBase {
   /** Makes flywheel charge to desired speed. */
   public void runFlywheel() {
     double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
-    flywheel.set(0.42);
+    flywheel.set(0.45);
     // double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
     // double motorImpt = prevImpt + (flydiff * 0.0000055);
     // flywheel.set(motorImpt);
