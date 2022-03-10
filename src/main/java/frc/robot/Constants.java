@@ -138,7 +138,7 @@ public final class Constants {
 
     // Shooter constants
     // Shooter motor speeds
-    public static final double HUB_SHOOT_SPD = 0.45; // Upper is 0.44
+    public static final double HUB_SHOOT_SPD = 1; // Upper is 0.45
     public static final double LOW_SHOOT_SPD = 0.20; // Hood must be up
     public static final double LAUNCH_SHOOT_SPD = 0.50; // Hood up
     public static final double FLYWHEEL_CANCEL_RPM = 0; // Change to TPS?
