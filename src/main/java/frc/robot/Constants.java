@@ -122,8 +122,8 @@ public final class Constants {
     // Hopper motor ID
     public static final int HOPPER_ID = 31;
     // Hopper motor speeds
-    public static final double HOPPER_SPD = -0.8;
-    public static final double SHOOTER_HOPPER_SPD = -0.60;
+    public static final double HOPPER_SPD = 0.8;
+    public static final double SHOOTER_HOPPER_SPD = 0.3;
     // Hopper ball position sensor channels
     public static final int SLOT_1_CHANNEL = 1;
     public static final int SLOT_2_CHANNEL = 0;
@@ -138,7 +138,7 @@ public final class Constants {
 
     // Shooter constants
     // Shooter motor speeds
-    public static final double HUB_SHOOT_SPD = 0.40; // Upper is 0.44
+    public static final double HUB_SHOOT_SPD = 0.45; // Upper is 0.44
     public static final double LOW_SHOOT_SPD = 0.20; // Hood must be up
     public static final double LAUNCH_SHOOT_SPD = 0.50; // Hood up
     public static final double FLYWHEEL_CANCEL_RPM = 0; // Change to TPS?
@@ -151,11 +151,11 @@ public final class Constants {
     public static final int SHOOTERSOL_FWD = 4;
     public static final int SHOOTERSOL_REV = 1;
     // Flywheel PID
-    public static final double KP_FLYWHEEL = 0.0;
+    public static final double KP_FLYWHEEL = 0.0000008;
     public static final double KI_FLYWHEEL = 0.003;
     public static final double KD_FLYWHEEL = 0.0;
-    public static final double FLYWHEEL_VEL_TOL = 10; // Used as position tolerance.
-    public static final double FLYWHEEL_ACCEL_TOL = 2; // Unused. Would be used for velocity tolerance.
+    public static final double FLYWHEEL_VEL_TOL = 25; // Used as position tolerance.
+    public static final double FLYWHEEL_ACCEL_TOL = 5; // Unused. Would be used for velocity tolerance.
     
     // Climber constants
     // Climber motor IDs

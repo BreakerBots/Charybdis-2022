@@ -28,6 +28,7 @@ public class Hopper extends SubsystemBase {
   public Hopper(Intake intakeArg) {
     setName("Hopper");
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
+    hopperMotor.setInverted(true);
     intake = intakeArg;
     bottomSlot = new AnalogInput(Constants.SLOT_1_CHANNEL);
     topSlot = new AnalogInput(Constants.SLOT_2_CHANNEL);

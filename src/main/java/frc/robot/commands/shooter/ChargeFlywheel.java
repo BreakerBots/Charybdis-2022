@@ -14,7 +14,7 @@ import frc.robot.subsystems.Shooter.FlywheelState;
 public class ChargeFlywheel extends CommandBase {
   private Shooter shooter;
   private XboxController xbox;
-  private long cycleCount;
+  private double cycleCount;
 
   /**
    * Creates a new ChargeFlywheel.
@@ -47,31 +47,29 @@ public class ChargeFlywheel extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("Charge time: " + (cycleCount / 50));
     cycleCount = 0;
-    shooter.setFlywheelState(FlywheelState.OFF);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // Move state setting into shooter periodic?
-    // if (shooter.flywheelPIDAtSetpoint()) {
-    //   DashboardControl.log("FLYWHEEL CHARGED!");
-    //   shooter.setFlywheelState(FlywheelState.CHARGED);
-    //   return true;
-    // } else if (xbox.getStartButtonPressed()) {
-    //   shooter.setOff();
-    //   shooter.resetFlywheelPID();
-    //   DashboardControl.log("FLYWHEEL MANUALLY STOPPED!");
-    //   return true;
-    // } else if (cycleCount > 9999999) { //500
-    //   shooter.setOff();
-    //   shooter.resetFlywheelPID();
-    //   DashboardControl.log("FLYWHEEL CHARGING TIMED OUT!");
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return xbox.getStartButtonPressed();
+    if (shooter.flywheelPIDAtSetpoint()) {
+      DashboardControl.log("FLYWHEEL CHARGED!");
+      shooter.setFlywheelState(FlywheelState.CHARGED);
+      return true;
+    } else if (xbox.getStartButtonPressed()) {
+      shooter.setOff();
+      shooter.resetFlywheelPID();
+      DashboardControl.log("FLYWHEEL MANUALLY STOPPED!");
+      return true;
+    } else if (cycleCount > 9999999) { //500
+      shooter.setOff();
+      shooter.resetFlywheelPID();
+      DashboardControl.log("FLYWHEEL CHARGING TIMED OUT!");
+      return true;
+    } else {
+      return false;
+    }
   }
 }
