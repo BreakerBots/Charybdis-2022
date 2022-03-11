@@ -15,6 +15,7 @@ public class ChargeFlywheel extends CommandBase {
   private Shooter shooter;
   private XboxController xbox;
   private double cycleCount;
+  private double prevOverShoot;
 
   /**
    * Creates a new ChargeFlywheel.
@@ -32,6 +33,7 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public void initialize() {
     cycleCount = 0;
+    prevOverShoot = 0;
     shooter.resetFlywheelPID();
     DashboardControl.log("CHARGING FLYWHEEL");
     if (shooter.getFlywheelState() == FlywheelState.IDLE || shooter.getFlywheelState() == FlywheelState.OFF) {
@@ -43,12 +45,15 @@ public class ChargeFlywheel extends CommandBase {
   @Override
   public void execute() {
     cycleCount ++;
+    if (shooter.flywheelPID.getPositionError() < prevOverShoot) {
+      prevOverShoot = shooter.flywheelPID.getPositionError();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Charge time: " + (cycleCount / 50));
+    System.out.println("Charge time: " + (cycleCount / 50) + " Highest Overshoot Speed: " + prevOverShoot);
   }
 
   // Returns true when the command should end.

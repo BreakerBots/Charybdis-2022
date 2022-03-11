@@ -30,7 +30,7 @@ public class Shooter extends SubsystemBase {
 
   private FlywheelState flywheelState = FlywheelState.OFF;
   private ShooterMode shooterMode = ShooterMode.HUB;
-  private PIDController flywheelPID;
+  public PIDController flywheelPID;
   private boolean shooterIsUp;
   private WPI_TalonFX shooterL;
   private WPI_TalonFX shooterR;
@@ -83,8 +83,9 @@ public class Shooter extends SubsystemBase {
 
   /** Makes flywheel charge to desired speed. */
   public void runFlywheel() {
-    double flySpd = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
-    flywheel.set(flyTgtSpdPrct);
+    double flyCor = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
+    double flySpd = flyTgtSpdPrct + (flywheelPID.getPositionError() > 100 ? flyCor : 0);
+    flywheel.set(flySpd);
     // double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
     // double motorImpt = prevImpt + (flydiff * 0.0000055);
     // flywheel.set(motorImpt);
