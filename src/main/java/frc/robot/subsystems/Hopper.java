@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -16,8 +17,8 @@ public class Hopper extends SubsystemBase {
   // Hopper motor
   private WPI_TalonSRX hopperMotor;
   // Sensors for checking hopper inventory
-  private AnalogInput bottomSlot;
-  private AnalogInput topSlot;
+  private DigitalInput bottomSlot;
+  private DigitalInput topSlot;
   // Intake pass-in
   private Intake intake;
   // Pause times for hopper logic
@@ -30,8 +31,8 @@ public class Hopper extends SubsystemBase {
     hopperMotor = new WPI_TalonSRX(Constants.HOPPER_ID);
     hopperMotor.setInverted(true);
     intake = intakeArg;
-    bottomSlot = new AnalogInput(Constants.SLOT_1_CHANNEL);
-    topSlot = new AnalogInput(Constants.SLOT_2_CHANNEL);
+    bottomSlot = new DigitalInput(Constants.SLOT_1_CHANNEL);
+    topSlot = new DigitalInput(Constants.SLOT_2_CHANNEL);
   }
 
   /** Turns on hopper */
@@ -67,7 +68,7 @@ public class Hopper extends SubsystemBase {
    * @return true if full, false if empty.
    */
   public boolean bottomSlotIsFull() {
-    return (bottomSlot.getVoltage() >= 4);
+    return bottomSlot.get();
   }
 
   /**
@@ -76,7 +77,7 @@ public class Hopper extends SubsystemBase {
    * @return true if full, false if empty.
    */
   public boolean topSlotIsFull() {
-    return (topSlot.getVoltage() >= 4);
+    return topSlot.get();
   }
 
   /**
@@ -163,7 +164,7 @@ public class Hopper extends SubsystemBase {
     addChild("Hopper Motor", hopperMotor);
     addChild("Bottom Sensor", bottomSlot);
     addChild("Top Sensor", topSlot);
-    // System.out.println("Bottom slot: " + bottomSlotIsFull());
-    // System.out.println("Top slot: " + topSlotIsFull());
+    // System.out.println("Bottom slot: " + bottomSlot.getVoltage());
+    // System.out.println("Top slot: " + topSlot.getVoltage());
   }
 }
