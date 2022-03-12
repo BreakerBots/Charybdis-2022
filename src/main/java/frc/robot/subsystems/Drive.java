@@ -31,6 +31,7 @@ public class Drive extends SubsystemBase {
   private DifferentialDrive driveTrainDiff;
   // PIDs and stuff
   public PIDController anglePID;
+  public PIDController aimPID;
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
   public double prevNet;
@@ -45,6 +46,8 @@ public class Drive extends SubsystemBase {
     pdp = pdpArg;
     anglePID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
     anglePID.setTolerance(Constants.ANG_POS_TOL, Constants.ANG_VEL_TOL);
+    aimPID = new PIDController(Constants.KP_ANG, Constants.KI_ANG, Constants.KD_ANG);
+    aimPID.setTolerance(Constants.ANG_POS_TOL, Constants.ANG_VEL_TOL);
     distPID = new PIDController(Constants.KP_DIST, Constants.KI_DIST, Constants.KD_DIST);
     distPID.setTolerance(Constants.DIST_POS_TOL, Constants.DIST_VEL_TOL);
     driveFF = new SimpleMotorFeedforward(Constants.KS_DRIVE, Constants.KV_DRIVE, Constants.KA_DRIVE);
