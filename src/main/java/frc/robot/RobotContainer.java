@@ -134,7 +134,7 @@ public class RobotContainer {
     // configureButtonBindings();
     // CHANGE AUTOPATH HERE \/
 
-    int pathNumber = 2; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+    int pathNumber = 6; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
                         // list below. To change use the desired paths sumber from the list below.
 
     switch (pathNumber) {
@@ -151,6 +151,8 @@ public class RobotContainer {
         return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 5:
         return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+      case 6:
+        return new IntakeHopperIndexerTest(10, hopperSys, intakeSys);
     }
   }
 
@@ -162,7 +164,7 @@ public class RobotContainer {
   public Command getTestCommand() {
     // configureButtonBindings();
 
-    int cmdNum = 1; // Number for selecting command for use in Test mode.
+    int cmdNum = 3; // Number for selecting command for use in Test mode.
 
     switch (cmdNum) {
       case 0:
@@ -174,7 +176,7 @@ public class RobotContainer {
       case 2:
         return new DriveTrainTest(0.5, 20, driveSys);
       case 3:
-        return new IntakeHopperIndexerTest(5, hopperSys, intakeSys);
+        return new IntakeHopperIndexerTest(10, hopperSys, intakeSys);
       case 4:
         return new FlywheelTest(3, 0.5, shooterSys);
     }
