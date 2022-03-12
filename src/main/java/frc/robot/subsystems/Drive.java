@@ -34,7 +34,7 @@ public class Drive extends SubsystemBase {
   public PIDController distPID;
   public SimpleMotorFeedforward driveFF;
   public double prevNet;
-  private boolean kickstandOn = false;
+  private boolean slowModeOn = false;
   private PowerDistribution pdp;
 
   private final double artLinearFeedForward = 0.3;
@@ -75,7 +75,7 @@ public class Drive extends SubsystemBase {
   public void teleopMove(double netSpd, double turnSpd) {
     double logSpd = netSpd;
 
-    if (kickstandOn) {
+    if (slowModeOn) {
       logSpd *= 0.5;
       turnSpd *= 0.5;
     }
@@ -138,12 +138,12 @@ public class Drive extends SubsystemBase {
     return r1.getSelectedSensorPosition();
   }
 
-  public void toggleKickstand() {
-    if (kickstandOn) {
-      kickstandOn = false;
-    } else {
-      kickstandOn = true;
-    }
+  public void toggleSlowMode() {
+    slowModeOn = slowModeOn ? false : true;
+  }
+
+  public void setSlowMode(boolean val) {
+    slowModeOn = val;
   }
 
   /*** Sets encoders of all drive motors to 0 */

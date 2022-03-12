@@ -114,7 +114,7 @@ public class RobotContainer {
     dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     // B button shoots, Left Menu cancles
     backButton.whenPressed(new ToggleCompressor(compressorSys));
-    dUp.whenPressed(new InstantCommand(driveSys::toggleKickstand));
+    dUp.whenPressed(new InstantCommand(driveSys::toggleSlowMode));
     // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
     // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
     // break;
@@ -200,6 +200,7 @@ public class RobotContainer {
         return null;
       case 1:
         driveSys.setBrakeMode(true);
+        driveSys.setSlowMode(false);
         shooterSys.counter = 0;
         return null;
     }
