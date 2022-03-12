@@ -163,7 +163,7 @@ public final class Constants {
     public static final int CLIMBER_R_ID = 52;
     // Climber Solonoid IDs
     public static final int CLIMBSOL_FWD = 6;
-    public static final int CLIMBSOL_REV = 3;
+    public static final int CLIMBSOL_REV = 7;
     // Trigger thresholds for climber states (in ticks)
     public static final double CLIMB_RET_THRESH = 0;
     public static final double CLIMB_EXT_THRESH = 0;
@@ -183,7 +183,7 @@ public final class Constants {
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
-    public static final double WINCH_INPUT_MULTIPLIER = 2100; //2100
+    public static final double WINCH_INPUT_MULTIPLIER = 700; //2100
 
     public static final double CLIMB_SPD_RESET_CYCLES = 150;
   

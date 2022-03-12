@@ -76,6 +76,10 @@ public class ManuallyMoveClimb extends CommandBase {
     
     lPrevTgtTicks = lTargetTicks;
     rPrevTgtTicks = rTargetTicks;
+
+    if (xbox.getYButtonPressed()) {
+      climb.toggleClimbSol();
+    }
   }
 
   // Called once the command ends or is interrupted.
