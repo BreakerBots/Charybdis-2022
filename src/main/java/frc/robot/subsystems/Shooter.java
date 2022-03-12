@@ -208,7 +208,7 @@ public class Shooter extends SubsystemBase {
     switch (flywheelState) {
       case CHARGED:
       case CHARGING:
-        runFlywheelMike();
+        runFlywheel();
         break;
       case OFF:
       case IDLE:
