@@ -31,7 +31,7 @@ public class FlywheelTest extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setManualFlywheelSpeed(speed);
+    shooter.setFlywheelManualSpeed(speed);
     System.out.println("START FLYWHEEL TESTING!");
     flywheelLStaAvg = shooter.getLFlywheelSta();
     flywheelLSupAvg = shooter.getLFlywheelSup();
@@ -61,7 +61,7 @@ public class FlywheelTest extends CommandBase {
       + " RIGHT FLYWHEEL STATOR:  " + flywheelRStaAvg + " RIGHT FLYWHEEL SUPPLY: " + flywheelRSupAvg + "\n"
       + " FLYWHEEL TOTAL AVERAGE STATOR: " + flywheelStaTotalAvg + " FLYWHEEL TOTAL AVERAGE SUPPLY: " + flywheelSupTotalAvg + "\n\n"
     );
-    shooter.setManualFlywheelSpeed(0);
+    shooter.setFlywheelManualSpeed(0);
   }
 
   // Returns true when the command should end.

@@ -198,6 +198,7 @@ public class RobotContainer {
         return null;
       case 1:
         driveSys.setBrakeMode(true);
+        shooterSys.counter = 0;
         return null;
     }
   }

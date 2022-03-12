@@ -39,6 +39,9 @@ public class ChargeFlywheel extends CommandBase {
     if (shooter.getFlywheelState() == FlywheelState.IDLE || shooter.getFlywheelState() == FlywheelState.OFF) {
       shooter.chargeFlywheel();
     }
+  //  if (shooter.flywheelPIDAtSetpoint()) {
+  //     System.out.println("Charge time: " + (cycleCount / 50) + " Highest Overshoot amt: " + prevOverShoot);
+  //  }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -53,7 +56,7 @@ public class ChargeFlywheel extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Charge time: " + (cycleCount / 50) + " Highest Overshoot Speed: " + prevOverShoot);
+    System.out.println("Charge time: " + (cycleCount / 50) + " Highest Overshoot amt: " + prevOverShoot);
   }
 
   // Returns true when the command should end.
@@ -76,5 +79,6 @@ public class ChargeFlywheel extends CommandBase {
     } else {
       return false;
     }
+    //return false;
   }
 }

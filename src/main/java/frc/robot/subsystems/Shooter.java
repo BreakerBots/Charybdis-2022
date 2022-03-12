@@ -25,8 +25,11 @@ public class Shooter extends SubsystemBase {
     LAUNCH
   }
 
-  
   public boolean isShooting = false;
+
+  
+  double kpSpd = 0;
+  double currInput = 0;
 
   private FlywheelState flywheelState = FlywheelState.OFF;
   private ShooterMode shooterMode = ShooterMode.HUB;
@@ -39,8 +42,8 @@ public class Shooter extends SubsystemBase {
   private MotorControllerGroup flywheel;
   // private DoubleSolenoid shooterSol;
   private Hopper hopper;
-  private double prevImpt;
-  private int counter = 0;
+  private double prevInput;
+  public int counter = 0;
 
   public Shooter(Hopper hopperArg) {
     setName("Shooter");
@@ -81,17 +84,38 @@ public class Shooter extends SubsystemBase {
     flywheelState = FlywheelState.IDLE;
   }
 
+  public void runFlywheelMike() {
+    double flyCor = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
+    if (counter >= 5) {
+      kpSpd = 0.00002;
+      double speedErr = getFlywheelTargetSpeed() - getFlywheelTPS();
+      currInput = prevInput + speedErr * kpSpd;
+      flywheel.set(currInput);
+      prevInput = currInput;
+    } else {
+      kpSpd = 0;
+      flywheel.set(Constants.HUB_SHOOT_SPD);
+    }
+
+    System.out.println("Tgt: " + getFlywheelTargetSpeed() + "  Flywheel TPS: " + Math.round(getFlywheelTPS()) +
+        "  MtrInput:  " + currInput +
+        "  Counter:  " + counter++);
+  }
+
   /** Makes flywheel charge to desired speed. */
   public void runFlywheel() {
     double flyCor = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
-    double flySpd = flyTgtSpdPrct + (flywheelPID.getPositionError() > 100 ? flyCor : 0);
+    double flySpd = flyTgtSpdPrct + flyCor; // (flywheelPID.getPositionError() > 100 ? flyCor : 0);
     flywheel.set(flySpd);
     // double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
     // double motorImpt = prevImpt + (flydiff * 0.0000055);
     // flywheel.set(motorImpt);
     // prevImpt = motorImpt;
-   // if (counter++ % 25 == 0)
-    System.out.println("Flywheel TPS: " + Math.round(getFlywheelTPS()) + "  Flywheel.set: " + String.format("%.2f", flySpd) + " fly tgt spd: " + getFlywheelTargetSpeed() + " at set pt: " + flywheelPID.atSetpoint());
+    // if (counter++ % 25 == 0)
+    System.out.println(" fly tgt spd: " + getFlywheelTargetSpeed() + "  Flywheel TPS: " + Math.round(getFlywheelTPS()) +
+        "  Flywheel accel:  " + String.format("%.2f", flywheelPID.getVelocityError()) +
+        "  Flywheel.set: " + String.format("%.2f", flySpd) +
+        " at set pt: " + flywheelPID.atSetpoint());
   }
 
   /** Based on shoot mode, sets idle speed, target speed, and shoot position. */
@@ -171,11 +195,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean flywheelPIDAtSetpoint() {
-    return flywheelPID.atSetpoint();
-  }
-
-  public void setManualFlywheelSpeed(double speed) {
-    flywheel.set(speed);
+    return flywheelPID.atSetpoint() && (flywheelPID.getVelocityError() != 0);
   }
 
   public void setFlywheelManualSpeed(double speed) {
@@ -188,7 +208,7 @@ public class Shooter extends SubsystemBase {
     switch (flywheelState) {
       case CHARGED:
       case CHARGING:
-        runFlywheel();
+        runFlywheelMike();
         break;
       case OFF:
       case IDLE:
@@ -204,7 +224,8 @@ public class Shooter extends SubsystemBase {
     // addChild("Shooter Piston", shooterSol);
     addChild("Flywheel PID", flywheelPID);
     // setFlywheelManualSpeed(0.44);
-    // System.out.println("fly spd: " + getFlywheelTPS() + "\n" + " impt V: " + (getLFlywheelSup()+getRFlywheelSup()));
+    // System.out.println("fly spd: " + getFlywheelTPS() + "\n" + " impt V: " +
+    // (getLFlywheelSup()+getRFlywheelSup()));
     // System.out.println("fly err: " + flywheelPID.getPositionError());
   }
 

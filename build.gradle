@@ -53,7 +53,7 @@ def includeDesktopSupport = false
 // Also defines JUnit 4.
 dependencies {
 
-    implementation 'com.github.Oblarg:Oblog:master-SNAPSHOT'
+    implementation 'com.github.Oblarg:Oblog:3.0.3'
 
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
