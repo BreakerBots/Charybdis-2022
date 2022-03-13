@@ -109,27 +109,13 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     CommandScheduler.getInstance().clearButtons();
-    // switch (Robot.robotMode) {
-    // case TELEOP:
     buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
     buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     dRight.whenPressed(new ToggleShooterMode(shooterSys));
-    //buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
     dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
-    // B button shoots, Left Menu cancles
     backButton.whenPressed(new ToggleCompressor(compressorSys));
     dUp.whenPressed(new InstantCommand(driveSys::toggleSlowMode));
-    // new JoystickButton(xboxSys, Constants.UP).whenPressed(new
-    // HighbarClimbSequence(climbSys, imuSys, xboxSys, watchdogSys));
-    // break;
-    // case TEST:
-    // case AUTO:
-    // case DISABLED:
-    // default:
-    // break;
-    // }
-
   }
 
   /**
@@ -166,6 +152,24 @@ public class RobotContainer {
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   /**
    * Use this to pass the test command to the main {@link Robot} class.
    *
