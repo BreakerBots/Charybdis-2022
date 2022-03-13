@@ -7,6 +7,7 @@ package frc.robot.commands.drive;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.BreakerMath;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.devices.IMU;
 
@@ -42,6 +43,7 @@ public class DriveStraight extends CommandBase {
   public void initialize() {
     drive.resetEncoders();
     imu.reset();
+    drive.setSlowMode(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,8 +56,9 @@ public class DriveStraight extends CommandBase {
     double motorSpeed = drive.distPIDCalc(curDist, targetDistance);
     // double motorspeed = feedBackVal + feedForwardVal;
     motorSpeed = MathUtil.clamp(motorSpeed, -speedClamp, speedClamp);
+    motorSpeed += (motorSpeed > 0) ? Constants.ART_DRIVE_FF : -Constants.ART_DRIVE_FF;
     double turnSpeed = imu.getYaw() * -0.04;
-    drive.autoMove(motorSpeed, turnSpeed);
+    drive.move(motorSpeed, turnSpeed);
     // 1D movement back and forth
 
     System.out.println("Position error: " + drive.distPID.getPositionError());
@@ -65,7 +68,7 @@ public class DriveStraight extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     cyclecount = 0;
-    drive.autoMove(0, 0);
+    drive.move(0, 0);
   }
 
   // Returns true when the command should end.

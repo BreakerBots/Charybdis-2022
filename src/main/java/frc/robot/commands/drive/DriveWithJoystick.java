@@ -61,9 +61,9 @@ public class DriveWithJoystick extends CommandBase {
     // }
     prevNet = net;
     if (Robot.robotMode != RobotMode.TEST) {
-      drive.teleopMove(net, turn); // Calculates speed and turn outputs
+      drive.move(net, turn); // Calculates speed and turn outputs
     } else {
-      drive.teleopMove(0, 0);
+      drive.move(0, 0);
     }
   }
 
