@@ -98,7 +98,7 @@ public class ShootAll extends CommandBase {
       shooter.setOff();
       intake.deactivateIntake();
       return true;
-    } else if (cycleCount > 999999999) { //400
+    } else if (cycleCount > 400) {
       DashboardControl.log("SHOOTER TIMED OUT!");
       hopper.deactivateHopper();
       shooter.setOff();
