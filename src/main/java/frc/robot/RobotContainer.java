@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.auto.paths.OffTarmack_G;
@@ -23,6 +24,8 @@ import frc.robot.commands.auto.paths.Pickup2_Shoot3_P2;
 import frc.robot.commands.climb.actions.ManuallyMoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
 import frc.robot.commands.compressor.ToggleCompressor;
+import frc.robot.commands.drive.DrivePivot;
+import frc.robot.commands.drive.DriveTurn;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
 import frc.robot.commands.intake.ToggleIntakeArm;
@@ -136,7 +139,7 @@ public class RobotContainer {
     // configureButtonBindings();
     // CHANGE AUTOPATH HERE \/
 
-    int pathNumber = 2; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+    int pathNumber = 6; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
                         // list below. To change use the desired paths sumber from the list below.
 
     switch (pathNumber) {
@@ -153,6 +156,11 @@ public class RobotContainer {
         return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 5:
         return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+      case 6: 
+        return new SequentialCommandGroup(
+          new DrivePivot(driveSys, imuSys, 90, 0.3),
+          new DrivePivot(driveSys, imuSys, -90, 0.3)
+          );
     }
   }
 

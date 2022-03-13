@@ -61,7 +61,7 @@ public class DriveTrainTest extends CommandBase {
   @Override
   public void execute() {
     cycleCount ++;
-    drive.teleopMove(speed, 0);
+    drive.move(speed, 0);
     // System.out.println(
     // "sta L1: " + drive.getStatorCurrent(Constants.L1_ID) + "  sta R1: " + drive.getStatorCurrent(Constants.R1_ID) + "\n" +
     // "sta L2: " + drive.getStatorCurrent(Constants.L2_ID) + "  sta R2: " + drive.getStatorCurrent(Constants.R2_ID) + "\n" +

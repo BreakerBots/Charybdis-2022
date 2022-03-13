@@ -37,9 +37,6 @@ public class Drive extends SubsystemBase {
   private boolean slowModeOn = false;
   private PowerDistribution pdp;
 
-  private final double artLinearFeedForward = 0.3;
-  private final double artAngleFeedForward = 0.2;
-
   /** Creates a new Drive. */
   public Drive(PowerDistribution pdpArg) {
     setName("Drive");
@@ -72,49 +69,17 @@ public class Drive extends SubsystemBase {
   }
 
   /** Wraps around arcadeDrive to allow for movement */
-  public void teleopMove(double netSpd, double turnSpd) {
+  public void move(double netSpd, double turnSpd) {
     double logSpd = netSpd;
 
     if (slowModeOn) {
       logSpd *= 0.5;
       turnSpd *= 0.5;
-    }
+      }
 
-         // BreakerMath.driveCurve(netSpd);
-    // if (pdp.getVoltage() < 8.5) {
-    // logSpd *= 0.85;
-    // turnSpd *= 0.85;
-    // }
-    // System.out.println("netSpd: " + netSpd + " logSpd: " + logSpd + " turnSpd: "
-    // + turnSpd + " logTurn: ");
     driveTrainDiff.arcadeDrive(logSpd, turnSpd); // Calculates speed and turn outputs
-    // System.out.println("L1: " + l1.getSupplyCurrent() + " L2: " +
-    // l2.getSupplyCurrent() + " L3: " + l3.getSupplyCurrent());
-    // System.out.println("R1: " + r1.getSupplyCurrent() + " R2: " +
-    // r2.getSupplyCurrent() + " R3: " + r3.getSupplyCurrent());
-    // System.out.println("L1Stat: " + l1.getStatorCurrent() + " L2Stat: " +
-    // l2.getStatorCurrent() + " L3Stat: " + l3.getStatorCurrent());
-    // System.out.println("R1Stat: " + r1.getStatorCurrent() + " R2Stat: " +
-    // r2.getStatorCurrent() + " R3Stat: " + r3.getStatorCurrent());
-  }
-
-  public void autoMove(double netSpd, double turnSpd) {
-    if (pdp.getVoltage() < 8.5) {
-      netSpd *= 0.85;
-      turnSpd *= 0.85;
+    //System.out.println("speed: " + logSpd + " turn: " + turnSpd );
     }
-    if (netSpd > 0) {
-      netSpd += artLinearFeedForward;
-    } else {
-      netSpd -= artLinearFeedForward;
-    }
-    if (turnSpd > 0) {
-      turnSpd += artAngleFeedForward;
-    } else {
-      turnSpd -= artAngleFeedForward;
-    }
-    driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
-  }
 
   /** Wraps around tankDrive to allow for tank-like movement */
   public void tankMove(double spdL, double spdR) {
@@ -139,7 +104,7 @@ public class Drive extends SubsystemBase {
   }
 
   public void toggleSlowMode() {
-    slowModeOn = slowModeOn ? false : true;
+    slowModeOn = !slowModeOn;
   }
 
   public void setSlowMode(boolean val) {

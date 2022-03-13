@@ -36,6 +36,7 @@ public class DrivePivot extends CommandBase {
   @Override
   public void initialize() {
     imu.reset();
+    drive.setSlowMode(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,11 +47,10 @@ public class DrivePivot extends CommandBase {
         curAngle *= -1;
       lastAngle = curAngle;
       double turnPercent = drive.anglePID.calculate(curAngle, target);
-      turnPercent += (turnPercent>=0 ? Constants.ANG_FEEDFWD : -Constants.ANG_FEEDFWD);
       turnPercent = MathUtil.clamp(turnPercent, -speedClamp, speedClamp); // Restricts motor speed
-
+      turnPercent += (turnPercent > 0 ? Constants.ANG_FEEDFWD : -Constants.ANG_FEEDFWD);
       System.out.println("CurrAng: " + curAngle + " TgtAng: " + target + " AngErr: " + drive.anglePID.getPositionError() + " Turn %: " + turnPercent);
-      drive.autoMove(0, turnPercent); // Turns in place
+      drive.move(0, turnPercent); // Turns in place
       
   }
 
