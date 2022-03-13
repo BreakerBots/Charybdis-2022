@@ -141,6 +141,7 @@ public class Shooter extends SubsystemBase {
       case VISION:
         visionHoodPosLoop();
         flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
+        break;
       case HUB:
       default:
         lowerShooter();

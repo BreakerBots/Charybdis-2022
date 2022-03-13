@@ -14,10 +14,11 @@ import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Shooter.FlywheelState;
+import frc.robot.subsystems.Shooter.ShooterMode;
 import frc.robot.subsystems.devices.Limelight;
 
 public class RunVisionShooter extends CommandBase {
-  /** Creates a new AimShooter. */
+  
   Limelight camera;
   Drive drive;
   Shooter shooter;
@@ -28,6 +29,9 @@ public class RunVisionShooter extends CommandBase {
   boolean startWithTwoCargo;
   private long timedStopCount;
   private long timedStartCount;
+  /** vision capable shooting command to compleatly replace the ChargeThenShoot command group. Defaults to normal shooting
+   * if driver specifyed or if a limelight fault is detected.
+    */
   public RunVisionShooter(Limelight limelightArg, Drive driveArg, Shooter shooterArg, Hopper hopperArg, Intake intakeArg, XboxController controllerArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     camera = limelightArg;
@@ -52,8 +56,9 @@ public class RunVisionShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (camera.hasTarget()) {
-      double curAngle = camera.getTargetInfo("tx");
+    // Pivots robot to allign with vision target if the camera has a valid target and robot has vision targeting enabled
+    if (camera.hasTarget() && (shooter.getShootMode() == ShooterMode.VISION)) {
+      double curAngle = camera.getTargetInfo("tx"); // gets position of target relative to center of cameras FOV
       double turnPercent = camera.aimPID.calculate(curAngle, 0);  // Restricts motor speed
       turnPercent += (turnPercent > 0 ? Constants.ANG_FEEDFWD : -Constants.ANG_FEEDFWD);
       drive.move(0, turnPercent); // Turns in place
@@ -61,11 +66,13 @@ public class RunVisionShooter extends CommandBase {
       drive.move(0, 0);
     }
 
+    // Checks superstructur conditions to see if the robot can begin shooting
     if (shooter.flywheelPIDAtSetpoint() && (camera.shooterIsAimed() ^ !camera.hasTarget())) {
       shooter.setFlywheelState(FlywheelState.CHARGED);
       startShooting = true;
     } 
 
+    // logic loop that handles shooting after the flywheel is charged (ball feeding)
     if (startShooting = true) {
       if (shooter.getFlywheelState() == FlywheelState.CHARGED && shooter.flywheelPIDAtSetpoint()) {
         shooter.isShooting = true;
@@ -74,6 +81,7 @@ public class RunVisionShooter extends CommandBase {
         DashboardControl.log("SHOOTER STARTED!");
       }
       if (hopper.bothSlotsAreEmpty()) {
+        // delay to prevent balls from being caught in system
         if (timedStopCount > 75) {
           hopper.deactivateHopper();
           intake.deactivateIntake();
