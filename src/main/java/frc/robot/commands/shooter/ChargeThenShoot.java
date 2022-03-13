@@ -19,7 +19,7 @@ public class ChargeThenShoot extends SequentialCommandGroup {
   Intake intake;
   Hopper hopper;
   XboxController xbox;
-  /** DEPRICATED! */
+  /** DEPRICATED! TO BE REPLACED BY "RunVisionFlywheel" COMMAND! */
   public ChargeThenShoot(XboxController controllerArg, Intake intakeArg, Hopper hopperArg, Shooter shooterArg) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
