@@ -10,6 +10,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.devices.Limelight;
 
 public class Shooter extends SubsystemBase {
   public enum FlywheelState {
@@ -21,6 +22,7 @@ public class Shooter extends SubsystemBase {
 
   public enum ShooterMode {
     HUB,
+    VISION,
     LOW,
     LAUNCH
   }
@@ -42,14 +44,16 @@ public class Shooter extends SubsystemBase {
   private MotorControllerGroup flywheel;
   // private DoubleSolenoid shooterSol;
   private Hopper hopper;
+  private Limelight limelight;
   private double prevInput;
   public int counter = 0;
 
-  public Shooter(Hopper hopperArg) {
+  public Shooter(Hopper hopperArg, Limelight limelightArg) {
     setName("Shooter");
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
     // Constants.FLYWHEEL_KV);
     hopper = hopperArg;
+    limelight = limelightArg;
     flywheelPID = new PIDController(Constants.KP_FLYWHEEL, Constants.KI_FLYWHEEL, Constants.KD_FLYWHEEL);
     flywheelPID.setTolerance(Constants.FLYWHEEL_VEL_TOL, Constants.FLYWHEEL_ACCEL_TOL);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
@@ -107,16 +111,21 @@ public class Shooter extends SubsystemBase {
     double flyCor = (flywheelPID.calculate(getFlywheelTPS(), getFlywheelTargetSpeed()));
     double flySpd = flyTgtSpdPrct + flyCor; // (flywheelPID.getPositionError() > 100 ? flyCor : 0);
     flywheel.set(flySpd);
-    // double flydiff = getFlywheelTargetSpeed() - getFlywheelTPS();
-    // double motorImpt = prevImpt + (flydiff * 0.0000055);
-    // flywheel.set(motorImpt);
-    // prevImpt = motorImpt;
-    // if (counter++ % 25 == 0)
     System.out.println(" fly tgt spd: " + getFlywheelTargetSpeed() + "  Flywheel TPS: " + Math.round(getFlywheelTPS()) +
         "  Flywheel accel:  " + String.format("%.2f", flywheelPID.getVelocityError()) +
         "  Flywheel.set: " + String.format("%.2f", flySpd) +
         " at set pt: " + flywheelPID.atSetpoint());
   }
+
+  private void visionHoodPosLoop() {
+    if (limelight.getTargetDistance() >= Constants.HOOD_UP_DIST) {
+      raiseShooter();
+    } else {
+      lowerShooter();
+    }
+  }
+
+
 
   /** Based on shoot mode, sets idle speed, target speed, and shoot position. */
   public void setShooter() {
@@ -129,6 +138,9 @@ public class Shooter extends SubsystemBase {
         raiseShooter();
         flyTgtSpdPrct = Constants.LAUNCH_SHOOT_SPD;
         break;
+      case VISION:
+        visionHoodPosLoop();
+        flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
       case HUB:
       default:
         lowerShooter();
@@ -170,12 +182,16 @@ public class Shooter extends SubsystemBase {
     }
   }
 
-  public double getFlywheelTargetSpeed() {
-    return Constants.FLYWHEEL_MAX_TPS * flyTgtSpdPrct;
-  }
-
   public ShooterMode getShootMode() {
     return shooterMode;
+  }
+
+  public double getFlywheelTargetSpeed() {
+    if (limelight.hasTarget() && (getShootMode() == ShooterMode.VISION)) {
+      return 0;
+    } else {
+      return Constants.FLYWHEEL_MAX_TPS * flyTgtSpdPrct;
+    }
   }
 
   public void setShootMode(ShooterMode mode) {

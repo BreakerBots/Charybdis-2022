@@ -44,6 +44,7 @@ import frc.robot.subsystems.devices.AirCompressor;
 import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.FMS_Handler;
 import frc.robot.subsystems.devices.IMU;
+import frc.robot.subsystems.devices.Limelight;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -62,12 +63,13 @@ public class RobotContainer {
   private final IMU imuSys = new IMU();
   private final PowerDistribution pdpSys = new PowerDistribution(Constants.PDH_ID, ModuleType.kRev);
   private final XboxController xboxSys = new XboxController(0);
+  private final Limelight limelightSys = new Limelight();
   // Subsystems
   private final Drive driveSys = new Drive(pdpSys);
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
   private final Climber climbSys = new Climber();
-  private final Shooter shooterSys = new Shooter(hopperSys);
+  private final Shooter shooterSys = new Shooter(hopperSys, limelightSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
   private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys,

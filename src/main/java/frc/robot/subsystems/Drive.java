@@ -78,8 +78,7 @@ public class Drive extends SubsystemBase {
       }
 
     driveTrainDiff.arcadeDrive(logSpd, turnSpd); // Calculates speed and turn outputs
-    //System.out.println("speed: " + logSpd + " turn: " + turnSpd );
-    }
+  }
 
   /** Wraps around tankDrive to allow for tank-like movement */
   public void tankMove(double spdL, double spdR) {
