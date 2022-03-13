@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -34,8 +36,8 @@ public class Climber extends SubsystemBase{
     rClimbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
-    climberR.setInverted(true);
-    climberL.setInverted(false);
+    climberR.setInverted(TalonFXInvertType.CounterClockwise);
+    climberL.setInverted(TalonFXInvertType.CounterClockwise);
     climbSol = new DoubleSolenoid(Constants.PCM_ID,
     PneumaticsModuleType.CTREPCM,
     Constants.CLIMBSOL_FWD, Constants.CLIMBSOL_REV);
