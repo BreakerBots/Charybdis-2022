@@ -113,7 +113,7 @@ public class RobotContainer {
     buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     dRight.whenPressed(new ToggleShooterMode(shooterSys));
-    buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
+    //buttonY.whenPressed(new PivotClimb(climbSys, watchdogSys, true));
     dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     // B button shoots, Left Menu cancles
     backButton.whenPressed(new ToggleCompressor(compressorSys));
