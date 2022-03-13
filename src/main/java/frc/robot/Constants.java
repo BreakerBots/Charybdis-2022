@@ -188,6 +188,9 @@ public final class Constants {
     public static final double CLIMB_SPD_RESET_CYCLES = 150;
 
     public static final double ART_DRIVE_FF = 0.2;
+    public static final double HUB_HEIGHT_INS = 104;
+    public static final double SHOOT_CAM_HEIGHT = FILLER;
+    public static final double SHOOT_CAM_ANG = 0;
 
   
     
