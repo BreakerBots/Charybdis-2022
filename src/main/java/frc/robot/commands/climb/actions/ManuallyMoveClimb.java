@@ -31,6 +31,11 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climb.resetClimbEncoders();
+    climb.lClimbPID.reset();
+    climb.rClimbPID.reset();
+    lTargetTicks = 0;
+    rTargetTicks = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

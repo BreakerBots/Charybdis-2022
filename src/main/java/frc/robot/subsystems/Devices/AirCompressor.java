@@ -6,6 +6,7 @@ package frc.robot.subsystems.devices;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.DashboardControl;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AirCompressor extends SubsystemBase {
+  private AnalogPotentiometer analogPressureSensor;
   private Compressor compressor;
   private PneumaticsControlModule pcm;
   private long cycleCount;
@@ -20,6 +22,8 @@ public class AirCompressor extends SubsystemBase {
   /** Creates a new AirCompressor. */
   public AirCompressor(PneumaticsControlModule pcmArg) {
     compressor = new Compressor(Constants.PCM_ID, PneumaticsModuleType.CTREPCM);
+    // double scale = 250, offset = -25;
+    // analogPressureSensor = new AnalogPotentiometer(/* the AnalogIn port */ 2, scale, offset);
     pcm = pcmArg;
     compressor.enableDigital();
     compressor.disable();
@@ -86,7 +90,7 @@ public class AirCompressor extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
-    //autoTimeout();
-   // System.out.println(compressor.getPressureSwitchValue());
+    // autoTimeout();
+    // System.out.println(compressor.getPressureSwitchValue());
   }
 }
