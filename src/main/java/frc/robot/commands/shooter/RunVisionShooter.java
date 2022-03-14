@@ -57,7 +57,7 @@ public class RunVisionShooter extends CommandBase {
   @Override
   public void execute() {
     // Pivots robot to allign with vision target if the camera has a valid target and robot has vision targeting enabled
-    if (camera.hasTarget() && (shooter.getShootMode() == ShooterMode.VISION)) {
+    if (camera.hasTarget() /** && (shooter.getShootMode() == ShooterMode.VISION) */) {
       double curAngle = camera.getTargetInfo("tx"); // gets position of target relative to center of cameras FOV
       double turnPercent = camera.aimPID.calculate(curAngle, 0);  // Restricts motor speed
       turnPercent += (turnPercent > 0 ? Constants.ANG_FEEDFWD : -Constants.ANG_FEEDFWD);
