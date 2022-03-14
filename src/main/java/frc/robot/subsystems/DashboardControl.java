@@ -61,25 +61,25 @@ public class DashboardControl extends SubsystemBase{
     SmartDashboard.putBoolean("SHOOTING", shooter.isShooting);
     // Intake widgets
     SmartDashboard.putBoolean("INTAKING", intake.intakeIsRunning());
-    SmartDashboard.putBoolean("ARM EXTENDED", intake.armIsExtended());
+   // SmartDashboard.putBoolean("ARM EXTENDED", intake.armIsExtended());
     // Compressor widgets
     SmartDashboard.putBoolean("STATE", compressor.compressorIsEnabled());
     // Electrical widgets
     SmartDashboard.putNumber("BATTERY V", pdp.getVoltage());
     SmartDashboard.putBoolean("ROBORIO", RobotController.isBrownedOut());
     // Comp widgets
-    SmartDashboard.putBoolean("ALLIANCE", fms.getAllianceBool());
-    SmartDashboard.putNumber("STATION #", DriverStation.getLocation());
+    // SmartDashboard.putBoolean("ALLIANCE", fms.getAllianceBool());
+    // SmartDashboard.putNumber("STATION #", DriverStation.getLocation());
     SmartDashboard.putNumber("MATCH TIME", DriverStation.getMatchTime());
-    SmartDashboard.putNumber("MATCH #", DriverStation.getMatchNumber());
-    SmartDashboard.putBoolean("FMS CONNTECTED", DriverStation.isFMSAttached());
+    // SmartDashboard.putNumber("MATCH #", DriverStation.getMatchNumber());
+    // SmartDashboard.putBoolean("FMS CONNTECTED", DriverStation.isFMSAttached());
     // climber widgets
-    SmartDashboard.putNumber("LEFT CLIMB TICKS", climber.getLeftClimbTicks());
-    SmartDashboard.putNumber("LEFT CLIMB TARGET", climber.lClimbPID.getSetpoint());
-    SmartDashboard.putNumber("RIGHT CLIMB TICKS", climber.getLeftClimbTicks());
-    SmartDashboard.putNumber("RIGHT CLIMB TARGET", climber.lClimbPID.getSetpoint());
-    SmartDashboard.putBoolean("AUTO CLIMBING", climber.isClimbing());
-    SmartDashboard.putBoolean("CLIMB ARMS UP", climber.climbSolRetracted);
+    // SmartDashboard.putNumber("LEFT CLIMB TICKS", climber.getLeftClimbTicks());
+    // SmartDashboard.putNumber("LEFT CLIMB TARGET", climber.lClimbPID.getSetpoint());
+    // SmartDashboard.putNumber("RIGHT CLIMB TICKS", climber.getLeftClimbTicks());
+    // SmartDashboard.putNumber("RIGHT CLIMB TARGET", climber.lClimbPID.getSetpoint());
+    // SmartDashboard.putBoolean("AUTO CLIMBING", climber.isClimbing());
+    // SmartDashboard.putBoolean("CLIMB ARMS UP", climber.climbSolRetracted);
     // cameras
     // UsbCamera frontCam = new UsbCamera("Front Camera", 0);
     // UsbCamera backCam = new UsbCamera("Back Camera", 1);

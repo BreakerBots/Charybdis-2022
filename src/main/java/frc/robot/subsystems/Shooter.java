@@ -22,7 +22,7 @@ public class Shooter extends SubsystemBase {
 
   public enum ShooterMode {
     HUB,
-    VISION,
+    //VISION,
     LOW,
     LAUNCH
   }
@@ -138,10 +138,10 @@ public class Shooter extends SubsystemBase {
         raiseShooter();
         flyTgtSpdPrct = Constants.LAUNCH_SHOOT_SPD;
         break;
-      case VISION:
-        visionHoodPosLoop();
-        flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
-        break;
+      // case VISION:
+      //   visionHoodPosLoop();
+      //   flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;
+      //   break;
       case HUB:
       default:
         lowerShooter();
@@ -188,11 +188,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getFlywheelTargetSpeed() {
-    if (limelight.hasTarget() && (getShootMode() == ShooterMode.VISION)) {
-      return 0;
-    } else {
+   // if (limelight.hasTarget() && (getShootMode() == ShooterMode.VISION)) {
+   //   return 0;
+  //  } else {
       return Constants.FLYWHEEL_MAX_TPS * flyTgtSpdPrct;
-    }
+    //}
   }
 
   public void setShootMode(ShooterMode mode) {
