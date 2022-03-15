@@ -24,6 +24,7 @@
       "/LiveWindow/Intake/Intake Motor": "Motor Controller",
       "/LiveWindow/Intake/Left Indexer": "Motor Controller",
       "/LiveWindow/Intake/Right Indexer": "Motor Controller",
+      "/LiveWindow/Limelight": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/Shooter/Flywheel": "Motor Controller",
       "/LiveWindow/Shooter/Flywheel PID": "PIDController",

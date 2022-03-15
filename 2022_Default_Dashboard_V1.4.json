@@ -11,10 +11,10 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "16,0": {
+          "15,7": {
             "size": [
-              3,
-              8
+              8,
+              3
             ],
             "content": {
               "_type": "Text View",
@@ -22,47 +22,10 @@
               "_title": "LOG"
             }
           },
-          "19,0": {
+          "20,10": {
             "size": [
-              4,
-              6
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "FMS",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/MATCH #",
-                  "_title": "MATCH #"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/STATION #",
-                  "_title": "STATION #"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/ALLIANCE",
-                  "_title": "ALLIANCE",
-                  "Colors/Color when true": "#0000FFFF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/FMS CONNTECTED",
-                  "_title": "FMS CONNTECTED",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                }
-              ]
-            }
-          },
-          "12,0": {
-            "size": [
-              4,
-              8
+              3,
+              2
             ],
             "content": {
               "_type": "Text View",
@@ -72,8 +35,8 @@
           },
           "0,0": {
             "size": [
-              9,
-              8
+              15,
+              12
             ],
             "content": {
               "_type": "Boolean Box",
@@ -83,48 +46,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,0": {
+          "15,4": {
             "size": [
-              3,
-              8
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ARM EXTENDED",
-              "_title": "ARM EXTENDED",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "13,10": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/AUTO CLIMBING",
-              "_title": "AUTO CLIMBING",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "13,9": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/CLIMB ARMS UP",
-              "_title": "CLIMB ARMS UP",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,9": {
-            "size": [
-              7,
+              8,
               3
             ],
             "content": {
@@ -154,55 +78,9 @@
               }
             }
           },
-          "7,9": {
+          "15,10": {
             "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "L - CLIMB",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/LEFT CLIMB TICKS",
-                  "_title": "LEFT CLIMB TICKS"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/LEFT CLIMB TARGET",
-                  "_title": "LEFT CLIMB TARGET"
-                }
-              ]
-            }
-          },
-          "10,9": {
-            "size": [
-              3,
-              3
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "R - CLIMB",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/RIGHT CLIMB TICKS",
-                  "_title": "RIGHT CLIMB TICKS"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/RIGHT CLIMB TARGET",
-                  "_title": "RIGHT CLIMB TARGET"
-                }
-              ]
-            }
-          },
-          "16,9": {
-            "size": [
-              4,
+              5,
               2
             ],
             "content": {
@@ -227,64 +105,29 @@
               }
             }
           },
-          "19,6": {
+          "15,0": {
             "size": [
-              4,
-              2
+              8,
+              4
             ],
             "content": {
-              "_type": "Grid Layout",
+              "_type": "List Layout",
               "_title": "COMPRESSOR",
-              "Layout/Number of columns": 3,
-              "Layout/Number of rows": 3,
               "Layout/Label position": "BOTTOM",
-              "_children": {
-                "1,0": {
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/PSI",
+                  "_title": "PSI"
+                },
+                {
                   "_type": "Boolean Box",
                   "_source0": "network_table:///SmartDashboard/STATE",
                   "_title": "STATE",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
-                },
-                "0,0": {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/PSI",
-                  "_title": "PSI"
                 }
-              }
-            }
-          },
-          "23,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName"
-            }
-          },
-          "23,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Interface",
-              "_title": "limelight_Interface"
-            }
-          },
-          "23,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream"
+              ]
             }
           }
         }
@@ -970,9 +813,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.199999809265137,
-    "y": -7.199999809265137,
-    "width": 1550.4000244140625,
-    "height": 878.4000244140625
+    "x": -1928.0,
+    "y": -8.0,
+    "width": 1936.0,
+    "height": 1096.0
   }
 }

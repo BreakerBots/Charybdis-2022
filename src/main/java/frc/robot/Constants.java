@@ -67,8 +67,8 @@ public final class Constants {
 
     // Drivetrain constants
     // Angle and distance PID
-    public static final double KP_ANG = 0.02;
-    public static final double KI_ANG = 0.0001;
+    public static final double KP_ANG = 0.025;
+    public static final double KI_ANG = 0.0;
     public static final double KD_ANG = 0.0;
     public static final double KP_DIST = 0.05;
     public static final double KI_DIST = 0;
@@ -81,7 +81,7 @@ public final class Constants {
     public static final double KS_DRIVE = 4.0089;
     public static final double KV_DRIVE = 0.029497;
     public static final double KA_DRIVE = -0.71256;
-    public static final double ANG_FEEDFWD = 0.20;
+    public static final double ANG_FEEDFWD = 0.23;
     // Drive motor IDs
     public static final int L1_ID = 11;
     public static final int L2_ID = 12;

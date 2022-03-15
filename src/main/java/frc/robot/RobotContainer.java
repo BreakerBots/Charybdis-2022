@@ -124,10 +124,11 @@ public class RobotContainer {
    * @return The command to run in autonomous.
    */
   public Command getAutonomousCommand() {
+    driveSys.setBrakeMode(true);
     // configureButtonBindings();
     // CHANGE AUTOPATH HERE \/
 
-    int pathNumber = 6; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+    int pathNumber = 5; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
                         // list below. To change use the desired paths sumber from the list below.
 
     switch (pathNumber) {
@@ -147,7 +148,12 @@ public class RobotContainer {
       case 6: 
         return new SequentialCommandGroup(
           new DrivePivot(driveSys, imuSys, 90, 0.3),
-          new DrivePivot(driveSys, imuSys, -90, 0.3)
+          new DrivePivot(driveSys, imuSys, 90, 0.3),
+          new DrivePivot(driveSys, imuSys, 90, 0.3),
+          new DrivePivot(driveSys, imuSys, 90, 0.3),
+          new DrivePivot(driveSys, imuSys, -120, 0.3),
+          new DrivePivot(driveSys, imuSys, -120, 0.3),
+          new DrivePivot(driveSys, imuSys, -120, 0.3)
           );
     }
   }
