@@ -9,7 +9,7 @@ import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.BreakerMath;
 
-public class IMU extends SubsystemBase {
+public class BreakerPigeon2 extends SubsystemBase {
   private WPI_Pigeon2 pigeon;
   private double imuInvert;
   private boolean isInverted;
@@ -18,7 +18,7 @@ public class IMU extends SubsystemBase {
   private double roll;
 
   /** Creates a new PigeonIMU. */
-  public IMU(int deviceID, boolean isInverted) {
+  public BreakerPigeon2(int deviceID, boolean isInverted) {
     pigeon = new WPI_Pigeon2(deviceID);
     isInverted = this.isInverted;
   }

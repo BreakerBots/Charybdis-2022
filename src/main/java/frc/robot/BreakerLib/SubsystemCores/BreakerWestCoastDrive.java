@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Drivetrain extends SubsystemBase {
+public class BreakerWestCoastDrive extends SubsystemBase {
   private MotorControllerGroup leftDrive;
   private MotorControllerGroup rightDrive;
   private DifferentialDrive diffDrive;
@@ -21,13 +21,13 @@ public class Drivetrain extends SubsystemBase {
   }
   
   /** Creates a new Drive. */
-  public Drivetrain(WPI_TalonFX leftLead, WPI_TalonFX[] leftMotors, Boolean invertL, WPI_TalonFX rightLead, WPI_TalonFX[] rightMotors, Boolean invertR) {
+  public BreakerWestCoastDrive(WPI_TalonFX[] leftMotors, Boolean invertL, WPI_TalonFX[] rightMotors, Boolean invertR) {
     leftDrive = new MotorControllerGroup(leftLead, leftMotors);
     leftDrive.setInverted(invertL);
-    leftLead = this.leftLead;
+    leftLead = leftMotors[0];
     rightDrive = new MotorControllerGroup(rightLead, rightMotors);
     rightDrive.setInverted(invertR);
-    rightLead = this.rightLead;
+    rightLead = rightMotors[0];
     diffDrive = new DifferentialDrive(leftDrive, rightDrive);
   }
 
