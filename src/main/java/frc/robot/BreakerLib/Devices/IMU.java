@@ -8,7 +8,6 @@ import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.BreakerMath;
-import frc.robot.Constants;
 
 public class IMU extends SubsystemBase {
   private WPI_Pigeon2 pigeon;

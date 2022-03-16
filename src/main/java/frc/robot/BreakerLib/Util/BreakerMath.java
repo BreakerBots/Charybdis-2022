@@ -1,7 +1,6 @@
 package frc.robot.BreakerLib.Util;
 
 import edu.wpi.first.math.MathUtil;
-import frc.robot.Constants;
 
 //easily accessible conversion equations
 public class BreakerMath {

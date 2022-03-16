@@ -4,16 +4,8 @@
 
 package frc.robot.BreakerLib.SubsystemCores;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
-import org.ejml.sparse.csc.linsol.qr.LinearSolverQrLeftLooking_DSCC;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
