@@ -23,8 +23,8 @@ public class Shooter extends SubsystemBase {
   public enum ShooterMode {
     HUB,
     //VISION,
-    LOW,
-    LAUNCH
+    LOW
+    //LAUNCH
   }
 
   public boolean isShooting = false;
@@ -134,10 +134,10 @@ public class Shooter extends SubsystemBase {
         raiseShooter();
         flyTgtSpdPrct = Constants.LOW_SHOOT_SPD;
         break;
-      case LAUNCH:
-        raiseShooter();
-        flyTgtSpdPrct = Constants.LAUNCH_SHOOT_SPD;
-        break;
+      // case LAUNCH:
+      //   raiseShooter();
+      //   flyTgtSpdPrct = Constants.LAUNCH_SHOOT_SPD;
+      //   break;
       // case VISION:
       //   visionHoodPosLoop();
       //   flyTgtSpdPrct = Constants.HUB_SHOOT_SPD;

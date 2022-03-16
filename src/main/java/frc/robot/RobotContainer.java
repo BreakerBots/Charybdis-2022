@@ -110,7 +110,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     CommandScheduler.getInstance().clearButtons();
     buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
-    buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
+    //buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     dRight.whenPressed(new ToggleShooterMode(shooterSys));
     dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
@@ -125,11 +125,10 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     driveSys.setBrakeMode(true);
-    // configureButtonBindings();
     // CHANGE AUTOPATH HERE \/
 
     int pathNumber = 5; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
-                        // list below. To change use the desired paths sumber from the list below.
+                        // list below. To change, use the desired path's number from the list below.
 
     switch (pathNumber) {
       case 0:
@@ -145,16 +144,6 @@ public class RobotContainer {
         return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 5:
         return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-      case 6: 
-        return new SequentialCommandGroup(
-          new DrivePivot(driveSys, imuSys, 90, 0.3),
-          new DrivePivot(driveSys, imuSys, 90, 0.3),
-          new DrivePivot(driveSys, imuSys, 90, 0.3),
-          new DrivePivot(driveSys, imuSys, 90, 0.3),
-          new DrivePivot(driveSys, imuSys, -120, 0.3),
-          new DrivePivot(driveSys, imuSys, -120, 0.3),
-          new DrivePivot(driveSys, imuSys, -120, 0.3)
-          );
     }
   }
 

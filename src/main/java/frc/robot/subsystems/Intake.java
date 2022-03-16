@@ -104,6 +104,9 @@ public class Intake extends SubsystemBase {
         stopIntakeMotor();
         stopLeftIndexer();
         stopRightIndexer();
+        if (intakeIsExtended) {
+            retractIntakeArm();
+        }
     }
 
     /**
