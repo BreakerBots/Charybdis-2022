@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.BooleanArraySerializer;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.BreakerMath;
 import frc.robot.Constants;
 import frc.robot.RobotConfig;
 
@@ -85,21 +87,22 @@ public class Drive extends SubsystemBase {
     driveTrainDiff.tankDrive(spdL, spdR);
   }
 
+    /** Returns number of ticks on left motors */
+    public double getLeftTicks() {
+      return l1.getSelectedSensorPosition();
+    }
+  
+    /** Returns number of ticks on right motors */
+    public double getRightTicks() {
+      return r1.getSelectedSensorPosition();
+    }
+
   @Override
   public void periodic() {
     addChild("Drivetrain", driveTrainDiff);
     addChild("Angle PID", anglePID);
     addChild("Distance PID", distPID);
-  }
-
-  /** Returns number of ticks on left motors */
-  public double getLeftTicks() {
-    return l1.getSelectedSensorPosition();
-  }
-
-  /** Returns number of ticks on right motors */
-  public double getRightTicks() {
-    return r1.getSelectedSensorPosition();
+   // System.out.println("drive dist: " + BreakerMath.ticksToInches(getLeftTicks()));
   }
 
   public void toggleSlowMode() {
@@ -141,7 +144,11 @@ public class Drive extends SubsystemBase {
 
   /** Access distance PID .atSetpoint() method */
   public boolean atSetpointDist() {
-    return distPID.atSetpoint();
+    return (distPID.atSetpoint()) /** && (distPID.getVelocityError() != 0)) */;
+  }
+
+  public boolean atSetpointAng() {
+    return (anglePID.atSetpoint()) /** && (anglePID.getVelocityError() != 0)) */;
   }
 
   public double getStatorCurrent(int motorID) {

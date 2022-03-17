@@ -61,6 +61,6 @@ public class DrivePivot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return drive.anglePID.atSetpoint();
+    return drive.atSetpointAng();
   }
 }

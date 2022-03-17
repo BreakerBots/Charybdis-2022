@@ -93,7 +93,7 @@ public final class Constants {
     /** Gear ratio for drivetrain (rotation of motors to rotation of wheel) */
     public static final double DRIVE_GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49
     /** Diameter of Colson wheel, in inches */
-    public static final double COLSON_DIAMETER = 4;
+    public static final double COLSON_DIAMETER = 3.88;
     /** Circumference of Colson wheel, in inches */
     public static final double COLSON_CIRCUMFERENCE = COLSON_DIAMETER * Math.PI;
     /** Ticks per rotation of Colson wheels on drivetrain */
@@ -189,7 +189,7 @@ public final class Constants {
 
     public static final double CLIMB_SPD_RESET_CYCLES = 150;
 
-    public static final double ART_DRIVE_FF = 0.2;
+    public static final double ART_DRIVE_FF = 0.20;
     public static final double HUB_HEIGHT_INS = 104;
     public static final double SHOOT_CAM_HEIGHT = FILLER;
     public static final double SHOOT_CAM_ANG = FILLER;

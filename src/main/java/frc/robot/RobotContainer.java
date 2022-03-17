@@ -25,6 +25,7 @@ import frc.robot.commands.climb.actions.ManuallyMoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
 import frc.robot.commands.compressor.ToggleCompressor;
 import frc.robot.commands.drive.DrivePivot;
+import frc.robot.commands.drive.DriveStraight;
 import frc.robot.commands.drive.DriveTurn;
 import frc.robot.commands.drive.DriveWithJoystick;
 import frc.robot.commands.intake.ToggleIntake;
@@ -127,7 +128,7 @@ public class RobotContainer {
     driveSys.setBrakeMode(true);
     // CHANGE AUTOPATH HERE \/
 
-    int pathNumber = 5; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+    int pathNumber = 3; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
                         // list below. To change, use the desired path's number from the list below.
 
     switch (pathNumber) {
@@ -144,6 +145,15 @@ public class RobotContainer {
         return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 5:
         return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+      case 6: 
+        return new SequentialCommandGroup(
+        new DriveStraight(driveSys, imuSys, 12, 0.4, 6),
+        new DriveStraight(driveSys, imuSys, 13, 0.41, 6),
+        new DriveStraight(driveSys, imuSys, 14, 0.42, 6),
+        new DriveStraight(driveSys, imuSys, 15, 0.43, 6),
+        new DriveStraight(driveSys, imuSys, 16, 0.44, 6),
+        new DriveStraight(driveSys, imuSys, 17, 0.45, 6)
+        );
     }
   }
 

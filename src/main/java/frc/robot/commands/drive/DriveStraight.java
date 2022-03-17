@@ -41,9 +41,13 @@ public class DriveStraight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    cyclecount = 0;
     drive.resetEncoders();
     imu.reset();
     drive.setSlowMode(false);
+    drive.resetEncoders();
+    drive.resetEncoders();
+    drive.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -51,7 +55,6 @@ public class DriveStraight extends CommandBase {
   public void execute() {
     cyclecount ++;
     double curDist = BreakerMath.ticksToInches(drive.getLeftTicks());
-    System.out.println("Ticks: " + drive.getLeftTicks());
     // System.out.println(drive.feedForwardCalc(4, 2)); // Constants for desired vel, desired acc
     double motorSpeed = drive.distPIDCalc(curDist, targetDistance);
     // double motorspeed = feedBackVal + feedForwardVal;
@@ -61,7 +64,7 @@ public class DriveStraight extends CommandBase {
     drive.move(motorSpeed, turnSpeed);
     // 1D movement back and forth
 
-    System.out.println("Position error: " + drive.distPID.getPositionError());
+    System.out.println("cur dist: " + String.format("%.2f", curDist) + " Pos err: " + String.format("%.2f",drive.distPID.getPositionError()) + " Vel err: " + String.format("%.2f",drive.distPID.getVelocityError()) + " fwd set: " + String.format("%.2f", motorSpeed) + " turn set " + String.format("%.2f", turnSpeed));
   }
 
   // Called once the command ends or is interrupted.
@@ -69,6 +72,7 @@ public class DriveStraight extends CommandBase {
   public void end(boolean interrupted) {
     cyclecount = 0;
     drive.move(0, 0);
+    System.out.println(" \n MOVE STRAIGHT END! \n ");
   }
 
   // Returns true when the command should end.

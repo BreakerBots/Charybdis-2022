@@ -22,8 +22,8 @@ public class AirCompressor extends SubsystemBase {
   /** Creates a new AirCompressor. */
   public AirCompressor(PneumaticsControlModule pcmArg) {
     compressor = new Compressor(Constants.PCM_ID, PneumaticsModuleType.CTREPCM);
-    // double scale = 250, offset = -25;
-    // analogPressureSensor = new AnalogPotentiometer(/* the AnalogIn port */ 2, scale, offset);
+    double scale = 250, offset = -25;
+    analogPressureSensor = new AnalogPotentiometer(0, scale, offset);
     pcm = pcmArg;
     compressor.enableDigital();
     compressor.disable();
@@ -67,7 +67,7 @@ public class AirCompressor extends SubsystemBase {
    * @return Current air pressure, in PSI.
    */
   public double getPressure() {
-    return pcm.getCompressorCurrent();
+    return analogPressureSensor.get();
   }
 
   /**
@@ -89,7 +89,8 @@ public class AirCompressor extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
+    // SmartDashboard.putNumber("PSI", pcm.getCompressorCurrent());
+    //System.out.println("PSI: " + getPressure());
     // autoTimeout();
     // System.out.println(compressor.getPressureSwitchValue());
   }

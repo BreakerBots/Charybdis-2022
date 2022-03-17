@@ -35,24 +35,24 @@ public class Pickup2_Shoot3_P2 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new InstantCommand(intakeArg :: activateIntake),
-      new DriveStraight(driveArg, imuArg, 52, 0.4, 4),
+      new DriveStraight(driveArg, imuArg, 52, 0.4, 45),
       new ParallelCommandGroup(
         new ChargeFlywheel(shooterArg, controllerArg), 
         new SequentialCommandGroup(
-          new DriveStraight(driveArg, imuArg, -62, 0.4, 4),
+          new DriveStraight(driveArg, imuArg, -62, 0.45, 4),
           new ToggleIntake(intakeArg, hopperArg),
           new DrivePivot(driveArg, imuArg, 20, 0.4),
           new DriveStraight(driveArg, imuArg, -16, 0.4, 2)
         )),
       new ShootAll(shooterArg, hopperArg, controllerArg, intakeArg),
       new DriveStraight(driveArg, imuArg, 8, 0.4, 4),
-      new DrivePivot(driveArg, imuArg, 55, 0.4),
+      new DrivePivot(driveArg, imuArg, 64, 0.4),
       new ToggleIntake(intakeArg, hopperArg),
-      new DriveStraight(driveArg, imuArg, 108, 0.6, 5),
+      new DriveStraight(driveArg, imuArg, 108, 0.7, 5),
       new ParallelCommandGroup(
         new ChargeFlywheel(shooterArg, controllerArg),
         new SequentialCommandGroup(
-          new DriveStraight(driveArg, imuArg, -108, 0.6, 5),
+          new DriveStraight(driveArg, imuArg, -108, 0.7, 5),
           new ToggleIntake(intakeArg, hopperArg),
           new DrivePivot(driveArg, imuArg,-60, 0.4),
           new DriveStraight(driveArg, imuArg, -8, 0.4, 4)

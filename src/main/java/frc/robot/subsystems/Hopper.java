@@ -68,7 +68,7 @@ public class Hopper extends SubsystemBase {
    * @return true if full, false if empty.
    */
   public boolean bottomSlotIsFull() {
-    return bottomSlot.get();
+    return !bottomSlot.get();
   }
 
   /**
@@ -146,7 +146,7 @@ public class Hopper extends SubsystemBase {
         }
       } else if (bothSlotsAreEmpty() && !getBallInTransit()) { // Both are empty
         deactivateHopper();
-        //activateHopper();
+        // activateHopper();
       } else if (bothSlotsAreFull()) { // Both are full
         pauseCountB++;
         if (pauseCountB > 0) { // Waits to turn off hopper and intake.
@@ -164,7 +164,7 @@ public class Hopper extends SubsystemBase {
     addChild("Hopper Motor", hopperMotor);
     addChild("Bottom Sensor", bottomSlot);
     addChild("Top Sensor", topSlot);
-    System.out.println("Bottom slot: " + bottomSlot.get());
-    System.out.println("Top slot: " + topSlot.get());
+    // System.out.println("Bottom slot: " + bottomSlotIsFull());
+    // System.out.println("Top slot: " + topSlot.get());
   }
 }
