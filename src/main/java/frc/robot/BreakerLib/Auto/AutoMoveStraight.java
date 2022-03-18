@@ -7,13 +7,13 @@ package frc.robot.BreakerLib.Auto;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.BreakerMath;
+import frc.robot.BreakerLib.Devices.BreakerPigeon2;
 import frc.robot.BreakerLib.SubsystemCores.BreakerWestCoastDrive;
-import frc.robot.subsystems.devices.IMU;
 
 /** Robot moves forward/back to target distance */
 public class AutoMoveStraight extends CommandBase {
   private int cyclecount;
-  private IMU imu;
+  private BreakerPigeon2 imu;
   private double targetDistance;
   private double speedClamp;
   private double time;
@@ -27,7 +27,7 @@ public class AutoMoveStraight extends CommandBase {
    * @param speedLimit the precent of max speed you wish the robot to be caped at (0.0 to 1.0) (DO NOT make argument negative) (WARNING: 7.0 or above is EXTREAMLY FAST)
    * @param secArg the time limit (in seconds) on this particular instance of this command befor it times out and cancles (safty feature to prevent accadents)
    */
-  public AutoMoveStraight(AutoController autoArg, BreakerWestCoastDrive driveTrainArg, IMU imuArg, double distanceInches, double speedLimit, double secArg) {
+  public AutoMoveStraight(AutoController autoArg, BreakerWestCoastDrive driveTrainArg, BreakerPigeon2 imuArg, double distanceInches, double speedLimit, double secArg) {
     time = secArg * 50; 
     auto = autoArg;
     imu = imuArg;

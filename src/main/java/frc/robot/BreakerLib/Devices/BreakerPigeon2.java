@@ -16,6 +16,10 @@ public class BreakerPigeon2 extends SubsystemBase {
   private double pitch;
   private double yaw;
   private double roll;
+  private double [] wxyz = new double [3];
+  private double xSpeed;
+  private double ySpeed;
+  private double zSpeed;
 
   /** Creates a new PigeonIMU. */
   public BreakerPigeon2(int deviceID, boolean isInverted) {
@@ -37,6 +41,8 @@ public class BreakerPigeon2 extends SubsystemBase {
     
     setName("IMU");
     addChild("Pigeon", pigeon);
+    
+    calculate4DPosition();
   }
 
   /** Returns pitch angle within +- 360 degrees */
@@ -83,4 +89,53 @@ public class BreakerPigeon2 extends SubsystemBase {
   public double getRollRate() {
     return getGyroRates(2);
   }
+
+  public short getRawAccelerometerVals(int arrayElement) {
+    short[] accelVals = new short[2];
+    pigeon.getBiasedAccelerometer(accelVals);
+    return accelVals[arrayElement];
+  }
+
+  public double getIns2AccelX() {
+    return (frc.robot.BreakerLib.Util.BreakerMath.fixedToFloat(getRawAccelerometerVals(0), 14) * 7.721772);
+  }
+
+  public double getIns2AccelY() {
+    return (frc.robot.BreakerLib.Util.BreakerMath.fixedToFloat(getRawAccelerometerVals(1), 14) * 7.721772);
+  }
+
+  public double getIns2AccelZ() {
+    return (frc.robot.BreakerLib.Util.BreakerMath.fixedToFloat(getRawAccelerometerVals(2), 14) * 7.721772);
+  }
+
+  private void calculate4DPosition() {
+   wxyz[0] = yaw;
+   xSpeed += getIns2AccelX();
+   ySpeed += getIns2AccelY();
+   zSpeed += getIns2AccelZ();
+   wxyz[1] += xSpeed;
+   wxyz[2] += ySpeed;
+   wxyz[3] += zSpeed;
+  }
+
+  /** Returns WXYZ psoition of imu, W is angle and XYZ are position */
+  public double[] get4DPosition() {
+    return wxyz;
+  }
+
+  public void set4DPosition(double[] wxyz) {
+    wxyz = this.wxyz;
+  }
+
+  public void reset4DPosition() {
+    wxyz[0] = 0;
+    wxyz[1] = 0;
+    wxyz[2] = 0;
+    wxyz[3] = 0;
+    reset();
+    xSpeed = 0;
+    ySpeed = 0;
+    zSpeed = 0;
+  }
+
 }

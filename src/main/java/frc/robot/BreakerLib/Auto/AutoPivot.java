@@ -6,12 +6,13 @@ package frc.robot.BreakerLib.Auto;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.BreakerLib.Devices.BreakerPigeon2;
 import frc.robot.BreakerLib.SubsystemCores.BreakerWestCoastDrive;
-import frc.robot.subsystems.devices.IMU;
+import frc.robot.BreakerLib.Util.BreakerMath;
 
 public class AutoPivot extends CommandBase {
   AutoController auto;
-  IMU imu;
+  BreakerPigeon2 imu;
   double target;
   double speedClamp;
   double lastAngle;
@@ -24,7 +25,7 @@ public class AutoPivot extends CommandBase {
    * @param targetDegrees the number of degrees you want the robot to turn relative to its orientation on command start (+ is right and - is left)
    * @param speedLimit the precent of max speed you wish the robot to be caped at (0.0 to 1.0) (DO NOT make argument negative) (NOTE: 3.0 or below tends to be quite slow)
    */
-  public AutoPivot(AutoController autoArg, BreakerWestCoastDrive drivetrainArg, IMU imuArg, double targetDegrees, double speedLimit) {
+  public AutoPivot(AutoController autoArg, BreakerWestCoastDrive drivetrainArg, BreakerPigeon2 imuArg, double targetDegrees, double speedLimit) {
     auto = autoArg;
     drivetrain = drivetrainArg;
     imu = imuArg;

@@ -1,5 +1,8 @@
 package frc.robot.BreakerLib.Util;
 
+import java.util.function.IntToDoubleFunction;
+import java.util.function.ToDoubleFunction;
+
 import edu.wpi.first.math.MathUtil;
 
 //easily accessible conversion equations
@@ -67,5 +70,17 @@ public class BreakerMath {
 
     public static double getAvg(double lastAvg, double newVal, int cycleCount) {
         return (((lastAvg * (cycleCount - 1)) + newVal) / cycleCount);
+    }
+
+    public static double fixedToFloat(int FixedPointVal, int bitsAfterDicimal) {
+        return ((Double.valueOf(FixedPointVal)) / (Math.pow(2, bitsAfterDicimal)));
+    }
+
+    public static double fixedToFloat(Long FixedPointVal, int bitsAfterDicimal) {
+        return ((Double.valueOf(FixedPointVal)) / (Math.pow(2, bitsAfterDicimal)));
+    }
+
+    public static double fixedToFloat(Short FixedPointVal, int bitsAfterDicimal) {
+        return ((Double.valueOf(FixedPointVal)) / (Math.pow(2, bitsAfterDicimal)));
     }
 }
