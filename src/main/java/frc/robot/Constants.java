@@ -89,6 +89,8 @@ public final class Constants {
     public static final int R1_ID = 14;
     public static final int R2_ID = 15;
     public static final int R3_ID = 16;
+    // Slow mode
+    public static final double SLOW_MODE_MULTIPLIER = 0.5;
     // Drive specs 
     /** Gear ratio for drivetrain (rotation of motors to rotation of wheel) */
     public static final double DRIVE_GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49

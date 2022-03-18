@@ -6,8 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.BooleanArraySerializer;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -74,11 +72,6 @@ public class Drive extends SubsystemBase {
   public void move(double netSpd, double turnSpd) {
     double logSpd = netSpd;
 
-    if (slowModeOn) {
-      logSpd *= 0.5;
-      turnSpd *= 0.5;
-      }
-
     driveTrainDiff.arcadeDrive(logSpd, turnSpd); // Calculates speed and turn outputs
   }
 
@@ -111,6 +104,10 @@ public class Drive extends SubsystemBase {
 
   public void setSlowMode(boolean val) {
     slowModeOn = val;
+  }
+
+  public boolean getSlowMode() {
+    return slowModeOn;
   }
 
   /*** Sets encoders of all drive motors to 0 */

@@ -8,6 +8,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.Robot.RobotMode;
 import frc.robot.subsystems.Drive;
@@ -61,6 +62,12 @@ public class DriveWithJoystick extends CommandBase {
     // adjust = 1;
     // }
     prevNet = net;
+
+    if (drive.getSlowMode()) {
+      net *= Constants.SLOW_MODE_MULTIPLIER;
+      turn *= Constants.SLOW_MODE_MULTIPLIER;
+    }
+
     if (Robot.robotMode != RobotMode.TEST) {
       drive.move(net, turn); // Calculates speed and turn outputs
     } else {
