@@ -50,7 +50,7 @@ public class Climber extends SubsystemBase{
 
   @Override
   public void periodic() {
-    //String log_str = "LClimb Ticks: " + climberL.getSelectedSensorPosition() + " RClimb Ticks: " + climberR.getSelectedSensorPosition();
+    System.out.println("LClimb Ticks: " + climberL.getSelectedSensorPosition() + " RClimb Ticks: " + climberR.getSelectedSensorPosition());
     //DashboardControl.log(log_str);
     // This method will be called once per scheduler run
     //addChild("Winching Motors", climbMotors);

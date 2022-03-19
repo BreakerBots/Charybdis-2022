@@ -120,7 +120,7 @@ public final class Constants {
     public static final int PWR_DISTR = 0; // Unused?
     // Intake Solonoid IDs
     public static final int INTAKESOL_FWD = 2;
-    public static final int INTAKESOL_REV = 5;
+    public static final int INTAKESOL_REV = 0;
 
     // Hopper constants
     // Hopper motor ID
@@ -166,8 +166,8 @@ public final class Constants {
     public static final int CLIMBER_L_ID = 51;
     public static final int CLIMBER_R_ID = 52;
     // Climber Solonoid IDs
-    public static final int CLIMBSOL_FWD = 6;
-    public static final int CLIMBSOL_REV = 7;
+    public static final int CLIMBSOL_FWD = 1;
+    public static final int CLIMBSOL_REV = 3;
     // Trigger thresholds for climber states (in ticks)
     public static final double CLIMB_RET_THRESH = 0;
     public static final double CLIMB_EXT_THRESH = 0;
@@ -196,7 +196,7 @@ public final class Constants {
     public static final double SHOOT_CAM_HEIGHT = FILLER;
     public static final double SHOOT_CAM_ANG = FILLER;
     public static final double HOOD_UP_DIST = FILLER;
-    public static final int START_MAX_CLIMB_EXT = 0;
+    public static final int START_MAX_CLIMB_EXT = Integer.MAX_VALUE;
 
   
     

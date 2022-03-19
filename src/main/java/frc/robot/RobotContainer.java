@@ -113,10 +113,10 @@ public class RobotContainer {
     buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
     //buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
-    dRight.whenPressed(new ToggleShooterMode(shooterSys));
+    dRight.whenPressed(new InstantCommand(driveSys::toggleSlowMode));
     dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     backButton.whenPressed(new ToggleCompressor(compressorSys));
-    dUp.whenPressed(new InstantCommand(driveSys::toggleSlowMode));
+    dUp.whenPressed(new ToggleShooterMode(shooterSys));
   }
 
   /**
@@ -128,7 +128,7 @@ public class RobotContainer {
     driveSys.setBrakeMode(true);
     // CHANGE AUTOPATH HERE \/
 
-    int pathNumber = 3; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+    int pathNumber = 6; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
                         // list below. To change, use the desired path's number from the list below.
 
     switch (pathNumber) {
@@ -146,14 +146,7 @@ public class RobotContainer {
       case 5:
         return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 6: 
-        return new SequentialCommandGroup(
-        new DriveStraight(driveSys, imuSys, 12, 0.4, 6),
-        new DriveStraight(driveSys, imuSys, 13, 0.41, 6),
-        new DriveStraight(driveSys, imuSys, 14, 0.42, 6),
-        new DriveStraight(driveSys, imuSys, 15, 0.43, 6),
-        new DriveStraight(driveSys, imuSys, 16, 0.44, 6),
-        new DriveStraight(driveSys, imuSys, 17, 0.45, 6)
-        );
+        return new IntakeHopperIndexerTest(10, hopperSys, intakeSys);
     }
   }
 
