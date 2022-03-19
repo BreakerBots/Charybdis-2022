@@ -31,11 +31,10 @@ public class ManuallyMoveClimb extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climb.resetClimbEncoders();
     climb.lClimbPID.reset();
     climb.rClimbPID.reset();
-    lTargetTicks = 0;
-    rTargetTicks = 0;
+    lTargetTicks = climb.getLeftClimbTicks();
+    rTargetTicks = climb.getRightClimbTicks();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -51,6 +50,10 @@ public class ManuallyMoveClimb extends CommandBase {
       rTargetTicks += inputTicks;
     }
     
+    if (!climb.climbisFullyExtendable) {
+      lTargetTicks = MathUtil.clamp(lTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
+      rTargetTicks = MathUtil.clamp(rTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
+    }
 
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();

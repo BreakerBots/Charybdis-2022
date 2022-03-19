@@ -196,6 +196,7 @@ public final class Constants {
     public static final double SHOOT_CAM_HEIGHT = FILLER;
     public static final double SHOOT_CAM_ANG = FILLER;
     public static final double HOOD_UP_DIST = FILLER;
+    public static final int START_MAX_CLIMB_EXT = 0;
 
   
     

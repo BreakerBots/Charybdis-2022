@@ -28,7 +28,9 @@ public class Climber extends SubsystemBase{
   public PIDController rClimbPID;
   private boolean climbing;
   // 0 = retracted, 1 = extending/retracting, 2 = extended
-  public boolean climbSolRetracted; // true is extended
+  public boolean climbSolRetracted = true; // true is extended
+  public boolean climbisFullyExtendable = false;
+  private int fullyExtendableLoopCheckState = 0;
 
   public Climber() {
     setName("Climber");
@@ -43,6 +45,7 @@ public class Climber extends SubsystemBase{
     Constants.CLIMBSOL_FWD, Constants.CLIMBSOL_REV);
     climberL.setSelectedSensorPosition(0);
     climberR.setSelectedSensorPosition(0);
+    resetClimbEncoders();
   }
 
   @Override
@@ -54,6 +57,7 @@ public class Climber extends SubsystemBase{
     addChild("Left Climb PID", lClimbPID);
     addChild("Right Climb PID", rClimbPID);
     addChild("Pistons", climbSol);
+    climbisFullyExtendableCheckLoop();
   }
 
   public void moveClimb(double climbSpeedArg) {
@@ -98,5 +102,24 @@ public class Climber extends SubsystemBase{
 
   public void setIsClimbing(boolean val) {
     climbing = val;
+  }
+
+  private void climbisFullyExtendableCheckLoop() {
+    switch (fullyExtendableLoopCheckState) {
+      default:
+      case 0: 
+        if (!climbSolRetracted) {
+          fullyExtendableLoopCheckState ++;
+        }
+        break;
+      case 1:
+        if (climbSolRetracted) {
+          fullyExtendableLoopCheckState ++;
+        }
+        break;
+      case 2:
+        climbisFullyExtendable = true;
+        break;
+    }
   }
 }
