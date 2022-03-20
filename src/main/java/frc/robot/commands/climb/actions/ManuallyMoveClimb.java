@@ -50,10 +50,10 @@ public class ManuallyMoveClimb extends CommandBase {
       rTargetTicks += inputTicks;
     }
     
-    if (!climb.climbisFullyExtendable) {
-      lTargetTicks = MathUtil.clamp(lTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
-      rTargetTicks = MathUtil.clamp(rTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
-    }
+    // if (!climb.climbisFullyExtendable) {
+    //   lTargetTicks = MathUtil.clamp(lTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
+    //   rTargetTicks = MathUtil.clamp(rTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
+    // }
 
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();
