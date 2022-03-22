@@ -6,6 +6,7 @@ package frc.robot.commands.climb.actions;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -20,6 +21,7 @@ public class ManuallyMoveClimb extends CommandBase {
   private double rPrevTgtTicks = 0;
   private int lCycleCount = 0;
   private int rCycleCount = 0;
+  private boolean climbRetIsLimited = true;
 
   public ManuallyMoveClimb(Climber climbArg, XboxController controllerArg) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -50,10 +52,14 @@ public class ManuallyMoveClimb extends CommandBase {
       rTargetTicks += inputTicks;
     }
     
-    // if (!climb.climbisFullyExtendable) {
-    //   lTargetTicks = MathUtil.clamp(lTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
-    //   rTargetTicks = MathUtil.clamp(rTargetTicks, -10, Constants.START_MAX_CLIMB_EXT);
-    // }
+    lTargetTicks = MathUtil.clamp(lTargetTicks, !climb.climbisFullyExtendable ? Constants.START_MAX_CLIMB_EXT : -Integer.MAX_VALUE, climbRetIsLimited ? 0 : Integer.MAX_VALUE);
+    rTargetTicks = MathUtil.clamp(rTargetTicks, !climb.climbisFullyExtendable ? Constants.START_MAX_CLIMB_EXT : -Integer.MAX_VALUE, climbRetIsLimited ? 0 : Integer.MAX_VALUE);
+
+    if (xbox.getPOV() == Constants.D_DOWN) {
+      climb.climbisFullyExtendable = true;
+      climbRetIsLimited = false;
+
+    }
 
     double leftTicks = climb.getLeftClimbTicks();
     double rightTicks = climb.getRightClimbTicks();

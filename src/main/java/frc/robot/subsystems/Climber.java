@@ -38,7 +38,7 @@ public class Climber extends SubsystemBase{
     rClimbPID = new PIDController(Constants.KP_CLIMB, Constants.KI_CLIMB, Constants.KD_CLIMB);
     climberL = new WPI_TalonFX(Constants.CLIMBER_L_ID);
     climberR = new WPI_TalonFX(Constants.CLIMBER_R_ID);
-    climberR.setInverted(TalonFXInvertType.CounterClockwise);
+    climberR.setInverted(TalonFXInvertType.Clockwise);
     climberL.setInverted(TalonFXInvertType.CounterClockwise);
     climbSol = new DoubleSolenoid(Constants.PCM_ID,
     PneumaticsModuleType.CTREPCM,
