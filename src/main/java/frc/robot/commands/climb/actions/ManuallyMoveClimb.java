@@ -58,7 +58,6 @@ public class ManuallyMoveClimb extends CommandBase {
     if (xbox.getPOV() == Constants.D_DOWN) {
       climb.climbisFullyExtendable = true;
       climbRetIsLimited = false;
-
     }
 
     double leftTicks = climb.getLeftClimbTicks();

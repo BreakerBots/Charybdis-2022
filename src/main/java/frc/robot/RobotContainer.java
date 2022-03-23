@@ -111,7 +111,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     CommandScheduler.getInstance().clearButtons();
     buttonA.whenPressed(new ToggleIntake(intakeSys, hopperSys));
-    //buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
+    buttonX.whenPressed(new ToggleIntakeArm(intakeSys, hopperSys));
     buttonB.whenPressed(new ChargeThenShoot(xboxSys, intakeSys, hopperSys, shooterSys));
     dRight.whenPressed(new InstantCommand(driveSys::toggleSlowMode));
     dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
