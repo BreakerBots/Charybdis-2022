@@ -52,8 +52,8 @@ public class ManuallyMoveClimb extends CommandBase {
       rTargetTicks += inputTicks;
     }
     
-    lTargetTicks = MathUtil.clamp(lTargetTicks, !climb.climbisFullyExtendable ? Constants.START_MAX_CLIMB_EXT : -Integer.MAX_VALUE, climbRetIsLimited ? 0 : Integer.MAX_VALUE);
-    rTargetTicks = MathUtil.clamp(rTargetTicks, !climb.climbisFullyExtendable ? Constants.START_MAX_CLIMB_EXT : -Integer.MAX_VALUE, climbRetIsLimited ? 0 : Integer.MAX_VALUE);
+     lTargetTicks = MathUtil.clamp(lTargetTicks, !climb.climbisFullyExtendable ? Constants.START_MAX_CLIMB_EXT : -Integer.MAX_VALUE, Integer.MAX_VALUE);
+     rTargetTicks = MathUtil.clamp(rTargetTicks, !climb.climbisFullyExtendable ? Constants.START_MAX_CLIMB_EXT : -Integer.MAX_VALUE, Integer.MAX_VALUE);
 
     if (xbox.getPOV() == Constants.D_DOWN) {
       climb.climbisFullyExtendable = true;

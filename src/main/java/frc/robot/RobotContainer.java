@@ -81,6 +81,7 @@ public class RobotContainer {
   private JoystickButton buttonX = new JoystickButton(xboxSys, Constants.X);
   private JoystickButton buttonY = new JoystickButton(xboxSys, Constants.Y);
   private JoystickButton backButton = new JoystickButton(xboxSys, Constants.BACK);
+  private JoystickButton rightJoystickButton = new JoystickButton(xboxSys, Constants.R_STICK_PRESS);
   private POVButton dRight = new POVButton(xboxSys, Constants.D_RIGHT);
   private POVButton dLeft = new POVButton(xboxSys, Constants.D_LEFT);
   private POVButton dUp = new POVButton(xboxSys, Constants.D_UP);
@@ -117,6 +118,7 @@ public class RobotContainer {
     dLeft.whenPressed(new ManuallyMoveClimb(climbSys, xboxSys));
     backButton.whenPressed(new ToggleCompressor(compressorSys));
     dUp.whenPressed(new ToggleShooterMode(shooterSys));
+    // rightJoystickButton.whenPressed(climbSys::resetClimbEncoders);
   }
 
   /**
