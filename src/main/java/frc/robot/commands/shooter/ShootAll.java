@@ -68,7 +68,7 @@ public class ShootAll extends CommandBase {
     if (hopper.bothSlotsAreEmpty()) {
       if (timedStopCount > 75) {
         hopper.deactivateHopper();
-        intake.toggleHopperFeed();
+        intake.deactivateIntake();
         timedStopCount = 0;
         shooter.setOff();
         shooter.setFlywheelState(FlywheelState.OFF);
