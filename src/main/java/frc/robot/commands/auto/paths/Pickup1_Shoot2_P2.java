@@ -27,7 +27,7 @@ public class Pickup1_Shoot2_P2 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new InstantCommand(intakeArg :: activateIntake),
-      new DriveStraight(driveArg, imuArg, 48, 0.3, 4),
+      new DriveStraight(driveArg, imuArg, 48, 0.3, 3  ),
       new DriveStraight(driveArg, imuArg, -60, 0.3, 4),
       new ToggleIntake(intakeArg, hopperArg),
       new DrivePivot(driveArg, imuArg, 25, 0.3),

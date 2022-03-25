@@ -52,9 +52,9 @@ public class Pickup2_Shoot3_P2 extends SequentialCommandGroup {
       new ParallelCommandGroup(
         new ChargeFlywheel(shooterArg, controllerArg),
         new SequentialCommandGroup(
-          new DriveStraight(driveArg, imuArg, -108, 0.7, 5),
+          new DriveStraight(driveArg, imuArg, -116, 0.7, 5),
           new ToggleIntake(intakeArg, hopperArg),
-          new DrivePivot(driveArg, imuArg,-60, 0.4),
+          new DrivePivot(driveArg, imuArg,-55, 0.4),
           new DriveStraight(driveArg, imuArg, -8, 0.4, 4)
         )),
         new ShootAll(shooterArg, hopperArg, controllerArg, intakeArg)
