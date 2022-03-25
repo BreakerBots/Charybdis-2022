@@ -46,6 +46,7 @@ public class ShootAll extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timedStopCount = 0;
     DashboardControl.log("SHOOTALL INITIALIZED");
     if (hopper.bothSlotsAreFull()) {
       startWithTwoCargo = true;

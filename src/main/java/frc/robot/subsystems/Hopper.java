@@ -165,6 +165,6 @@ public class Hopper extends SubsystemBase {
     addChild("Bottom Sensor", bottomSlot);
     addChild("Top Sensor", topSlot);
     // System.out.println("Bottom slot: " + bottomSlotIsFull());
-    // System.out.println("Top slot: " + topSlot.get());
+    // System.out.println("Top slot: " + topSlotIsFull());
   }
 }

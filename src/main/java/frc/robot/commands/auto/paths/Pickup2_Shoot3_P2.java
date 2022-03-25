@@ -46,7 +46,7 @@ public class Pickup2_Shoot3_P2 extends SequentialCommandGroup {
         )),
       new ShootAll(shooterArg, hopperArg, controllerArg, intakeArg),
       new DriveStraight(driveArg, imuArg, 8, 0.4, 4),
-      new DrivePivot(driveArg, imuArg, 45, 0.4),
+      new DrivePivot(driveArg, imuArg, 55, 0.4),
       new ToggleIntake(intakeArg, hopperArg),
       new DriveStraight(driveArg, imuArg, 108, 0.7, 5),
       new ParallelCommandGroup(
