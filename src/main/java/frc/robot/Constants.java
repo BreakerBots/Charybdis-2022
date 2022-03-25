@@ -95,7 +95,7 @@ public final class Constants {
     /** Gear ratio for drivetrain (rotation of motors to rotation of wheel) */
     public static final double DRIVE_GEAR_RATIO = 8.49; // Assume (value) to 1. Alpha = 8.49 scyllia = 8.49
     /** Diameter of Colson wheel, in inches */
-    public static final double COLSON_DIAMETER = 3.88;
+    public static final double COLSON_DIAMETER = 3.83;
     /** Circumference of Colson wheel, in inches */
     public static final double COLSON_CIRCUMFERENCE = COLSON_DIAMETER * Math.PI;
     /** Ticks per rotation of Colson wheels on drivetrain */

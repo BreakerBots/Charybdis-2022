@@ -48,6 +48,7 @@ public class ShootAll extends CommandBase {
   public void initialize() {
     timedStopCount = 0;
     DashboardControl.log("SHOOTALL INITIALIZED");
+    intake.deactivateIntake();
     if (hopper.bothSlotsAreFull()) {
       startWithTwoCargo = true;
     } else {
