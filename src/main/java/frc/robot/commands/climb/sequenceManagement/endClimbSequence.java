@@ -11,9 +11,9 @@ import frc.robot.subsystems.DashboardControl;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class EndClimbSequence extends InstantCommand {
+public class endClimbSequence extends InstantCommand {
   Climber climb;
-  public EndClimbSequence(Climber climbArg) {
+  public endClimbSequence(Climber climbArg) {
     // Use addRequirements() here to declare subsystem dependencies.
     climb = climbArg;
   }

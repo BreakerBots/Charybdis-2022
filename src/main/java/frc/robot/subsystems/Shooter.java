@@ -10,7 +10,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.devices.Limelight;
+//import frc.robot.subsystems.devices.Limelight;
 
 public class Shooter extends SubsystemBase {
   public enum FlywheelState {
@@ -44,16 +44,16 @@ public class Shooter extends SubsystemBase {
   private MotorControllerGroup flywheel;
   // private DoubleSolenoid shooterSol;
   private Hopper hopper;
-  private Limelight limelight;
+  //private Limelight limelight;
   private double prevInput;
   public int counter = 0;
 
-  public Shooter(Hopper hopperArg, Limelight limelightArg) {
+  public Shooter(Hopper hopperArg /**, Limelight limelightArg */) {
     setName("Shooter");
     // flywheelFF = new SimpleMotorFeedforward(Constants.FLYWHEEL_KS,
     // Constants.FLYWHEEL_KV);
     hopper = hopperArg;
-    limelight = limelightArg;
+    //limelight = limelightArg;
     flywheelPID = new PIDController(Constants.KP_FLYWHEEL, Constants.KI_FLYWHEEL, Constants.KD_FLYWHEEL);
     flywheelPID.setTolerance(Constants.FLYWHEEL_VEL_TOL, Constants.FLYWHEEL_ACCEL_TOL);
     shooterL = new WPI_TalonFX(Constants.SHOOTER_L_ID);
@@ -117,13 +117,13 @@ public class Shooter extends SubsystemBase {
         " at set pt: " + flywheelPID.atSetpoint());
   }
 
-  private void visionHoodPosLoop() {
-    if (limelight.getTargetDistance() >= Constants.HOOD_UP_DIST) {
-      raiseShooter();
-    } else {
-      lowerShooter();
-    }
-  }
+  // private void visionHoodPosLoop() {
+  //   if (limelight.getTargetDistance() >= Constants.HOOD_UP_DIST) {
+  //     raiseShooter();
+  //   } else {
+  //     lowerShooter();
+  //   }
+  // }
 
 
 

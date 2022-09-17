@@ -70,9 +70,7 @@ public class Drive extends SubsystemBase {
 
   /** Wraps around arcadeDrive to allow for movement */
   public void move(double netSpd, double turnSpd) {
-    double logSpd = netSpd;
-
-    driveTrainDiff.arcadeDrive(logSpd, turnSpd); // Calculates speed and turn outputs
+    driveTrainDiff.arcadeDrive(netSpd, turnSpd); // Calculates speed and turn outputs
   }
 
   /** Wraps around tankDrive to allow for tank-like movement */

@@ -11,7 +11,7 @@ import frc.robot.commands.climb.actions.ClimbStabilityCheck;
 import frc.robot.commands.climb.actions.MoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
 import frc.robot.commands.climb.sequenceManagement.WaitForDownButton;
-import frc.robot.commands.climb.sequenceManagement.EndClimbSequence;
+import frc.robot.commands.climb.sequenceManagement.endClimbSequence;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.devices.ClimbWatchdog;
 import frc.robot.subsystems.devices.IMU;
@@ -45,7 +45,7 @@ public class HighbarClimbSequence extends SequentialCommandGroup {
       new ClimbStabilityCheck(climbArg, imuArg, watchdogArg),
       new MoveClimb(climbArg, Constants.LIFT_ONTO_HIGH_DIST, watchdogArg),
       new MoveClimb(climbArg, Constants.SECOND_MIRACLE_GRAB_EXT_DIST, watchdogArg),
-      new EndClimbSequence(climbArg)
+      new endClimbSequence(climbArg)
     );
   }
 }

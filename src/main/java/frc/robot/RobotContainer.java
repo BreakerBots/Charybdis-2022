@@ -70,7 +70,7 @@ public class RobotContainer {
   private final Intake intakeSys = new Intake();
   private final Hopper hopperSys = new Hopper(intakeSys);
   private final Climber climbSys = new Climber();
-  private final Shooter shooterSys = new Shooter(hopperSys, limelightSys);
+  private final Shooter shooterSys = new Shooter(hopperSys);
   private final FMS_Handler fmsSys = new FMS_Handler();
   private final ClimbWatchdog watchdogSys = new ClimbWatchdog(xboxSys, climbSys);
   private final DashboardControl dashboardSys = new DashboardControl(compressorSys, shooterSys, intakeSys, pdpSys,
