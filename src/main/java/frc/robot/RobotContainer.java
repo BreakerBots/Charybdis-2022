@@ -21,6 +21,7 @@ import frc.robot.commands.auto.paths.Pickup1_Shoot2_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P2;
 import frc.robot.commands.auto.paths.Pickup2_Shoot3_P2;
+import frc.robot.commands.auto.paths.Shoot_OffTarmac;
 import frc.robot.commands.climb.actions.ManuallyMoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
 import frc.robot.commands.compressor.ToggleCompressor;
@@ -147,7 +148,9 @@ public class RobotContainer {
         return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 5:
         return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
-      case 6: 
+      case 6:
+        return new Shoot_OffTarmac(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+      case 7: 
         return new IntakeHopperIndexerTest(10, hopperSys, intakeSys);
     }
   }
