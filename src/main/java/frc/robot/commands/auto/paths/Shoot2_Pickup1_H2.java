@@ -37,8 +37,8 @@ public class Shoot2_Pickup1_H2 extends SequentialCommandGroup {
        new DriveStraight(driveArg, imuArg, 30, 0.4, 2.5),
        new DrivePivot(driveArg, imuArg, 35, 0.2),
        new DriveStraight(driveArg, imuArg, 55, 0.4, 2.5),
-       new ToggleIntake(intakeArg, hopperArg),
        new DriveStraight(driveArg, imuArg, -55, 0.4, 2.5),
+       new ToggleIntake(intakeArg, hopperArg),
        new DrivePivot(driveArg, imuArg, -35, 0.2),
        new DriveStraight(driveArg, imuArg, -30, 0.4, 2.5),
        new ChargeThenShoot(controllerArg, intakeArg, hopperArg, shooterArg)
