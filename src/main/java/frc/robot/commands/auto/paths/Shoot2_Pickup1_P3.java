@@ -25,9 +25,9 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.devices.IMU;
 
-public class Shoot2_Pickup1_H1 extends SequentialCommandGroup {
+public class Shoot2_Pickup1_P3 extends SequentialCommandGroup {
     /** Creates a new Pickup2_Shoot3_P2. */
-    public Shoot2_Pickup1_H1(Drive driveArg, IMU imuArg, Intake intakeArg, Hopper hopperArg, XboxController controllerArg, Shooter shooterArg) {
+    public Shoot2_Pickup1_P3(Drive driveArg, IMU imuArg, Intake intakeArg, Hopper hopperArg, XboxController controllerArg, Shooter shooterArg) {
       // Add your commands in the addCommands() call, e.g.
       // addCommands(new FooCommand(), new BarCommand());
       addCommands(
@@ -35,11 +35,11 @@ public class Shoot2_Pickup1_H1 extends SequentialCommandGroup {
         new ChargeThenShoot(controllerArg, intakeArg, hopperArg, shooterArg),
        new ToggleIntake(intakeArg, hopperArg),
        new DriveStraight(driveArg, imuArg, 30, 0.4, 2.5),
-       new DrivePivot(driveArg, imuArg, 35, 0.2),
-       new DriveStraight(driveArg, imuArg, 45, 0.4, 2.5),
+       new DrivePivot(driveArg, imuArg, -25, 0.2),
+       new DriveStraight(driveArg, imuArg, 40, 0.4, 2.5),
        new ToggleIntake(intakeArg, hopperArg),
-       new DriveStraight(driveArg, imuArg, -45, 0.4, 2.5),
-       new DrivePivot(driveArg, imuArg, -35, 0.2),
+       new DriveStraight(driveArg, imuArg, -40, 0.4, 2.5),
+       new DrivePivot(driveArg, imuArg, 25, 0.2),
        new DriveStraight(driveArg, imuArg, -30, 0.4, 2.5),
        new ChargeThenShoot(controllerArg, intakeArg, hopperArg, shooterArg)
       );

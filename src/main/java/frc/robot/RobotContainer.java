@@ -21,8 +21,8 @@ import frc.robot.commands.auto.paths.Pickup1_Shoot2_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P2;
 import frc.robot.commands.auto.paths.Pickup2_Shoot3_P2;
-import frc.robot.commands.auto.paths.Shoot2_Pickup1_H1;
-import frc.robot.commands.auto.paths.Shoot2_Pickup1_P1;
+import frc.robot.commands.auto.paths.Shoot2_Pickup1_H2;
+import frc.robot.commands.auto.paths.Shoot2_Pickup1_P3;
 import frc.robot.commands.auto.paths.Shoot_OffTarmac;
 import frc.robot.commands.climb.actions.ManuallyMoveClimb;
 import frc.robot.commands.climb.actions.PivotClimb;
@@ -155,9 +155,9 @@ public class RobotContainer {
       case 7: 
         return new IntakeHopperIndexerTest(10, hopperSys, intakeSys);
       case 8: 
-        return new Shoot2_Pickup1_P1(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+        return new Shoot2_Pickup1_P3(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 9: 
-        return new Shoot2_Pickup1_H1(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+        return new Shoot2_Pickup1_H2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
     }
   }
 
