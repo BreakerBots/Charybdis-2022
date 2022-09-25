@@ -133,7 +133,7 @@ public class RobotContainer {
     driveSys.setBrakeMode(true);
     // CHANGE AUTOPATH HERE \/
 
-    int pathNumber = 9; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
+    int pathNumber = 6; // <<< IMPORTANT: The number after "=" refers to the selected autopath from the
                         // list below. To change, use the desired path's number from the list below.
 
     switch (pathNumber) {

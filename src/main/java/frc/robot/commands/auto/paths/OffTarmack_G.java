@@ -16,7 +16,7 @@ import frc.robot.subsystems.devices.IMU;
 public class OffTarmack_G extends SequentialCommandGroup {
   /** Creates a new OffTarmack_H1. */
   public OffTarmack_G(Drive driveArg, IMU imuArg) {
-    addCommands(new DriveStraight(driveArg, imuArg, 100, 0.3, 4)
+    addCommands(new DriveStraight(driveArg, imuArg, 100, 0.75, 4)
                 );
   }
 }

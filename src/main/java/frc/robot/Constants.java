@@ -187,7 +187,7 @@ public final class Constants {
     public static final double CLIMB_LIFT_OF_MID_DIST = FILLER;
     public static final double LIFT_ONTO_HIGH_DIST = FILLER;
     public static final double SECOND_MIRACLE_GRAB_EXT_DIST = FILLER;
-    public static final double WINCH_INPUT_MULTIPLIER = 3568; //Defult 1400
+    public static final double WINCH_INPUT_MULTIPLIER = 1784; //Defult 1400
 
     public static final double CLIMB_SPD_RESET_CYCLES = 150;
 

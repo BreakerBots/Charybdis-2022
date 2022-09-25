@@ -27,6 +27,6 @@ public class Shoot_OffTarmac extends SequentialCommandGroup {
     addCommands(
         new ChargeFlywheel(shooterArg, controllerArg),
         new ShootAll(shooterArg, hopperArg, controllerArg, intakeArg),
-        new DriveStraight(driveArg, imuArg, 100, 0.3, 4));
+        new DriveStraight(driveArg, imuArg, 100, 0.8, 5));
   }
 }
