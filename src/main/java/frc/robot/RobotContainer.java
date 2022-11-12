@@ -20,7 +20,7 @@ import frc.robot.commands.auto.paths.OffTarmack_G;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_H1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P1;
 import frc.robot.commands.auto.paths.Pickup1_Shoot2_P2;
-import frc.robot.commands.auto.paths.Pickup2_Shoot3_P2;
+import frc.robot.commands.auto.paths.Pickup2_Shoot4_P2;
 import frc.robot.commands.auto.paths.Shoot2_Pickup1_H2;
 import frc.robot.commands.auto.paths.Shoot2_Pickup1_P3;
 import frc.robot.commands.auto.paths.Shoot_OffTarmac;
@@ -149,7 +149,7 @@ public class RobotContainer {
       case 4:
         return new Pickup1_Shoot2_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 5:
-        return new Pickup2_Shoot3_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
+        return new Pickup2_Shoot4_P2(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 6:
         return new Shoot_OffTarmac(driveSys, imuSys, intakeSys, hopperSys, xboxSys, shooterSys);
       case 7: 
